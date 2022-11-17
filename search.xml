@@ -425,7 +425,7 @@
       </tags>
   </entry>
   <entry>
-    <title>JAVA之面向对象中</title>
+    <title>JAVA之面向对象下</title>
     <url>/2022/11/17/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8B/</url>
     <content><![CDATA[<h3 id="关键字：static静态的"><a href="#关键字：static静态的" class="headerlink" title="关键字：static静态的"></a>关键字：static静态的</h3><h4 id="可以用来修饰的结构：主要用来修饰类的内部结构"><a href="#可以用来修饰的结构：主要用来修饰类的内部结构" class="headerlink" title="可以用来修饰的结构：主要用来修饰类的内部结构"></a>可以用来修饰的结构：主要用来修饰类的内部结构</h4><p>属性、方法、代码块、内部类</p>
 <h4 id="static修饰属性：静态变量（或类变量）"><a href="#static修饰属性：静态变量（或类变量）" class="headerlink" title="static修饰属性：静态变量（或类变量）"></a>static修饰属性：<i style="color: aqua;">静态变量（或类变量）</i></h4><h5 id="属性，是否使用static修饰，又分为：静态属性-vs-非静态属性-实例变量"><a href="#属性，是否使用static修饰，又分为：静态属性-vs-非静态属性-实例变量" class="headerlink" title="属性，是否使用static修饰，又分为：静态属性  vs 非静态属性(实例变量)"></a>属性，是否使用static修饰，又分为：静态属性  vs 非静态属性(实例变量)</h5><span id="more"></span>
