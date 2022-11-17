@@ -170,88 +170,10 @@
         
         <div class="page-template-content keep-markdown-body">
             
-                <h1>about</h1>
+                <p>检查</p>
+
             
         </div>
-        
-            <div class="page-template-comments">
-                
-<div class="comments-container">
-    <div id="comments-anchor"></div>
-    <div class="comment-area-title">
-        <i class="fas fa-comments"></i>&nbsp;评论
-    </div>
-    
-        
-            
-
-    <div class="valine-container">
-        <script data-pjax src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
-        <div id="vcomments"></div>
-        <script data-pjax>
-          function loadValine() {
-            new Valine({
-              el: '#vcomments',
-              appId: 'uWNCspT1yx1uL4GOXkGqPAnO-gzGzoHsz',
-              appKey: 'kxzojjaKQ6PiMLZ7jynOrx6q',
-              meta: ['nick', 'mail', 'link'],
-              avatar: 'wavatar',
-              enableQQ: true,
-              placeholder: '可以提出宝贵的意见哟',
-              lang: 'zh-CN'.toLowerCase()
-            });
-
-            function getAuthor(language) {
-              switch (language) {
-                case 'en':
-                  return 'Author';
-                case 'zh-CN':
-                  return '博主';
-                default:
-                  return 'Master';
-              }
-            }
-
-            // Add "Author" identify
-            const getValineDomTimer = setInterval(() => {
-              const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
-              if (vcards.length > 0) {
-                let author = '赫然玉鑫';
-
-                if (author) {
-                  for (let vcard of vcards) {
-                    const vnick_dom = vcard.querySelector('.vhead .vnick');
-                    const vnick = vnick_dom.innerHTML;
-                    if (vnick === author) {
-                      vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
-                    }
-                  }
-                }
-                clearInterval(getValineDomTimer);
-              } else {
-                clearInterval(getValineDomTimer);
-              }
-            }, 2000);
-          }
-
-          if ('true' === 'true') {
-            const loadValineTimeout = setTimeout(() => {
-              loadValine();
-              clearTimeout(loadValineTimeout);
-            }, 1000);
-          } else {
-            window.addEventListener('DOMContentLoaded', loadValine);
-          }
-        </script>
-    </div>
-
-
-
-        
-    
-</div>
-
-            </div>
         
     </div>
 </div>

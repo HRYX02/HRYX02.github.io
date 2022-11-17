@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello Blog</title>
-    <url>/2022/11/17/FirstBlog/</url>
-    <content><![CDATA[<p>这是我的第一条博客<br>哈喽，博客</p>
-]]></content>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2022/11/17/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo<i class="fas fa-external-link-alt"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation<i class="fas fa-external-link-alt"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub<i class="fas fa-external-link-alt"></i></a>.</p>
@@ -23,5 +17,14 @@
 
 <p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment<i class="fas fa-external-link-alt"></i></a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Hello Blog</title>
+    <url>/2022/11/17/FirstBlog/</url>
+    <content><![CDATA[<p>这是我的第一条博客<br>哈喽，博客</p>
+]]></content>
+      <tags>
+        <tag>撰写博客的的那些事</tag>
+      </tags>
   </entry>
 </search>
