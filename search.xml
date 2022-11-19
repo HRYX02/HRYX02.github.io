@@ -10,6 +10,511 @@
       </tags>
   </entry>
   <entry>
+    <title>JAVA之面向对象上</title>
+    <url>//post/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8A.html</url>
+    <content><![CDATA[<h3 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h3><span id="more"></span>
+<h4 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a>JVM内存结构</h4><p>编译完源程序以后，生成一个或多个字节码文件。<br>我们使用JVM中的类的加载器和解释器对生成的字节码文件进行解释运行。意味着，需要将字节码文件对应的类加载到内存中，涉及到内存解析。</p>
+<p><img src="https://raw.githubusercontent.com/HRYX02/screenshot/master/1.bmp"></p>
+<p>虚拟机栈，即为平时提到的栈结构。<i style="color: red;">我们将局部变量存储在栈结构中堆，我们将new出来的结构（比如：数组、对象）加载在对空间中。补充：对象的属性（非static的）加载在堆空间中。方法区：类的加载信息、常量池、静态域</i></p>
+<h3 id="类的结构之一：属性"><a href="#类的结构之一：属性" class="headerlink" title="类的结构之一：属性"></a>类的结构之一：属性</h3><h4 id="对比：属性-vs-局部变量"><a href="#对比：属性-vs-局部变量" class="headerlink" title="对比：属性  vs  局部变量"></a>对比：属性  vs  局部变量</h4><h5 id="相同点："><a href="#相同点：" class="headerlink" title="相同点："></a>相同点：</h5><ul>
+<li>定义变量的格式：数据类型  变量名 &#x3D; 变量值</li>
+<li>先声明，后使用</li>
+<li>1.3 变量都其对应的作用域</li>
+</ul>
+<h5 id="不同点："><a href="#不同点：" class="headerlink" title="不同点："></a>不同点：</h5><h6 id="在类中声明的位置的不同"><a href="#在类中声明的位置的不同" class="headerlink" title="在类中声明的位置的不同"></a>在类中声明的位置的不同</h6><ul>
+<li>属性：直接定义在类的一对{}内</li>
+<li>局部变量：声明在方法内、方法形参、代码块内、构造器形参、构造器内部的变量</li>
+</ul>
+<h6 id="关于权限修饰符的不同"><a href="#关于权限修饰符的不同" class="headerlink" title="关于权限修饰符的不同"></a>关于权限修饰符的不同</h6><ul>
+<li>属性：可以在声明属性时，指明其权限，使用权限修饰符。</li>
+<li>常用的权限修饰符：private、public、缺省、protected  —&gt;封装性</li>
+<li>目前，大家声明属性时，都使用缺省就可以了。</li>
+<li>局部变量：不可以使用权限修饰符。</li>
+</ul>
+<h6 id="默认初始化值的情况："><a href="#默认初始化值的情况：" class="headerlink" title="默认初始化值的情况："></a>默认初始化值的情况：</h6><p>属性：类的属性，根据其类型，都默认初始化值。</p>
+<ul>
+<li><p>整型（byte、short、int、long：0）</p>
+</li>
+<li><p>浮点型（float、double：0.0）</p>
+</li>
+<li><p>字符型（char：0  （或’\u0000’））</p>
+</li>
+<li><p>布尔型（boolean：false）</p>
+</li>
+<li><p>引用数据类型（类、数组、接口：null）</p>
+</li>
+</ul>
+<p>局部变量：没默认初始化值。</p>
+<p>意味着，我们在调用局部变量之前，一定要显式赋值。</p>
+<p>特别地：形参在调用时，我们赋值即可。</p>
+<h6 id="在内存中加载的位置："><a href="#在内存中加载的位置：" class="headerlink" title="在内存中加载的位置："></a>在内存中加载的位置：</h6><p>属性：加载到堆空间中   （非static）</p>
+<p>局部变量：加载到栈空间</p>
+<h6 id="补充：回顾变量的分类："><a href="#补充：回顾变量的分类：" class="headerlink" title="补充：回顾变量的分类："></a>补充：回顾变量的分类：</h6><p>方式一：按照数据类型：</p>
+<p><img src="https://raw.githubusercontent.com/HRYX02/screenshot/master/1(1).bmp"></p>
+<p>方式二：按照在类中声明的位置：</p>
+<p><img src="https://raw.githubusercontent.com/HRYX02/screenshot/master/2.bmp"></p>
+<h3 id="类的结构之二：方法"><a href="#类的结构之二：方法" class="headerlink" title="类的结构之二：方法"></a>类的结构之二：方法</h3><h4 id="方法：描述类应该具的功能。"><a href="#方法：描述类应该具的功能。" class="headerlink" title="方法：描述类应该具的功能。"></a>方法：描述类应该具的功能。</h4><p>比如：Math类：sqrt()\random() ...</p>
+<p>​			Scanner类：nextXxx() …</p>
+<p>​			Arrays类：sort() \ binarySearch() \ toString() \ equals() \ …</p>
+<h5 id="1-举例："><a href="#1-举例：" class="headerlink" title="1.举例："></a>1.举例：</h5><ul>
+<li>public void eat(){}</li>
+<li>public void sleep(int hour){}</li>
+<li>public String getName(){}</li>
+<li>public String getNation(String nation){}</li>
+</ul>
+<h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><h6 id="关于权限修饰符：默认方法的权限修饰符先都使用public"><a href="#关于权限修饰符：默认方法的权限修饰符先都使用public" class="headerlink" title="关于权限修饰符：默认方法的权限修饰符先都使用public"></a>关于权限修饰符：默认方法的权限修饰符先都使用public</h6><p>Java规定的4种权限修饰符：private、public、缺省、protected  –&gt;封装性再细说</p>
+<h6 id="返回值类型：-返回值-vs-没返回值"><a href="#返回值类型：-返回值-vs-没返回值" class="headerlink" title="返回值类型： 返回值  vs 没返回值"></a>返回值类型： 返回值  vs 没返回值</h6><p>如果方法返回值，则必须在方法声明时，指定返回值的类型。同时，方法中，需要使用return关键字来返回指定类型的变量或常量：“return 数据”。</p>
+<p>如果方法没返回值，则方法声明时，使用void来表示。通常，没返回值的方法中，就不需要使用return.但是，如果使用的话，只能“return;”表示结束此方法的意思。</p>
+<h6 id="我们定义方法该不该返回值？"><a href="#我们定义方法该不该返回值？" class="headerlink" title="我们定义方法该不该返回值？"></a>我们定义方法该不该返回值？</h6><ul>
+<li>题目要求</li>
+<li>凭经验：具体问题具体分析</li>
+</ul>
+<h6 id="方法名：属于标识符，遵循标识符的规则和规范，“见名知意”"><a href="#方法名：属于标识符，遵循标识符的规则和规范，“见名知意”" class="headerlink" title="方法名：属于标识符，遵循标识符的规则和规范，“见名知意”"></a>方法名：属于标识符，遵循标识符的规则和规范，“见名知意”</h6><h6 id="形参列表：-方法可以声明0个，1个，或多个形参。"><a href="#形参列表：-方法可以声明0个，1个，或多个形参。" class="headerlink" title="形参列表： 方法可以声明0个，1个，或多个形参。"></a>形参列表： 方法可以声明0个，1个，或多个形参。</h6><p>格式：数据类型1 形参1,数据类型2 形参2,…</p>
+<p>我们定义方法时，该不该定义形参？<br>① 题目要求② 凭经验：具体问题具体分析</p>
+<p>方法体：方法功能的体现。 	</p>
+<h5 id="方法的使用中，可以调用当前类的属性或方法"><a href="#方法的使用中，可以调用当前类的属性或方法" class="headerlink" title="方法的使用中，可以调用当前类的属性或方法"></a>方法的使用中，可以调用当前类的属性或方法</h5><p>特殊的：方法A中又调用了方法A:递归方法。</p>
+<p>方法中，不可以定义方法。</p>
+<h4 id="关键字：return"><a href="#关键字：return" class="headerlink" title="关键字：return"></a>关键字：return</h4><ol>
+<li><p>使用范围：使用在方法体中</p>
+</li>
+<li><p>作用：① 结束方法</p>
+<p>​		    ② 针对于返回值类型的方法，使用”return 数据”方法返回所要的数据。</p>
+</li>
+<li><p>3.注意点：return关键字后面不可以声明执行语句。</p>
+</li>
+</ol>
+<h4 id="方法的重载"><a href="#方法的重载" class="headerlink" title="方法的重载"></a>方法的重载</h4><p>略</p>
+<h4 id="可变个数形参的方法"><a href="#可变个数形参的方法" class="headerlink" title="可变个数形参的方法"></a>可变个数形参的方法</h4><h5 id="1-使用说明："><a href="#1-使用说明：" class="headerlink" title="1.使用说明："></a>1.使用说明：</h5><h6 id="jdk-5-0新增的内容"><a href="#jdk-5-0新增的内容" class="headerlink" title="jdk 5.0新增的内容"></a>jdk 5.0新增的内容</h6><p>具体使用：</p>
+<ul>
+<li>可变个数形参的格式：数据类型 … 变量名</li>
+<li>当调用可变个数形参的方法时，传入的参数个数可以是：0个，1个,2个，。。。</li>
+<li>可变个数形参的方法与本类中方法名相同，形参不同的方法之间构成重载</li>
+<li>可变个数形参的方法与本类中方法名相同，形参类型也相同的数组之间不构成重载。换句话说，二者不能共存。</li>
+<li>可变个数形参在方法的形参中，必须声明在末尾</li>
+<li>可变个数形参在方法的形参中,最多只能声明一个可变形参。</li>
+</ul>
+<h5 id="2-举例说明："><a href="#2-举例说明：" class="headerlink" title="2.举例说明："></a>2.举例说明：</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java">public void show(int i)&#123;
+
+&#125;
+
+public void show(String s)&#123;
+	System.out.println(&quot;show(String)&quot;);
+&#125;
+
+public void show(String ... strs)&#123;
+	System.out.println(&quot;show(String ... strs)&quot;);
+	for(int i &#x3D; 0;i &lt; strs.length;i++)&#123;
+		System.out.println(strs[i]);
+	&#125;
+&#125;
+&#x2F;&#x2F;不能与上一个方法同时存在
+&#x2F;&#x2F;	public void show(String[] strs)&#123;
+&#x2F;&#x2F;		
+&#x2F;&#x2F;	&#125;</code></pre>
+<h6 id="调用时："><a href="#调用时：" class="headerlink" title="调用时："></a>调用时：</h6><p>​		<br>​		</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">test.show(&quot;hello&quot;);
+test.show(&quot;hello&quot;,&quot;world&quot;);
+test.show();
+test.show(new String[]&#123;&quot;AA&quot;,&quot;BB&quot;,&quot;CC&quot;&#125;);</code></pre>
+
+<h4 id="java的值传递机制"><a href="#java的值传递机制" class="headerlink" title="java的值传递机制"></a>java的值传递机制</h4><h5 id="1-针对于方法内变量的赋值举例："><a href="#1-针对于方法内变量的赋值举例：" class="headerlink" title="1.针对于方法内变量的赋值举例："></a>1.针对于方法内变量的赋值举例：</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java">System.out.println(&quot;***********基本数据类型：****************&quot;);
+int m &#x3D; 10;
+int n &#x3D; m;
+System.out.println(&quot;m &#x3D; &quot; + m + &quot;, n &#x3D; &quot; + n);	
+n &#x3D; 20;
+System.out.println(&quot;m &#x3D; &quot; + m + &quot;, n &#x3D; &quot; + n);
+System.out.println(&quot;***********引用数据类型：****************&quot;);
+Order o1 &#x3D; new Order();
+o1.orderId &#x3D; 1001;
+Order o2 &#x3D; o1;&#x2F;&#x2F;赋值以后，o1和o2的地址值相同，都指向了堆空间中同一个对象实体。
+System.out.println(&quot;o1.orderId &#x3D; &quot; + o1.orderId + &quot;,o2.orderId &#x3D; &quot; +o2.orderId);
+o2.orderId &#x3D; 1002;
+System.out.println(&quot;o1.orderId &#x3D; &quot; + o1.orderId + &quot;,o2.orderId &#x3D; &quot; +o2.orderId);</code></pre>
+
+<h6 id="规则："><a href="#规则：" class="headerlink" title="规则："></a>规则：</h6><ul>
+<li>如果变量是基本数据类型，此时赋值的是变量所保存的数据值。</li>
+<li>如果变量是引用数据类型，此时赋值的是变量所保存的数据的地址值。</li>
+</ul>
+<h4 id="递归方法"><a href="#递归方法" class="headerlink" title="递归方法"></a>递归方法</h4><h5 id="1-定义："><a href="#1-定义：" class="headerlink" title="1.定义："></a>1.定义：</h5><p>递归方法：一个方法体内调用它自身。</p>
+<h5 id="2-如何理解递归方法？"><a href="#2-如何理解递归方法？" class="headerlink" title="2.如何理解递归方法？"></a>2.如何理解递归方法？</h5><ul>
+<li>方法递归包含了一种隐式的循环，它会重复执行某段代码，但这种重复执行无须循环控制。</li>
+<li>递归一定要向已知方向递归，否则这种递归就变成了无穷递归，类似于死循环。</li>
+</ul>
+<p>3.举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">&#x2F;&#x2F; 例1：计算1-n之间所自然数的和
+public int getSum(int n) &#123;&#x2F;&#x2F; 3
+	if (n &#x3D;&#x3D; 1) &#123;
+		return 1;
+	&#125; else &#123;
+		return n + getSum(n - 1);
+	&#125;
+&#125;
+&#x2F;&#x2F; 例2：计算1-n之间所自然数的乘积:n!
+public int getSum1(int n) &#123;
+	if (n &#x3D;&#x3D; 1) &#123;
+		return 1;
+	&#125; else &#123;
+		return n * getSum1(n - 1);
+	&#125;
+&#125;
+
+&#x2F;&#x2F;例3：已知一个数列：f(0) &#x3D; 1,f(1) &#x3D; 4,f(n+2)&#x3D;2*f(n+1) + f(n),
+&#x2F;&#x2F;其中n是大于0的整数，求f(10)的值。
+public int f(int n)&#123;
+	if(n &#x3D;&#x3D; 0)&#123;
+		return 1;
+	&#125;else if(n &#x3D;&#x3D; 1)&#123;
+		return 4;
+	&#125;else&#123;
+		&#x2F;&#x2F;return f(n + 2) - 2 * f(n + 1);
+		return 2*f(n - 1) + f(n - 2);
+		&#125;
+	&#125;
+&#x2F;&#x2F;例4：斐波那契数列
+&#x2F;&#x2F;例5：汉诺塔问题
+&#x2F;&#x2F;例6：快排</code></pre>
+<h3 id="面向对象的特征一：封装性"><a href="#面向对象的特征一：封装性" class="headerlink" title="面向对象的特征一：封装性"></a>面向对象的特征一：封装性</h3><h4 id="1-为什么要引入封装性？"><a href="#1-为什么要引入封装性？" class="headerlink" title="1.为什么要引入封装性？"></a>1.为什么要引入封装性？</h4><h5 id="我们程序设计追求“高内聚，低耦合”。"><a href="#我们程序设计追求“高内聚，低耦合”。" class="headerlink" title="我们程序设计追求“高内聚，低耦合”。"></a>我们程序设计追求“高内聚，低耦合”。</h5><ul>
+<li>高内聚 ：类的内部数据操作细节自己完成，不允许外部干涉；</li>
+<li>低耦合 ：仅对外暴露少量的方法用于使用。</li>
+</ul>
+<h5 id="隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。"><a href="#隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。" class="headerlink" title="隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。"></a>隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。</h5><h4 id="2-问题引入："><a href="#2-问题引入：" class="headerlink" title="2.问题引入："></a>2.问题引入：</h4><p>当我们创建一个类的对象以后，我们可以通过”对象.属性”的方式，对对象的属性进行赋值。这里，赋值操作要受到属性的数据类型和存储范围的制约。除此之外，没其他制约条件。但是，在实际问题中，我们往往需要给属性赋值加入额外的限制条件。这个条件就不能在属性声明时体现，我们只能通过方法进行限制条件的添加。（比如：setLegs()同时，我们需要避免用户再使用”对象.属性”的方式对属性进行赋值。则需要将属性声明为私有的(private).<br>  –&gt;此时，针对于属性就体现了封装性。</p>
+<h4 id="3-封装性思想具体的代码体现："><a href="#3-封装性思想具体的代码体现：" class="headerlink" title="3.封装性思想具体的代码体现："></a>3.封装性思想具体的代码体现：</h4><ul>
+<li>将类的属性xxx私化(private),同时，提供公共的(public)方法来获取(getXxx)和设置(setXxx)此属性的值</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">private double radius;
+public void setRadius(double radius)&#123;
+	this.radius &#x3D; radius;
+&#125;
+public double getRadius()&#123;
+	return radius;
+&#125;</code></pre>
+
+<ul>
+<li>体现二：不对外暴露的私有的方法</li>
+<li>体现三：单例模式（将构造器私有化）</li>
+<li>体现四：如果不希望类在包外被调用，可以将类设置为缺省的。</li>
+</ul>
+<h4 id="4-Java规定的四种权限修饰符"><a href="#4-Java规定的四种权限修饰符" class="headerlink" title="4.Java规定的四种权限修饰符"></a>4.Java规定的四种权限修饰符</h4><h5 id="4-1-权限从小到大顺序为：private-lt-缺省-lt-protected-lt-public"><a href="#4-1-权限从小到大顺序为：private-lt-缺省-lt-protected-lt-public" class="headerlink" title="4.1 权限从小到大顺序为：private &lt;  缺省 &lt; protected &lt; public"></a>4.1 权限从小到大顺序为：private &lt;  缺省 &lt; protected &lt; public</h5><h5 id="4-2-具体的修饰范围："><a href="#4-2-具体的修饰范围：" class="headerlink" title="4.2 具体的修饰范围："></a>4.2 具体的修饰范围：</h5><p><img src="https://raw.githubusercontent.com/HRYX02/screenshot/master/1(2).bmp"></p>
+<h5 id="4-3-权限修饰符可用来修饰的结构说明："><a href="#4-3-权限修饰符可用来修饰的结构说明：" class="headerlink" title="4.3 权限修饰符可用来修饰的结构说明："></a>4.3 权限修饰符可用来修饰的结构说明：</h5><p>4种权限都可以用来修饰类的内部结构：属性、方法、构造器、内部类<br>修饰类的话，只能使用：缺省、public</p>
+<h3 id="类的结构之三：构造器"><a href="#类的结构之三：构造器" class="headerlink" title="类的结构之三：构造器"></a>类的结构之三：构造器</h3><h4 id="属性赋值的顺序"><a href="#属性赋值的顺序" class="headerlink" title="属性赋值的顺序"></a>属性赋值的顺序</h4><p>① 默认初始化</p>
+<p>② 显式初始化</p>
+<p>③ 构造器中初始化</p>
+<p>④ 通过”对象.方法” 或 “对象.属性”的方式，赋值</p>
+<p>以上操作的先后顺序：① - ② - ③ - ④ </p>
+<h4 id="JavaBean的概念"><a href="#JavaBean的概念" class="headerlink" title="JavaBean的概念"></a>JavaBean的概念</h4><h5 id="所谓JavaBean，是指符合如下标准的Java类："><a href="#所谓JavaBean，是指符合如下标准的Java类：" class="headerlink" title="所谓JavaBean，是指符合如下标准的Java类："></a>所谓JavaBean，是指符合如下标准的Java类：</h5><ul>
+<li>类是公共的</li>
+<li>一个无参的公共的构造器</li>
+<li>属性，且对应的get、set方法</li>
+</ul>
+<h3 id="关键字：this"><a href="#关键字：this" class="headerlink" title="关键字：this"></a>关键字：this</h3><h4 id="1-可以调用的结构：属性、方法；构造器"><a href="#1-可以调用的结构：属性、方法；构造器" class="headerlink" title="1.可以调用的结构：属性、方法；构造器"></a>1.可以调用的结构：属性、方法；构造器</h4><h4 id="2-this调用属性、方法："><a href="#2-this调用属性、方法：" class="headerlink" title="2.this调用属性、方法："></a>2.this调用属性、方法：</h4><p>this理解为：当前对象  或 当前正在创建的对象</p>
+<ul>
+<li><p>2.1在类的方法中，我们可以使用”this.属性”或”this.方法”的方式，调用当前对象属性或方法。但是，通常情况下，我们都择省略”this.”。特殊情况下，如果方法的形参和类的属性同名时，我们必须显式的使用”this.变量”的方式，表明此变量是属性，而非形参。</p>
+</li>
+<li><p>2.2 在类的构造器中，我们可以使用”this.属性”或”this.方法”的方式，调用当前正在创建的对象属性或方法。但是，通常情况下，我们都择省略”this.”。</p>
+</li>
+<li><p>特殊情况下，如果构造器的形参和类的属性同名时，我们必须显式的使用”this.变量”的方式，表明此变量是属性，而非形参。</p>
+</li>
+</ul>
+<h4 id="3-this调用构造器："><a href="#3-this调用构造器：" class="headerlink" title="3.this调用构造器："></a>3.this调用构造器：</h4><ul>
+<li>我们在类的构造器中，可以显式的使用”this(形参列表)”方式，调用本类中指定的其他构造器</li>
+<li>构造器中不能通过”this(形参列表)”方式调用自己</li>
+<li>如果一个类中有n个构造器，则最多有 n - 1构造器中使用了”this(形参列表)”</li>
+<li>规定：”this(形参列表)”必须声明在当前构造器的首行</li>
+<li>构造器内部，最多只能声明一个”this(形参列表)”，用来调用其他的构造器</li>
+</ul>
+<h3 id="关键字：package-x2F-import"><a href="#关键字：package-x2F-import" class="headerlink" title="关键字：package&#x2F;import"></a>关键字：package&#x2F;import</h3><h4 id="package的使用"><a href="#package的使用" class="headerlink" title="package的使用"></a>package的使用</h4><h5 id="使用说明："><a href="#使用说明：" class="headerlink" title="使用说明："></a>使用说明：</h5><ul>
+<li>1.为了更好的实现项目中类的管理，提供包的概念</li>
+<li>2.使用package声明类或接口所属的包，声明在源文件的首行</li>
+<li>3.包，属于标识符，遵循标识符的命名规则、规范(xxxyyyzzz)、“见名知意”</li>
+<li>4.每”.”一次，就代表一层文件目录。</li>
+</ul>
+<h5 id="举例："><a href="#举例：" class="headerlink" title="举例："></a>举例：</h5><h6 id="举例一：某航运软件系统包括：一组域对象、GUI和reports子系统"><a href="#举例一：某航运软件系统包括：一组域对象、GUI和reports子系统" class="headerlink" title="举例一：某航运软件系统包括：一组域对象、GUI和reports子系统"></a>举例一：某航运软件系统包括：一组域对象、GUI和reports子系统</h6><p><img src="https://raw.githubusercontent.com/HRYX02/screenshot/master/1(3).bmp"></p>
+<h6 id="举例二：MVC设计模式"><a href="#举例二：MVC设计模式" class="headerlink" title="举例二：MVC设计模式"></a>举例二：MVC设计模式</h6><p><img src="https://raw.githubusercontent.com/HRYX02/screenshot/master/2(1).bmp"></p>
+<h5 id="1-3-JDK中的主要包介绍："><a href="#1-3-JDK中的主要包介绍：" class="headerlink" title="1.3 JDK中的主要包介绍："></a>1.3 JDK中的主要包介绍：</h5><p><img src="https://raw.githubusercontent.com/HRYX02/screenshot/master/3.bmp"></p>
+<h4 id="import的使用："><a href="#import的使用：" class="headerlink" title="import的使用："></a>import的使用：</h4><h5 id="import-导入"><a href="#import-导入" class="headerlink" title="import:导入"></a>import:导入</h5><ul>
+<li>在源文件中显式的使用import结构导入指定包下的类、接口</li>
+<li>声明在包的声明和类的声明之间</li>
+<li>如果需要导入多个结构，则并列写出即可</li>
+<li>可以使用”xxx.*”的方式，表示可以导入xxx包下的所结构</li>
+<li>如果使用的类或接口是java.lang包下定义的，则可以省略import结构</li>
+<li>如果使用的类或接口是本包下定义的，则可以省略import结构</li>
+<li>如果在源文件中，使用了不同包下的同名的类，则必须至少一个类需要以全类名的方式显示。</li>
+<li>使用”xxx.*”方式表明可以调用xxx包下的所结构。但是如果使用的是xxx子包下的结构，则仍需要显式导入</li>
+<li>import static:导入指定类或接口中的静态结构:属性或方法。</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端学习的记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JAVA之面向对象中</title>
+    <url>//post/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%AD.html</url>
+    <content><![CDATA[<h3 id="面向对象的特征二：继承性"><a href="#面向对象的特征二：继承性" class="headerlink" title="面向对象的特征二：继承性"></a>面向对象的特征二：继承性</h3><span id="more"></span>
+<h4 id="为什么要有类的继承性？-继承性的好处）"><a href="#为什么要有类的继承性？-继承性的好处）" class="headerlink" title="为什么要有类的继承性？(继承性的好处）"></a>为什么要有类的继承性？(继承性的好处）</h4><ul>
+<li>减少了代码的冗余，提高了代码的复用性</li>
+<li>便于功能的扩展</li>
+<li>为之后多态性的使用，提供了前提</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1.bmp"></p>
+<h4 id="继承性的格式："><a href="#继承性的格式：" class="headerlink" title="继承性的格式："></a>继承性的格式：</h4><h5 id="class-A-extends-B"><a href="#class-A-extends-B" class="headerlink" title="class A extends B{}"></a>class A extends B{}</h5><ul>
+<li>A:子类、派生类、subclass</li>
+<li>B:父类、超类、基类、superclass</li>
+</ul>
+<h4 id="子类继承父类以后有哪些不同？"><a href="#子类继承父类以后有哪些不同？" class="headerlink" title="子类继承父类以后有哪些不同？"></a>子类继承父类以后有哪些不同？</h4><ul>
+<li>体现：一旦子类A继承父类B以后，子类A中就获取了父类B中声明的所有的属性和方法。特别的，父类中声明为private的属性或方法，子类继承父类以后，仍然认为获取了父类中私的结构。只因为封装性的影响，使得子类不能直接调用父类的结构而已。</li>
+<li>子类继承父类以后，还可以声明自己特有的属性或方法：实现功能的拓展。子类和父类的关系，不同于子集和集合的关系。extends：延展、扩展</li>
+</ul>
+<h4 id="Java中继承性的说明"><a href="#Java中继承性的说明" class="headerlink" title="Java中继承性的说明"></a>Java中继承性的说明</h4><ul>
+<li>一个类可以被多个子类继承。</li>
+<li>Java中类的单继承性：一个类只能有一个父类。</li>
+<li>子父类是相对的概念。</li>
+<li>子类直接继承的父类，称为：直接父类。间接继承的父类称为：间接父类。</li>
+<li>子类继承父类以后，就获取了直接父类以及所间接父类中声明的属性和方法</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/HRYX02/javazhong/master/2.bmp"></p>
+<h4 id="java-lang-Object类的理解"><a href="#java-lang-Object类的理解" class="headerlink" title="java.lang.Object类的理解"></a>java.lang.Object类的理解</h4><ul>
+<li>如果我们没显式的声明一个类的父类的话，则此类继承于java.lang.Object类</li>
+<li>所的java类（除java.lang.Object类之外都直接或间接的继承于java.lang.Object类</li>
+<li>意味着，所的java类具有java.lang.Object类声明的功能。</li>
+</ul>
+<h3 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a>方法的重写</h3><p>什么是方法的重写(override 或 overwrite)？<br>子类继承父类以后，可以对父类中同名同参数的方法，进行覆盖操作.</p>
+<p>应用：</p>
+<p>重写以后，当创建子类对象以后，通过子类对象调用子父类中的同名同参数的方法时，实际执行的是子类重写父类的方法。</p>
+<p>举例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class Circle&#123;
+public double findArea()&#123;&#125;&#x2F;&#x2F;求面积
+&#125;
+class Cylinder extends Circle&#123;
+public double findArea()&#123;&#125;&#x2F;&#x2F;求表面积
+&#125;
+&#x2F;&#x2F;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+class Account&#123;
+public boolean withdraw(double amt)&#123;&#125;
+&#125;
+class CheckAccount extends Account&#123;
+public boolean withdraw(double amt)&#123;&#125;
+&#125;</code></pre>
+
+
+
+<p>重写的规则：</p>
+<p>方法的声明： 权限修饰符  返回值类型  方法名(形参列表) throws 异常的类型{</p>
+<p>​		&#x2F;&#x2F;方法体</p>
+<p>}</p>
+<p>约定俗称：子类中的叫重写的方法，父类中的叫被重写的方法</p>
+<ol>
+<li>子类重写的方法的方法名和形参列表与父类被重写的方法的方法名和形参列表相同</li>
+<li>子类重写的方法的权限修饰符不小于父类被重写的方法的权限修饰符</li>
+<li>特殊情况：子类不能重写父类中声明为private权限的方法</li>
+<li>返回值类型：父类被重写的方法的返回值类型是void，则子类重写的方法的返回值类型只能是void父类被重写的方法的返回值类型是A类型，则子类重写的方法的返回值类型可以是A类或A类的子类父类被重写的方法的返回值类型是基本数据类型(比如：double)，则子类重写的方法的返回值类型必须是相同的基本数据类型(必须也是double)</li>
+<li>子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型</li>
+</ol>
+<p>子类和父类中的同名同参数的方法要么都声明为非static的（考虑重写，要么都声明为static的（不是重写)。	</p>
+<p><i style="color: red;">面试题：区分方法的重写和重载？</i></p>
+<ol>
+<li>二者的概念：</li>
+<li>重载和重写的具体规则</li>
+<li>重载：不表现为多态性。<br>重写：表现为多态性。</li>
+</ol>
+<blockquote><span class="custom-blockquote-svg"><svg width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg" data-reactroot="">
+<path fill="" d="M22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C13.8 22 15.5 21.5 17 20.6L22 22L20.7 17C21.5 15.5 22 13.8 22 12Z" undefined="1"></path>
+<path fill="" d="M15.97 11.5H16.04C17.12 11.5 18 12.38 18 13.47V13.53C18 14.62 17.12 15.5 16.03 15.5H15.96C14.88 15.5 14 14.62 14 13.53V13.46C14 12.38 14.88 11.5 15.97 11.5Z" undefined="1"></path>
+<path fill="" d="M7.97 11.5H8.04C9.12 11.5 10 12.38 10 13.47V13.53C10 14.62 9.12 15.5 8.03 15.5H7.97C6.88 15.5 6 14.62 6 13.53V13.46C6 12.38 6.88 11.5 7.97 11.5Z" undefined="1"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M17 8.5C15.23 8.97 14.07 10.84 14.01 13.27C14 13.33 14 13.4 14 13.47V13.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M9 8.5C7.23 8.97 6.07 10.84 6.01 13.27C6 13.33 6 13.4 6 13.47V13.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M15.97 11.5H16.04C17.12 11.5 18 12.38 18 13.47V13.53C18 14.62 17.12 15.5 16.03 15.5H15.96C14.88 15.5 14 14.62 14 13.53V13.46C14 12.38 14.88 11.5 15.97 11.5Z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M7.97 11.5H8.04C9.12 11.5 10 12.38 10 13.47V13.53C10 14.62 9.12 15.5 8.03 15.5H7.97C6.88 15.5 6 14.62 6 13.53V13.46C6 12.38 6.88 11.5 7.97 11.5Z"></path>
+</svg>
+</span><p>重载，是指允许存在多个同名方法，而这些方法的参数不同。编译器根据方法不同的参数表，对同名方法的名称做修饰。对于编译器而言，这些同名方法就成了不同的方法。它们的调用地址在编译期就绑定了。Java的重载是可以包括父类和子类的，即子类可以重载父类的同名不同参数的方法。<br>所以：对于重载而言，在方法调用之前，编译器就已经确定了所要调用的方法，这称为“早绑定”或“静态绑定”；</p></blockquote>
+<blockquote><span class="custom-blockquote-svg"><svg width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg" data-reactroot="">
+<path fill="" d="M22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C13.8 22 15.5 21.5 17 20.6L22 22L20.7 17C21.5 15.5 22 13.8 22 12Z" undefined="1"></path>
+<path fill="" d="M15.97 11.5H16.04C17.12 11.5 18 12.38 18 13.47V13.53C18 14.62 17.12 15.5 16.03 15.5H15.96C14.88 15.5 14 14.62 14 13.53V13.46C14 12.38 14.88 11.5 15.97 11.5Z" undefined="1"></path>
+<path fill="" d="M7.97 11.5H8.04C9.12 11.5 10 12.38 10 13.47V13.53C10 14.62 9.12 15.5 8.03 15.5H7.97C6.88 15.5 6 14.62 6 13.53V13.46C6 12.38 6.88 11.5 7.97 11.5Z" undefined="1"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M17 8.5C15.23 8.97 14.07 10.84 14.01 13.27C14 13.33 14 13.4 14 13.47V13.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M9 8.5C7.23 8.97 6.07 10.84 6.01 13.27C6 13.33 6 13.4 6 13.47V13.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M15.97 11.5H16.04C17.12 11.5 18 12.38 18 13.47V13.53C18 14.62 17.12 15.5 16.03 15.5H15.96C14.88 15.5 14 14.62 14 13.53V13.46C14 12.38 14.88 11.5 15.97 11.5Z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M7.97 11.5H8.04C9.12 11.5 10 12.38 10 13.47V13.53C10 14.62 9.12 15.5 8.03 15.5H7.97C6.88 15.5 6 14.62 6 13.53V13.46C6 12.38 6.88 11.5 7.97 11.5Z"></path>
+</svg>
+</span><p>而对于多态，只等到方法调用的那一刻，解释运行器才会确定所要调用的具体方法，这称为“晚绑定”或“动态绑定”。 </p></blockquote>
+<blockquote><span class="custom-blockquote-svg"><svg width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg" data-reactroot="">
+<path fill="" d="M22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C13.8 22 15.5 21.5 17 20.6L22 22L20.7 17C21.5 15.5 22 13.8 22 12Z" undefined="1"></path>
+<path fill="" d="M15.97 11.5H16.04C17.12 11.5 18 12.38 18 13.47V13.53C18 14.62 17.12 15.5 16.03 15.5H15.96C14.88 15.5 14 14.62 14 13.53V13.46C14 12.38 14.88 11.5 15.97 11.5Z" undefined="1"></path>
+<path fill="" d="M7.97 11.5H8.04C9.12 11.5 10 12.38 10 13.47V13.53C10 14.62 9.12 15.5 8.03 15.5H7.97C6.88 15.5 6 14.62 6 13.53V13.46C6 12.38 6.88 11.5 7.97 11.5Z" undefined="1"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M17 8.5C15.23 8.97 14.07 10.84 14.01 13.27C14 13.33 14 13.4 14 13.47V13.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M9 8.5C7.23 8.97 6.07 10.84 6.01 13.27C6 13.33 6 13.4 6 13.47V13.5"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M15.97 11.5H16.04C17.12 11.5 18 12.38 18 13.47V13.53C18 14.62 17.12 15.5 16.03 15.5H15.96C14.88 15.5 14 14.62 14 13.53V13.46C14 12.38 14.88 11.5 15.97 11.5Z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M7.97 11.5H8.04C9.12 11.5 10 12.38 10 13.47V13.53C10 14.62 9.12 15.5 8.03 15.5H7.97C6.88 15.5 6 14.62 6 13.53V13.46C6 12.38 6.88 11.5 7.97 11.5Z"></path>
+</svg>
+</span><p>引用一句Bruce Eckel的话：“不要犯傻，如果它不是晚绑定，它就不是多态。”</p></blockquote>
+<h3 id="关键字：super"><a href="#关键字：super" class="headerlink" title="关键字：super"></a>关键字：super</h3><h4 id="super-关键字可以理解为：父类的"><a href="#super-关键字可以理解为：父类的" class="headerlink" title="super 关键字可以理解为：父类的"></a>super 关键字可以理解为：父类的</h4><h4 id="可以用来调用的结构："><a href="#可以用来调用的结构：" class="headerlink" title="可以用来调用的结构："></a>可以用来调用的结构：</h4><p>属性、方法、构造器</p>
+<h4 id="super调用属性、方法："><a href="#super调用属性、方法：" class="headerlink" title="super调用属性、方法："></a>super调用属性、方法：</h4><ol>
+<li>我们可以在子类的方法或构造器中。通过使用”super.属性”或”super.方法”的方式，显式的调用父类中声明的属性或方法。但是，通常情况下，我们习惯省略”super.”</li>
+<li>特殊情况：当子类和父类中定义了同名的属性时，我们要想在子类中调用父类中声明的属性，则必须显式的使用”super.属性”的方式，表明调用的是父类中声明的属性。</li>
+<li>特殊情况：当子类重写了父类中的方法以后，我们想在子类的方法中调用父类中被重写的方法时，则必须显式的使用”super.方法”的方式，表明调用的是父类中被重写的方法。</li>
+</ol>
+<h4 id="super调用构造器："><a href="#super调用构造器：" class="headerlink" title="super调用构造器："></a>super调用构造器：</h4><ol>
+<li>我们可以在子类的构造器中显式的使用”super(形参列表)”的方式，调用父类中声明的指定的构造器</li>
+<li>“super(形参列表)”的使用，必须声明在子类构造器的首行！</li>
+<li>我们在类的构造器中，针对于”this(形参列表)”或”super(形参列表)”只能二一，不能同时出现</li>
+<li>在构造器的首行，没显式的声明”this(形参列表)”或”super(形参列表)”，则默认调用的是父类中空参的构造器：super()</li>
+<li>在类的多个构造器中，至少一个类的构造器中使用了”super(形参列表)”，调用父类中的构造器</li>
+</ol>
+<h3 id="子类对象实例化全过程"><a href="#子类对象实例化全过程" class="headerlink" title="子类对象实例化全过程"></a>子类对象实例化全过程</h3><h4 id="从结果上看：继承性"><a href="#从结果上看：继承性" class="headerlink" title="从结果上看：继承性"></a>从结果上看：继承性</h4><ul>
+<li>子类继承父类以后，就获取了父类中声明的属性或方法。</li>
+<li>创建子类的对象，在堆空间中，就会加载所父类中声明的属性。</li>
+</ul>
+<h4 id="从过程上看："><a href="#从过程上看：" class="headerlink" title="从过程上看："></a>从过程上看：</h4><p>当我们通过子类的构造器创建子类对象时，我们一定会直接或间接的调用其父类的构造器，进而调用父类的父类的构造器，…直到调用了java.lang.Object类中空参的构造器为止。正因为加载过所的父类的结构，所以才可以看到内存中父类中的结构，子类对象才可以考虑进行调用。</p>
+<p><img src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(1).bmp"></p>
+<h4 id="强调说明："><a href="#强调说明：" class="headerlink" title="强调说明："></a>强调说明：</h4><p>虽然创建子类对象时，调用了父类的构造器，但是自始至终就创建过一个对象，即为new的子类对象。</p>
+<p><img src="https://raw.githubusercontent.com/HRYX02/javazhong/master/2(1).bmp"></p>
+<h3 id="面向对象的特征三：多态性"><a href="#面向对象的特征三：多态性" class="headerlink" title="面向对象的特征三：多态性"></a>面向对象的特征三：多态性</h3><h4 id="多态性的理解："><a href="#多态性的理解：" class="headerlink" title="多态性的理解："></a>多态性的理解：</h4><p>可以理解为一个事物的多种形态。</p>
+<h4 id="何为多态性："><a href="#何为多态性：" class="headerlink" title="何为多态性："></a>何为多态性：</h4><p>对象的多态性：父类的引用指向子类的对象（或子类的对象赋给父类的引用）</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">Person p &#x3D; new Man();
+Object obj &#x3D; new Date();</code></pre>
+
+<h4 id="多态性的使用：虚拟方法调用"><a href="#多态性的使用：虚拟方法调用" class="headerlink" title="多态性的使用：虚拟方法调用"></a>多态性的使用：虚拟方法调用</h4><ul>
+<li>有了对象的多态性以后，我们在编译期，只能调用父类中声明的方法，但在运行期，我们实际执行的是子类重写父类的方法。</li>
+<li>总结：编译，看左边；运行，看右边。</li>
+</ul>
+<h4 id="多态性的使用前提："><a href="#多态性的使用前提：" class="headerlink" title="多态性的使用前提："></a>多态性的使用前提：</h4><ul>
+<li>类的继承关系</li>
+<li>方法的重写</li>
+</ul>
+<h4 id="多态性的应用举例："><a href="#多态性的应用举例：" class="headerlink" title="多态性的应用举例："></a>多态性的应用举例：</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">举例一：
+	public void func(Animal animal)&#123;&#x2F;&#x2F;Animal animal &#x3D; new Dog();
+		animal.eat();
+		animal.shout();
+	&#125;
+举例二：
+	public void method(Object obj)&#123;
+		
+	&#125;
+举例三：
+class Driver&#123;
+	public void doData(Connection conn)&#123;
+	&#x2F;&#x2F;conn &#x3D; new MySQlConnection();
+	&#x2F;&#x2F;conn &#x3D; new OracleConnection();
+		conn.method1();
+		conn.method2();
+		conn.method3();		
+	&#125;
+&#125;</code></pre>
+
+
+
+<h4 id="多态性使用的注意点："><a href="#多态性使用的注意点：" class="headerlink" title="多态性使用的注意点："></a>多态性使用的注意点：</h4><p><i style="color: red;">对象的多态性，只适用于方法，不适用于属性（编译和运行都看左边）</i></p>
+<h4 id="关于向上转型与向下转型："><a href="#关于向上转型与向下转型：" class="headerlink" title="关于向上转型与向下转型："></a>关于向上转型与向下转型：</h4><h5 id="向上转型：多态"><a href="#向上转型：多态" class="headerlink" title="向上转型：多态"></a>向上转型：多态</h5><h5 id="向下转型："><a href="#向下转型：" class="headerlink" title="向下转型："></a>向下转型：</h5><h6 id="为什么使用向下转型："><a href="#为什么使用向下转型：" class="headerlink" title="为什么使用向下转型："></a>为什么使用向下转型：</h6><p>有了对象的多态性以后，内存中实际上是加载了子类特有的属性和方法的，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法。子类特有的属性和方法不能调用。如何才能调用子类特的属性和方法？使用向下转型。</p>
+<h6 id="如何实现向下转型："><a href="#如何实现向下转型：" class="headerlink" title="如何实现向下转型："></a>如何实现向下转型：</h6><p>使用强制类型转换符：()</p>
+<h6 id="使用时的注意点："><a href="#使用时的注意点：" class="headerlink" title="使用时的注意点："></a>使用时的注意点：</h6><ol>
+<li>使用强转时，可能出现ClassCastException的异常。</li>
+<li>为了避免在向下转型时出现ClassCastException的异常，我们在向下转型之前，先进行instanceof的判断，一旦返回true，就进行向下转型。如果返回false，不进行向下转型。</li>
+</ol>
+<h6 id="instanceof的使用："><a href="#instanceof的使用：" class="headerlink" title="instanceof的使用："></a>instanceof的使用：</h6><ol>
+<li>a instanceof A:判断对象a是否是类A的实例。如果是，返回true；如果不是，返回false。</li>
+<li>如果 a instanceof A返回true,则 a instanceof B也返回true.其中，类B是类A的父类。</li>
+<li>要求a所属的类与类A必须是子类和父类的关系，否则编译错误。</li>
+</ol>
+<h6 id="图示："><a href="#图示：" class="headerlink" title="图示："></a>图示：</h6><p><img src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(2).bmp"></p>
+<h4 id="面试题："><a href="#面试题：" class="headerlink" title="面试题："></a>面试题：</h4><h5 id="谈谈你对多态性的理解？"><a href="#谈谈你对多态性的理解？" class="headerlink" title="谈谈你对多态性的理解？"></a>谈谈你对多态性的理解？</h5><ol>
+<li>实现代码的通用性。</li>
+<li>Object类中定义的public boolean equals(Object obj){  }</li>
+<li>JDBC:使用java程序操作(获取数据库连接、CRUD)数据库(MySQL、Oracle、DB2、SQL Server)</li>
+</ol>
+<h5 id="多态是编译时行为还是运行时行为？"><a href="#多态是编译时行为还是运行时行为？" class="headerlink" title="多态是编译时行为还是运行时行为？"></a>多态是编译时行为还是运行时行为？</h5><p><i style="color: red;">运行时行为</i></p>
+<h3 id="Object类的使用"><a href="#Object类的使用" class="headerlink" title="Object类的使用"></a>Object类的使用</h3><h4 id="java-lang-Object类的说明："><a href="#java-lang-Object类的说明：" class="headerlink" title="java.lang.Object类的说明："></a>java.lang.Object类的说明：</h4><ol>
+<li>Object类是所Java类的根父类</li>
+<li>如果在类的声明中未使用extends关键字指明其父类，则默认父类为java.lang.Object类 </li>
+<li>Object类中的功能(属性、方法)就具通用性。<br>属性：无<br>方法：equals() &#x2F; toString() &#x2F; getClass() &#x2F;hashCode() &#x2F; clone() &#x2F; finalize() wait() 、 notify()、notifyAll()</li>
+<li>Object类只声明了一个空参的构造器</li>
+</ol>
+<h4 id="equals-方法"><a href="#equals-方法" class="headerlink" title="equals()方法"></a>equals()方法</h4><h5 id="equals-的使用："><a href="#equals-的使用：" class="headerlink" title="equals()的使用："></a>equals()的使用：</h5><ol>
+<li><p>是一个方法，而非运算符</p>
+</li>
+<li><p>只能适用于引用数据类型</p>
+</li>
+<li><p>Object类中equals()的定义：</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>public boolean equals(Object obj) {<br>    return (this &#x3D;&#x3D; obj);<br>  }<br>&#x2F;<em>说明：Object类中定义的equals()和&#x3D;&#x3D;的作用是相同的：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</em>&#x2F;</p>
+<pre class="line-numbers language-none"><code class="language-none">
+5. 像String、Date、File、包装类等都重写了Object类中的equals()方法。重写以后，比较的不是两个引用的地址是否相同，而是比较两个对象的&quot;实体内容&quot;是否相同。
+
+6. 通常情况下，我们自定义的类如果使用equals()的话，也通常是比较两个对象的&quot;实体内容&quot;是否相同。那么，我们就需要对Object类中的equals()进行重写.
+   重写的原则：比较两个对象的实体内容是否相同.
+
+##### 如何重写equals()
+
+###### 手动重写举例：
+
+&#96;&#96;&#96;java
+class User&#123;
+	String name;
+	int age;
+	&#x2F;&#x2F;重写其equals()方法
+	public boolean equals(Object obj)&#123;
+		if(obj &#x3D;&#x3D; this)&#123;
+			return true;
+		&#125;
+		if(obj instanceof User)&#123;
+			User u &#x3D; (User)obj;
+			return this.age &#x3D;&#x3D; u.age &amp;&amp; this.name.equals(u.name);
+		&#125;
+		return false;
+	&#125;
+&#125;</code></pre></li>
+</ol>
+<h6 id="开发中如何实现：自动生成的"><a href="#开发中如何实现：自动生成的" class="headerlink" title="开发中如何实现：自动生成的"></a>开发中如何实现：自动生成的</h6><h5 id="回顾-x3D-x3D-运算符的使用："><a href="#回顾-x3D-x3D-运算符的使用：" class="headerlink" title="回顾 &#x3D;&#x3D; 运算符的使用："></a>回顾 &#x3D;&#x3D; 运算符的使用：</h5><p> &#x3D;&#x3D; ：运算符</p>
+<ol>
+<li>可以使用在基本数据类型变量和引用数据类型变量中</li>
+<li>如果比较的是基本数据类型变量：比较两个变量保存的数据是否相等。（不一定类型要相同）<br>如果比较的是引用数据类型变量：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</li>
+<li>补充： &#x3D;&#x3D; 符号使用时，必须保证符号左右两边的变量类型一致。</li>
+</ol>
+<h4 id="toString-方法"><a href="#toString-方法" class="headerlink" title="toString()方法"></a>toString()方法</h4><h5 id="toString-的使用："><a href="#toString-的使用：" class="headerlink" title="toString()的使用："></a>toString()的使用：</h5><ol>
+<li><p>当我们输出一个对象的引用时，实际上就是调用当前对象的toString()</p>
+</li>
+<li><p>Object类中toString()的定义：</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>public String toString() {<br>   return getClass().getName() + “@” + Integer.toHexString(hashCode());<br>}</p>
+<pre class="line-numbers language-none"><code class="language-none">
+   
+
+4. 像String、Date、File、包装类等都重写了Object类中的toString()方法。
+   使得在调用对象的toString()时，返回&quot;实体内容&quot;信息
+
+5. 自定义类也可以重写toString()方法，当调用此方法时，返回对象的&quot;实体内容&quot;
+##### 如何重写toString()
+
+&#96;&#96;&#96;java
+&#x2F;&#x2F;自动实现
+@Override
+public String toString() &#123;
+	return &quot;Customer [name&#x3D;&quot; + name + &quot;, age&#x3D;&quot; + age + &quot;]&quot;;
+&#125;</code></pre></li>
+</ol>
+<h4 id="面试题：-1"><a href="#面试题：-1" class="headerlink" title="面试题："></a>面试题：</h4><ul>
+<li>final、finally、finalize的区别？</li>
+<li>&#x3D;&#x3D; 和 equals() 区别</li>
+</ul>
+<h3 id="单元测试方法"><a href="#单元测试方法" class="headerlink" title="单元测试方法"></a>单元测试方法</h3><p>略</p>
+<h3 id="包装类的使用"><a href="#包装类的使用" class="headerlink" title="包装类的使用"></a>包装类的使用</h3><h4 id="1-为什么要有包装类-或封装类）"><a href="#1-为什么要有包装类-或封装类）" class="headerlink" title="1.为什么要有包装类(或封装类）"></a>1.为什么要有包装类(或封装类）</h4><p>为了使基本数据类型的变量具有类的特征，引入包装类。</p>
+<h4 id="2-基本数据类型与对应的包装类："><a href="#2-基本数据类型与对应的包装类：" class="headerlink" title="2.基本数据类型与对应的包装类："></a>2.基本数据类型与对应的包装类：</h4><p><img src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(3).bmp"></p>
+<h4 id="3-需要掌握的类型间的转换：（基本数据类型、包装类、String）"><a href="#3-需要掌握的类型间的转换：（基本数据类型、包装类、String）" class="headerlink" title="3.需要掌握的类型间的转换：（基本数据类型、包装类、String）"></a>3.需要掌握的类型间的转换：（基本数据类型、包装类、String）</h4><p><img src="https://raw.githubusercontent.com/HRYX02/javazhong/master/2(2).bmp"></p>
+<h5 id="简易版："><a href="#简易版：" class="headerlink" title="简易版："></a>简易版：</h5><ul>
+<li>基本数据类型&lt;—&gt;包装类：JDK 5.0 新特性：自动装箱 与自动拆箱</li>
+<li>基本数据类型、包装类—&gt;String:调用String重载的valueOf(Xxx xxx)</li>
+<li>String—&gt;基本数据类型、包装类:调用包装类的parseXxx(String s)</li>
+</ul>
+<p><i style="color: red;"> 注意：转换时，可能会报NumberFormatException</i></p>
+<h6 id="应用场景举例："><a href="#应用场景举例：" class="headerlink" title="应用场景举例："></a>应用场景举例：</h6><p>Vector类中关于添加元素，只定义了形参为Object类型的方法：</p>
+<p>v.addElement(Object obj);   &#x2F;&#x2F;基本数据类型 —&gt;包装类 —&gt;使用多态</p>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端学习的记录</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JAVA之面向对象下</title>
     <url>//post/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8B.html</url>
     <content><![CDATA[<h3 id="关键字：static静态的"><a href="#关键字：static静态的" class="headerlink" title="关键字：static静态的"></a>关键字：static静态的</h3><span id="more"></span>
@@ -529,511 +1034,6 @@ public void eat()&#123;
 <h5 id="格式："><a href="#格式：" class="headerlink" title="格式："></a>格式：</h5><ul>
 <li>成员内部类：外部类$内部类名.class</li>
 <li>局部内部类：外部类$数字 内部类名.class</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>JAVA</tag>
-        <tag>后端学习的记录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JAVA之面向对象中</title>
-    <url>//post/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%AD.html</url>
-    <content><![CDATA[<h3 id="面向对象的特征二：继承性"><a href="#面向对象的特征二：继承性" class="headerlink" title="面向对象的特征二：继承性"></a>面向对象的特征二：继承性</h3><span id="more"></span>
-<h4 id="为什么要有类的继承性？-继承性的好处）"><a href="#为什么要有类的继承性？-继承性的好处）" class="headerlink" title="为什么要有类的继承性？(继承性的好处）"></a>为什么要有类的继承性？(继承性的好处）</h4><ul>
-<li>减少了代码的冗余，提高了代码的复用性</li>
-<li>便于功能的扩展</li>
-<li>为之后多态性的使用，提供了前提</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1.bmp"></p>
-<h4 id="继承性的格式："><a href="#继承性的格式：" class="headerlink" title="继承性的格式："></a>继承性的格式：</h4><h5 id="class-A-extends-B"><a href="#class-A-extends-B" class="headerlink" title="class A extends B{}"></a>class A extends B{}</h5><ul>
-<li>A:子类、派生类、subclass</li>
-<li>B:父类、超类、基类、superclass</li>
-</ul>
-<h4 id="子类继承父类以后有哪些不同？"><a href="#子类继承父类以后有哪些不同？" class="headerlink" title="子类继承父类以后有哪些不同？"></a>子类继承父类以后有哪些不同？</h4><ul>
-<li>体现：一旦子类A继承父类B以后，子类A中就获取了父类B中声明的所有的属性和方法。特别的，父类中声明为private的属性或方法，子类继承父类以后，仍然认为获取了父类中私的结构。只因为封装性的影响，使得子类不能直接调用父类的结构而已。</li>
-<li>子类继承父类以后，还可以声明自己特有的属性或方法：实现功能的拓展。子类和父类的关系，不同于子集和集合的关系。extends：延展、扩展</li>
-</ul>
-<h4 id="Java中继承性的说明"><a href="#Java中继承性的说明" class="headerlink" title="Java中继承性的说明"></a>Java中继承性的说明</h4><ul>
-<li>一个类可以被多个子类继承。</li>
-<li>Java中类的单继承性：一个类只能有一个父类。</li>
-<li>子父类是相对的概念。</li>
-<li>子类直接继承的父类，称为：直接父类。间接继承的父类称为：间接父类。</li>
-<li>子类继承父类以后，就获取了直接父类以及所间接父类中声明的属性和方法</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HRYX02/javazhong/master/2.bmp"></p>
-<h4 id="java-lang-Object类的理解"><a href="#java-lang-Object类的理解" class="headerlink" title="java.lang.Object类的理解"></a>java.lang.Object类的理解</h4><ul>
-<li>如果我们没显式的声明一个类的父类的话，则此类继承于java.lang.Object类</li>
-<li>所的java类（除java.lang.Object类之外都直接或间接的继承于java.lang.Object类</li>
-<li>意味着，所的java类具有java.lang.Object类声明的功能。</li>
-</ul>
-<h3 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a>方法的重写</h3><p>什么是方法的重写(override 或 overwrite)？<br>子类继承父类以后，可以对父类中同名同参数的方法，进行覆盖操作.</p>
-<p>应用：</p>
-<p>重写以后，当创建子类对象以后，通过子类对象调用子父类中的同名同参数的方法时，实际执行的是子类重写父类的方法。</p>
-<p>举例：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">class Circle&#123;
-public double findArea()&#123;&#125;&#x2F;&#x2F;求面积
-&#125;
-class Cylinder extends Circle&#123;
-public double findArea()&#123;&#125;&#x2F;&#x2F;求表面积
-&#125;
-&#x2F;&#x2F;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-class Account&#123;
-public boolean withdraw(double amt)&#123;&#125;
-&#125;
-class CheckAccount extends Account&#123;
-public boolean withdraw(double amt)&#123;&#125;
-&#125;</code></pre>
-
-
-
-<p>重写的规则：</p>
-<p>方法的声明： 权限修饰符  返回值类型  方法名(形参列表) throws 异常的类型{</p>
-<p>​		&#x2F;&#x2F;方法体</p>
-<p>}</p>
-<p>约定俗称：子类中的叫重写的方法，父类中的叫被重写的方法</p>
-<ol>
-<li>子类重写的方法的方法名和形参列表与父类被重写的方法的方法名和形参列表相同</li>
-<li>子类重写的方法的权限修饰符不小于父类被重写的方法的权限修饰符</li>
-<li>特殊情况：子类不能重写父类中声明为private权限的方法</li>
-<li>返回值类型：父类被重写的方法的返回值类型是void，则子类重写的方法的返回值类型只能是void父类被重写的方法的返回值类型是A类型，则子类重写的方法的返回值类型可以是A类或A类的子类父类被重写的方法的返回值类型是基本数据类型(比如：double)，则子类重写的方法的返回值类型必须是相同的基本数据类型(必须也是double)</li>
-<li>子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型</li>
-</ol>
-<p>子类和父类中的同名同参数的方法要么都声明为非static的（考虑重写，要么都声明为static的（不是重写)。	</p>
-<p><i style="color: red;">面试题：区分方法的重写和重载？</i></p>
-<ol>
-<li>二者的概念：</li>
-<li>重载和重写的具体规则</li>
-<li>重载：不表现为多态性。<br>重写：表现为多态性。</li>
-</ol>
-<blockquote><span class="custom-blockquote-svg"><svg width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg" data-reactroot="">
-<path fill="" d="M22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C13.8 22 15.5 21.5 17 20.6L22 22L20.7 17C21.5 15.5 22 13.8 22 12Z" undefined="1"></path>
-<path fill="" d="M15.97 11.5H16.04C17.12 11.5 18 12.38 18 13.47V13.53C18 14.62 17.12 15.5 16.03 15.5H15.96C14.88 15.5 14 14.62 14 13.53V13.46C14 12.38 14.88 11.5 15.97 11.5Z" undefined="1"></path>
-<path fill="" d="M7.97 11.5H8.04C9.12 11.5 10 12.38 10 13.47V13.53C10 14.62 9.12 15.5 8.03 15.5H7.97C6.88 15.5 6 14.62 6 13.53V13.46C6 12.38 6.88 11.5 7.97 11.5Z" undefined="1"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M17 8.5C15.23 8.97 14.07 10.84 14.01 13.27C14 13.33 14 13.4 14 13.47V13.5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M9 8.5C7.23 8.97 6.07 10.84 6.01 13.27C6 13.33 6 13.4 6 13.47V13.5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M15.97 11.5H16.04C17.12 11.5 18 12.38 18 13.47V13.53C18 14.62 17.12 15.5 16.03 15.5H15.96C14.88 15.5 14 14.62 14 13.53V13.46C14 12.38 14.88 11.5 15.97 11.5Z"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M7.97 11.5H8.04C9.12 11.5 10 12.38 10 13.47V13.53C10 14.62 9.12 15.5 8.03 15.5H7.97C6.88 15.5 6 14.62 6 13.53V13.46C6 12.38 6.88 11.5 7.97 11.5Z"></path>
-</svg>
-</span><p>重载，是指允许存在多个同名方法，而这些方法的参数不同。编译器根据方法不同的参数表，对同名方法的名称做修饰。对于编译器而言，这些同名方法就成了不同的方法。它们的调用地址在编译期就绑定了。Java的重载是可以包括父类和子类的，即子类可以重载父类的同名不同参数的方法。<br>所以：对于重载而言，在方法调用之前，编译器就已经确定了所要调用的方法，这称为“早绑定”或“静态绑定”；</p></blockquote>
-<blockquote><span class="custom-blockquote-svg"><svg width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg" data-reactroot="">
-<path fill="" d="M22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C13.8 22 15.5 21.5 17 20.6L22 22L20.7 17C21.5 15.5 22 13.8 22 12Z" undefined="1"></path>
-<path fill="" d="M15.97 11.5H16.04C17.12 11.5 18 12.38 18 13.47V13.53C18 14.62 17.12 15.5 16.03 15.5H15.96C14.88 15.5 14 14.62 14 13.53V13.46C14 12.38 14.88 11.5 15.97 11.5Z" undefined="1"></path>
-<path fill="" d="M7.97 11.5H8.04C9.12 11.5 10 12.38 10 13.47V13.53C10 14.62 9.12 15.5 8.03 15.5H7.97C6.88 15.5 6 14.62 6 13.53V13.46C6 12.38 6.88 11.5 7.97 11.5Z" undefined="1"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M17 8.5C15.23 8.97 14.07 10.84 14.01 13.27C14 13.33 14 13.4 14 13.47V13.5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M9 8.5C7.23 8.97 6.07 10.84 6.01 13.27C6 13.33 6 13.4 6 13.47V13.5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M15.97 11.5H16.04C17.12 11.5 18 12.38 18 13.47V13.53C18 14.62 17.12 15.5 16.03 15.5H15.96C14.88 15.5 14 14.62 14 13.53V13.46C14 12.38 14.88 11.5 15.97 11.5Z"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M7.97 11.5H8.04C9.12 11.5 10 12.38 10 13.47V13.53C10 14.62 9.12 15.5 8.03 15.5H7.97C6.88 15.5 6 14.62 6 13.53V13.46C6 12.38 6.88 11.5 7.97 11.5Z"></path>
-</svg>
-</span><p>而对于多态，只等到方法调用的那一刻，解释运行器才会确定所要调用的具体方法，这称为“晚绑定”或“动态绑定”。 </p></blockquote>
-<blockquote><span class="custom-blockquote-svg"><svg width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg" data-reactroot="">
-<path fill="" d="M22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C13.8 22 15.5 21.5 17 20.6L22 22L20.7 17C21.5 15.5 22 13.8 22 12Z" undefined="1"></path>
-<path fill="" d="M15.97 11.5H16.04C17.12 11.5 18 12.38 18 13.47V13.53C18 14.62 17.12 15.5 16.03 15.5H15.96C14.88 15.5 14 14.62 14 13.53V13.46C14 12.38 14.88 11.5 15.97 11.5Z" undefined="1"></path>
-<path fill="" d="M7.97 11.5H8.04C9.12 11.5 10 12.38 10 13.47V13.53C10 14.62 9.12 15.5 8.03 15.5H7.97C6.88 15.5 6 14.62 6 13.53V13.46C6 12.38 6.88 11.5 7.97 11.5Z" undefined="1"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M17 8.5C15.23 8.97 14.07 10.84 14.01 13.27C14 13.33 14 13.4 14 13.47V13.5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M9 8.5C7.23 8.97 6.07 10.84 6.01 13.27C6 13.33 6 13.4 6 13.47V13.5"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M15.97 11.5H16.04C17.12 11.5 18 12.38 18 13.47V13.53C18 14.62 17.12 15.5 16.03 15.5H15.96C14.88 15.5 14 14.62 14 13.53V13.46C14 12.38 14.88 11.5 15.97 11.5Z"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="" d="M7.97 11.5H8.04C9.12 11.5 10 12.38 10 13.47V13.53C10 14.62 9.12 15.5 8.03 15.5H7.97C6.88 15.5 6 14.62 6 13.53V13.46C6 12.38 6.88 11.5 7.97 11.5Z"></path>
-</svg>
-</span><p>引用一句Bruce Eckel的话：“不要犯傻，如果它不是晚绑定，它就不是多态。”</p></blockquote>
-<h3 id="关键字：super"><a href="#关键字：super" class="headerlink" title="关键字：super"></a>关键字：super</h3><h4 id="super-关键字可以理解为：父类的"><a href="#super-关键字可以理解为：父类的" class="headerlink" title="super 关键字可以理解为：父类的"></a>super 关键字可以理解为：父类的</h4><h4 id="可以用来调用的结构："><a href="#可以用来调用的结构：" class="headerlink" title="可以用来调用的结构："></a>可以用来调用的结构：</h4><p>属性、方法、构造器</p>
-<h4 id="super调用属性、方法："><a href="#super调用属性、方法：" class="headerlink" title="super调用属性、方法："></a>super调用属性、方法：</h4><ol>
-<li>我们可以在子类的方法或构造器中。通过使用”super.属性”或”super.方法”的方式，显式的调用父类中声明的属性或方法。但是，通常情况下，我们习惯省略”super.”</li>
-<li>特殊情况：当子类和父类中定义了同名的属性时，我们要想在子类中调用父类中声明的属性，则必须显式的使用”super.属性”的方式，表明调用的是父类中声明的属性。</li>
-<li>特殊情况：当子类重写了父类中的方法以后，我们想在子类的方法中调用父类中被重写的方法时，则必须显式的使用”super.方法”的方式，表明调用的是父类中被重写的方法。</li>
-</ol>
-<h4 id="super调用构造器："><a href="#super调用构造器：" class="headerlink" title="super调用构造器："></a>super调用构造器：</h4><ol>
-<li>我们可以在子类的构造器中显式的使用”super(形参列表)”的方式，调用父类中声明的指定的构造器</li>
-<li>“super(形参列表)”的使用，必须声明在子类构造器的首行！</li>
-<li>我们在类的构造器中，针对于”this(形参列表)”或”super(形参列表)”只能二一，不能同时出现</li>
-<li>在构造器的首行，没显式的声明”this(形参列表)”或”super(形参列表)”，则默认调用的是父类中空参的构造器：super()</li>
-<li>在类的多个构造器中，至少一个类的构造器中使用了”super(形参列表)”，调用父类中的构造器</li>
-</ol>
-<h3 id="子类对象实例化全过程"><a href="#子类对象实例化全过程" class="headerlink" title="子类对象实例化全过程"></a>子类对象实例化全过程</h3><h4 id="从结果上看：继承性"><a href="#从结果上看：继承性" class="headerlink" title="从结果上看：继承性"></a>从结果上看：继承性</h4><ul>
-<li>子类继承父类以后，就获取了父类中声明的属性或方法。</li>
-<li>创建子类的对象，在堆空间中，就会加载所父类中声明的属性。</li>
-</ul>
-<h4 id="从过程上看："><a href="#从过程上看：" class="headerlink" title="从过程上看："></a>从过程上看：</h4><p>当我们通过子类的构造器创建子类对象时，我们一定会直接或间接的调用其父类的构造器，进而调用父类的父类的构造器，…直到调用了java.lang.Object类中空参的构造器为止。正因为加载过所的父类的结构，所以才可以看到内存中父类中的结构，子类对象才可以考虑进行调用。</p>
-<p><img src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(1).bmp"></p>
-<h4 id="强调说明："><a href="#强调说明：" class="headerlink" title="强调说明："></a>强调说明：</h4><p>虽然创建子类对象时，调用了父类的构造器，但是自始至终就创建过一个对象，即为new的子类对象。</p>
-<p><img src="https://raw.githubusercontent.com/HRYX02/javazhong/master/2(1).bmp"></p>
-<h3 id="面向对象的特征三：多态性"><a href="#面向对象的特征三：多态性" class="headerlink" title="面向对象的特征三：多态性"></a>面向对象的特征三：多态性</h3><h4 id="多态性的理解："><a href="#多态性的理解：" class="headerlink" title="多态性的理解："></a>多态性的理解：</h4><p>可以理解为一个事物的多种形态。</p>
-<h4 id="何为多态性："><a href="#何为多态性：" class="headerlink" title="何为多态性："></a>何为多态性：</h4><p>对象的多态性：父类的引用指向子类的对象（或子类的对象赋给父类的引用）</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">Person p &#x3D; new Man();
-Object obj &#x3D; new Date();</code></pre>
-
-<h4 id="多态性的使用：虚拟方法调用"><a href="#多态性的使用：虚拟方法调用" class="headerlink" title="多态性的使用：虚拟方法调用"></a>多态性的使用：虚拟方法调用</h4><ul>
-<li>有了对象的多态性以后，我们在编译期，只能调用父类中声明的方法，但在运行期，我们实际执行的是子类重写父类的方法。</li>
-<li>总结：编译，看左边；运行，看右边。</li>
-</ul>
-<h4 id="多态性的使用前提："><a href="#多态性的使用前提：" class="headerlink" title="多态性的使用前提："></a>多态性的使用前提：</h4><ul>
-<li>类的继承关系</li>
-<li>方法的重写</li>
-</ul>
-<h4 id="多态性的应用举例："><a href="#多态性的应用举例：" class="headerlink" title="多态性的应用举例："></a>多态性的应用举例：</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">举例一：
-	public void func(Animal animal)&#123;&#x2F;&#x2F;Animal animal &#x3D; new Dog();
-		animal.eat();
-		animal.shout();
-	&#125;
-举例二：
-	public void method(Object obj)&#123;
-		
-	&#125;
-举例三：
-class Driver&#123;
-	public void doData(Connection conn)&#123;
-	&#x2F;&#x2F;conn &#x3D; new MySQlConnection();
-	&#x2F;&#x2F;conn &#x3D; new OracleConnection();
-		conn.method1();
-		conn.method2();
-		conn.method3();		
-	&#125;
-&#125;</code></pre>
-
-
-
-<h4 id="多态性使用的注意点："><a href="#多态性使用的注意点：" class="headerlink" title="多态性使用的注意点："></a>多态性使用的注意点：</h4><p><i style="color: red;">对象的多态性，只适用于方法，不适用于属性（编译和运行都看左边）</i></p>
-<h4 id="关于向上转型与向下转型："><a href="#关于向上转型与向下转型：" class="headerlink" title="关于向上转型与向下转型："></a>关于向上转型与向下转型：</h4><h5 id="向上转型：多态"><a href="#向上转型：多态" class="headerlink" title="向上转型：多态"></a>向上转型：多态</h5><h5 id="向下转型："><a href="#向下转型：" class="headerlink" title="向下转型："></a>向下转型：</h5><h6 id="为什么使用向下转型："><a href="#为什么使用向下转型：" class="headerlink" title="为什么使用向下转型："></a>为什么使用向下转型：</h6><p>有了对象的多态性以后，内存中实际上是加载了子类特有的属性和方法的，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法。子类特有的属性和方法不能调用。如何才能调用子类特的属性和方法？使用向下转型。</p>
-<h6 id="如何实现向下转型："><a href="#如何实现向下转型：" class="headerlink" title="如何实现向下转型："></a>如何实现向下转型：</h6><p>使用强制类型转换符：()</p>
-<h6 id="使用时的注意点："><a href="#使用时的注意点：" class="headerlink" title="使用时的注意点："></a>使用时的注意点：</h6><ol>
-<li>使用强转时，可能出现ClassCastException的异常。</li>
-<li>为了避免在向下转型时出现ClassCastException的异常，我们在向下转型之前，先进行instanceof的判断，一旦返回true，就进行向下转型。如果返回false，不进行向下转型。</li>
-</ol>
-<h6 id="instanceof的使用："><a href="#instanceof的使用：" class="headerlink" title="instanceof的使用："></a>instanceof的使用：</h6><ol>
-<li>a instanceof A:判断对象a是否是类A的实例。如果是，返回true；如果不是，返回false。</li>
-<li>如果 a instanceof A返回true,则 a instanceof B也返回true.其中，类B是类A的父类。</li>
-<li>要求a所属的类与类A必须是子类和父类的关系，否则编译错误。</li>
-</ol>
-<h6 id="图示："><a href="#图示：" class="headerlink" title="图示："></a>图示：</h6><p><img src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(2).bmp"></p>
-<h4 id="面试题："><a href="#面试题：" class="headerlink" title="面试题："></a>面试题：</h4><h5 id="谈谈你对多态性的理解？"><a href="#谈谈你对多态性的理解？" class="headerlink" title="谈谈你对多态性的理解？"></a>谈谈你对多态性的理解？</h5><ol>
-<li>实现代码的通用性。</li>
-<li>Object类中定义的public boolean equals(Object obj){  }</li>
-<li>JDBC:使用java程序操作(获取数据库连接、CRUD)数据库(MySQL、Oracle、DB2、SQL Server)</li>
-</ol>
-<h5 id="多态是编译时行为还是运行时行为？"><a href="#多态是编译时行为还是运行时行为？" class="headerlink" title="多态是编译时行为还是运行时行为？"></a>多态是编译时行为还是运行时行为？</h5><p><i style="color: red;">运行时行为</i></p>
-<h3 id="Object类的使用"><a href="#Object类的使用" class="headerlink" title="Object类的使用"></a>Object类的使用</h3><h4 id="java-lang-Object类的说明："><a href="#java-lang-Object类的说明：" class="headerlink" title="java.lang.Object类的说明："></a>java.lang.Object类的说明：</h4><ol>
-<li>Object类是所Java类的根父类</li>
-<li>如果在类的声明中未使用extends关键字指明其父类，则默认父类为java.lang.Object类 </li>
-<li>Object类中的功能(属性、方法)就具通用性。<br>属性：无<br>方法：equals() &#x2F; toString() &#x2F; getClass() &#x2F;hashCode() &#x2F; clone() &#x2F; finalize() wait() 、 notify()、notifyAll()</li>
-<li>Object类只声明了一个空参的构造器</li>
-</ol>
-<h4 id="equals-方法"><a href="#equals-方法" class="headerlink" title="equals()方法"></a>equals()方法</h4><h5 id="equals-的使用："><a href="#equals-的使用：" class="headerlink" title="equals()的使用："></a>equals()的使用：</h5><ol>
-<li><p>是一个方法，而非运算符</p>
-</li>
-<li><p>只能适用于引用数据类型</p>
-</li>
-<li><p>Object类中equals()的定义：</p>
-</li>
-<li><p>&#96;&#96;&#96;java<br>public boolean equals(Object obj) {<br>    return (this &#x3D;&#x3D; obj);<br>  }<br>&#x2F;<em>说明：Object类中定义的equals()和&#x3D;&#x3D;的作用是相同的：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</em>&#x2F;</p>
-<pre class="line-numbers language-none"><code class="language-none">
-5. 像String、Date、File、包装类等都重写了Object类中的equals()方法。重写以后，比较的不是两个引用的地址是否相同，而是比较两个对象的&quot;实体内容&quot;是否相同。
-
-6. 通常情况下，我们自定义的类如果使用equals()的话，也通常是比较两个对象的&quot;实体内容&quot;是否相同。那么，我们就需要对Object类中的equals()进行重写.
-   重写的原则：比较两个对象的实体内容是否相同.
-
-##### 如何重写equals()
-
-###### 手动重写举例：
-
-&#96;&#96;&#96;java
-class User&#123;
-	String name;
-	int age;
-	&#x2F;&#x2F;重写其equals()方法
-	public boolean equals(Object obj)&#123;
-		if(obj &#x3D;&#x3D; this)&#123;
-			return true;
-		&#125;
-		if(obj instanceof User)&#123;
-			User u &#x3D; (User)obj;
-			return this.age &#x3D;&#x3D; u.age &amp;&amp; this.name.equals(u.name);
-		&#125;
-		return false;
-	&#125;
-&#125;</code></pre></li>
-</ol>
-<h6 id="开发中如何实现：自动生成的"><a href="#开发中如何实现：自动生成的" class="headerlink" title="开发中如何实现：自动生成的"></a>开发中如何实现：自动生成的</h6><h5 id="回顾-x3D-x3D-运算符的使用："><a href="#回顾-x3D-x3D-运算符的使用：" class="headerlink" title="回顾 &#x3D;&#x3D; 运算符的使用："></a>回顾 &#x3D;&#x3D; 运算符的使用：</h5><p> &#x3D;&#x3D; ：运算符</p>
-<ol>
-<li>可以使用在基本数据类型变量和引用数据类型变量中</li>
-<li>如果比较的是基本数据类型变量：比较两个变量保存的数据是否相等。（不一定类型要相同）<br>如果比较的是引用数据类型变量：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</li>
-<li>补充： &#x3D;&#x3D; 符号使用时，必须保证符号左右两边的变量类型一致。</li>
-</ol>
-<h4 id="toString-方法"><a href="#toString-方法" class="headerlink" title="toString()方法"></a>toString()方法</h4><h5 id="toString-的使用："><a href="#toString-的使用：" class="headerlink" title="toString()的使用："></a>toString()的使用：</h5><ol>
-<li><p>当我们输出一个对象的引用时，实际上就是调用当前对象的toString()</p>
-</li>
-<li><p>Object类中toString()的定义：</p>
-</li>
-<li><p>&#96;&#96;&#96;java<br>public String toString() {<br>   return getClass().getName() + “@” + Integer.toHexString(hashCode());<br>}</p>
-<pre class="line-numbers language-none"><code class="language-none">
-   
-
-4. 像String、Date、File、包装类等都重写了Object类中的toString()方法。
-   使得在调用对象的toString()时，返回&quot;实体内容&quot;信息
-
-5. 自定义类也可以重写toString()方法，当调用此方法时，返回对象的&quot;实体内容&quot;
-##### 如何重写toString()
-
-&#96;&#96;&#96;java
-&#x2F;&#x2F;自动实现
-@Override
-public String toString() &#123;
-	return &quot;Customer [name&#x3D;&quot; + name + &quot;, age&#x3D;&quot; + age + &quot;]&quot;;
-&#125;</code></pre></li>
-</ol>
-<h4 id="面试题：-1"><a href="#面试题：-1" class="headerlink" title="面试题："></a>面试题：</h4><ul>
-<li>final、finally、finalize的区别？</li>
-<li>&#x3D;&#x3D; 和 equals() 区别</li>
-</ul>
-<h3 id="单元测试方法"><a href="#单元测试方法" class="headerlink" title="单元测试方法"></a>单元测试方法</h3><p>略</p>
-<h3 id="包装类的使用"><a href="#包装类的使用" class="headerlink" title="包装类的使用"></a>包装类的使用</h3><h4 id="1-为什么要有包装类-或封装类）"><a href="#1-为什么要有包装类-或封装类）" class="headerlink" title="1.为什么要有包装类(或封装类）"></a>1.为什么要有包装类(或封装类）</h4><p>为了使基本数据类型的变量具有类的特征，引入包装类。</p>
-<h4 id="2-基本数据类型与对应的包装类："><a href="#2-基本数据类型与对应的包装类：" class="headerlink" title="2.基本数据类型与对应的包装类："></a>2.基本数据类型与对应的包装类：</h4><p><img src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(3).bmp"></p>
-<h4 id="3-需要掌握的类型间的转换：（基本数据类型、包装类、String）"><a href="#3-需要掌握的类型间的转换：（基本数据类型、包装类、String）" class="headerlink" title="3.需要掌握的类型间的转换：（基本数据类型、包装类、String）"></a>3.需要掌握的类型间的转换：（基本数据类型、包装类、String）</h4><p><img src="https://raw.githubusercontent.com/HRYX02/javazhong/master/2(2).bmp"></p>
-<h5 id="简易版："><a href="#简易版：" class="headerlink" title="简易版："></a>简易版：</h5><ul>
-<li>基本数据类型&lt;—&gt;包装类：JDK 5.0 新特性：自动装箱 与自动拆箱</li>
-<li>基本数据类型、包装类—&gt;String:调用String重载的valueOf(Xxx xxx)</li>
-<li>String—&gt;基本数据类型、包装类:调用包装类的parseXxx(String s)</li>
-</ul>
-<p><i style="color: red;"> 注意：转换时，可能会报NumberFormatException</i></p>
-<h6 id="应用场景举例："><a href="#应用场景举例：" class="headerlink" title="应用场景举例："></a>应用场景举例：</h6><p>Vector类中关于添加元素，只定义了形参为Object类型的方法：</p>
-<p>v.addElement(Object obj);   &#x2F;&#x2F;基本数据类型 —&gt;包装类 —&gt;使用多态</p>
-]]></content>
-      <tags>
-        <tag>JAVA</tag>
-        <tag>后端学习的记录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JAVA之面向对象上</title>
-    <url>//post/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8A.html</url>
-    <content><![CDATA[<h3 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h3><span id="more"></span>
-<h4 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a>JVM内存结构</h4><p>编译完源程序以后，生成一个或多个字节码文件。<br>我们使用JVM中的类的加载器和解释器对生成的字节码文件进行解释运行。意味着，需要将字节码文件对应的类加载到内存中，涉及到内存解析。</p>
-<p><img src="https://raw.githubusercontent.com/HRYX02/screenshot/master/1.bmp"></p>
-<p>虚拟机栈，即为平时提到的栈结构。<i style="color: red;">我们将局部变量存储在栈结构中堆，我们将new出来的结构（比如：数组、对象）加载在对空间中。补充：对象的属性（非static的）加载在堆空间中。方法区：类的加载信息、常量池、静态域</i></p>
-<h3 id="类的结构之一：属性"><a href="#类的结构之一：属性" class="headerlink" title="类的结构之一：属性"></a>类的结构之一：属性</h3><h4 id="对比：属性-vs-局部变量"><a href="#对比：属性-vs-局部变量" class="headerlink" title="对比：属性  vs  局部变量"></a>对比：属性  vs  局部变量</h4><h5 id="相同点："><a href="#相同点：" class="headerlink" title="相同点："></a>相同点：</h5><ul>
-<li>定义变量的格式：数据类型  变量名 &#x3D; 变量值</li>
-<li>先声明，后使用</li>
-<li>1.3 变量都其对应的作用域</li>
-</ul>
-<h5 id="不同点："><a href="#不同点：" class="headerlink" title="不同点："></a>不同点：</h5><h6 id="在类中声明的位置的不同"><a href="#在类中声明的位置的不同" class="headerlink" title="在类中声明的位置的不同"></a>在类中声明的位置的不同</h6><ul>
-<li>属性：直接定义在类的一对{}内</li>
-<li>局部变量：声明在方法内、方法形参、代码块内、构造器形参、构造器内部的变量</li>
-</ul>
-<h6 id="关于权限修饰符的不同"><a href="#关于权限修饰符的不同" class="headerlink" title="关于权限修饰符的不同"></a>关于权限修饰符的不同</h6><ul>
-<li>属性：可以在声明属性时，指明其权限，使用权限修饰符。</li>
-<li>常用的权限修饰符：private、public、缺省、protected  —&gt;封装性</li>
-<li>目前，大家声明属性时，都使用缺省就可以了。</li>
-<li>局部变量：不可以使用权限修饰符。</li>
-</ul>
-<h6 id="默认初始化值的情况："><a href="#默认初始化值的情况：" class="headerlink" title="默认初始化值的情况："></a>默认初始化值的情况：</h6><p>属性：类的属性，根据其类型，都默认初始化值。</p>
-<ul>
-<li><p>整型（byte、short、int、long：0）</p>
-</li>
-<li><p>浮点型（float、double：0.0）</p>
-</li>
-<li><p>字符型（char：0  （或’\u0000’））</p>
-</li>
-<li><p>布尔型（boolean：false）</p>
-</li>
-<li><p>引用数据类型（类、数组、接口：null）</p>
-</li>
-</ul>
-<p>局部变量：没默认初始化值。</p>
-<p>意味着，我们在调用局部变量之前，一定要显式赋值。</p>
-<p>特别地：形参在调用时，我们赋值即可。</p>
-<h6 id="在内存中加载的位置："><a href="#在内存中加载的位置：" class="headerlink" title="在内存中加载的位置："></a>在内存中加载的位置：</h6><p>属性：加载到堆空间中   （非static）</p>
-<p>局部变量：加载到栈空间</p>
-<h6 id="补充：回顾变量的分类："><a href="#补充：回顾变量的分类：" class="headerlink" title="补充：回顾变量的分类："></a>补充：回顾变量的分类：</h6><p>方式一：按照数据类型：</p>
-<p><img src="https://raw.githubusercontent.com/HRYX02/screenshot/master/1(1).bmp"></p>
-<p>方式二：按照在类中声明的位置：</p>
-<p><img src="https://raw.githubusercontent.com/HRYX02/screenshot/master/2.bmp"></p>
-<h3 id="类的结构之二：方法"><a href="#类的结构之二：方法" class="headerlink" title="类的结构之二：方法"></a>类的结构之二：方法</h3><h4 id="方法：描述类应该具的功能。"><a href="#方法：描述类应该具的功能。" class="headerlink" title="方法：描述类应该具的功能。"></a>方法：描述类应该具的功能。</h4><p>比如：Math类：sqrt()\random() ...</p>
-<p>​			Scanner类：nextXxx() …</p>
-<p>​			Arrays类：sort() \ binarySearch() \ toString() \ equals() \ …</p>
-<h5 id="1-举例："><a href="#1-举例：" class="headerlink" title="1.举例："></a>1.举例：</h5><ul>
-<li>public void eat(){}</li>
-<li>public void sleep(int hour){}</li>
-<li>public String getName(){}</li>
-<li>public String getNation(String nation){}</li>
-</ul>
-<h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><h6 id="关于权限修饰符：默认方法的权限修饰符先都使用public"><a href="#关于权限修饰符：默认方法的权限修饰符先都使用public" class="headerlink" title="关于权限修饰符：默认方法的权限修饰符先都使用public"></a>关于权限修饰符：默认方法的权限修饰符先都使用public</h6><p>Java规定的4种权限修饰符：private、public、缺省、protected  –&gt;封装性再细说</p>
-<h6 id="返回值类型：-返回值-vs-没返回值"><a href="#返回值类型：-返回值-vs-没返回值" class="headerlink" title="返回值类型： 返回值  vs 没返回值"></a>返回值类型： 返回值  vs 没返回值</h6><p>如果方法返回值，则必须在方法声明时，指定返回值的类型。同时，方法中，需要使用return关键字来返回指定类型的变量或常量：“return 数据”。</p>
-<p>如果方法没返回值，则方法声明时，使用void来表示。通常，没返回值的方法中，就不需要使用return.但是，如果使用的话，只能“return;”表示结束此方法的意思。</p>
-<h6 id="我们定义方法该不该返回值？"><a href="#我们定义方法该不该返回值？" class="headerlink" title="我们定义方法该不该返回值？"></a>我们定义方法该不该返回值？</h6><ul>
-<li>题目要求</li>
-<li>凭经验：具体问题具体分析</li>
-</ul>
-<h6 id="方法名：属于标识符，遵循标识符的规则和规范，“见名知意”"><a href="#方法名：属于标识符，遵循标识符的规则和规范，“见名知意”" class="headerlink" title="方法名：属于标识符，遵循标识符的规则和规范，“见名知意”"></a>方法名：属于标识符，遵循标识符的规则和规范，“见名知意”</h6><h6 id="形参列表：-方法可以声明0个，1个，或多个形参。"><a href="#形参列表：-方法可以声明0个，1个，或多个形参。" class="headerlink" title="形参列表： 方法可以声明0个，1个，或多个形参。"></a>形参列表： 方法可以声明0个，1个，或多个形参。</h6><p>格式：数据类型1 形参1,数据类型2 形参2,…</p>
-<p>我们定义方法时，该不该定义形参？<br>① 题目要求② 凭经验：具体问题具体分析</p>
-<p>方法体：方法功能的体现。 	</p>
-<h5 id="方法的使用中，可以调用当前类的属性或方法"><a href="#方法的使用中，可以调用当前类的属性或方法" class="headerlink" title="方法的使用中，可以调用当前类的属性或方法"></a>方法的使用中，可以调用当前类的属性或方法</h5><p>特殊的：方法A中又调用了方法A:递归方法。</p>
-<p>方法中，不可以定义方法。</p>
-<h4 id="关键字：return"><a href="#关键字：return" class="headerlink" title="关键字：return"></a>关键字：return</h4><ol>
-<li><p>使用范围：使用在方法体中</p>
-</li>
-<li><p>作用：① 结束方法</p>
-<p>​		    ② 针对于返回值类型的方法，使用”return 数据”方法返回所要的数据。</p>
-</li>
-<li><p>3.注意点：return关键字后面不可以声明执行语句。</p>
-</li>
-</ol>
-<h4 id="方法的重载"><a href="#方法的重载" class="headerlink" title="方法的重载"></a>方法的重载</h4><p>略</p>
-<h4 id="可变个数形参的方法"><a href="#可变个数形参的方法" class="headerlink" title="可变个数形参的方法"></a>可变个数形参的方法</h4><h5 id="1-使用说明："><a href="#1-使用说明：" class="headerlink" title="1.使用说明："></a>1.使用说明：</h5><h6 id="jdk-5-0新增的内容"><a href="#jdk-5-0新增的内容" class="headerlink" title="jdk 5.0新增的内容"></a>jdk 5.0新增的内容</h6><p>具体使用：</p>
-<ul>
-<li>可变个数形参的格式：数据类型 … 变量名</li>
-<li>当调用可变个数形参的方法时，传入的参数个数可以是：0个，1个,2个，。。。</li>
-<li>可变个数形参的方法与本类中方法名相同，形参不同的方法之间构成重载</li>
-<li>可变个数形参的方法与本类中方法名相同，形参类型也相同的数组之间不构成重载。换句话说，二者不能共存。</li>
-<li>可变个数形参在方法的形参中，必须声明在末尾</li>
-<li>可变个数形参在方法的形参中,最多只能声明一个可变形参。</li>
-</ul>
-<h5 id="2-举例说明："><a href="#2-举例说明：" class="headerlink" title="2.举例说明："></a>2.举例说明：</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java">public void show(int i)&#123;
-
-&#125;
-
-public void show(String s)&#123;
-	System.out.println(&quot;show(String)&quot;);
-&#125;
-
-public void show(String ... strs)&#123;
-	System.out.println(&quot;show(String ... strs)&quot;);
-	for(int i &#x3D; 0;i &lt; strs.length;i++)&#123;
-		System.out.println(strs[i]);
-	&#125;
-&#125;
-&#x2F;&#x2F;不能与上一个方法同时存在
-&#x2F;&#x2F;	public void show(String[] strs)&#123;
-&#x2F;&#x2F;		
-&#x2F;&#x2F;	&#125;</code></pre>
-<h6 id="调用时："><a href="#调用时：" class="headerlink" title="调用时："></a>调用时：</h6><p>​		<br>​		</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">test.show(&quot;hello&quot;);
-test.show(&quot;hello&quot;,&quot;world&quot;);
-test.show();
-test.show(new String[]&#123;&quot;AA&quot;,&quot;BB&quot;,&quot;CC&quot;&#125;);</code></pre>
-
-<h4 id="java的值传递机制"><a href="#java的值传递机制" class="headerlink" title="java的值传递机制"></a>java的值传递机制</h4><h5 id="1-针对于方法内变量的赋值举例："><a href="#1-针对于方法内变量的赋值举例：" class="headerlink" title="1.针对于方法内变量的赋值举例："></a>1.针对于方法内变量的赋值举例：</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java">System.out.println(&quot;***********基本数据类型：****************&quot;);
-int m &#x3D; 10;
-int n &#x3D; m;
-System.out.println(&quot;m &#x3D; &quot; + m + &quot;, n &#x3D; &quot; + n);	
-n &#x3D; 20;
-System.out.println(&quot;m &#x3D; &quot; + m + &quot;, n &#x3D; &quot; + n);
-System.out.println(&quot;***********引用数据类型：****************&quot;);
-Order o1 &#x3D; new Order();
-o1.orderId &#x3D; 1001;
-Order o2 &#x3D; o1;&#x2F;&#x2F;赋值以后，o1和o2的地址值相同，都指向了堆空间中同一个对象实体。
-System.out.println(&quot;o1.orderId &#x3D; &quot; + o1.orderId + &quot;,o2.orderId &#x3D; &quot; +o2.orderId);
-o2.orderId &#x3D; 1002;
-System.out.println(&quot;o1.orderId &#x3D; &quot; + o1.orderId + &quot;,o2.orderId &#x3D; &quot; +o2.orderId);</code></pre>
-
-<h6 id="规则："><a href="#规则：" class="headerlink" title="规则："></a>规则：</h6><ul>
-<li>如果变量是基本数据类型，此时赋值的是变量所保存的数据值。</li>
-<li>如果变量是引用数据类型，此时赋值的是变量所保存的数据的地址值。</li>
-</ul>
-<h4 id="递归方法"><a href="#递归方法" class="headerlink" title="递归方法"></a>递归方法</h4><h5 id="1-定义："><a href="#1-定义：" class="headerlink" title="1.定义："></a>1.定义：</h5><p>递归方法：一个方法体内调用它自身。</p>
-<h5 id="2-如何理解递归方法？"><a href="#2-如何理解递归方法？" class="headerlink" title="2.如何理解递归方法？"></a>2.如何理解递归方法？</h5><ul>
-<li>方法递归包含了一种隐式的循环，它会重复执行某段代码，但这种重复执行无须循环控制。</li>
-<li>递归一定要向已知方向递归，否则这种递归就变成了无穷递归，类似于死循环。</li>
-</ul>
-<p>3.举例：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">&#x2F;&#x2F; 例1：计算1-n之间所自然数的和
-public int getSum(int n) &#123;&#x2F;&#x2F; 3
-	if (n &#x3D;&#x3D; 1) &#123;
-		return 1;
-	&#125; else &#123;
-		return n + getSum(n - 1);
-	&#125;
-&#125;
-&#x2F;&#x2F; 例2：计算1-n之间所自然数的乘积:n!
-public int getSum1(int n) &#123;
-	if (n &#x3D;&#x3D; 1) &#123;
-		return 1;
-	&#125; else &#123;
-		return n * getSum1(n - 1);
-	&#125;
-&#125;
-
-&#x2F;&#x2F;例3：已知一个数列：f(0) &#x3D; 1,f(1) &#x3D; 4,f(n+2)&#x3D;2*f(n+1) + f(n),
-&#x2F;&#x2F;其中n是大于0的整数，求f(10)的值。
-public int f(int n)&#123;
-	if(n &#x3D;&#x3D; 0)&#123;
-		return 1;
-	&#125;else if(n &#x3D;&#x3D; 1)&#123;
-		return 4;
-	&#125;else&#123;
-		&#x2F;&#x2F;return f(n + 2) - 2 * f(n + 1);
-		return 2*f(n - 1) + f(n - 2);
-		&#125;
-	&#125;
-&#x2F;&#x2F;例4：斐波那契数列
-&#x2F;&#x2F;例5：汉诺塔问题
-&#x2F;&#x2F;例6：快排</code></pre>
-<h3 id="面向对象的特征一：封装性"><a href="#面向对象的特征一：封装性" class="headerlink" title="面向对象的特征一：封装性"></a>面向对象的特征一：封装性</h3><h4 id="1-为什么要引入封装性？"><a href="#1-为什么要引入封装性？" class="headerlink" title="1.为什么要引入封装性？"></a>1.为什么要引入封装性？</h4><h5 id="我们程序设计追求“高内聚，低耦合”。"><a href="#我们程序设计追求“高内聚，低耦合”。" class="headerlink" title="我们程序设计追求“高内聚，低耦合”。"></a>我们程序设计追求“高内聚，低耦合”。</h5><ul>
-<li>高内聚 ：类的内部数据操作细节自己完成，不允许外部干涉；</li>
-<li>低耦合 ：仅对外暴露少量的方法用于使用。</li>
-</ul>
-<h5 id="隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。"><a href="#隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。" class="headerlink" title="隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。"></a>隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。</h5><h4 id="2-问题引入："><a href="#2-问题引入：" class="headerlink" title="2.问题引入："></a>2.问题引入：</h4><p>当我们创建一个类的对象以后，我们可以通过”对象.属性”的方式，对对象的属性进行赋值。这里，赋值操作要受到属性的数据类型和存储范围的制约。除此之外，没其他制约条件。但是，在实际问题中，我们往往需要给属性赋值加入额外的限制条件。这个条件就不能在属性声明时体现，我们只能通过方法进行限制条件的添加。（比如：setLegs()同时，我们需要避免用户再使用”对象.属性”的方式对属性进行赋值。则需要将属性声明为私有的(private).<br>  –&gt;此时，针对于属性就体现了封装性。</p>
-<h4 id="3-封装性思想具体的代码体现："><a href="#3-封装性思想具体的代码体现：" class="headerlink" title="3.封装性思想具体的代码体现："></a>3.封装性思想具体的代码体现：</h4><ul>
-<li>将类的属性xxx私化(private),同时，提供公共的(public)方法来获取(getXxx)和设置(setXxx)此属性的值</li>
-</ul>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">private double radius;
-public void setRadius(double radius)&#123;
-	this.radius &#x3D; radius;
-&#125;
-public double getRadius()&#123;
-	return radius;
-&#125;</code></pre>
-
-<ul>
-<li>体现二：不对外暴露的私有的方法</li>
-<li>体现三：单例模式（将构造器私有化）</li>
-<li>体现四：如果不希望类在包外被调用，可以将类设置为缺省的。</li>
-</ul>
-<h4 id="4-Java规定的四种权限修饰符"><a href="#4-Java规定的四种权限修饰符" class="headerlink" title="4.Java规定的四种权限修饰符"></a>4.Java规定的四种权限修饰符</h4><h5 id="4-1-权限从小到大顺序为：private-lt-缺省-lt-protected-lt-public"><a href="#4-1-权限从小到大顺序为：private-lt-缺省-lt-protected-lt-public" class="headerlink" title="4.1 权限从小到大顺序为：private &lt;  缺省 &lt; protected &lt; public"></a>4.1 权限从小到大顺序为：private &lt;  缺省 &lt; protected &lt; public</h5><h5 id="4-2-具体的修饰范围："><a href="#4-2-具体的修饰范围：" class="headerlink" title="4.2 具体的修饰范围："></a>4.2 具体的修饰范围：</h5><p><img src="https://raw.githubusercontent.com/HRYX02/screenshot/master/1(2).bmp"></p>
-<h5 id="4-3-权限修饰符可用来修饰的结构说明："><a href="#4-3-权限修饰符可用来修饰的结构说明：" class="headerlink" title="4.3 权限修饰符可用来修饰的结构说明："></a>4.3 权限修饰符可用来修饰的结构说明：</h5><p>4种权限都可以用来修饰类的内部结构：属性、方法、构造器、内部类<br>修饰类的话，只能使用：缺省、public</p>
-<h3 id="类的结构之三：构造器"><a href="#类的结构之三：构造器" class="headerlink" title="类的结构之三：构造器"></a>类的结构之三：构造器</h3><h4 id="属性赋值的顺序"><a href="#属性赋值的顺序" class="headerlink" title="属性赋值的顺序"></a>属性赋值的顺序</h4><p>① 默认初始化</p>
-<p>② 显式初始化</p>
-<p>③ 构造器中初始化</p>
-<p>④ 通过”对象.方法” 或 “对象.属性”的方式，赋值</p>
-<p>以上操作的先后顺序：① - ② - ③ - ④ </p>
-<h4 id="JavaBean的概念"><a href="#JavaBean的概念" class="headerlink" title="JavaBean的概念"></a>JavaBean的概念</h4><h5 id="所谓JavaBean，是指符合如下标准的Java类："><a href="#所谓JavaBean，是指符合如下标准的Java类：" class="headerlink" title="所谓JavaBean，是指符合如下标准的Java类："></a>所谓JavaBean，是指符合如下标准的Java类：</h5><ul>
-<li>类是公共的</li>
-<li>一个无参的公共的构造器</li>
-<li>属性，且对应的get、set方法</li>
-</ul>
-<h3 id="关键字：this"><a href="#关键字：this" class="headerlink" title="关键字：this"></a>关键字：this</h3><h4 id="1-可以调用的结构：属性、方法；构造器"><a href="#1-可以调用的结构：属性、方法；构造器" class="headerlink" title="1.可以调用的结构：属性、方法；构造器"></a>1.可以调用的结构：属性、方法；构造器</h4><h4 id="2-this调用属性、方法："><a href="#2-this调用属性、方法：" class="headerlink" title="2.this调用属性、方法："></a>2.this调用属性、方法：</h4><p>this理解为：当前对象  或 当前正在创建的对象</p>
-<ul>
-<li><p>2.1在类的方法中，我们可以使用”this.属性”或”this.方法”的方式，调用当前对象属性或方法。但是，通常情况下，我们都择省略”this.”。特殊情况下，如果方法的形参和类的属性同名时，我们必须显式的使用”this.变量”的方式，表明此变量是属性，而非形参。</p>
-</li>
-<li><p>2.2 在类的构造器中，我们可以使用”this.属性”或”this.方法”的方式，调用当前正在创建的对象属性或方法。但是，通常情况下，我们都择省略”this.”。</p>
-</li>
-<li><p>特殊情况下，如果构造器的形参和类的属性同名时，我们必须显式的使用”this.变量”的方式，表明此变量是属性，而非形参。</p>
-</li>
-</ul>
-<h4 id="3-this调用构造器："><a href="#3-this调用构造器：" class="headerlink" title="3.this调用构造器："></a>3.this调用构造器：</h4><ul>
-<li>我们在类的构造器中，可以显式的使用”this(形参列表)”方式，调用本类中指定的其他构造器</li>
-<li>构造器中不能通过”this(形参列表)”方式调用自己</li>
-<li>如果一个类中有n个构造器，则最多有 n - 1构造器中使用了”this(形参列表)”</li>
-<li>规定：”this(形参列表)”必须声明在当前构造器的首行</li>
-<li>构造器内部，最多只能声明一个”this(形参列表)”，用来调用其他的构造器</li>
-</ul>
-<h3 id="关键字：package-x2F-import"><a href="#关键字：package-x2F-import" class="headerlink" title="关键字：package&#x2F;import"></a>关键字：package&#x2F;import</h3><h4 id="package的使用"><a href="#package的使用" class="headerlink" title="package的使用"></a>package的使用</h4><h5 id="使用说明："><a href="#使用说明：" class="headerlink" title="使用说明："></a>使用说明：</h5><ul>
-<li>1.为了更好的实现项目中类的管理，提供包的概念</li>
-<li>2.使用package声明类或接口所属的包，声明在源文件的首行</li>
-<li>3.包，属于标识符，遵循标识符的命名规则、规范(xxxyyyzzz)、“见名知意”</li>
-<li>4.每”.”一次，就代表一层文件目录。</li>
-</ul>
-<h5 id="举例："><a href="#举例：" class="headerlink" title="举例："></a>举例：</h5><h6 id="举例一：某航运软件系统包括：一组域对象、GUI和reports子系统"><a href="#举例一：某航运软件系统包括：一组域对象、GUI和reports子系统" class="headerlink" title="举例一：某航运软件系统包括：一组域对象、GUI和reports子系统"></a>举例一：某航运软件系统包括：一组域对象、GUI和reports子系统</h6><p><img src="https://raw.githubusercontent.com/HRYX02/screenshot/master/1(3).bmp"></p>
-<h6 id="举例二：MVC设计模式"><a href="#举例二：MVC设计模式" class="headerlink" title="举例二：MVC设计模式"></a>举例二：MVC设计模式</h6><p><img src="https://raw.githubusercontent.com/HRYX02/screenshot/master/2(1).bmp"></p>
-<h5 id="1-3-JDK中的主要包介绍："><a href="#1-3-JDK中的主要包介绍：" class="headerlink" title="1.3 JDK中的主要包介绍："></a>1.3 JDK中的主要包介绍：</h5><p><img src="https://raw.githubusercontent.com/HRYX02/screenshot/master/3.bmp"></p>
-<h4 id="import的使用："><a href="#import的使用：" class="headerlink" title="import的使用："></a>import的使用：</h4><h5 id="import-导入"><a href="#import-导入" class="headerlink" title="import:导入"></a>import:导入</h5><ul>
-<li>在源文件中显式的使用import结构导入指定包下的类、接口</li>
-<li>声明在包的声明和类的声明之间</li>
-<li>如果需要导入多个结构，则并列写出即可</li>
-<li>可以使用”xxx.*”的方式，表示可以导入xxx包下的所结构</li>
-<li>如果使用的类或接口是java.lang包下定义的，则可以省略import结构</li>
-<li>如果使用的类或接口是本包下定义的，则可以省略import结构</li>
-<li>如果在源文件中，使用了不同包下的同名的类，则必须至少一个类需要以全类名的方式显示。</li>
-<li>使用”xxx.*”方式表明可以调用xxx包下的所结构。但是如果使用的是xxx子包下的结构，则仍需要显式导入</li>
-<li>import static:导入指定类或接口中的静态结构:属性或方法。</li>
 </ul>
 ]]></content>
       <tags>
