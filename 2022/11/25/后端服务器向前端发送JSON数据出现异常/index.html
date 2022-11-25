@@ -183,7 +183,7 @@
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2022-11-25 20:30:29</span>
+        <span class="pc">2022-11-25 20:33:31</span>
     </span>
     
     
@@ -215,7 +215,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>291 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>301 字</span>
         </span>
     
     
@@ -249,7 +249,7 @@
 <p>但是前端页面无法数据</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//部分前端代码</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadStudentData</span>(<span class="params"></span>)&#123;</span><br><span class="line">	$.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">    	<span class="attr">url</span>:<span class="string">&quot;student/queryStudent.do&quot;</span>,</span><br><span class="line">        <span class="attr">type</span>:<span class="string">&quot;get&quot;</span>,</span><br><span class="line">        <span class="attr">dataType</span>:<span class="string">&quot;json&quot;</span>,</span><br><span class="line">        <span class="attr">success</span>:<span class="keyword">function</span>(<span class="params">data</span>)&#123;</span><br><span class="line">        	$.<span class="title function_">each</span>(data,<span class="keyword">function</span>(<span class="params">i,n</span>)&#123;</span><br><span class="line">            	$(<span class="string">&quot;#info&quot;</span>).<span class="title function_">append</span>(<span class="string">&quot;&lt;tr&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">id</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">name</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">age</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;/tr&gt;&quot;</span>)</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>看了一下接口发现一个<i style="color:red">500的服务器内部的报错</i>，主要报错为</p>
+<h2 id="问题的对策"><a href="#问题的对策" class="headerlink" title="问题的对策"></a>问题的对策</h2><p>看了一下接口发现一个<i style="color:red">500的服务器内部的报错</i>，主要报错为</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No converter found for return value of type: class java.util.ArrayList</span><br></pre></td></tr></table></figure>
 
 <p><img  
@@ -265,7 +265,7 @@
                      data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-16-43.jpg"
                      
                 ></p>
-<p>而我们要使用的是mvc结尾的那一个，最终前端也成功的获取到了JSON数据</p>
+<h2 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h2><p>而我们要使用的是mvc结尾的那一个，最终前端也成功的获取到了JSON数据</p>
 <p><img  
                      lazyload
                      alt="image"
@@ -430,7 +430,7 @@
             <div class="toc-content-container">
                 <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E7%94%B1%E6%9D%A5"><span class="nav-text">问题的由来</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E7%94%B1%E6%9D%A5"><span class="nav-text">问题的由来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E7%AD%96"><span class="nav-text">问题的对策</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3"><span class="nav-text">问题的解决</span></a></li></ol>
     </div>
 </div>
 
