@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="赫然玉鑫">
+    
+    <title>
+        
+            SpringBoot学习笔记-基础篇 |
+        
+        赫然玉鑫的Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.5.2/source/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.5.2/source/fontawesome/css/regular.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.5.2/source/fontawesome/css/solid.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.5.2/source/fontawesome/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":"https://cdn.staticaly.com/gh/HRYX02/images@master/13d07879d7b0b4b.2g1ysoua97ms.webp","favicon":"/images/logo.svg","avatar":"https://cdn.staticaly.com/gh/HRYX02/images@master/13d07879d7b0b4b.2g1ysoua97ms.webp","font_size":"16px","font_family":null,"hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"header_transparent":true,"background_img":"https://cdn.staticaly.com/gh/HRYX02/images@master/top_img2.2m10fibmxws0.webp","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":true},"scroll":{"progress_bar":false,"percent":false}},"local_search":{"enable":false,"preload":false},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"obsidian"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":true,"use":"valine","valine":{"appid":"uWNCspT1yx1uL4GOXkGqPAnO-gzGzoHsz","appkey":"kxzojjaKQ6PiMLZ7jynOrx6q","placeholder":"可以提出宝贵的意见哟"},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.7"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":true,"custom_label_list":["学徒","工程师","架构师"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"left","copyright_info":true},"version":"3.5.2"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="https://cdn.staticaly.com/gh/HRYX02/images@master/13d07879d7b0b4b.2g1ysoua97ms.webp">
+                </a>
+            
+            <a class="logo-title" href="/">
+               赫然玉鑫的Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                博文列表
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">博文列表</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">SpringBoot学习笔记-基础篇</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="https://cdn.staticaly.com/gh/HRYX02/images@master/13d07879d7b0b4b.2g1ysoua97ms.webp">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">赫然玉鑫</span>
+                            
+                                <span class="author-label">Lv2</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-02-27 18:50:00</span>
+        <span class="mobile">2023-02-27 18:50</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-02-27 18:51:00</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/JAVA/">JAVA</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%AE%B0%E5%BD%95/">后端学习的记录</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/SpringBoot2/">SpringBoot2</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.3k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>5 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                <h1 id="SpringBoot学习笔记-基础篇"><a href="#SpringBoot学习笔记-基础篇" class="headerlink" title="SpringBoot学习笔记-基础篇"></a>SpringBoot学习笔记-基础篇</h1><h2 id="配置文件的使用"><a href="#配置文件的使用" class="headerlink" title="配置文件的使用"></a>配置文件的使用</h2><h3 id="配置文件的类型"><a href="#配置文件的类型" class="headerlink" title="配置文件的类型"></a>配置文件的类型</h3><h4 id="properties-传统格式-x2F-默认格式"><a href="#properties-传统格式-x2F-默认格式" class="headerlink" title="properties(传统格式&#x2F;默认格式)"></a>properties(传统格式&#x2F;默认格式)</h4><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 服务器端口配置</span></span><br><span class="line"><span class="attr">server.port</span>=<span class="string">80</span></span><br><span class="line"><span class="comment"># 修改banner</span></span><br><span class="line"><span class="attr">spring.main.banner-mode</span>=<span class="string">off</span></span><br><span class="line"><span class="attr">spring.banner.image.location</span>=<span class="string">logo.png</span></span><br><span class="line"><span class="comment"># 日志</span></span><br><span class="line"><span class="attr">logging.level.root</span>=<span class="string">info</span></span><br><span class="line"><span class="attr">logging.level.com.itheima</span>=<span class="string">warn</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="yaml-主流格式-x2F-常用"><a href="#yaml-主流格式-x2F-常用" class="headerlink" title="yaml(主流格式&#x2F;常用)"></a>yaml(主流格式&#x2F;常用)</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">82</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="yml"><a href="#yml" class="headerlink" title="yml"></a>yml</h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">81</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="SpringBoot配置文件加载顺序"><a href="#SpringBoot配置文件加载顺序" class="headerlink" title="SpringBoot配置文件加载顺序"></a>SpringBoot配置文件加载顺序</h4><p>application.properties &gt; application.yml &gt; application.yaml</p>
+<h4 id="yaml语法总结"><a href="#yaml语法总结" class="headerlink" title="yaml语法总结"></a>yaml语法总结</h4><h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>YAML（YAML Ain’t Markup Language），一种数据序列化格式YAML</p>
+<p>文件扩展名	.yml（主流）	.yaml</p>
+<h5 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h5><ul>
+<li>大小写敏感</li>
+<li>属性层级关系使用多行描述，每行结尾使用冒号结束</li>
+<li>使用缩进表示层级关系，同层级左侧对齐，只允许使用空格（不允许使用Tab键）</li>
+<li>属性值前面添加空格（属性名与属性值之间使用冒号+空格作为分隔）</li>
+<li>星号*表示注释</li>
+<li><strong>核心规则：数据前面要加空格与冒号隔开</strong></li>
+</ul>
+<h6 id="字面值表示方式"><a href="#字面值表示方式" class="headerlink" title="字面值表示方式"></a>字面值表示方式</h6><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean: TRUE</td>
+<td>TRUE,true,True,FALSE,false,False均可</td>
+</tr>
+<tr>
+<td>float: 3.14</td>
+<td>6.8523015e+5     支持科学计数法</td>
+</tr>
+<tr>
+<td>int: 123</td>
+<td>0b1010_0111_0100_1010_1110    支持二、八、十六进制</td>
+</tr>
+<tr>
+<td>null: ~</td>
+<td>使用~表示null</td>
+</tr>
+<tr>
+<td>string: HelloWorld</td>
+<td>字符串可以直接书写</td>
+</tr>
+<tr>
+<td>string2: “Hello World”</td>
+<td>可以使用双引号包裹特殊字符</td>
+</tr>
+<tr>
+<td>date: 2023-02-22</td>
+<td>日期必须使用yyyy-MN-dd格式</td>
+</tr>
+<tr>
+<td>datetime: 2023-02-22T18:09:00+08:00</td>
+<td>时间和日期之间使用T连接，最后使用+代表时区</td>
+</tr>
+</tbody></table>
+<h6 id="数组表示方式"><a href="#数组表示方式" class="headerlink" title="数组表示方式"></a>数组表示方式</h6><p>在属性名书写位置的下方使用减号作为数据开始符号，每行书写一个数据，减号与数据间空格分隔</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">subject:</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">Java</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">前端</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">大数据</span></span><br><span class="line"><span class="attr">enterprise:</span></span><br><span class="line">	<span class="attr">name:</span> <span class="string">itcast</span></span><br><span class="line">	<span class="attr">age:</span> <span class="number">16</span></span><br><span class="line">	<span class="attr">subject:</span></span><br><span class="line">		<span class="bullet">-</span> <span class="string">Java</span></span><br><span class="line">		<span class="bullet">-</span> <span class="string">前端</span></span><br><span class="line">		<span class="bullet">-</span> <span class="string">大数据</span></span><br><span class="line"><span class="attr">likes:</span> [<span class="string">王者荣耀</span>,<span class="string">刺激战场</span>]	<span class="comment">#数组书写缩略格式</span></span><br><span class="line"></span><br><span class="line"><span class="attr">users:</span> <span class="comment">#对象数组格式一</span></span><br><span class="line">	<span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Tom</span></span><br><span class="line">	  <span class="attr">age:</span> <span class="number">4</span></span><br><span class="line">	<span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Jerry</span></span><br><span class="line">	  <span class="attr">age:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">users:</span> <span class="comment">#对象数组格式二</span></span><br><span class="line">	<span class="bullet">-</span></span><br><span class="line">		<span class="attr">name:</span> <span class="string">Tom</span></span><br><span class="line">		<span class="attr">age:</span> <span class="number">4</span></span><br><span class="line">	<span class="bullet">-</span></span><br><span class="line">		<span class="attr">name:</span> <span class="string">Jerry</span></span><br><span class="line">		<span class="attr">age:</span> <span class="number">5</span></span><br><span class="line"><span class="comment">#对象数组缩略格式</span></span><br><span class="line"><span class="attr">users2:</span> [ &#123; <span class="string">name:Tom</span> , <span class="string">age:4</span> &#125; , &#123; <span class="string">name:Jerry</span> , <span class="string">age:5</span> &#125; ]</span><br></pre></td></tr></table></figure>
+
+<h5 id="yaml数据的读取"><a href="#yaml数据的读取" class="headerlink" title="yaml数据的读取"></a>yaml数据的读取</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#application.yaml中的数据</span></span><br><span class="line"></span><br><span class="line"><span class="attr">country:</span> <span class="string">china</span></span><br><span class="line"></span><br><span class="line"><span class="attr">user1:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">itcast</span></span><br><span class="line">  <span class="attr">age:</span> <span class="number">16</span></span><br><span class="line">  </span><br><span class="line"><span class="attr">likes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">game</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">music</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">sleep</span>  </span><br><span class="line">  </span><br><span class="line"><span class="attr">users:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">zhangsan</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">18</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">lisi</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">17</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">#使用$&#123;属性名&#125;引用数据</span></span><br><span class="line"><span class="attr">tempDir:</span> <span class="string">$&#123;baseDir&#125;\temp</span></span><br><span class="line"><span class="comment">#使用引号包裹的字符串，其中的转义字符可以生效</span></span><br><span class="line"><span class="attr">tempDir2:</span> <span class="string">&quot;$&#123;baseDir&#125;\temp\t1\t2\t3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建类，用于封装下面的数据</span></span><br><span class="line"><span class="comment"># 由spring帮我们去加载数据到对象中，一定要告诉spring加载这组信息</span></span><br><span class="line"><span class="comment"># 使用时候从spring中直接获取信息使用</span></span><br><span class="line"><span class="attr">datasource:</span></span><br><span class="line">  <span class="attr">driver:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost/springboot_db</span></span><br><span class="line">  <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">root666</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="方式一：单个获取单个读取"><a href="#方式一：单个获取单个读取" class="headerlink" title="方式一：单个获取单个读取"></a>方式一：单个获取单个读取</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Java读取application.yaml中的数据</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Value(&quot;$&#123;country&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String country1;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;user1.name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String name;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;likes[0]&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String likes;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;users[0].name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String users;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;tempDir&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String tempDir;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;tempDir2&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String tempDir2;</span><br></pre></td></tr></table></figure>
+
+<h6 id="方式二：统一获取单个读取"><a href="#方式二：统一获取单个读取" class="headerlink" title="方式二：统一获取单个读取"></a>方式二：统一获取单个读取</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用自动装配将所有的数据封装到一个对象Environment中</span></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> Environment env;</span><br></pre></td></tr></table></figure>
+
+<h6 id="方式三：放在对象中"><a href="#方式三：放在对象中" class="headerlink" title="方式三：放在对象中"></a>方式三：放在对象中</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//2.定义为spring管控的bean</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="comment">//3.指定加载的数据，prefix名也要一直</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;datasource&quot;)</span></span><br><span class="line"><span class="comment">//1.定义数据模型封装yaml文件中对应的数据</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyDataSource</span> &#123;</span><br><span class="line">    <span class="comment">//属性要与yaml文件中的属性名一致</span></span><br><span class="line">    <span class="keyword">private</span> String driver;</span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    </span><br><span class="line">    get()/set()方法	<span class="comment">//必须</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="整合第三方技术"><a href="#整合第三方技术" class="headerlink" title="整合第三方技术"></a>整合第三方技术</h2><h3 id="整合JUnit"><a href="#整合JUnit" class="headerlink" title="整合JUnit"></a>整合JUnit</h3><p>测试类SpringBoot已经帮忙构建了，只需要</p>
+<ol>
+<li>注入你要测试的对象</li>
+<li>执行要测试的对象对应的方法</li>
+</ol>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>如果测试类文件不在<strong>主配置类文件的同级或子级包</strong>如同下图，那么就会报错</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-22_19-00-24.jpg"
+                     
+                ></p>
+<p style="color: red">java.lang.IllegalStateException: Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=...) with your test</p>
+
+<p>因此我们需要手动添加主配置类路径</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这俩注解任选一个</span></span><br><span class="line"><span class="meta">@SpringBootTest(classes = Springboot04JunitApplication.class)</span></span><br><span class="line"><span class="meta">@ContextConfiguration(classes = Springboot04JunitApplication.class)</span></span><br></pre></td></tr></table></figure>
+
+<p>因为上述报错显示</p>
+<p style="color: red">Unable to find a @SpringBootConfiguration</p>
+
+<p>所以在主配置文件的**@SpringBootApplication**注解中可以发现</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-22_19-05-37.jpg"
+                     
+                ></p>
+<h3 id="整合MyBatis"><a href="#整合MyBatis" class="headerlink" title="整合MyBatis"></a>整合MyBatis</h3><h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><h5 id="1-选择技术集"><a href="#1-选择技术集" class="headerlink" title="1.选择技术集"></a>1.选择技术集</h5><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-23_15-04-47.jpg"
+                     
+                ></p>
+<h5 id="2-设置数据源参数"><a href="#2-设置数据源参数" class="headerlink" title="2.设置数据源参数"></a>2.设置数据源参数</h5><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#2.配置相关信息</span></span><br><span class="line"><span class="comment">#application.yml</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/springboot</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">666</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-定义数据层接口与映射配置"><a href="#3-定义数据层接口与映射配置" class="headerlink" title="3.定义数据层接口与映射配置"></a>3.定义数据层接口与映射配置</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">BookDao</span> &#123;</span><br><span class="line">    <span class="meta">@Select(&quot;select * from tbl_book where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Book <span class="title function_">getById</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> Integer id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="整合MyBatis-Plus"><a href="#整合MyBatis-Plus" class="headerlink" title="整合MyBatis-Plus"></a>整合MyBatis-Plus</h3><h4 id="1-选择技术集-1"><a href="#1-选择技术集-1" class="headerlink" title="1.选择技术集"></a>1.选择技术集</h4><p>步骤与整合MyBatis相似,但是</p>
+<p style="color:red">在选择技术集时不选择MyBatis Framework</p>
+
+<p>而是手动引入MyBatis-Plus依赖。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-定义数据层接口与映射配置"><a href="#2-定义数据层接口与映射配置" class="headerlink" title="2.定义数据层接口与映射配置"></a>2.定义数据层接口与映射配置</h4><p style="color:red">无需手写接口和映射文件，只需继承BaseMapper<实体类></p>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">BookDao</span> <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;Book&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="整合Druid"><a href="#整合Druid" class="headerlink" title="整合Druid"></a>整合Druid</h3><h4 id="1-选择技术集-2"><a href="#1-选择技术集-2" class="headerlink" title="1.选择技术集"></a>1.选择技术集</h4><p>步骤与整合MyBatis一样,选择MyBatis Framework和MySQL Driver</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-定义数据层接口与映射配置-1"><a href="#2-定义数据层接口与映射配置-1" class="headerlink" title="2.定义数据层接口与映射配置"></a>2.定义数据层接口与映射配置</h4><p>与整合MyBatis一样</p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul class="copyright-info-content">
+        <li>
+            <span class="type">本文标题</span>：<span class="content">SpringBoot学习笔记-基础篇</span>
+        </li>
+        <li>
+            <span class="type">本文作者</span>：<span class="content">赫然玉鑫</span>
+        </li>
+        <li>
+            <span class="type">创建时间</span>：<span class="content">2023-02-27 18:50:00</span>
+        </li>
+        <li class="post-link">
+            <span class="type">本文链接</span>：<span class="content">2023/02/27/SpringBoot学习笔记--基础篇/</span>
+        </li>
+        <li>
+            <span class="type">版权声明</span>：<span class="content">本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！</span>
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/JAVA/">#JAVA</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%AE%B0%E5%BD%95/">#后端学习的记录</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/SpringBoot2/">#SpringBoot2</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/02/27/Git%E6%8C%87%E4%BB%A4/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">Git指令</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/02/11/MyBatis%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">MyBatis学习总结</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    
+<div class="comments-container">
+    <div id="comments-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+        
+            
+
+    <div class="valine-container">
+        <script data-pjax src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+          function loadValine() {
+            new Valine({
+              el: '#vcomments',
+              appId: 'uWNCspT1yx1uL4GOXkGqPAnO-gzGzoHsz',
+              appKey: 'kxzojjaKQ6PiMLZ7jynOrx6q',
+              meta: ['nick', 'mail', 'link'],
+              avatar: 'wavatar',
+              enableQQ: true,
+              placeholder: '可以提出宝贵的意见哟',
+              lang: 'zh-CN'.toLowerCase()
+            });
+
+            function getAuthor(language) {
+              switch (language) {
+                case 'en':
+                  return 'Author';
+                case 'zh-CN':
+                  return '博主';
+                default:
+                  return 'Master';
+              }
+            }
+
+            // Add "Author" identify
+            const getValineDomTimer = setInterval(() => {
+              const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+              if (vcards.length > 0) {
+                let author = '赫然玉鑫';
+
+                if (author) {
+                  for (let vcard of vcards) {
+                    const vnick_dom = vcard.querySelector('.vhead .vnick');
+                    const vnick = vnick_dom.innerHTML;
+                    if (vnick === author) {
+                      vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                    }
+                  }
+                }
+                clearInterval(getValineDomTimer);
+              } else {
+                clearInterval(getValineDomTimer);
+              }
+            }, 2000);
+          }
+
+          if ('true' === 'true') {
+            const loadValineTimeout = setTimeout(() => {
+              loadValine();
+              clearTimeout(loadValineTimeout);
+            }, 1000);
+          } else {
+            window.addEventListener('DOMContentLoaded', loadValine);
+          }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9F%BA%E7%A1%80%E7%AF%87"><span class="nav-text">SpringBoot学习笔记-基础篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">配置文件的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-text">配置文件的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#properties-%E4%BC%A0%E7%BB%9F%E6%A0%BC%E5%BC%8F-x2F-%E9%BB%98%E8%AE%A4%E6%A0%BC%E5%BC%8F"><span class="nav-text">properties(传统格式&#x2F;默认格式)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yaml-%E4%B8%BB%E6%B5%81%E6%A0%BC%E5%BC%8F-x2F-%E5%B8%B8%E7%94%A8"><span class="nav-text">yaml(主流格式&#x2F;常用)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yml"><span class="nav-text">yml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringBoot%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F"><span class="nav-text">SpringBoot配置文件加载顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yaml%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93"><span class="nav-text">yaml语法总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-text">概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99"><span class="nav-text">语法规则</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AD%97%E9%9D%A2%E5%80%BC%E8%A1%A8%E7%A4%BA%E6%96%B9%E5%BC%8F"><span class="nav-text">字面值表示方式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E5%BC%8F"><span class="nav-text">数组表示方式</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#yaml%E6%95%B0%E6%8D%AE%E7%9A%84%E8%AF%BB%E5%8F%96"><span class="nav-text">yaml数据的读取</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%9A%E5%8D%95%E4%B8%AA%E8%8E%B7%E5%8F%96%E5%8D%95%E4%B8%AA%E8%AF%BB%E5%8F%96"><span class="nav-text">方式一：单个获取单个读取</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%9A%E7%BB%9F%E4%B8%80%E8%8E%B7%E5%8F%96%E5%8D%95%E4%B8%AA%E8%AF%BB%E5%8F%96"><span class="nav-text">方式二：统一获取单个读取</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%89%EF%BC%9A%E6%94%BE%E5%9C%A8%E5%AF%B9%E8%B1%A1%E4%B8%AD"><span class="nav-text">方式三：放在对象中</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88%E7%AC%AC%E4%B8%89%E6%96%B9%E6%8A%80%E6%9C%AF"><span class="nav-text">整合第三方技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E5%90%88JUnit"><span class="nav-text">整合JUnit</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E5%90%88MyBatis"><span class="nav-text">整合MyBatis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E9%80%89%E6%8B%A9%E6%8A%80%E6%9C%AF%E9%9B%86"><span class="nav-text">1.选择技术集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E8%AE%BE%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90%E5%8F%82%E6%95%B0"><span class="nav-text">2.设置数据源参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E5%B1%82%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%98%A0%E5%B0%84%E9%85%8D%E7%BD%AE"><span class="nav-text">3.定义数据层接口与映射配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E5%90%88MyBatis-Plus"><span class="nav-text">整合MyBatis-Plus</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E9%80%89%E6%8B%A9%E6%8A%80%E6%9C%AF%E9%9B%86-1"><span class="nav-text">1.选择技术集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E5%B1%82%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%98%A0%E5%B0%84%E9%85%8D%E7%BD%AE"><span class="nav-text">2.定义数据层接口与映射配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E5%90%88Druid"><span class="nav-text">整合Druid</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E9%80%89%E6%8B%A9%E6%8A%80%E6%9C%AF%E9%9B%86-2"><span class="nav-text">1.选择技术集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E5%B1%82%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%98%A0%E5%B0%84%E9%85%8D%E7%BD%AE-1"><span class="nav-text">2.定义数据层接口与映射配置</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2022</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">赫然玉鑫</a>
+            
+        </div>
+        
+            <script async data-pjax
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.5.2</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+
+</main>
+
+
+
+<script src="//unpkg.com/hexo-theme-keep@3.5.2/source/js/utils.js"></script><script src="//unpkg.com/hexo-theme-keep@3.5.2/source/js/main.js"></script><script src="//unpkg.com/hexo-theme-keep@3.5.2/source/js/header-shrink.js"></script><script src="//unpkg.com/hexo-theme-keep@3.5.2/source/js/back2top.js"></script><script src="//unpkg.com/hexo-theme-keep@3.5.2/source/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.5.2/source/js/code-block.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.5.2/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//unpkg.com/hexo-theme-keep@3.5.2/source/js/post-helper.js"></script>
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.5.2/source/js/libs/anime.min.js"></script>
+        
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.5.2/source/js/toc.js"></script>
+        
+    
+</div>
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.5.2/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
