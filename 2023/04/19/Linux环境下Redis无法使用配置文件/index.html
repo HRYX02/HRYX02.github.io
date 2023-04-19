@@ -9,7 +9,7 @@
     
     <title>
         
-            jdk1.8安装步骤 |
+            Linux环境下Redis无法使用配置文件 |
         
         赫然玉鑫的Blog
     </title>
@@ -155,7 +155,7 @@
         <div class="article-content-container">
 
             <div class="article-title">
-                <span class="title-hover-animation">jdk1.8安装步骤</span>
+                <span class="title-hover-animation">Linux环境下Redis无法使用配置文件</span>
             </div>
 
             
@@ -177,13 +177,13 @@
         
             <i class="fa-regular fa-calendar-plus"></i>&nbsp;
         
-        <span class="pc">2023-04-19 12:03:00</span>
-        <span class="mobile">2023-04-19 12:03</span>
+        <span class="pc">2023-04-19 12:30:00</span>
+        <span class="mobile">2023-04-19 12:30</span>
     </span>
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-04-19 12:03:49</span>
+        <span class="pc">2023-04-19 12:30:50</span>
     </span>
     
     
@@ -193,7 +193,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>&nbsp;
+                        <a href="/tags/Linux%E5%AD%A6%E4%B9%A0%EF%BC%8C%E5%B9%B3%E5%B8%B8%E5%AD%A6%E4%B9%A0%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">Linux学习，平常学习开发中遇到的问题</a>&nbsp;
                     </li>
                 
             </ul>
@@ -203,7 +203,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>175 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>188 字</span>
         </span>
     
     
@@ -224,96 +224,15 @@
             
 
             <div class="article-content keep-markdown-body">
-                <h1 id="jdk1-8安装步骤"><a href="#jdk1-8安装步骤" class="headerlink" title="jdk1.8安装步骤"></a>jdk1.8安装步骤</h1><ol>
-<li><p>去Orcale官网在页面中找到Java<a class="link"   target="_blank" rel="noopener" href="https://www.oracle.com/" ><i class="fas fa-external-link-alt"></i></a><img  
+                <h1 id="Linux环境下Redis无法使用配置文件"><a href="#Linux环境下Redis无法使用配置文件" class="headerlink" title="Linux环境下Redis无法使用配置文件"></a>Linux环境下Redis无法使用配置文件</h1><h2 id="为什么"><a href="#为什么" class="headerlink" title="为什么?"></a>为什么?</h2><p>因为我是将<code>redis.conf</code>配置文件直接复制到<code>/myredis/</code>即根目录的myredis文件夹下，因为linux根目录下本身没有myredis文件夹所以我<code>mkdir</code>了一个我们可以查看一下下载解压redis目录下<code>redis.conf</code>的文件权限<img  
                      lazyload
                      alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417110119970-1006665398.png"
-                      alt="img"
-                ><br>  2.在页面中找到Oracle JDK<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417110230716-1406771304.png"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419122220354-1007819127.png"
                       alt="img"
                 ></p>
-</li>
-<li><p>在页面中找到Java 8的对应版本下载<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417110422646-234286030.png"
-                      alt="img"
-                ></p>
-</li>
-<li><p>无脑点击下载的exe，不建议安装在C盘</p>
-</li>
-<li><p>环境配置</p>
-<ol>
-<li><p>进入环境变量：我的电脑右键属性 -&gt; 高级系统设置 -&gt; 环境变量<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111123605-1704686929.png"
-                      alt="img"
-                ><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111209128-203857538.png"
-                      alt="img"
-                ><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111317993-905614547.png"
-                      alt="img"
-                ></p>
-</li>
-<li><p>配置JAVA_HOME：点击新建 变量：JAVA_HOME,值：JDK8安装目录<br><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111715256-1609117752.png"
-                      alt="img"
-                ></p>
-<blockquote>
-<p>解释:因为我安装了两个版本的jdk所以再间接的包一层版本HOME</p>
-</blockquote>
-</li>
-<li><p>配置CLASSPATH<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115106269-1197964225.png"
-                      alt="img"
-                ></p>
-</li>
-<li><p>配置Path<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115524830-2023442476.png"
-                      alt="img"
-                ></p>
-</li>
-</ol>
-</li>
-<li><p>检验配置是否成功<br>  打开cmd输入</p>
-</li>
-</ol>
-<ul>
-<li><code>java</code><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115912490-2123310794.png"
-                      alt="img"
-                ></li>
-<li>&#96;&#96;&#96;&#96;&#96;&#96;javac&#96;&#96;&#96;<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115937691-387392419.png"
-                      alt="img"
-                ></li>
-<li><code>java -version</code><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419120007113-1750989495.png"
-                      alt="img"
-                >这显示我的jdk版本为17可能因为我用的是17</li>
-</ul>
+<p>可以清晰的看到该文件没有执行权限，所以我们<code>redis-server /myredis/redis.conf</code>是无法使用该配置文件的</p>
+<h2 id="怎么发现的？"><a href="#怎么发现的？" class="headerlink" title="怎么发现的？"></a>怎么发现的？</h2><p>起初我们并没有在意该配置文件是不是可执行的，而是运行了<code>redis-server&amp; /myredis/redis.conf</code>提示没有权限，</p>
+<h2 id="怎么修复"><a href="#怎么修复" class="headerlink" title="怎么修复"></a>怎么修复</h2><p>直接<code>chmod 777/myredis/redis.conf</code>或将配置文件的执行权限加上即可</p>
 
             </div>
 
@@ -322,16 +241,16 @@
                     <div class="article-copyright-info-container">
     <ul class="copyright-info-content">
         <li>
-            <span class="type">本文标题</span>：<span class="content">jdk1.8安装步骤</span>
+            <span class="type">本文标题</span>：<span class="content">Linux环境下Redis无法使用配置文件</span>
         </li>
         <li>
             <span class="type">本文作者</span>：<span class="content">赫然玉鑫</span>
         </li>
         <li>
-            <span class="type">创建时间</span>：<span class="content">2023-04-19 12:03:00</span>
+            <span class="type">创建时间</span>：<span class="content">2023-04-19 12:30:00</span>
         </li>
         <li class="post-link">
-            <span class="type">本文链接</span>：<span class="content">2023/04/19/Jdk1.8安装/</span>
+            <span class="type">本文链接</span>：<span class="content">2023/04/19/Linux环境下Redis无法使用配置文件/</span>
         </li>
         <li>
             <span class="type">版权声明</span>：<span class="content">本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！</span>
@@ -346,7 +265,7 @@
                 <ul class="post-tags-box">
                     
                         <li class="tag-item">
-                            <a href="/tags/%E6%95%99%E7%A8%8B/">#教程</a>&nbsp;
+                            <a href="/tags/Linux%E5%AD%A6%E4%B9%A0%EF%BC%8C%E5%B9%B3%E5%B8%B8%E5%AD%A6%E4%B9%A0%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">#Linux学习，平常学习开发中遇到的问题</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -355,29 +274,14 @@
             
                 <div class="article-nav">
                     
-                        <div class="article-prev">
-                            <a class="prev"
-                               rel="prev"
-                               href="/2023/04/19/Linux%E7%8E%AF%E5%A2%83%E4%B8%8BRedis%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/"
-                            >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                                <span class="title flex-center">
-                                <span class="post-nav-title-item">Linux环境下Redis无法使用配置文件</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                            </a>
-                        </div>
-                    
                     
                         <div class="article-next">
                             <a class="next"
                                rel="next"
-                               href="/2023/04/15/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E8%84%9A%E6%89%8B%E6%9E%B6%E7%AF%87/"
+                               href="/2023/04/19/Jdk1.8%E5%AE%89%E8%A3%85/"
                             >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Vue学习脚手架篇</span>
+                                <span class="post-nav-title-item">jdk1.8安装步骤</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                                 <span class="right arrow-icon flex-center">
@@ -475,7 +379,7 @@
             <div class="toc-content-container">
                 <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#jdk1-8%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-text">jdk1.8安装步骤</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux%E7%8E%AF%E5%A2%83%E4%B8%8BRedis%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">Linux环境下Redis无法使用配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88"><span class="nav-text">为什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E5%8F%91%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="nav-text">怎么发现的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E4%BF%AE%E5%A4%8D"><span class="nav-text">怎么修复</span></a></li></ol></li></ol>
     </div>
 </div>
 

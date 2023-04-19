@@ -10,6 +10,117 @@
       </tags>
   </entry>
   <entry>
+    <title>Git指令</title>
+    <url>/2023/02/27/Git%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="Git指令"><a href="#Git指令" class="headerlink" title="Git指令"></a>Git指令</h1><h2 id="Git-常用命令"><a href="#Git-常用命令" class="headerlink" title="Git 常用命令"></a>Git 常用命令</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>git config –global user.name 用户名</td>
+<td>设置用户签名</td>
+</tr>
+<tr>
+<td>git config –global user.email 邮箱</td>
+<td>设置用户签名</td>
+</tr>
+<tr>
+<td>git init</td>
+<td>初始化本地库</td>
+</tr>
+<tr>
+<td>git status</td>
+<td>查看本地库状态</td>
+</tr>
+<tr>
+<td>git add 文件名</td>
+<td>添加到暂存区</td>
+</tr>
+<tr>
+<td>git commit -m “日志信总” 文件名</td>
+<td>提交到本地库</td>
+</tr>
+<tr>
+<td>git reflog</td>
+<td>查看历史记录</td>
+</tr>
+<tr>
+<td>git reset –hard 版本号</td>
+<td>版本穿梭</td>
+</tr>
+</tbody></table>
+<h2 id="Git分支操作"><a href="#Git分支操作" class="headerlink" title="Git分支操作"></a>Git分支操作</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>git branch 分支名</td>
+<td>创建分支</td>
+</tr>
+<tr>
+<td>git branch -v</td>
+<td>查看分支</td>
+</tr>
+<tr>
+<td>git checkout 分支名</td>
+<td>切换分支</td>
+</tr>
+<tr>
+<td>git merge 分支名</td>
+<td>把指定的分支合并到当前分支上</td>
+</tr>
+</tbody></table>
+<h3 id="产生冲突"><a href="#产生冲突" class="headerlink" title="产生冲突"></a>产生冲突</h3><p>冲突产生的表现：后面状态为MERGING</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="/../%E8%B5%84%E6%BA%90%E6%95%B0%E6%8D%AE/%E6%88%91%E7%9A%84%E6%96%87%E4%BB%B6/Typora%E5%9B%BE%E5%83%8F/Snipaste_2022-09-20_17-05-24.jpg"
+                      alt="Snipaste_2022-09-20_17-05-24"
+                >冲突产生的原因：<br>合并分支时，两个分支在<strong>同一个文件的同一个位置</strong>有两套完全不同的修改。Git无法替<br>我们决定使用哪一个。必须<strong>人为决定</strong>新代码内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"></span><br><span class="line">On branch master</span><br><span class="line">You have unmerged paths.</span><br><span class="line"> (fix conflicts and run &quot;git</span><br><span class="line"> (use &quot;git merge abort&quot; to abort the merge)</span><br><span class="line"></span><br><span class="line">Unmerged paths:</span><br><span class="line"> (use &quot;git add &lt;file&gt;...&quot; to mark resolution)</span><br><span class="line">    </span><br><span class="line">  	both modified: hello.txt</span><br><span class="line">no changes added to commit (use &quot;git add&quot; 	  and/or &quot;git commit  -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h3><p>编辑有冲突的文件，删除特殊符号，决定要使用的内容</p>
+<p>特殊符号：<br>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD 当前分支的代码 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 合并过来的代码 &gt;&gt;&gt;&gt;&gt;&gt;&gt; hot-fix</p>
+<h2 id="GitHub操作"><a href="#GitHub操作" class="headerlink" title="GitHub操作"></a>GitHub操作</h2><table>
+<thead>
+<tr>
+<th>命令名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>git remote -v</td>
+<td>查看当前所有远程地址别名</td>
+</tr>
+<tr>
+<td>git remote add 别名 远程地址</td>
+<td>起别名</td>
+</tr>
+<tr>
+<td>git push 远程库地址&#x2F;别名 分支</td>
+<td>推送本地分支上的内容到远程仓库</td>
+</tr>
+<tr>
+<td>git clone 远程地址</td>
+<td>将远程仓库的内容克隆到本地</td>
+</tr>
+<tr>
+<td>git pull 远程库地址&#x2F;别名 远程分支名</td>
+<td>将远程仓库对于分支最新内容拉下来后与当前本地分支直接合并</td>
+</tr>
+</tbody></table>
+]]></content>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JAVA之面向对象上</title>
     <url>/2022/11/17/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8A/</url>
     <content><![CDATA[<h3 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h3><span id="more"></span>
@@ -494,324 +605,101 @@
       </tags>
   </entry>
   <entry>
-    <title>JAVA之面向对象中</title>
-    <url>/2022/11/17/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%AD/</url>
-    <content><![CDATA[<h3 id="面向对象的特征二：继承性"><a href="#面向对象的特征二：继承性" class="headerlink" title="面向对象的特征二：继承性"></a>面向对象的特征二：继承性</h3><span id="more"></span>
-<h4 id="为什么要有类的继承性？-继承性的好处）"><a href="#为什么要有类的继承性？-继承性的好处）" class="headerlink" title="为什么要有类的继承性？(继承性的好处）"></a>为什么要有类的继承性？(继承性的好处）</h4><ul>
-<li>减少了代码的冗余，提高了代码的复用性</li>
-<li>便于功能的扩展</li>
-<li>为之后多态性的使用，提供了前提</li>
-</ul>
-<p><img  
+    <title>jdk1.8安装步骤</title>
+    <url>/2023/04/19/Jdk1.8%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h1 id="jdk1-8安装步骤"><a href="#jdk1-8安装步骤" class="headerlink" title="jdk1.8安装步骤"></a>jdk1.8安装步骤</h1><ol>
+<li><p>去Orcale官网在页面中找到Java<a class="link"   href="https://www.oracle.com/" ><i class="fas fa-external-link-alt"></i></a><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1.bmp"
-                     
-                ></p>
-<h4 id="继承性的格式："><a href="#继承性的格式：" class="headerlink" title="继承性的格式："></a>继承性的格式：</h4><h5 id="class-A-extends-B"><a href="#class-A-extends-B" class="headerlink" title="class A extends B{}"></a>class A extends B{}</h5><ul>
-<li>A:子类、派生类、subclass</li>
-<li>B:父类、超类、基类、superclass</li>
-</ul>
-<h4 id="子类继承父类以后有哪些不同？"><a href="#子类继承父类以后有哪些不同？" class="headerlink" title="子类继承父类以后有哪些不同？"></a>子类继承父类以后有哪些不同？</h4><ul>
-<li>体现：一旦子类A继承父类B以后，子类A中就获取了父类B中声明的所有的属性和方法。特别的，父类中声明为private的属性或方法，子类继承父类以后，仍然认为获取了父类中私的结构。只因为封装性的影响，使得子类不能直接调用父类的结构而已。</li>
-<li>子类继承父类以后，还可以声明自己特有的属性或方法：实现功能的拓展。子类和父类的关系，不同于子集和集合的关系。extends：延展、扩展</li>
-</ul>
-<h4 id="Java中继承性的说明"><a href="#Java中继承性的说明" class="headerlink" title="Java中继承性的说明"></a>Java中继承性的说明</h4><ul>
-<li>一个类可以被多个子类继承。</li>
-<li>Java中类的单继承性：一个类只能有一个父类。</li>
-<li>子父类是相对的概念。</li>
-<li>子类直接继承的父类，称为：直接父类。间接继承的父类称为：间接父类。</li>
-<li>子类继承父类以后，就获取了直接父类以及所间接父类中声明的属性和方法</li>
-</ul>
-<p><img  
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417110119970-1006665398.png"
+                      alt="img"
+                ><br>  2.在页面中找到Oracle JDK<img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/2.bmp"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417110230716-1406771304.png"
+                      alt="img"
                 ></p>
-<h4 id="java-lang-Object类的理解"><a href="#java-lang-Object类的理解" class="headerlink" title="java.lang.Object类的理解"></a>java.lang.Object类的理解</h4><ul>
-<li>如果我们没显式的声明一个类的父类的话，则此类继承于java.lang.Object类</li>
-<li>所的java类（除java.lang.Object类之外都直接或间接的继承于java.lang.Object类</li>
-<li>意味着，所的java类具有java.lang.Object类声明的功能。</li>
-</ul>
-<h3 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a>方法的重写</h3><p>什么是方法的重写(override 或 overwrite)？<br>子类继承父类以后，可以对父类中同名同参数的方法，进行覆盖操作.</p>
-<p>应用：</p>
-<p>重写以后，当创建子类对象以后，通过子类对象调用子父类中的同名同参数的方法时，实际执行的是子类重写父类的方法。</p>
-<p>举例：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">double</span> <span class="title function_">findArea</span><span class="params">()</span>&#123;&#125;<span class="comment">//求面积</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cylinder</span> <span class="keyword">extends</span> <span class="title class_">Circle</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">double</span> <span class="title function_">findArea</span><span class="params">()</span>&#123;&#125;<span class="comment">//求表面积</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//==============</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">withdraw</span><span class="params">(<span class="type">double</span> amt)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CheckAccount</span> <span class="keyword">extends</span> <span class="title class_">Account</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">withdraw</span><span class="params">(<span class="type">double</span> amt)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>重写的规则：</p>
-<p>方法的声明： 权限修饰符  返回值类型  方法名(形参列表) throws 异常的类型{</p>
-<p>​		&#x2F;&#x2F;方法体</p>
-<p>}</p>
-<p>约定俗称：子类中的叫重写的方法，父类中的叫被重写的方法</p>
+</li>
+<li><p>在页面中找到Java 8的对应版本下载<img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417110422646-234286030.png"
+                      alt="img"
+                ></p>
+</li>
+<li><p>无脑点击下载的exe，不建议安装在C盘</p>
+</li>
+<li><p>环境配置</p>
 <ol>
-<li>子类重写的方法的方法名和形参列表与父类被重写的方法的方法名和形参列表相同</li>
-<li>子类重写的方法的权限修饰符不小于父类被重写的方法的权限修饰符</li>
-<li>特殊情况：子类不能重写父类中声明为private权限的方法</li>
-<li>返回值类型：父类被重写的方法的返回值类型是void，则子类重写的方法的返回值类型只能是void父类被重写的方法的返回值类型是A类型，则子类重写的方法的返回值类型可以是A类或A类的子类父类被重写的方法的返回值类型是基本数据类型(比如：double)，则子类重写的方法的返回值类型必须是相同的基本数据类型(必须也是double)</li>
-<li>子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型</li>
-</ol>
-<p>子类和父类中的同名同参数的方法要么都声明为非static的（考虑重写，要么都声明为static的（不是重写)。	</p>
-<p><i style="color: red;">面试题：区分方法的重写和重载？</i></p>
-<ol>
-<li>二者的概念：</li>
-<li>重载和重写的具体规则</li>
-<li>重载：不表现为多态性。<br>重写：表现为多态性。</li>
-</ol>
+<li><p>进入环境变量：我的电脑右键属性 -&gt; 高级系统设置 -&gt; 环境变量<img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111123605-1704686929.png"
+                      alt="img"
+                ><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111209128-203857538.png"
+                      alt="img"
+                ><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111317993-905614547.png"
+                      alt="img"
+                ></p>
+</li>
+<li><p>配置JAVA_HOME：点击新建 变量：JAVA_HOME,值：JDK8安装目录<br><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111715256-1609117752.png"
+                      alt="img"
+                ></p>
 <blockquote>
-<p>重载，是指允许存在多个同名方法，而这些方法的参数不同。编译器根据方法不同的参数表，对同名方法的名称做修饰。对于编译器而言，这些同名方法就成了不同的方法。它们的调用地址在编译期就绑定了。Java的重载是可以包括父类和子类的，即子类可以重载父类的同名不同参数的方法。<br>所以：对于重载而言，在方法调用之前，编译器就已经确定了所要调用的方法，这称为“早绑定”或“静态绑定”；</p>
+<p>解释:因为我安装了两个版本的jdk所以再间接的包一层版本HOME</p>
 </blockquote>
-<blockquote>
-<p>而对于多态，只等到方法调用的那一刻，解释运行器才会确定所要调用的具体方法，这称为“晚绑定”或“动态绑定”。 </p>
-</blockquote>
-<blockquote>
-<p>引用一句Bruce Eckel的话：“不要犯傻，如果它不是晚绑定，它就不是多态。”</p>
-</blockquote>
-<h3 id="关键字：super"><a href="#关键字：super" class="headerlink" title="关键字：super"></a>关键字：super</h3><h4 id="super-关键字可以理解为：父类的"><a href="#super-关键字可以理解为：父类的" class="headerlink" title="super 关键字可以理解为：父类的"></a>super 关键字可以理解为：父类的</h4><h4 id="可以用来调用的结构："><a href="#可以用来调用的结构：" class="headerlink" title="可以用来调用的结构："></a>可以用来调用的结构：</h4><p>属性、方法、构造器</p>
-<h4 id="super调用属性、方法："><a href="#super调用属性、方法：" class="headerlink" title="super调用属性、方法："></a>super调用属性、方法：</h4><ol>
-<li>我们可以在子类的方法或构造器中。通过使用”super.属性”或”super.方法”的方式，显式的调用父类中声明的属性或方法。但是，通常情况下，我们习惯省略”super.”</li>
-<li>特殊情况：当子类和父类中定义了同名的属性时，我们要想在子类中调用父类中声明的属性，则必须显式的使用”super.属性”的方式，表明调用的是父类中声明的属性。</li>
-<li>特殊情况：当子类重写了父类中的方法以后，我们想在子类的方法中调用父类中被重写的方法时，则必须显式的使用”super.方法”的方式，表明调用的是父类中被重写的方法。</li>
-</ol>
-<h4 id="super调用构造器："><a href="#super调用构造器：" class="headerlink" title="super调用构造器："></a>super调用构造器：</h4><ol>
-<li>我们可以在子类的构造器中显式的使用”super(形参列表)”的方式，调用父类中声明的指定的构造器</li>
-<li>“super(形参列表)”的使用，必须声明在子类构造器的首行！</li>
-<li>我们在类的构造器中，针对于”this(形参列表)”或”super(形参列表)”只能二一，不能同时出现</li>
-<li>在构造器的首行，没显式的声明”this(形参列表)”或”super(形参列表)”，则默认调用的是父类中空参的构造器：super()</li>
-<li>在类的多个构造器中，至少一个类的构造器中使用了”super(形参列表)”，调用父类中的构造器</li>
-</ol>
-<h3 id="子类对象实例化全过程"><a href="#子类对象实例化全过程" class="headerlink" title="子类对象实例化全过程"></a>子类对象实例化全过程</h3><h4 id="从结果上看：继承性"><a href="#从结果上看：继承性" class="headerlink" title="从结果上看：继承性"></a>从结果上看：继承性</h4><ul>
-<li>子类继承父类以后，就获取了父类中声明的属性或方法。</li>
-<li>创建子类的对象，在堆空间中，就会加载所父类中声明的属性。</li>
-</ul>
-<h4 id="从过程上看："><a href="#从过程上看：" class="headerlink" title="从过程上看："></a>从过程上看：</h4><p>当我们通过子类的构造器创建子类对象时，我们一定会直接或间接的调用其父类的构造器，进而调用父类的父类的构造器，…直到调用了java.lang.Object类中空参的构造器为止。正因为加载过所的父类的结构，所以才可以看到内存中父类中的结构，子类对象才可以考虑进行调用。</p>
-<p><img  
+</li>
+<li><p>配置CLASSPATH<img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(1).bmp"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115106269-1197964225.png"
+                      alt="img"
                 ></p>
-<h4 id="强调说明："><a href="#强调说明：" class="headerlink" title="强调说明："></a>强调说明：</h4><p>虽然创建子类对象时，调用了父类的构造器，但是自始至终就创建过一个对象，即为new的子类对象。</p>
-<p><img  
+</li>
+<li><p>配置Path<img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/2(1).bmp"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115524830-2023442476.png"
+                      alt="img"
                 ></p>
-<h3 id="面向对象的特征三：多态性"><a href="#面向对象的特征三：多态性" class="headerlink" title="面向对象的特征三：多态性"></a>面向对象的特征三：多态性</h3><h4 id="多态性的理解："><a href="#多态性的理解：" class="headerlink" title="多态性的理解："></a>多态性的理解：</h4><p>可以理解为一个事物的多种形态。</p>
-<h4 id="何为多态性："><a href="#何为多态性：" class="headerlink" title="何为多态性："></a>何为多态性：</h4><p>对象的多态性：父类的引用指向子类的对象（或子类的对象赋给父类的引用）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Man</span>();</span><br><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br></pre></td></tr></table></figure>
-
-<h4 id="多态性的使用：虚拟方法调用"><a href="#多态性的使用：虚拟方法调用" class="headerlink" title="多态性的使用：虚拟方法调用"></a>多态性的使用：虚拟方法调用</h4><ul>
-<li>有了对象的多态性以后，我们在编译期，只能调用父类中声明的方法，但在运行期，我们实际执行的是子类重写父类的方法。</li>
-<li>总结：编译，看左边；运行，看右边。</li>
-</ul>
-<h4 id="多态性的使用前提："><a href="#多态性的使用前提：" class="headerlink" title="多态性的使用前提："></a>多态性的使用前提：</h4><ul>
-<li>类的继承关系</li>
-<li>方法的重写</li>
-</ul>
-<h4 id="多态性的应用举例："><a href="#多态性的应用举例：" class="headerlink" title="多态性的应用举例："></a>多态性的应用举例：</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">举例一：</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">func</span><span class="params">(Animal animal)</span>&#123;<span class="comment">//Animal animal = new Dog();</span></span><br><span class="line">		animal.eat();</span><br><span class="line">		animal.shout();</span><br><span class="line">	&#125;</span><br><span class="line">举例二：</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">(Object obj)</span>&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">举例三：</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Driver</span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doData</span><span class="params">(Connection conn)</span>&#123;</span><br><span class="line">	<span class="comment">//conn = new MySQlConnection();</span></span><br><span class="line">	<span class="comment">//conn = new OracleConnection();</span></span><br><span class="line">		conn.method1();</span><br><span class="line">		conn.method2();</span><br><span class="line">		conn.method3();		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="多态性使用的注意点："><a href="#多态性使用的注意点：" class="headerlink" title="多态性使用的注意点："></a>多态性使用的注意点：</h4><p><i style="color: red;">对象的多态性，只适用于方法，不适用于属性（编译和运行都看左边）</i></p>
-<h4 id="关于向上转型与向下转型："><a href="#关于向上转型与向下转型：" class="headerlink" title="关于向上转型与向下转型："></a>关于向上转型与向下转型：</h4><h5 id="向上转型：多态"><a href="#向上转型：多态" class="headerlink" title="向上转型：多态"></a>向上转型：多态</h5><h5 id="向下转型："><a href="#向下转型：" class="headerlink" title="向下转型："></a>向下转型：</h5><h6 id="为什么使用向下转型："><a href="#为什么使用向下转型：" class="headerlink" title="为什么使用向下转型："></a>为什么使用向下转型：</h6><p>有了对象的多态性以后，内存中实际上是加载了子类特有的属性和方法的，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法。子类特有的属性和方法不能调用。如何才能调用子类特的属性和方法？使用向下转型。</p>
-<h6 id="如何实现向下转型："><a href="#如何实现向下转型：" class="headerlink" title="如何实现向下转型："></a>如何实现向下转型：</h6><p>使用强制类型转换符：()</p>
-<h6 id="使用时的注意点："><a href="#使用时的注意点：" class="headerlink" title="使用时的注意点："></a>使用时的注意点：</h6><ol>
-<li>使用强转时，可能出现ClassCastException的异常。</li>
-<li>为了避免在向下转型时出现ClassCastException的异常，我们在向下转型之前，先进行instanceof的判断，一旦返回true，就进行向下转型。如果返回false，不进行向下转型。</li>
+</li>
 </ol>
-<h6 id="instanceof的使用："><a href="#instanceof的使用：" class="headerlink" title="instanceof的使用："></a>instanceof的使用：</h6><ol>
-<li>a instanceof A:判断对象a是否是类A的实例。如果是，返回true；如果不是，返回false。</li>
-<li>如果 a instanceof A返回true,则 a instanceof B也返回true.其中，类B是类A的父类。</li>
-<li>要求a所属的类与类A必须是子类和父类的关系，否则编译错误。</li>
+</li>
+<li><p>检验配置是否成功<br>  打开cmd输入</p>
+</li>
 </ol>
-<h6 id="图示："><a href="#图示：" class="headerlink" title="图示："></a>图示：</h6><p><img  
+<ul>
+<li><code>java</code><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(2).bmp"
-                     
-                ></p>
-<h4 id="面试题："><a href="#面试题：" class="headerlink" title="面试题："></a>面试题：</h4><h5 id="谈谈你对多态性的理解？"><a href="#谈谈你对多态性的理解？" class="headerlink" title="谈谈你对多态性的理解？"></a>谈谈你对多态性的理解？</h5><ol>
-<li>实现代码的通用性。</li>
-<li>Object类中定义的public boolean equals(Object obj){  }</li>
-<li>JDBC:使用java程序操作(获取数据库连接、CRUD)数据库(MySQL、Oracle、DB2、SQL Server)</li>
-</ol>
-<h5 id="多态是编译时行为还是运行时行为？"><a href="#多态是编译时行为还是运行时行为？" class="headerlink" title="多态是编译时行为还是运行时行为？"></a>多态是编译时行为还是运行时行为？</h5><p><i style="color: red;">运行时行为</i></p>
-<h3 id="Object类的使用"><a href="#Object类的使用" class="headerlink" title="Object类的使用"></a>Object类的使用</h3><h4 id="java-lang-Object类的说明："><a href="#java-lang-Object类的说明：" class="headerlink" title="java.lang.Object类的说明："></a>java.lang.Object类的说明：</h4><ol>
-<li>Object类是所Java类的根父类</li>
-<li>如果在类的声明中未使用extends关键字指明其父类，则默认父类为java.lang.Object类 </li>
-<li>Object类中的功能(属性、方法)就具通用性。<br>属性：无<br>方法：equals() &#x2F; toString() &#x2F; getClass() &#x2F;hashCode() &#x2F; clone() &#x2F; finalize() wait() 、 notify()、notifyAll()</li>
-<li>Object类只声明了一个空参的构造器</li>
-</ol>
-<h4 id="equals-方法"><a href="#equals-方法" class="headerlink" title="equals()方法"></a>equals()方法</h4><h5 id="equals-的使用："><a href="#equals-的使用：" class="headerlink" title="equals()的使用："></a>equals()的使用：</h5><ol>
-<li><p>是一个方法，而非运算符</p>
-</li>
-<li><p>只能适用于引用数据类型</p>
-</li>
-<li><p>Object类中equals()的定义：</p>
-</li>
-<li><p>&#96;&#96;&#96;java<br>public boolean equals(Object obj) {<br>    return (this &#x3D;&#x3D; obj);<br>  }<br>&#x2F;<em>说明：Object类中定义的equals()和&#x3D;&#x3D;的作用是相同的：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</em>&#x2F;</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">5. 像String、Date、File、包装类等都重写了Object类中的equals()方法。重写以后，比较的不是两个引用的地址是否相同，而是比较两个对象的&quot;实体内容&quot;是否相同。</span><br><span class="line"></span><br><span class="line">6. 通常情况下，我们自定义的类如果使用equals()的话，也通常是比较两个对象的&quot;实体内容&quot;是否相同。那么，我们就需要对Object类中的equals()进行重写.</span><br><span class="line">   重写的原则：比较两个对象的实体内容是否相同.</span><br><span class="line"></span><br><span class="line">##### 如何重写equals()</span><br><span class="line"></span><br><span class="line">###### 手动重写举例：</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">class User&#123;</span><br><span class="line">	String name;</span><br><span class="line">	int age;</span><br><span class="line">	//重写其equals()方法</span><br><span class="line">	public boolean equals(Object obj)&#123;</span><br><span class="line">		if(obj == this)&#123;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">		if(obj instanceof User)&#123;</span><br><span class="line">			User u = (User)obj;</span><br><span class="line">			return this.age == u.age &amp;&amp; this.name.equals(u.name);</span><br><span class="line">		&#125;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h6 id="开发中如何实现：自动生成的"><a href="#开发中如何实现：自动生成的" class="headerlink" title="开发中如何实现：自动生成的"></a>开发中如何实现：自动生成的</h6><h5 id="回顾-x3D-x3D-运算符的使用："><a href="#回顾-x3D-x3D-运算符的使用：" class="headerlink" title="回顾 &#x3D;&#x3D; 运算符的使用："></a>回顾 &#x3D;&#x3D; 运算符的使用：</h5><p> &#x3D;&#x3D; ：运算符</p>
-<ol>
-<li>可以使用在基本数据类型变量和引用数据类型变量中</li>
-<li>如果比较的是基本数据类型变量：比较两个变量保存的数据是否相等。（不一定类型要相同）<br>如果比较的是引用数据类型变量：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</li>
-<li>补充： &#x3D;&#x3D; 符号使用时，必须保证符号左右两边的变量类型一致。</li>
-</ol>
-<h4 id="toString-方法"><a href="#toString-方法" class="headerlink" title="toString()方法"></a>toString()方法</h4><h5 id="toString-的使用："><a href="#toString-的使用：" class="headerlink" title="toString()的使用："></a>toString()的使用：</h5><ol>
-<li><p>当我们输出一个对象的引用时，实际上就是调用当前对象的toString()</p>
-</li>
-<li><p>Object类中toString()的定义：</p>
-</li>
-<li><p>&#96;&#96;&#96;java<br>public String toString() {<br>   return getClass().getName() + “@” + Integer.toHexString(hashCode());<br>}</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">4. 像String、Date、File、包装类等都重写了Object类中的toString()方法。</span><br><span class="line">   使得在调用对象的toString()时，返回&quot;实体内容&quot;信息</span><br><span class="line"></span><br><span class="line">5. 自定义类也可以重写toString()方法，当调用此方法时，返回对象的&quot;实体内容&quot;</span><br><span class="line">##### 如何重写toString()</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">//自动实现</span><br><span class="line">@Override</span><br><span class="line">public String toString() &#123;</span><br><span class="line">	return &quot;Customer [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h4 id="面试题：-1"><a href="#面试题：-1" class="headerlink" title="面试题："></a>面试题：</h4><ul>
-<li>final、finally、finalize的区别？</li>
-<li>&#x3D;&#x3D; 和 equals() 区别</li>
-</ul>
-<h3 id="单元测试方法"><a href="#单元测试方法" class="headerlink" title="单元测试方法"></a>单元测试方法</h3><p>略</p>
-<h3 id="包装类的使用"><a href="#包装类的使用" class="headerlink" title="包装类的使用"></a>包装类的使用</h3><h4 id="1-为什么要有包装类-或封装类）"><a href="#1-为什么要有包装类-或封装类）" class="headerlink" title="1.为什么要有包装类(或封装类）"></a>1.为什么要有包装类(或封装类）</h4><p>为了使基本数据类型的变量具有类的特征，引入包装类。</p>
-<h4 id="2-基本数据类型与对应的包装类："><a href="#2-基本数据类型与对应的包装类：" class="headerlink" title="2.基本数据类型与对应的包装类："></a>2.基本数据类型与对应的包装类：</h4><p><img  
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115912490-2123310794.png"
+                      alt="img"
+                ></li>
+<li>&#96;&#96;&#96;&#96;&#96;&#96;javac&#96;&#96;&#96;<img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(3).bmp"
-                     
-                ></p>
-<h4 id="3-需要掌握的类型间的转换：（基本数据类型、包装类、String）"><a href="#3-需要掌握的类型间的转换：（基本数据类型、包装类、String）" class="headerlink" title="3.需要掌握的类型间的转换：（基本数据类型、包装类、String）"></a>3.需要掌握的类型间的转换：（基本数据类型、包装类、String）</h4><p><img  
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115937691-387392419.png"
+                      alt="img"
+                ></li>
+<li><code>java -version</code><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/2(2).bmp"
-                     
-                ></p>
-<h5 id="简易版："><a href="#简易版：" class="headerlink" title="简易版："></a>简易版：</h5><ul>
-<li>基本数据类型&lt;—&gt;包装类：JDK 5.0 新特性：自动装箱 与自动拆箱</li>
-<li>基本数据类型、包装类—&gt;String:调用String重载的valueOf(Xxx xxx)</li>
-<li>String—&gt;基本数据类型、包装类:调用包装类的parseXxx(String s)</li>
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419120007113-1750989495.png"
+                      alt="img"
+                >这显示我的jdk版本为17可能因为我用的是17</li>
 </ul>
-<p><i style="color: red;"> 注意：转换时，可能会报NumberFormatException</i></p>
-<h6 id="应用场景举例："><a href="#应用场景举例：" class="headerlink" title="应用场景举例："></a>应用场景举例：</h6><p>Vector类中关于添加元素，只定义了形参为Object类型的方法：</p>
-<p>v.addElement(Object obj);   &#x2F;&#x2F;基本数据类型 —&gt;包装类 —&gt;使用多态</p>
 ]]></content>
       <tags>
-        <tag>JAVA</tag>
-        <tag>后端学习的记录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git指令</title>
-    <url>/2023/02/27/Git%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="Git指令"><a href="#Git指令" class="headerlink" title="Git指令"></a>Git指令</h1><h2 id="Git-常用命令"><a href="#Git-常用命令" class="headerlink" title="Git 常用命令"></a>Git 常用命令</h2><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>git config –global user.name 用户名</td>
-<td>设置用户签名</td>
-</tr>
-<tr>
-<td>git config –global user.email 邮箱</td>
-<td>设置用户签名</td>
-</tr>
-<tr>
-<td>git init</td>
-<td>初始化本地库</td>
-</tr>
-<tr>
-<td>git status</td>
-<td>查看本地库状态</td>
-</tr>
-<tr>
-<td>git add 文件名</td>
-<td>添加到暂存区</td>
-</tr>
-<tr>
-<td>git commit -m “日志信总” 文件名</td>
-<td>提交到本地库</td>
-</tr>
-<tr>
-<td>git reflog</td>
-<td>查看历史记录</td>
-</tr>
-<tr>
-<td>git reset –hard 版本号</td>
-<td>版本穿梭</td>
-</tr>
-</tbody></table>
-<h2 id="Git分支操作"><a href="#Git分支操作" class="headerlink" title="Git分支操作"></a>Git分支操作</h2><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>git branch 分支名</td>
-<td>创建分支</td>
-</tr>
-<tr>
-<td>git branch -v</td>
-<td>查看分支</td>
-</tr>
-<tr>
-<td>git checkout 分支名</td>
-<td>切换分支</td>
-</tr>
-<tr>
-<td>git merge 分支名</td>
-<td>把指定的分支合并到当前分支上</td>
-</tr>
-</tbody></table>
-<h3 id="产生冲突"><a href="#产生冲突" class="headerlink" title="产生冲突"></a>产生冲突</h3><p>冲突产生的表现：后面状态为MERGING</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="/../%E8%B5%84%E6%BA%90%E6%95%B0%E6%8D%AE/%E6%88%91%E7%9A%84%E6%96%87%E4%BB%B6/Typora%E5%9B%BE%E5%83%8F/Snipaste_2022-09-20_17-05-24.jpg"
-                      alt="Snipaste_2022-09-20_17-05-24"
-                >冲突产生的原因：<br>合并分支时，两个分支在<strong>同一个文件的同一个位置</strong>有两套完全不同的修改。Git无法替<br>我们决定使用哪一个。必须<strong>人为决定</strong>新代码内容。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line"></span><br><span class="line">On branch master</span><br><span class="line">You have unmerged paths.</span><br><span class="line"> (fix conflicts and run &quot;git</span><br><span class="line"> (use &quot;git merge abort&quot; to abort the merge)</span><br><span class="line"></span><br><span class="line">Unmerged paths:</span><br><span class="line"> (use &quot;git add &lt;file&gt;...&quot; to mark resolution)</span><br><span class="line">    </span><br><span class="line">  	both modified: hello.txt</span><br><span class="line">no changes added to commit (use &quot;git add&quot; 	  and/or &quot;git commit  -a&quot;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h3><p>编辑有冲突的文件，删除特殊符号，决定要使用的内容</p>
-<p>特殊符号：<br>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD 当前分支的代码 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 合并过来的代码 &gt;&gt;&gt;&gt;&gt;&gt;&gt; hot-fix</p>
-<h2 id="GitHub操作"><a href="#GitHub操作" class="headerlink" title="GitHub操作"></a>GitHub操作</h2><table>
-<thead>
-<tr>
-<th>命令名称</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>git remote -v</td>
-<td>查看当前所有远程地址别名</td>
-</tr>
-<tr>
-<td>git remote add 别名 远程地址</td>
-<td>起别名</td>
-</tr>
-<tr>
-<td>git push 远程库地址&#x2F;别名 分支</td>
-<td>推送本地分支上的内容到远程仓库</td>
-</tr>
-<tr>
-<td>git clone 远程地址</td>
-<td>将远程仓库的内容克隆到本地</td>
-</tr>
-<tr>
-<td>git pull 远程库地址&#x2F;别名 远程分支名</td>
-<td>将远程仓库对于分支最新内容拉下来后与当前本地分支直接合并</td>
-</tr>
-</tbody></table>
-]]></content>
-      <tags>
-        <tag>Git</tag>
+        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
@@ -1883,101 +1771,230 @@
       </tags>
   </entry>
   <entry>
-    <title>jdk1.8安装步骤</title>
-    <url>/2023/04/19/Jdk1.8%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<h1 id="jdk1-8安装步骤"><a href="#jdk1-8安装步骤" class="headerlink" title="jdk1.8安装步骤"></a>jdk1.8安装步骤</h1><ol>
-<li><p>去Orcale官网在页面中找到Java<a class="link"   href="https://www.oracle.com/" ><i class="fas fa-external-link-alt"></i></a><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417110119970-1006665398.png"
-                      alt="img"
-                ><br>  2.在页面中找到Oracle JDK<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417110230716-1406771304.png"
-                      alt="img"
-                ></p>
-</li>
-<li><p>在页面中找到Java 8的对应版本下载<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417110422646-234286030.png"
-                      alt="img"
-                ></p>
-</li>
-<li><p>无脑点击下载的exe，不建议安装在C盘</p>
-</li>
-<li><p>环境配置</p>
-<ol>
-<li><p>进入环境变量：我的电脑右键属性 -&gt; 高级系统设置 -&gt; 环境变量<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111123605-1704686929.png"
-                      alt="img"
-                ><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111209128-203857538.png"
-                      alt="img"
-                ><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111317993-905614547.png"
-                      alt="img"
-                ></p>
-</li>
-<li><p>配置JAVA_HOME：点击新建 变量：JAVA_HOME,值：JDK8安装目录<br><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111715256-1609117752.png"
-                      alt="img"
-                ></p>
-<blockquote>
-<p>解释:因为我安装了两个版本的jdk所以再间接的包一层版本HOME</p>
-</blockquote>
-</li>
-<li><p>配置CLASSPATH<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115106269-1197964225.png"
-                      alt="img"
-                ></p>
-</li>
-<li><p>配置Path<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115524830-2023442476.png"
-                      alt="img"
-                ></p>
-</li>
-</ol>
-</li>
-<li><p>检验配置是否成功<br>  打开cmd输入</p>
-</li>
-</ol>
-<ul>
-<li><code>java</code><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115912490-2123310794.png"
-                      alt="img"
-                ></li>
-<li>&#96;&#96;&#96;&#96;&#96;&#96;javac&#96;&#96;&#96;<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115937691-387392419.png"
-                      alt="img"
-                ></li>
-<li><code>java -version</code><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419120007113-1750989495.png"
-                      alt="img"
-                >这显示我的jdk版本为17可能因为我用的是17</li>
+    <title>JAVA之面向对象中</title>
+    <url>/2022/11/17/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%AD/</url>
+    <content><![CDATA[<h3 id="面向对象的特征二：继承性"><a href="#面向对象的特征二：继承性" class="headerlink" title="面向对象的特征二：继承性"></a>面向对象的特征二：继承性</h3><span id="more"></span>
+<h4 id="为什么要有类的继承性？-继承性的好处）"><a href="#为什么要有类的继承性？-继承性的好处）" class="headerlink" title="为什么要有类的继承性？(继承性的好处）"></a>为什么要有类的继承性？(继承性的好处）</h4><ul>
+<li>减少了代码的冗余，提高了代码的复用性</li>
+<li>便于功能的扩展</li>
+<li>为之后多态性的使用，提供了前提</li>
 </ul>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1.bmp"
+                     
+                ></p>
+<h4 id="继承性的格式："><a href="#继承性的格式：" class="headerlink" title="继承性的格式："></a>继承性的格式：</h4><h5 id="class-A-extends-B"><a href="#class-A-extends-B" class="headerlink" title="class A extends B{}"></a>class A extends B{}</h5><ul>
+<li>A:子类、派生类、subclass</li>
+<li>B:父类、超类、基类、superclass</li>
+</ul>
+<h4 id="子类继承父类以后有哪些不同？"><a href="#子类继承父类以后有哪些不同？" class="headerlink" title="子类继承父类以后有哪些不同？"></a>子类继承父类以后有哪些不同？</h4><ul>
+<li>体现：一旦子类A继承父类B以后，子类A中就获取了父类B中声明的所有的属性和方法。特别的，父类中声明为private的属性或方法，子类继承父类以后，仍然认为获取了父类中私的结构。只因为封装性的影响，使得子类不能直接调用父类的结构而已。</li>
+<li>子类继承父类以后，还可以声明自己特有的属性或方法：实现功能的拓展。子类和父类的关系，不同于子集和集合的关系。extends：延展、扩展</li>
+</ul>
+<h4 id="Java中继承性的说明"><a href="#Java中继承性的说明" class="headerlink" title="Java中继承性的说明"></a>Java中继承性的说明</h4><ul>
+<li>一个类可以被多个子类继承。</li>
+<li>Java中类的单继承性：一个类只能有一个父类。</li>
+<li>子父类是相对的概念。</li>
+<li>子类直接继承的父类，称为：直接父类。间接继承的父类称为：间接父类。</li>
+<li>子类继承父类以后，就获取了直接父类以及所间接父类中声明的属性和方法</li>
+</ul>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/2.bmp"
+                     
+                ></p>
+<h4 id="java-lang-Object类的理解"><a href="#java-lang-Object类的理解" class="headerlink" title="java.lang.Object类的理解"></a>java.lang.Object类的理解</h4><ul>
+<li>如果我们没显式的声明一个类的父类的话，则此类继承于java.lang.Object类</li>
+<li>所的java类（除java.lang.Object类之外都直接或间接的继承于java.lang.Object类</li>
+<li>意味着，所的java类具有java.lang.Object类声明的功能。</li>
+</ul>
+<h3 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a>方法的重写</h3><p>什么是方法的重写(override 或 overwrite)？<br>子类继承父类以后，可以对父类中同名同参数的方法，进行覆盖操作.</p>
+<p>应用：</p>
+<p>重写以后，当创建子类对象以后，通过子类对象调用子父类中的同名同参数的方法时，实际执行的是子类重写父类的方法。</p>
+<p>举例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">double</span> <span class="title function_">findArea</span><span class="params">()</span>&#123;&#125;<span class="comment">//求面积</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cylinder</span> <span class="keyword">extends</span> <span class="title class_">Circle</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">double</span> <span class="title function_">findArea</span><span class="params">()</span>&#123;&#125;<span class="comment">//求表面积</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//==============</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">withdraw</span><span class="params">(<span class="type">double</span> amt)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CheckAccount</span> <span class="keyword">extends</span> <span class="title class_">Account</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">withdraw</span><span class="params">(<span class="type">double</span> amt)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>重写的规则：</p>
+<p>方法的声明： 权限修饰符  返回值类型  方法名(形参列表) throws 异常的类型{</p>
+<p>​		&#x2F;&#x2F;方法体</p>
+<p>}</p>
+<p>约定俗称：子类中的叫重写的方法，父类中的叫被重写的方法</p>
+<ol>
+<li>子类重写的方法的方法名和形参列表与父类被重写的方法的方法名和形参列表相同</li>
+<li>子类重写的方法的权限修饰符不小于父类被重写的方法的权限修饰符</li>
+<li>特殊情况：子类不能重写父类中声明为private权限的方法</li>
+<li>返回值类型：父类被重写的方法的返回值类型是void，则子类重写的方法的返回值类型只能是void父类被重写的方法的返回值类型是A类型，则子类重写的方法的返回值类型可以是A类或A类的子类父类被重写的方法的返回值类型是基本数据类型(比如：double)，则子类重写的方法的返回值类型必须是相同的基本数据类型(必须也是double)</li>
+<li>子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型</li>
+</ol>
+<p>子类和父类中的同名同参数的方法要么都声明为非static的（考虑重写，要么都声明为static的（不是重写)。	</p>
+<p><i style="color: red;">面试题：区分方法的重写和重载？</i></p>
+<ol>
+<li>二者的概念：</li>
+<li>重载和重写的具体规则</li>
+<li>重载：不表现为多态性。<br>重写：表现为多态性。</li>
+</ol>
+<blockquote>
+<p>重载，是指允许存在多个同名方法，而这些方法的参数不同。编译器根据方法不同的参数表，对同名方法的名称做修饰。对于编译器而言，这些同名方法就成了不同的方法。它们的调用地址在编译期就绑定了。Java的重载是可以包括父类和子类的，即子类可以重载父类的同名不同参数的方法。<br>所以：对于重载而言，在方法调用之前，编译器就已经确定了所要调用的方法，这称为“早绑定”或“静态绑定”；</p>
+</blockquote>
+<blockquote>
+<p>而对于多态，只等到方法调用的那一刻，解释运行器才会确定所要调用的具体方法，这称为“晚绑定”或“动态绑定”。 </p>
+</blockquote>
+<blockquote>
+<p>引用一句Bruce Eckel的话：“不要犯傻，如果它不是晚绑定，它就不是多态。”</p>
+</blockquote>
+<h3 id="关键字：super"><a href="#关键字：super" class="headerlink" title="关键字：super"></a>关键字：super</h3><h4 id="super-关键字可以理解为：父类的"><a href="#super-关键字可以理解为：父类的" class="headerlink" title="super 关键字可以理解为：父类的"></a>super 关键字可以理解为：父类的</h4><h4 id="可以用来调用的结构："><a href="#可以用来调用的结构：" class="headerlink" title="可以用来调用的结构："></a>可以用来调用的结构：</h4><p>属性、方法、构造器</p>
+<h4 id="super调用属性、方法："><a href="#super调用属性、方法：" class="headerlink" title="super调用属性、方法："></a>super调用属性、方法：</h4><ol>
+<li>我们可以在子类的方法或构造器中。通过使用”super.属性”或”super.方法”的方式，显式的调用父类中声明的属性或方法。但是，通常情况下，我们习惯省略”super.”</li>
+<li>特殊情况：当子类和父类中定义了同名的属性时，我们要想在子类中调用父类中声明的属性，则必须显式的使用”super.属性”的方式，表明调用的是父类中声明的属性。</li>
+<li>特殊情况：当子类重写了父类中的方法以后，我们想在子类的方法中调用父类中被重写的方法时，则必须显式的使用”super.方法”的方式，表明调用的是父类中被重写的方法。</li>
+</ol>
+<h4 id="super调用构造器："><a href="#super调用构造器：" class="headerlink" title="super调用构造器："></a>super调用构造器：</h4><ol>
+<li>我们可以在子类的构造器中显式的使用”super(形参列表)”的方式，调用父类中声明的指定的构造器</li>
+<li>“super(形参列表)”的使用，必须声明在子类构造器的首行！</li>
+<li>我们在类的构造器中，针对于”this(形参列表)”或”super(形参列表)”只能二一，不能同时出现</li>
+<li>在构造器的首行，没显式的声明”this(形参列表)”或”super(形参列表)”，则默认调用的是父类中空参的构造器：super()</li>
+<li>在类的多个构造器中，至少一个类的构造器中使用了”super(形参列表)”，调用父类中的构造器</li>
+</ol>
+<h3 id="子类对象实例化全过程"><a href="#子类对象实例化全过程" class="headerlink" title="子类对象实例化全过程"></a>子类对象实例化全过程</h3><h4 id="从结果上看：继承性"><a href="#从结果上看：继承性" class="headerlink" title="从结果上看：继承性"></a>从结果上看：继承性</h4><ul>
+<li>子类继承父类以后，就获取了父类中声明的属性或方法。</li>
+<li>创建子类的对象，在堆空间中，就会加载所父类中声明的属性。</li>
+</ul>
+<h4 id="从过程上看："><a href="#从过程上看：" class="headerlink" title="从过程上看："></a>从过程上看：</h4><p>当我们通过子类的构造器创建子类对象时，我们一定会直接或间接的调用其父类的构造器，进而调用父类的父类的构造器，…直到调用了java.lang.Object类中空参的构造器为止。正因为加载过所的父类的结构，所以才可以看到内存中父类中的结构，子类对象才可以考虑进行调用。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(1).bmp"
+                     
+                ></p>
+<h4 id="强调说明："><a href="#强调说明：" class="headerlink" title="强调说明："></a>强调说明：</h4><p>虽然创建子类对象时，调用了父类的构造器，但是自始至终就创建过一个对象，即为new的子类对象。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/2(1).bmp"
+                     
+                ></p>
+<h3 id="面向对象的特征三：多态性"><a href="#面向对象的特征三：多态性" class="headerlink" title="面向对象的特征三：多态性"></a>面向对象的特征三：多态性</h3><h4 id="多态性的理解："><a href="#多态性的理解：" class="headerlink" title="多态性的理解："></a>多态性的理解：</h4><p>可以理解为一个事物的多种形态。</p>
+<h4 id="何为多态性："><a href="#何为多态性：" class="headerlink" title="何为多态性："></a>何为多态性：</h4><p>对象的多态性：父类的引用指向子类的对象（或子类的对象赋给父类的引用）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Man</span>();</span><br><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="多态性的使用：虚拟方法调用"><a href="#多态性的使用：虚拟方法调用" class="headerlink" title="多态性的使用：虚拟方法调用"></a>多态性的使用：虚拟方法调用</h4><ul>
+<li>有了对象的多态性以后，我们在编译期，只能调用父类中声明的方法，但在运行期，我们实际执行的是子类重写父类的方法。</li>
+<li>总结：编译，看左边；运行，看右边。</li>
+</ul>
+<h4 id="多态性的使用前提："><a href="#多态性的使用前提：" class="headerlink" title="多态性的使用前提："></a>多态性的使用前提：</h4><ul>
+<li>类的继承关系</li>
+<li>方法的重写</li>
+</ul>
+<h4 id="多态性的应用举例："><a href="#多态性的应用举例：" class="headerlink" title="多态性的应用举例："></a>多态性的应用举例：</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">举例一：</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">func</span><span class="params">(Animal animal)</span>&#123;<span class="comment">//Animal animal = new Dog();</span></span><br><span class="line">		animal.eat();</span><br><span class="line">		animal.shout();</span><br><span class="line">	&#125;</span><br><span class="line">举例二：</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">(Object obj)</span>&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">举例三：</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Driver</span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doData</span><span class="params">(Connection conn)</span>&#123;</span><br><span class="line">	<span class="comment">//conn = new MySQlConnection();</span></span><br><span class="line">	<span class="comment">//conn = new OracleConnection();</span></span><br><span class="line">		conn.method1();</span><br><span class="line">		conn.method2();</span><br><span class="line">		conn.method3();		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="多态性使用的注意点："><a href="#多态性使用的注意点：" class="headerlink" title="多态性使用的注意点："></a>多态性使用的注意点：</h4><p><i style="color: red;">对象的多态性，只适用于方法，不适用于属性（编译和运行都看左边）</i></p>
+<h4 id="关于向上转型与向下转型："><a href="#关于向上转型与向下转型：" class="headerlink" title="关于向上转型与向下转型："></a>关于向上转型与向下转型：</h4><h5 id="向上转型：多态"><a href="#向上转型：多态" class="headerlink" title="向上转型：多态"></a>向上转型：多态</h5><h5 id="向下转型："><a href="#向下转型：" class="headerlink" title="向下转型："></a>向下转型：</h5><h6 id="为什么使用向下转型："><a href="#为什么使用向下转型：" class="headerlink" title="为什么使用向下转型："></a>为什么使用向下转型：</h6><p>有了对象的多态性以后，内存中实际上是加载了子类特有的属性和方法的，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法。子类特有的属性和方法不能调用。如何才能调用子类特的属性和方法？使用向下转型。</p>
+<h6 id="如何实现向下转型："><a href="#如何实现向下转型：" class="headerlink" title="如何实现向下转型："></a>如何实现向下转型：</h6><p>使用强制类型转换符：()</p>
+<h6 id="使用时的注意点："><a href="#使用时的注意点：" class="headerlink" title="使用时的注意点："></a>使用时的注意点：</h6><ol>
+<li>使用强转时，可能出现ClassCastException的异常。</li>
+<li>为了避免在向下转型时出现ClassCastException的异常，我们在向下转型之前，先进行instanceof的判断，一旦返回true，就进行向下转型。如果返回false，不进行向下转型。</li>
+</ol>
+<h6 id="instanceof的使用："><a href="#instanceof的使用：" class="headerlink" title="instanceof的使用："></a>instanceof的使用：</h6><ol>
+<li>a instanceof A:判断对象a是否是类A的实例。如果是，返回true；如果不是，返回false。</li>
+<li>如果 a instanceof A返回true,则 a instanceof B也返回true.其中，类B是类A的父类。</li>
+<li>要求a所属的类与类A必须是子类和父类的关系，否则编译错误。</li>
+</ol>
+<h6 id="图示："><a href="#图示：" class="headerlink" title="图示："></a>图示：</h6><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(2).bmp"
+                     
+                ></p>
+<h4 id="面试题："><a href="#面试题：" class="headerlink" title="面试题："></a>面试题：</h4><h5 id="谈谈你对多态性的理解？"><a href="#谈谈你对多态性的理解？" class="headerlink" title="谈谈你对多态性的理解？"></a>谈谈你对多态性的理解？</h5><ol>
+<li>实现代码的通用性。</li>
+<li>Object类中定义的public boolean equals(Object obj){  }</li>
+<li>JDBC:使用java程序操作(获取数据库连接、CRUD)数据库(MySQL、Oracle、DB2、SQL Server)</li>
+</ol>
+<h5 id="多态是编译时行为还是运行时行为？"><a href="#多态是编译时行为还是运行时行为？" class="headerlink" title="多态是编译时行为还是运行时行为？"></a>多态是编译时行为还是运行时行为？</h5><p><i style="color: red;">运行时行为</i></p>
+<h3 id="Object类的使用"><a href="#Object类的使用" class="headerlink" title="Object类的使用"></a>Object类的使用</h3><h4 id="java-lang-Object类的说明："><a href="#java-lang-Object类的说明：" class="headerlink" title="java.lang.Object类的说明："></a>java.lang.Object类的说明：</h4><ol>
+<li>Object类是所Java类的根父类</li>
+<li>如果在类的声明中未使用extends关键字指明其父类，则默认父类为java.lang.Object类 </li>
+<li>Object类中的功能(属性、方法)就具通用性。<br>属性：无<br>方法：equals() &#x2F; toString() &#x2F; getClass() &#x2F;hashCode() &#x2F; clone() &#x2F; finalize() wait() 、 notify()、notifyAll()</li>
+<li>Object类只声明了一个空参的构造器</li>
+</ol>
+<h4 id="equals-方法"><a href="#equals-方法" class="headerlink" title="equals()方法"></a>equals()方法</h4><h5 id="equals-的使用："><a href="#equals-的使用：" class="headerlink" title="equals()的使用："></a>equals()的使用：</h5><ol>
+<li><p>是一个方法，而非运算符</p>
+</li>
+<li><p>只能适用于引用数据类型</p>
+</li>
+<li><p>Object类中equals()的定义：</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>public boolean equals(Object obj) {<br>    return (this &#x3D;&#x3D; obj);<br>  }<br>&#x2F;<em>说明：Object类中定义的equals()和&#x3D;&#x3D;的作用是相同的：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</em>&#x2F;</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">5. 像String、Date、File、包装类等都重写了Object类中的equals()方法。重写以后，比较的不是两个引用的地址是否相同，而是比较两个对象的&quot;实体内容&quot;是否相同。</span><br><span class="line"></span><br><span class="line">6. 通常情况下，我们自定义的类如果使用equals()的话，也通常是比较两个对象的&quot;实体内容&quot;是否相同。那么，我们就需要对Object类中的equals()进行重写.</span><br><span class="line">   重写的原则：比较两个对象的实体内容是否相同.</span><br><span class="line"></span><br><span class="line">##### 如何重写equals()</span><br><span class="line"></span><br><span class="line">###### 手动重写举例：</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">class User&#123;</span><br><span class="line">	String name;</span><br><span class="line">	int age;</span><br><span class="line">	//重写其equals()方法</span><br><span class="line">	public boolean equals(Object obj)&#123;</span><br><span class="line">		if(obj == this)&#123;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">		if(obj instanceof User)&#123;</span><br><span class="line">			User u = (User)obj;</span><br><span class="line">			return this.age == u.age &amp;&amp; this.name.equals(u.name);</span><br><span class="line">		&#125;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h6 id="开发中如何实现：自动生成的"><a href="#开发中如何实现：自动生成的" class="headerlink" title="开发中如何实现：自动生成的"></a>开发中如何实现：自动生成的</h6><h5 id="回顾-x3D-x3D-运算符的使用："><a href="#回顾-x3D-x3D-运算符的使用：" class="headerlink" title="回顾 &#x3D;&#x3D; 运算符的使用："></a>回顾 &#x3D;&#x3D; 运算符的使用：</h5><p> &#x3D;&#x3D; ：运算符</p>
+<ol>
+<li>可以使用在基本数据类型变量和引用数据类型变量中</li>
+<li>如果比较的是基本数据类型变量：比较两个变量保存的数据是否相等。（不一定类型要相同）<br>如果比较的是引用数据类型变量：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</li>
+<li>补充： &#x3D;&#x3D; 符号使用时，必须保证符号左右两边的变量类型一致。</li>
+</ol>
+<h4 id="toString-方法"><a href="#toString-方法" class="headerlink" title="toString()方法"></a>toString()方法</h4><h5 id="toString-的使用："><a href="#toString-的使用：" class="headerlink" title="toString()的使用："></a>toString()的使用：</h5><ol>
+<li><p>当我们输出一个对象的引用时，实际上就是调用当前对象的toString()</p>
+</li>
+<li><p>Object类中toString()的定义：</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>public String toString() {<br>   return getClass().getName() + “@” + Integer.toHexString(hashCode());<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">4. 像String、Date、File、包装类等都重写了Object类中的toString()方法。</span><br><span class="line">   使得在调用对象的toString()时，返回&quot;实体内容&quot;信息</span><br><span class="line"></span><br><span class="line">5. 自定义类也可以重写toString()方法，当调用此方法时，返回对象的&quot;实体内容&quot;</span><br><span class="line">##### 如何重写toString()</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">//自动实现</span><br><span class="line">@Override</span><br><span class="line">public String toString() &#123;</span><br><span class="line">	return &quot;Customer [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="面试题：-1"><a href="#面试题：-1" class="headerlink" title="面试题："></a>面试题：</h4><ul>
+<li>final、finally、finalize的区别？</li>
+<li>&#x3D;&#x3D; 和 equals() 区别</li>
+</ul>
+<h3 id="单元测试方法"><a href="#单元测试方法" class="headerlink" title="单元测试方法"></a>单元测试方法</h3><p>略</p>
+<h3 id="包装类的使用"><a href="#包装类的使用" class="headerlink" title="包装类的使用"></a>包装类的使用</h3><h4 id="1-为什么要有包装类-或封装类）"><a href="#1-为什么要有包装类-或封装类）" class="headerlink" title="1.为什么要有包装类(或封装类）"></a>1.为什么要有包装类(或封装类）</h4><p>为了使基本数据类型的变量具有类的特征，引入包装类。</p>
+<h4 id="2-基本数据类型与对应的包装类："><a href="#2-基本数据类型与对应的包装类：" class="headerlink" title="2.基本数据类型与对应的包装类："></a>2.基本数据类型与对应的包装类：</h4><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(3).bmp"
+                     
+                ></p>
+<h4 id="3-需要掌握的类型间的转换：（基本数据类型、包装类、String）"><a href="#3-需要掌握的类型间的转换：（基本数据类型、包装类、String）" class="headerlink" title="3.需要掌握的类型间的转换：（基本数据类型、包装类、String）"></a>3.需要掌握的类型间的转换：（基本数据类型、包装类、String）</h4><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/2(2).bmp"
+                     
+                ></p>
+<h5 id="简易版："><a href="#简易版：" class="headerlink" title="简易版："></a>简易版：</h5><ul>
+<li>基本数据类型&lt;—&gt;包装类：JDK 5.0 新特性：自动装箱 与自动拆箱</li>
+<li>基本数据类型、包装类—&gt;String:调用String重载的valueOf(Xxx xxx)</li>
+<li>String—&gt;基本数据类型、包装类:调用包装类的parseXxx(String s)</li>
+</ul>
+<p><i style="color: red;"> 注意：转换时，可能会报NumberFormatException</i></p>
+<h6 id="应用场景举例："><a href="#应用场景举例：" class="headerlink" title="应用场景举例："></a>应用场景举例：</h6><p>Vector类中关于添加元素，只定义了形参为Object类型的方法：</p>
+<p>v.addElement(Object obj);   &#x2F;&#x2F;基本数据类型 —&gt;包装类 —&gt;使用多态</p>
 ]]></content>
       <tags>
-        <tag>教程</tag>
+        <tag>JAVA</tag>
+        <tag>后端学习的记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux环境下Redis无法使用配置文件</title>
+    <url>/2023/04/19/Linux%E7%8E%AF%E5%A2%83%E4%B8%8BRedis%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="Linux环境下Redis无法使用配置文件"><a href="#Linux环境下Redis无法使用配置文件" class="headerlink" title="Linux环境下Redis无法使用配置文件"></a>Linux环境下Redis无法使用配置文件</h1><h2 id="为什么"><a href="#为什么" class="headerlink" title="为什么?"></a>为什么?</h2><p>因为我是将<code>redis.conf</code>配置文件直接复制到<code>/myredis/</code>即根目录的myredis文件夹下，因为linux根目录下本身没有myredis文件夹所以我<code>mkdir</code>了一个我们可以查看一下下载解压redis目录下<code>redis.conf</code>的文件权限<img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419122220354-1007819127.png"
+                      alt="img"
+                ></p>
+<p>可以清晰的看到该文件没有执行权限，所以我们<code>redis-server /myredis/redis.conf</code>是无法使用该配置文件的</p>
+<h2 id="怎么发现的？"><a href="#怎么发现的？" class="headerlink" title="怎么发现的？"></a>怎么发现的？</h2><p>起初我们并没有在意该配置文件是不是可执行的，而是运行了<code>redis-server&amp; /myredis/redis.conf</code>提示没有权限，</p>
+<h2 id="怎么修复"><a href="#怎么修复" class="headerlink" title="怎么修复"></a>怎么修复</h2><p>直接<code>chmod 777/myredis/redis.conf</code>或将配置文件的执行权限加上即可</p>
+]]></content>
+      <tags>
+        <tag>Linux学习，平常学习开发中遇到的问题</tag>
       </tags>
   </entry>
   <entry>
@@ -2238,6 +2255,152 @@
       </tags>
   </entry>
   <entry>
+    <title>MyBatis中关于TableId的使用</title>
+    <url>/2023/04/04/MyBatis%E4%B8%AD%E5%85%B3%E4%BA%8ETableId%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">saveWithFlavor</span><span class="params">(DishDto dishDto)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 保存菜品的基本信息到菜品表dish</span></span><br><span class="line">        <span class="built_in">this</span>.save(dishDto);</span><br><span class="line">        <span class="comment">//菜品id 雪花算法自动生成只要经过id操作。即可马上赋值</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">dishId</span> <span class="operator">=</span> dishDto.getId();</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto2/master/Snipaste_2023-04-04_19-45-54.jpg"
+                     
+                ></p>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端学习的记录</tag>
+        <tag>MyBaits</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringBoot学习笔记-基础篇</title>
+    <url>/2023/02/27/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0--%E5%9F%BA%E7%A1%80%E7%AF%87/</url>
+    <content><![CDATA[<h1 id="SpringBoot学习笔记-基础篇"><a href="#SpringBoot学习笔记-基础篇" class="headerlink" title="SpringBoot学习笔记-基础篇"></a>SpringBoot学习笔记-基础篇</h1><h2 id="配置文件的使用"><a href="#配置文件的使用" class="headerlink" title="配置文件的使用"></a>配置文件的使用</h2><h3 id="配置文件的类型"><a href="#配置文件的类型" class="headerlink" title="配置文件的类型"></a>配置文件的类型</h3><h4 id="properties-传统格式-x2F-默认格式"><a href="#properties-传统格式-x2F-默认格式" class="headerlink" title="properties(传统格式&#x2F;默认格式)"></a>properties(传统格式&#x2F;默认格式)</h4><figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 服务器端口配置</span></span><br><span class="line"><span class="attr">server.port</span>=<span class="string">80</span></span><br><span class="line"><span class="comment"># 修改banner</span></span><br><span class="line"><span class="attr">spring.main.banner-mode</span>=<span class="string">off</span></span><br><span class="line"><span class="attr">spring.banner.image.location</span>=<span class="string">logo.png</span></span><br><span class="line"><span class="comment"># 日志</span></span><br><span class="line"><span class="attr">logging.level.root</span>=<span class="string">info</span></span><br><span class="line"><span class="attr">logging.level.com.itheima</span>=<span class="string">warn</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="yaml-主流格式-x2F-常用"><a href="#yaml-主流格式-x2F-常用" class="headerlink" title="yaml(主流格式&#x2F;常用)"></a>yaml(主流格式&#x2F;常用)</h4><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">82</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="yml"><a href="#yml" class="headerlink" title="yml"></a>yml</h4><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">81</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="SpringBoot配置文件加载顺序"><a href="#SpringBoot配置文件加载顺序" class="headerlink" title="SpringBoot配置文件加载顺序"></a>SpringBoot配置文件加载顺序</h4><p>application.properties &gt; application.yml &gt; application.yaml</p>
+<h4 id="yaml语法总结"><a href="#yaml语法总结" class="headerlink" title="yaml语法总结"></a>yaml语法总结</h4><h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>YAML（YAML Ain’t Markup Language），一种数据序列化格式YAML</p>
+<p>文件扩展名	.yml（主流）	.yaml</p>
+<h5 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h5><ul>
+<li>大小写敏感</li>
+<li>属性层级关系使用多行描述，每行结尾使用冒号结束</li>
+<li>使用缩进表示层级关系，同层级左侧对齐，只允许使用空格（不允许使用Tab键）</li>
+<li>属性值前面添加空格（属性名与属性值之间使用冒号+空格作为分隔）</li>
+<li>星号*表示注释</li>
+<li><strong>核心规则：数据前面要加空格与冒号隔开</strong></li>
+</ul>
+<h6 id="字面值表示方式"><a href="#字面值表示方式" class="headerlink" title="字面值表示方式"></a>字面值表示方式</h6><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean: TRUE</td>
+<td>TRUE,true,True,FALSE,false,False均可</td>
+</tr>
+<tr>
+<td>float: 3.14</td>
+<td>6.8523015e+5     支持科学计数法</td>
+</tr>
+<tr>
+<td>int: 123</td>
+<td>0b1010_0111_0100_1010_1110    支持二、八、十六进制</td>
+</tr>
+<tr>
+<td>null: ~</td>
+<td>使用~表示null</td>
+</tr>
+<tr>
+<td>string: HelloWorld</td>
+<td>字符串可以直接书写</td>
+</tr>
+<tr>
+<td>string2: “Hello World”</td>
+<td>可以使用双引号包裹特殊字符</td>
+</tr>
+<tr>
+<td>date: 2023-02-22</td>
+<td>日期必须使用yyyy-MN-dd格式</td>
+</tr>
+<tr>
+<td>datetime: 2023-02-22T18:09:00+08:00</td>
+<td>时间和日期之间使用T连接，最后使用+代表时区</td>
+</tr>
+</tbody></table>
+<h6 id="数组表示方式"><a href="#数组表示方式" class="headerlink" title="数组表示方式"></a>数组表示方式</h6><p>在属性名书写位置的下方使用减号作为数据开始符号，每行书写一个数据，减号与数据间空格分隔</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">subject:</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">Java</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">前端</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">大数据</span></span><br><span class="line"><span class="attr">enterprise:</span></span><br><span class="line">	<span class="attr">name:</span> <span class="string">itcast</span></span><br><span class="line">	<span class="attr">age:</span> <span class="number">16</span></span><br><span class="line">	<span class="attr">subject:</span></span><br><span class="line">		<span class="bullet">-</span> <span class="string">Java</span></span><br><span class="line">		<span class="bullet">-</span> <span class="string">前端</span></span><br><span class="line">		<span class="bullet">-</span> <span class="string">大数据</span></span><br><span class="line"><span class="attr">likes:</span> [<span class="string">王者荣耀</span>,<span class="string">刺激战场</span>]	<span class="comment">#数组书写缩略格式</span></span><br><span class="line"></span><br><span class="line"><span class="attr">users:</span> <span class="comment">#对象数组格式一</span></span><br><span class="line">	<span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Tom</span></span><br><span class="line">	  <span class="attr">age:</span> <span class="number">4</span></span><br><span class="line">	<span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Jerry</span></span><br><span class="line">	  <span class="attr">age:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">users:</span> <span class="comment">#对象数组格式二</span></span><br><span class="line">	<span class="bullet">-</span></span><br><span class="line">		<span class="attr">name:</span> <span class="string">Tom</span></span><br><span class="line">		<span class="attr">age:</span> <span class="number">4</span></span><br><span class="line">	<span class="bullet">-</span></span><br><span class="line">		<span class="attr">name:</span> <span class="string">Jerry</span></span><br><span class="line">		<span class="attr">age:</span> <span class="number">5</span></span><br><span class="line"><span class="comment">#对象数组缩略格式</span></span><br><span class="line"><span class="attr">users2:</span> [ &#123; <span class="string">name:Tom</span> , <span class="string">age:4</span> &#125; , &#123; <span class="string">name:Jerry</span> , <span class="string">age:5</span> &#125; ]</span><br></pre></td></tr></table></figure>
+
+<h5 id="yaml数据的读取"><a href="#yaml数据的读取" class="headerlink" title="yaml数据的读取"></a>yaml数据的读取</h5><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#application.yaml中的数据</span></span><br><span class="line"></span><br><span class="line"><span class="attr">country:</span> <span class="string">china</span></span><br><span class="line"></span><br><span class="line"><span class="attr">user1:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">itcast</span></span><br><span class="line">  <span class="attr">age:</span> <span class="number">16</span></span><br><span class="line">  </span><br><span class="line"><span class="attr">likes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">game</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">music</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">sleep</span>  </span><br><span class="line">  </span><br><span class="line"><span class="attr">users:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">zhangsan</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">18</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">lisi</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">17</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">#使用$&#123;属性名&#125;引用数据</span></span><br><span class="line"><span class="attr">tempDir:</span> <span class="string">$&#123;baseDir&#125;\temp</span></span><br><span class="line"><span class="comment">#使用引号包裹的字符串，其中的转义字符可以生效</span></span><br><span class="line"><span class="attr">tempDir2:</span> <span class="string">&quot;$&#123;baseDir&#125;\temp\t1\t2\t3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建类，用于封装下面的数据</span></span><br><span class="line"><span class="comment"># 由spring帮我们去加载数据到对象中，一定要告诉spring加载这组信息</span></span><br><span class="line"><span class="comment"># 使用时候从spring中直接获取信息使用</span></span><br><span class="line"><span class="attr">datasource:</span></span><br><span class="line">  <span class="attr">driver:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost/springboot_db</span></span><br><span class="line">  <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">root666</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="方式一：单个获取单个读取"><a href="#方式一：单个获取单个读取" class="headerlink" title="方式一：单个获取单个读取"></a>方式一：单个获取单个读取</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Java读取application.yaml中的数据</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Value(&quot;$&#123;country&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String country1;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;user1.name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String name;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;likes[0]&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String likes;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;users[0].name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String users;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;tempDir&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String tempDir;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;tempDir2&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String tempDir2;</span><br></pre></td></tr></table></figure>
+
+<h6 id="方式二：统一获取单个读取"><a href="#方式二：统一获取单个读取" class="headerlink" title="方式二：统一获取单个读取"></a>方式二：统一获取单个读取</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//使用自动装配将所有的数据封装到一个对象Environment中</span></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> Environment env;</span><br></pre></td></tr></table></figure>
+
+<h6 id="方式三：放在对象中"><a href="#方式三：放在对象中" class="headerlink" title="方式三：放在对象中"></a>方式三：放在对象中</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//2.定义为spring管控的bean</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="comment">//3.指定加载的数据，prefix名也要一直</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;datasource&quot;)</span></span><br><span class="line"><span class="comment">//1.定义数据模型封装yaml文件中对应的数据</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyDataSource</span> &#123;</span><br><span class="line">    <span class="comment">//属性要与yaml文件中的属性名一致</span></span><br><span class="line">    <span class="keyword">private</span> String driver;</span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    </span><br><span class="line">    get()/set()方法	<span class="comment">//必须</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="整合第三方技术"><a href="#整合第三方技术" class="headerlink" title="整合第三方技术"></a>整合第三方技术</h2><h3 id="整合JUnit"><a href="#整合JUnit" class="headerlink" title="整合JUnit"></a>整合JUnit</h3><p>测试类SpringBoot已经帮忙构建了，只需要</p>
+<ol>
+<li>注入你要测试的对象</li>
+<li>执行要测试的对象对应的方法</li>
+</ol>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>如果测试类文件不在<strong>主配置类文件的同级或子级包</strong>如同下图，那么就会报错</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-22_19-00-24.jpg"
+                     
+                ></p>
+<p style="color: red">java.lang.IllegalStateException: Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=...) with your test</p>
+
+<p>因此我们需要手动添加主配置类路径</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//这俩注解任选一个</span></span><br><span class="line"><span class="meta">@SpringBootTest(classes = Springboot04JunitApplication.class)</span></span><br><span class="line"><span class="meta">@ContextConfiguration(classes = Springboot04JunitApplication.class)</span></span><br></pre></td></tr></table></figure>
+
+<p>因为上述报错显示</p>
+<p style="color: red">Unable to find a @SpringBootConfiguration</p>
+
+<p>所以在主配置文件的**@SpringBootApplication**注解中可以发现</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-22_19-05-37.jpg"
+                     
+                ></p>
+<h3 id="整合MyBatis"><a href="#整合MyBatis" class="headerlink" title="整合MyBatis"></a>整合MyBatis</h3><h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><h5 id="1-选择技术集"><a href="#1-选择技术集" class="headerlink" title="1.选择技术集"></a>1.选择技术集</h5><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-23_15-04-47.jpg"
+                     
+                ></p>
+<h5 id="2-设置数据源参数"><a href="#2-设置数据源参数" class="headerlink" title="2.设置数据源参数"></a>2.设置数据源参数</h5><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#2.配置相关信息</span></span><br><span class="line"><span class="comment">#application.yml</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/springboot</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">666</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-定义数据层接口与映射配置"><a href="#3-定义数据层接口与映射配置" class="headerlink" title="3.定义数据层接口与映射配置"></a>3.定义数据层接口与映射配置</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">BookDao</span> &#123;</span><br><span class="line">    <span class="meta">@Select(&quot;select * from tbl_book where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Book <span class="title function_">getById</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> Integer id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="整合MyBatis-Plus"><a href="#整合MyBatis-Plus" class="headerlink" title="整合MyBatis-Plus"></a>整合MyBatis-Plus</h3><h4 id="1-选择技术集-1"><a href="#1-选择技术集-1" class="headerlink" title="1.选择技术集"></a>1.选择技术集</h4><p>步骤与整合MyBatis相似,但是</p>
+<p style="color:red">在选择技术集时不选择MyBatis Framework</p>
+
+<p>而是手动引入MyBatis-Plus依赖。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-定义数据层接口与映射配置"><a href="#2-定义数据层接口与映射配置" class="headerlink" title="2.定义数据层接口与映射配置"></a>2.定义数据层接口与映射配置</h4><p style="color:red">无需手写接口和映射文件，只需继承BaseMapper<实体类></p>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">BookDao</span> <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;Book&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="整合Druid"><a href="#整合Druid" class="headerlink" title="整合Druid"></a>整合Druid</h3><h4 id="1-选择技术集-2"><a href="#1-选择技术集-2" class="headerlink" title="1.选择技术集"></a>1.选择技术集</h4><p>步骤与整合MyBatis一样,选择MyBatis Framework和MySQL Driver</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-定义数据层接口与映射配置-1"><a href="#2-定义数据层接口与映射配置-1" class="headerlink" title="2.定义数据层接口与映射配置"></a>2.定义数据层接口与映射配置</h4><p>与整合MyBatis一样</p>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端学习的记录</tag>
+        <tag>SpringBoot2</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MyBatis学习总结</title>
     <url>/2023/02/11/MyBatis%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h1 id="MyBatis学习总结"><a href="#MyBatis学习总结" class="headerlink" title="MyBatis学习总结"></a>MyBatis学习总结</h1><p>[TOC]</p>
@@ -2435,7 +2598,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Map&lt;String, Object&gt; <span class="title function_">getUserByIdToMap</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> Integer id)</span>;</span><br></pre></td></tr></table></figure>
 
-<p>查询结果为：{password&#x3D;123456, gender&#x3D;男, id&#x3D;1, age&#x3D;23, email&#x3D;<a class="link"   href="mailto:&#x31;&#x32;&#51;&#52;&#53;&#54;&#x40;&#x71;&#113;&#x2e;&#99;&#111;&#x6d;" >&#x31;&#x32;&#51;&#52;&#53;&#54;&#x40;&#x71;&#113;&#x2e;&#99;&#111;&#x6d;<i class="fas fa-external-link-alt"></i></a>, username&#x3D;root}</p>
+<p>查询结果为：{password&#x3D;123456, gender&#x3D;男, id&#x3D;1, age&#x3D;23, email&#x3D;<a class="link"   href="mailto:&#49;&#50;&#x33;&#x34;&#x35;&#54;&#64;&#113;&#113;&#46;&#x63;&#111;&#109;" >&#49;&#50;&#x33;&#x34;&#x35;&#54;&#64;&#113;&#113;&#46;&#x63;&#111;&#109;<i class="fas fa-external-link-alt"></i></a>, username&#x3D;root}</p>
 <h3 id="查询多条数据为map集合"><a href="#查询多条数据为map集合" class="headerlink" title="查询多条数据为map集合"></a>查询多条数据为map集合</h3><p>查询多条数据时有两种方式，第一种是将每一条map放到泛型为map的list集合中，第二种是使用@MapKey注解</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Map&lt;String, Object&gt;&gt; <span class="title function_">getAllUserToMap</span><span class="params">()</span>;</span><br><span class="line"><span class="comment">//结果：&#123;password=123456, gender=男, id=1, age=23, email=12345@qq.com, username=admin&#125;,&#123;password=123456, //gender=男, id=1, age=23, email=12345@qq.com, username=admin&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@MapKey(&quot;id&quot;)</span></span><br><span class="line">Map&lt;String, Object&gt; <span class="title function_">getAllUserToMap</span><span class="params">()</span>;</span><br><span class="line"><span class="comment">//结果：&#123;1=&#123;password=123456, gender=男, id=1, age=23, email=12345@qq.com, username=admin&#125;,2=&#123;password=123, gender=男, id=2, age=23, email=12345@qq.com, username=zhangsan&#125;,3=&#123;password=123456, gender=女, id=3, age=33, email=123@qq.com, username=root&#125;,4=&#123;password=123, id=4, username=lisi&#125;&#125;</span></span><br></pre></td></tr></table></figure>
 
@@ -2462,7 +2625,7 @@
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--void insertUser(User user);</span></span><br><span class="line"><span class="comment">	useGeneratedKeys:表示当前添加功能使用自增的主键</span></span><br><span class="line"><span class="comment">	keyProperty:将添加的数据的自增主键为实体类类型的参数的属性赋值</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insertUser&quot;</span> <span class="attr">useGeneratedKeys</span>=<span class="string">&quot;true&quot;</span> <span class="attr">keyProperty</span>=<span class="string">&quot;id&quot;</span>&gt;</span></span><br><span class="line">	insert into t_user values(null,#&#123;username&#125;,#&#123;password&#125;,#&#123;age&#125;,#&#123;gender&#125;,#&#123;email&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>改造后输出结果：User{id&#x3D;9, username&#x3D;’lisi’, password&#x3D;’123456’, age&#x3D;12, gender&#x3D;’男’, email&#x3D;‘<a class="link"   href="mailto:&#49;&#50;&#x33;&#52;&#64;&#113;&#x71;&#46;&#x63;&#111;&#x6d;" >&#49;&#50;&#x33;&#52;&#64;&#113;&#x71;&#46;&#x63;&#111;&#x6d;<i class="fas fa-external-link-alt"></i></a>‘}</p>
+<p>改造后输出结果：User{id&#x3D;9, username&#x3D;’lisi’, password&#x3D;’123456’, age&#x3D;12, gender&#x3D;’男’, email&#x3D;‘<a class="link"   href="mailto:&#49;&#50;&#x33;&#x34;&#64;&#x71;&#113;&#46;&#99;&#x6f;&#109;" >&#49;&#50;&#x33;&#x34;&#64;&#x71;&#113;&#46;&#99;&#x6f;&#109;<i class="fas fa-external-link-alt"></i></a>‘}</p>
 </blockquote>
 <h2 id="自定义映射resultMap"><a href="#自定义映射resultMap" class="headerlink" title="自定义映射resultMap"></a>自定义映射resultMap</h2><h3 id="为什么要使用resultMap"><a href="#为什么要使用resultMap" class="headerlink" title="为什么要使用resultMap?"></a>为什么要使用resultMap?</h3><p>因为后端数据库中的字段与java中的pojo类的属性名不一样。例如在java中员工ID的表示方法为<strong>empId</strong>，而在数据库中表示为<strong>emp_id</strong>。</p>
 <h3 id="字段名和属性名不一致时如何处理？"><a href="#字段名和属性名不一致时如何处理？" class="headerlink" title="字段名和属性名不一致时如何处理？"></a>字段名和属性名不一致时如何处理？</h3><h4 id="1、为查询的字段设置别名，和属性名保持一致"><a href="#1、为查询的字段设置别名，和属性名保持一致" class="headerlink" title="1、为查询的字段设置别名，和属性名保持一致"></a>1、为查询的字段设置别名，和属性名保持一致</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getEmpByEmpId&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;Emp&quot;</span>&gt;</span></span><br><span class="line">	select emp_id empId,emp_name empName,age,gender from t_emp where emp_id = #&#123;empId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -2796,25 +2959,8 @@
       <tags>
         <tag>JAVA</tag>
         <tag>后端学习的记录</tag>
+        <tag>MyBaits</tag>
         <tag>SSM</tag>
-        <tag>MyBaits</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MyBatis中关于TableId的使用</title>
-    <url>/2023/04/04/MyBatis%E4%B8%AD%E5%85%B3%E4%BA%8ETableId%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">saveWithFlavor</span><span class="params">(DishDto dishDto)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 保存菜品的基本信息到菜品表dish</span></span><br><span class="line">        <span class="built_in">this</span>.save(dishDto);</span><br><span class="line">        <span class="comment">//菜品id 雪花算法自动生成只要经过id操作。即可马上赋值</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">dishId</span> <span class="operator">=</span> dishDto.getId();</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto2/master/Snipaste_2023-04-04_19-45-54.jpg"
-                     
-                ></p>
-]]></content>
-      <tags>
-        <tag>JAVA</tag>
-        <tag>后端学习的记录</tag>
-        <tag>MyBaits</tag>
       </tags>
   </entry>
   <entry>
@@ -2973,183 +3119,6 @@
         <tag>JAVA</tag>
         <tag>后端学习的记录</tag>
         <tag>SpringBoot2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SpringBoot学习笔记-基础篇</title>
-    <url>/2023/02/27/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0--%E5%9F%BA%E7%A1%80%E7%AF%87/</url>
-    <content><![CDATA[<h1 id="SpringBoot学习笔记-基础篇"><a href="#SpringBoot学习笔记-基础篇" class="headerlink" title="SpringBoot学习笔记-基础篇"></a>SpringBoot学习笔记-基础篇</h1><h2 id="配置文件的使用"><a href="#配置文件的使用" class="headerlink" title="配置文件的使用"></a>配置文件的使用</h2><h3 id="配置文件的类型"><a href="#配置文件的类型" class="headerlink" title="配置文件的类型"></a>配置文件的类型</h3><h4 id="properties-传统格式-x2F-默认格式"><a href="#properties-传统格式-x2F-默认格式" class="headerlink" title="properties(传统格式&#x2F;默认格式)"></a>properties(传统格式&#x2F;默认格式)</h4><figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 服务器端口配置</span></span><br><span class="line"><span class="attr">server.port</span>=<span class="string">80</span></span><br><span class="line"><span class="comment"># 修改banner</span></span><br><span class="line"><span class="attr">spring.main.banner-mode</span>=<span class="string">off</span></span><br><span class="line"><span class="attr">spring.banner.image.location</span>=<span class="string">logo.png</span></span><br><span class="line"><span class="comment"># 日志</span></span><br><span class="line"><span class="attr">logging.level.root</span>=<span class="string">info</span></span><br><span class="line"><span class="attr">logging.level.com.itheima</span>=<span class="string">warn</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="yaml-主流格式-x2F-常用"><a href="#yaml-主流格式-x2F-常用" class="headerlink" title="yaml(主流格式&#x2F;常用)"></a>yaml(主流格式&#x2F;常用)</h4><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">82</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="yml"><a href="#yml" class="headerlink" title="yml"></a>yml</h4><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">81</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="SpringBoot配置文件加载顺序"><a href="#SpringBoot配置文件加载顺序" class="headerlink" title="SpringBoot配置文件加载顺序"></a>SpringBoot配置文件加载顺序</h4><p>application.properties &gt; application.yml &gt; application.yaml</p>
-<h4 id="yaml语法总结"><a href="#yaml语法总结" class="headerlink" title="yaml语法总结"></a>yaml语法总结</h4><h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>YAML（YAML Ain’t Markup Language），一种数据序列化格式YAML</p>
-<p>文件扩展名	.yml（主流）	.yaml</p>
-<h5 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h5><ul>
-<li>大小写敏感</li>
-<li>属性层级关系使用多行描述，每行结尾使用冒号结束</li>
-<li>使用缩进表示层级关系，同层级左侧对齐，只允许使用空格（不允许使用Tab键）</li>
-<li>属性值前面添加空格（属性名与属性值之间使用冒号+空格作为分隔）</li>
-<li>星号*表示注释</li>
-<li><strong>核心规则：数据前面要加空格与冒号隔开</strong></li>
-</ul>
-<h6 id="字面值表示方式"><a href="#字面值表示方式" class="headerlink" title="字面值表示方式"></a>字面值表示方式</h6><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>boolean: TRUE</td>
-<td>TRUE,true,True,FALSE,false,False均可</td>
-</tr>
-<tr>
-<td>float: 3.14</td>
-<td>6.8523015e+5     支持科学计数法</td>
-</tr>
-<tr>
-<td>int: 123</td>
-<td>0b1010_0111_0100_1010_1110    支持二、八、十六进制</td>
-</tr>
-<tr>
-<td>null: ~</td>
-<td>使用~表示null</td>
-</tr>
-<tr>
-<td>string: HelloWorld</td>
-<td>字符串可以直接书写</td>
-</tr>
-<tr>
-<td>string2: “Hello World”</td>
-<td>可以使用双引号包裹特殊字符</td>
-</tr>
-<tr>
-<td>date: 2023-02-22</td>
-<td>日期必须使用yyyy-MN-dd格式</td>
-</tr>
-<tr>
-<td>datetime: 2023-02-22T18:09:00+08:00</td>
-<td>时间和日期之间使用T连接，最后使用+代表时区</td>
-</tr>
-</tbody></table>
-<h6 id="数组表示方式"><a href="#数组表示方式" class="headerlink" title="数组表示方式"></a>数组表示方式</h6><p>在属性名书写位置的下方使用减号作为数据开始符号，每行书写一个数据，减号与数据间空格分隔</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">subject:</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">Java</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">前端</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">大数据</span></span><br><span class="line"><span class="attr">enterprise:</span></span><br><span class="line">	<span class="attr">name:</span> <span class="string">itcast</span></span><br><span class="line">	<span class="attr">age:</span> <span class="number">16</span></span><br><span class="line">	<span class="attr">subject:</span></span><br><span class="line">		<span class="bullet">-</span> <span class="string">Java</span></span><br><span class="line">		<span class="bullet">-</span> <span class="string">前端</span></span><br><span class="line">		<span class="bullet">-</span> <span class="string">大数据</span></span><br><span class="line"><span class="attr">likes:</span> [<span class="string">王者荣耀</span>,<span class="string">刺激战场</span>]	<span class="comment">#数组书写缩略格式</span></span><br><span class="line"></span><br><span class="line"><span class="attr">users:</span> <span class="comment">#对象数组格式一</span></span><br><span class="line">	<span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Tom</span></span><br><span class="line">	  <span class="attr">age:</span> <span class="number">4</span></span><br><span class="line">	<span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Jerry</span></span><br><span class="line">	  <span class="attr">age:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">users:</span> <span class="comment">#对象数组格式二</span></span><br><span class="line">	<span class="bullet">-</span></span><br><span class="line">		<span class="attr">name:</span> <span class="string">Tom</span></span><br><span class="line">		<span class="attr">age:</span> <span class="number">4</span></span><br><span class="line">	<span class="bullet">-</span></span><br><span class="line">		<span class="attr">name:</span> <span class="string">Jerry</span></span><br><span class="line">		<span class="attr">age:</span> <span class="number">5</span></span><br><span class="line"><span class="comment">#对象数组缩略格式</span></span><br><span class="line"><span class="attr">users2:</span> [ &#123; <span class="string">name:Tom</span> , <span class="string">age:4</span> &#125; , &#123; <span class="string">name:Jerry</span> , <span class="string">age:5</span> &#125; ]</span><br></pre></td></tr></table></figure>
-
-<h5 id="yaml数据的读取"><a href="#yaml数据的读取" class="headerlink" title="yaml数据的读取"></a>yaml数据的读取</h5><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#application.yaml中的数据</span></span><br><span class="line"></span><br><span class="line"><span class="attr">country:</span> <span class="string">china</span></span><br><span class="line"></span><br><span class="line"><span class="attr">user1:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">itcast</span></span><br><span class="line">  <span class="attr">age:</span> <span class="number">16</span></span><br><span class="line">  </span><br><span class="line"><span class="attr">likes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">game</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">music</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">sleep</span>  </span><br><span class="line">  </span><br><span class="line"><span class="attr">users:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">zhangsan</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">18</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">lisi</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">17</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">#使用$&#123;属性名&#125;引用数据</span></span><br><span class="line"><span class="attr">tempDir:</span> <span class="string">$&#123;baseDir&#125;\temp</span></span><br><span class="line"><span class="comment">#使用引号包裹的字符串，其中的转义字符可以生效</span></span><br><span class="line"><span class="attr">tempDir2:</span> <span class="string">&quot;$&#123;baseDir&#125;\temp\t1\t2\t3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建类，用于封装下面的数据</span></span><br><span class="line"><span class="comment"># 由spring帮我们去加载数据到对象中，一定要告诉spring加载这组信息</span></span><br><span class="line"><span class="comment"># 使用时候从spring中直接获取信息使用</span></span><br><span class="line"><span class="attr">datasource:</span></span><br><span class="line">  <span class="attr">driver:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost/springboot_db</span></span><br><span class="line">  <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">root666</span></span><br></pre></td></tr></table></figure>
-
-<h6 id="方式一：单个获取单个读取"><a href="#方式一：单个获取单个读取" class="headerlink" title="方式一：单个获取单个读取"></a>方式一：单个获取单个读取</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Java读取application.yaml中的数据</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Value(&quot;$&#123;country&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String country1;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;user1.name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String name;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;likes[0]&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String likes;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;users[0].name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String users;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;tempDir&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String tempDir;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;tempDir2&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String tempDir2;</span><br></pre></td></tr></table></figure>
-
-<h6 id="方式二：统一获取单个读取"><a href="#方式二：统一获取单个读取" class="headerlink" title="方式二：统一获取单个读取"></a>方式二：统一获取单个读取</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//使用自动装配将所有的数据封装到一个对象Environment中</span></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> Environment env;</span><br></pre></td></tr></table></figure>
-
-<h6 id="方式三：放在对象中"><a href="#方式三：放在对象中" class="headerlink" title="方式三：放在对象中"></a>方式三：放在对象中</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//2.定义为spring管控的bean</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="comment">//3.指定加载的数据，prefix名也要一直</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;datasource&quot;)</span></span><br><span class="line"><span class="comment">//1.定义数据模型封装yaml文件中对应的数据</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyDataSource</span> &#123;</span><br><span class="line">    <span class="comment">//属性要与yaml文件中的属性名一致</span></span><br><span class="line">    <span class="keyword">private</span> String driver;</span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    </span><br><span class="line">    get()/set()方法	<span class="comment">//必须</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="整合第三方技术"><a href="#整合第三方技术" class="headerlink" title="整合第三方技术"></a>整合第三方技术</h2><h3 id="整合JUnit"><a href="#整合JUnit" class="headerlink" title="整合JUnit"></a>整合JUnit</h3><p>测试类SpringBoot已经帮忙构建了，只需要</p>
-<ol>
-<li>注入你要测试的对象</li>
-<li>执行要测试的对象对应的方法</li>
-</ol>
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>如果测试类文件不在<strong>主配置类文件的同级或子级包</strong>如同下图，那么就会报错</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-22_19-00-24.jpg"
-                     
-                ></p>
-<p style="color: red">java.lang.IllegalStateException: Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=...) with your test</p>
-
-<p>因此我们需要手动添加主配置类路径</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//这俩注解任选一个</span></span><br><span class="line"><span class="meta">@SpringBootTest(classes = Springboot04JunitApplication.class)</span></span><br><span class="line"><span class="meta">@ContextConfiguration(classes = Springboot04JunitApplication.class)</span></span><br></pre></td></tr></table></figure>
-
-<p>因为上述报错显示</p>
-<p style="color: red">Unable to find a @SpringBootConfiguration</p>
-
-<p>所以在主配置文件的**@SpringBootApplication**注解中可以发现</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-22_19-05-37.jpg"
-                     
-                ></p>
-<h3 id="整合MyBatis"><a href="#整合MyBatis" class="headerlink" title="整合MyBatis"></a>整合MyBatis</h3><h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><h5 id="1-选择技术集"><a href="#1-选择技术集" class="headerlink" title="1.选择技术集"></a>1.选择技术集</h5><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-23_15-04-47.jpg"
-                     
-                ></p>
-<h5 id="2-设置数据源参数"><a href="#2-设置数据源参数" class="headerlink" title="2.设置数据源参数"></a>2.设置数据源参数</h5><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#2.配置相关信息</span></span><br><span class="line"><span class="comment">#application.yml</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/springboot</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">666</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="3-定义数据层接口与映射配置"><a href="#3-定义数据层接口与映射配置" class="headerlink" title="3.定义数据层接口与映射配置"></a>3.定义数据层接口与映射配置</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">BookDao</span> &#123;</span><br><span class="line">    <span class="meta">@Select(&quot;select * from tbl_book where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Book <span class="title function_">getById</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> Integer id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="整合MyBatis-Plus"><a href="#整合MyBatis-Plus" class="headerlink" title="整合MyBatis-Plus"></a>整合MyBatis-Plus</h3><h4 id="1-选择技术集-1"><a href="#1-选择技术集-1" class="headerlink" title="1.选择技术集"></a>1.选择技术集</h4><p>步骤与整合MyBatis相似,但是</p>
-<p style="color:red">在选择技术集时不选择MyBatis Framework</p>
-
-<p>而是手动引入MyBatis-Plus依赖。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-定义数据层接口与映射配置"><a href="#2-定义数据层接口与映射配置" class="headerlink" title="2.定义数据层接口与映射配置"></a>2.定义数据层接口与映射配置</h4><p style="color:red">无需手写接口和映射文件，只需继承BaseMapper<实体类></p>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">BookDao</span> <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;Book&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="整合Druid"><a href="#整合Druid" class="headerlink" title="整合Druid"></a>整合Druid</h3><h4 id="1-选择技术集-2"><a href="#1-选择技术集-2" class="headerlink" title="1.选择技术集"></a>1.选择技术集</h4><p>步骤与整合MyBatis一样,选择MyBatis Framework和MySQL Driver</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-定义数据层接口与映射配置-1"><a href="#2-定义数据层接口与映射配置-1" class="headerlink" title="2.定义数据层接口与映射配置"></a>2.定义数据层接口与映射配置</h4><p>与整合MyBatis一样</p>
-]]></content>
-      <tags>
-        <tag>JAVA</tag>
-        <tag>后端学习的记录</tag>
-        <tag>SpringBoot2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>后端服务器向前端发送JSON数据出现了异常</title>
-    <url>/2022/11/25/%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%91%E5%89%8D%E7%AB%AF%E5%8F%91%E9%80%81JSON%E6%95%B0%E6%8D%AE%E5%87%BA%E7%8E%B0%E5%BC%82%E5%B8%B8/</url>
-    <content><![CDATA[<h2 id="问题的由来"><a href="#问题的由来" class="headerlink" title="问题的由来"></a>问题的由来</h2><p>今天在做SSM整合时发现后端服务器可以从数据库取出数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//部分后端代码</span></span><br><span class="line"><span class="comment">//处理查询，响应ajax</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/queryStudent.do&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Student&gt; <span class="title function_">queryStudent</span><span class="params">()</span>&#123;</span><br><span class="line">	List&lt;Student&gt; students = service.findStudents();</span><br><span class="line">    students.forEach(System.out::println);</span><br><span class="line">    <span class="keyword">return</span> students;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>同时我也打印此数据</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-03-06.jpg"
-                      alt="数据"
-                ></p>
-<p>但是前端页面无法数据</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//部分前端代码</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadStudentData</span>(<span class="params"></span>)&#123;</span><br><span class="line">	$.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">    	<span class="attr">url</span>:<span class="string">&quot;student/queryStudent.do&quot;</span>,</span><br><span class="line">        <span class="attr">type</span>:<span class="string">&quot;get&quot;</span>,</span><br><span class="line">        <span class="attr">dataType</span>:<span class="string">&quot;json&quot;</span>,</span><br><span class="line">        <span class="attr">success</span>:<span class="keyword">function</span>(<span class="params">data</span>)&#123;</span><br><span class="line">        	$.<span class="title function_">each</span>(data,<span class="keyword">function</span>(<span class="params">i,n</span>)&#123;</span><br><span class="line">            	$(<span class="string">&quot;#info&quot;</span>).<span class="title function_">append</span>(<span class="string">&quot;&lt;tr&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">id</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">name</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">age</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;/tr&gt;&quot;</span>)</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="问题的对策"><a href="#问题的对策" class="headerlink" title="问题的对策"></a>问题的对策</h2><p>看了一下接口发现一个<i style="color:red">500的服务器内部的报错</i>，主要报错为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">No converter found for return value of type: class java.util.ArrayList</span><br></pre></td></tr></table></figure>
-
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-08-40.jpg"
-                     
-                ></p>
-<p>发现在注册注解驱动&lt;mvc:annotation-driven &#x2F;&gt;时候有很多不同类型的注解驱动，我也是截了图保留了下来</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-16-43.jpg"
-                     
-                ></p>
-<h2 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h2><p>而我们要使用的是mvc结尾的那一个，最终前端也成功的获取到了JSON数据</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-19-55.jpg"
-                     
-                ></p>
-]]></content>
-      <tags>
-        <tag>JAVA</tag>
-        <tag>后端学习的记录</tag>
-        <tag>SSM</tag>
-        <tag>BUG菇的出现与消亡</tag>
-        <tag>SpringMVC</tag>
       </tags>
   </entry>
   <entry>
@@ -3805,6 +3774,54 @@
       <tags>
         <tag>Vue</tag>
         <tag>前端学习的记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>后端服务器向前端发送JSON数据出现了异常</title>
+    <url>/2022/11/25/%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%91%E5%89%8D%E7%AB%AF%E5%8F%91%E9%80%81JSON%E6%95%B0%E6%8D%AE%E5%87%BA%E7%8E%B0%E5%BC%82%E5%B8%B8/</url>
+    <content><![CDATA[<h2 id="问题的由来"><a href="#问题的由来" class="headerlink" title="问题的由来"></a>问题的由来</h2><p>今天在做SSM整合时发现后端服务器可以从数据库取出数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//部分后端代码</span></span><br><span class="line"><span class="comment">//处理查询，响应ajax</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/queryStudent.do&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Student&gt; <span class="title function_">queryStudent</span><span class="params">()</span>&#123;</span><br><span class="line">	List&lt;Student&gt; students = service.findStudents();</span><br><span class="line">    students.forEach(System.out::println);</span><br><span class="line">    <span class="keyword">return</span> students;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同时我也打印此数据</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-03-06.jpg"
+                      alt="数据"
+                ></p>
+<p>但是前端页面无法数据</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//部分前端代码</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadStudentData</span>(<span class="params"></span>)&#123;</span><br><span class="line">	$.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">    	<span class="attr">url</span>:<span class="string">&quot;student/queryStudent.do&quot;</span>,</span><br><span class="line">        <span class="attr">type</span>:<span class="string">&quot;get&quot;</span>,</span><br><span class="line">        <span class="attr">dataType</span>:<span class="string">&quot;json&quot;</span>,</span><br><span class="line">        <span class="attr">success</span>:<span class="keyword">function</span>(<span class="params">data</span>)&#123;</span><br><span class="line">        	$.<span class="title function_">each</span>(data,<span class="keyword">function</span>(<span class="params">i,n</span>)&#123;</span><br><span class="line">            	$(<span class="string">&quot;#info&quot;</span>).<span class="title function_">append</span>(<span class="string">&quot;&lt;tr&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">id</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">name</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">age</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;/tr&gt;&quot;</span>)</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="问题的对策"><a href="#问题的对策" class="headerlink" title="问题的对策"></a>问题的对策</h2><p>看了一下接口发现一个<i style="color:red">500的服务器内部的报错</i>，主要报错为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">No converter found for return value of type: class java.util.ArrayList</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-08-40.jpg"
+                     
+                ></p>
+<p>发现在注册注解驱动&lt;mvc:annotation-driven &#x2F;&gt;时候有很多不同类型的注解驱动，我也是截了图保留了下来</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-16-43.jpg"
+                     
+                ></p>
+<h2 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h2><p>而我们要使用的是mvc结尾的那一个，最终前端也成功的获取到了JSON数据</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-19-55.jpg"
+                     
+                ></p>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端学习的记录</tag>
+        <tag>SSM</tag>
+        <tag>BUG菇的出现与消亡</tag>
+        <tag>SpringMVC</tag>
       </tags>
   </entry>
   <entry>
