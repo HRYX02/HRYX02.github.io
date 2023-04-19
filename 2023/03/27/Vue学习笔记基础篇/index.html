@@ -183,7 +183,7 @@
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-03-27 18:43:12</span>
+        <span class="pc">2023-04-19 14:34:32</span>
     </span>
     
     
@@ -271,8 +271,8 @@
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-21_16-26-06.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143007449-2126172971.jpg"
+                      alt="img"
                 ></p>
 <p>显然应该为：你好插值语法，点我去黑马学习。因为插值语法和插值语法这两个词都由name代替为了方便使用，所以我们需要使用分层将name的不同含义划分开。</p>
 <p>改良代码</p>
@@ -287,15 +287,15 @@
 <h4 id="单向数据绑定"><a href="#单向数据绑定" class="headerlink" title="单向数据绑定"></a>单向数据绑定</h4><h5 id="修改后端数据时"><a href="#修改后端数据时" class="headerlink" title="修改后端数据时"></a>修改后端数据时</h5><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-22_15-52-41.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143024942-1104591568.jpg"
+                      alt="img"
                 ></p>
 <p>后端数据可以传递到前端页面</p>
 <h5 id="修改前端数据时"><a href="#修改前端数据时" class="headerlink" title="修改前端数据时"></a>修改前端数据时</h5><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-22_15-53-05.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143041052-1275277133.jpg"
+                      alt="img"
                 ></p>
 <p>前端页面的数据传递不到后端数据库</p>
 <h4 id="双向数据绑定"><a href="#双向数据绑定" class="headerlink" title="双向数据绑定"></a>双向数据绑定</h4><p>无论修改前端数据还是修改后端数据都能传输到自己的前后端</p>
@@ -331,8 +331,8 @@
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-23_18-42-52.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143100378-1176484024.jpg"
+                      alt="img"
                 ></p>
 <h3 id="JS中Object-defineProperty方法"><a href="#JS中Object-defineProperty方法" class="headerlink" title="JS中Object.defineProperty方法"></a>JS中Object.defineProperty方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">    <span class="attr">sex</span>: <span class="string">&#x27;男&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: number,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(person, <span class="string">&#x27;age&#x27;</span>, &#123;</span><br><span class="line">	<span class="attr">value</span>:<span class="number">18</span>,</span><br><span class="line">    <span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="comment">//控制属性是否可以枚举，默认值是false</span></span><br><span class="line">    <span class="attr">writable</span>:<span class="literal">true</span>,<span class="comment">//控制属性是否可以被修改，默认值是false</span></span><br><span class="line">    <span class="attr">configurable</span>:<span class="literal">true</span> <span class="comment">//控制属性是否可以被删除，默认值是false</span></span><br><span class="line">    <span class="title function_">get</span>(<span class="params"></span>) &#123;<span class="comment">//当有人读取person的age属性时，get函数(getter)就会被调用，且返回值就是age的值</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;有人读取age属性了&#x27;</span>)</span><br><span class="line">      <span class="keyword">return</span> number;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">value</span>) &#123;<span class="comment">//当有人修改person的age属性时，set函数(setter)就会被调用，且会收到修改的具体值</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;有人修改了age属性，且值是&#x27;</span>, value)</span><br><span class="line">      number = value</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -341,14 +341,14 @@
 <h5 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h5><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-23_19-36-16.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143126799-619414106.jpg"
+                      alt="img"
                 ></p>
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/%E6%97%A0%E6%A0%87%E9%A2%98.png"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143144184-1865621978.png"
+                      alt="img"
                 ></p>
 <h5 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h5><p>实际上底层使用的就是Object.defineProperty()方法</p>
 <p>Vue中的数据代理：<br>            通过vm对象来代理data对象中属性的操作（读&#x2F;写）</p>
@@ -455,8 +455,8 @@
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-02-27_16-12-50.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143213043-912077786.jpg"
+                      alt="img"
                 ></p>
 <h3 id="如何使用计算属性"><a href="#如何使用计算属性" class="headerlink" title="如何使用计算属性"></a>如何使用计算属性</h3><h4 id="1-在Vue实例中新建一个computed选项"><a href="#1-在Vue实例中新建一个computed选项" class="headerlink" title="1. 在Vue实例中新建一个computed选项"></a>1. 在Vue实例中新建一个computed选项</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> vm = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">computed</span>:&#123;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -576,20 +576,20 @@
 <h5 id="1-key-index"><a href="#1-key-index" class="headerlink" title="1. :key(index)"></a>1. :key(index)</h5><h6 id="添加数据前"><a href="#添加数据前" class="headerlink" title="添加数据前"></a>添加数据前</h6><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-03-10_16-05-17.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143237177-239228274.jpg"
+                      alt="img"
                 ></p>
 <h6 id="添加数据后"><a href="#添加数据后" class="headerlink" title="添加数据后"></a>添加数据后</h6><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-03-10_16-05-25.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143250079-1073960456.jpg"
+                      alt="img"
                 ></p>
 <h5 id="2-key-p-id"><a href="#2-key-p-id" class="headerlink" title="2. :key(p.id)"></a>2. :key(p.id)</h5><h6 id="添加数据后-1"><a href="#添加数据后-1" class="headerlink" title="添加数据后"></a>添加数据后</h6><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-03-10_16-16-15.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143308868-1269740469.jpg"
+                      alt="img"
                 ></p>
 <h4 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a>总结</h4><h5 id="面试题：react、vue中的key有什么作用？（key的内部原理）"><a href="#面试题：react、vue中的key有什么作用？（key的内部原理）" class="headerlink" title="面试题：react、vue中的key有什么作用？（key的内部原理）"></a>面试题：react、vue中的key有什么作用？（key的内部原理）</h5><ol>
 <li><p>虚拟DOM中key的作用：<br>                         key是虚拟DOM对象的标识，当数据发生变化时，Vue会根据【新数据】生成【新的虚拟DOM】,<br> 随后Vue进行【新虚拟DOM】与【旧虚拟DOM】的差异比较，比较规则如下：</p>
@@ -678,8 +678,8 @@
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-03-15_16-38-21.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143341632-1289952121.jpg"
+                      alt="img"
                 ></p>
 <h4 id="总结-7"><a href="#总结-7" class="headerlink" title="总结"></a>总结</h4><ol>
 <li>作用：向其所在的节点中渲染文本内容。</li>
@@ -692,8 +692,8 @@
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-03-15_16-41-27.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143354885-2091194480.jpg"
+                      alt="img"
                 ></p>
 <h4 id="总结-8"><a href="#总结-8" class="headerlink" title="总结"></a>总结</h4><p>1.作用：向指定节点中渲染包含html结构的内容。</p>
 <p>2.与插值语法的区别：</p>
@@ -779,8 +779,8 @@
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto2/master/lifecycle2.png"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143409957-76840749.png"
+                      alt="img"
                 ></p>
 <h4 id="beforeCreate和created"><a href="#beforeCreate和created" class="headerlink" title="beforeCreate和created"></a>beforeCreate和created</h4><h5 id="beforeCreate"><a href="#beforeCreate" class="headerlink" title="beforeCreate"></a>beforeCreate</h5><p>无法通过vm访问到data中的数据、methods中的方法。</p>
 <h5 id="created"><a href="#created" class="headerlink" title="created"></a>created</h5><p>可以通过vm访问到data中的数据、methods中配置的方法</p>
@@ -862,8 +862,8 @@
 <h5 id="组件结构"><a href="#组件结构" class="headerlink" title="组件结构"></a>组件结构</h5><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto2/master/Snipaste_2023-03-20_16-04-40.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143431925-1986985012.jpg"
+                      alt="img"
                 ></p>
 <h5 id="关于VueComponent"><a href="#关于VueComponent" class="headerlink" title="关于VueComponent"></a>关于VueComponent</h5><p>1.school组件本质是一个名为VueComponent的构造函数，且不是程序员定义的，是Vue.extend生成的。</p>
 <p>2.我们只需要写<school/>或<school></school>，Vue解析时会帮我们创建school组件的实例对象，即Vue帮我们执行的：new VueComponent(options)。</p>

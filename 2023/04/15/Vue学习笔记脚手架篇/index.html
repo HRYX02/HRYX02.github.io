@@ -183,7 +183,7 @@
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-04-15 16:35:48</span>
+        <span class="pc">2023-04-19 14:40:27</span>
     </span>
     
     
@@ -257,8 +257,8 @@
 <h4 id="输出结果"><a href="#输出结果" class="headerlink" title="输出结果"></a>输出结果</h4><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto2/master/Snipaste_2023-03-21_17-52-52.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143920009-386388481.jpg"
+                      alt="img"
                 ></p>
 <h2 id="props配置项"><a href="#props配置项" class="headerlink" title="props配置项"></a>props配置项</h2><h3 id="为什么要用props？"><a href="#为什么要用props？" class="headerlink" title="为什么要用props？"></a>为什么要用props？</h3><p>该组件可能会被多次征用，同时里面的属性名不一样</p>
 <p><strong>父组件给子组件传值</strong></p>
@@ -506,8 +506,8 @@
 <h2 id="Vuex"><a href="#Vuex" class="headerlink" title="Vuex"></a>Vuex</h2><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto2/master/vuex.png"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143949944-832248855.png"
+                      alt="img"
                 ></p>
 <h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h3><p>在Vue中实现集中式状态（数据）管理的一个Vue插件，对vue应用中多个组件的共享状态进行集中式的管理（读&#x2F;写），也是一种组件间通信的方式，且适用于任意组件间通信。</p>
 <h4 id="何时使用？"><a href="#何时使用？" class="headerlink" title="何时使用？"></a>何时使用？</h4><p>多个组件需要共享数据时</p>
@@ -776,8 +776,8 @@
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto2/master/Snipaste_2023-03-27_16-35-54.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419144022073-1779537214.jpg"
+                      alt="img"
                 ></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">代码解释：</span></span><br><span class="line"><span class="comment">	第一个if判断是否是进入news或xiaoxi路由组件</span></span><br><span class="line"><span class="comment">	如果不进入则可以显示组件路由</span></span><br><span class="line"><span class="comment">	如果进入的话</span></span><br><span class="line"><span class="comment">		进行判断school是否为atguigu</span></span><br><span class="line"><span class="comment">		如果是则可以显示news或xiaoxi路由组件</span></span><br><span class="line"><span class="comment">		如果不是就弹框</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">router.<span class="title function_">beforeEach</span>(<span class="function">(<span class="params">to,<span class="keyword">from</span>,next</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (to.<span class="property">path</span> === <span class="string">&#x27;/home/news&#x27;</span> || to.<span class="property">name</span> === <span class="string">&#x27;xiaoxi&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;school&#x27;</span>) === <span class="string">&#x27;atguigu&#x27;</span>) &#123;</span><br><span class="line">            <span class="title function_">next</span>()</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="title function_">alert</span>(<span class="string">&#x27;学校名不对，无权限查看！&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="title function_">next</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 

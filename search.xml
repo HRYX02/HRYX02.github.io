@@ -10,6 +10,210 @@
       </tags>
   </entry>
   <entry>
+    <title>JAVA之面向对象上</title>
+    <url>/2022/11/17/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8A/</url>
+    <content><![CDATA[<h3 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h3><span id="more"></span>
+<h4 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a>JVM内存结构</h4><p>编译完源程序以后，生成一个或多个字节码文件。<br>我们使用JVM中的类的加载器和解释器对生成的字节码文件进行解释运行。意味着，需要将字节码文件对应的类加载到内存中，涉及到内存解析。<br><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419135420886-1483954778.jpg"
+                      alt="img"
+                ></p>
+<p>虚拟机栈，即为平时提到的栈结构。<i style="color: red;">我们将局部变量存储在栈结构中堆，我们将new出来的结构（比如：数组、对象）加载在对空间中。补充：对象的属性（非static的）加载在堆空间中。方法区：类的加载信息、常量池、静态域</i></p>
+<h3 id="类的结构之一：属性"><a href="#类的结构之一：属性" class="headerlink" title="类的结构之一：属性"></a>类的结构之一：属性</h3><h4 id="对比：属性-vs-局部变量"><a href="#对比：属性-vs-局部变量" class="headerlink" title="对比：属性  vs  局部变量"></a>对比：属性  vs  局部变量</h4><h5 id="相同点："><a href="#相同点：" class="headerlink" title="相同点："></a>相同点：</h5><ul>
+<li>定义变量的格式：数据类型  变量名 &#x3D; 变量值</li>
+<li>先声明，后使用</li>
+<li>1.3 变量都其对应的作用域</li>
+</ul>
+<h5 id="不同点："><a href="#不同点：" class="headerlink" title="不同点："></a>不同点：</h5><h6 id="在类中声明的位置的不同"><a href="#在类中声明的位置的不同" class="headerlink" title="在类中声明的位置的不同"></a>在类中声明的位置的不同</h6><ul>
+<li>属性：直接定义在类的一对{}内</li>
+<li>局部变量：声明在方法内、方法形参、代码块内、构造器形参、构造器内部的变量</li>
+</ul>
+<h6 id="关于权限修饰符的不同"><a href="#关于权限修饰符的不同" class="headerlink" title="关于权限修饰符的不同"></a>关于权限修饰符的不同</h6><ul>
+<li>属性：可以在声明属性时，指明其权限，使用权限修饰符。</li>
+<li>常用的权限修饰符：private、public、缺省、protected  —&gt;封装性</li>
+<li>目前，大家声明属性时，都使用缺省就可以了。</li>
+<li>局部变量：不可以使用权限修饰符。</li>
+</ul>
+<h6 id="默认初始化值的情况："><a href="#默认初始化值的情况：" class="headerlink" title="默认初始化值的情况："></a>默认初始化值的情况：</h6><p>属性：类的属性，根据其类型，都默认初始化值。</p>
+<ul>
+<li><p>整型（byte、short、int、long：0）</p>
+</li>
+<li><p>浮点型（float、double：0.0）</p>
+</li>
+<li><p>字符型（char：0  （或’\u0000’））</p>
+</li>
+<li><p>布尔型（boolean：false）</p>
+</li>
+<li><p>引用数据类型（类、数组、接口：null）</p>
+</li>
+</ul>
+<p>局部变量：没默认初始化值。</p>
+<p>意味着，我们在调用局部变量之前，一定要显式赋值。</p>
+<p>特别地：形参在调用时，我们赋值即可。</p>
+<h6 id="在内存中加载的位置："><a href="#在内存中加载的位置：" class="headerlink" title="在内存中加载的位置："></a>在内存中加载的位置：</h6><p>属性：加载到堆空间中   （非static）</p>
+<p>局部变量：加载到栈空间</p>
+<h6 id="补充：回顾变量的分类："><a href="#补充：回顾变量的分类：" class="headerlink" title="补充：回顾变量的分类："></a>补充：回顾变量的分类：</h6><p>方式一：按照数据类型：</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419135533846-2130691652.bmp"
+                      alt="img"
+                ></p>
+<p>方式二：按照在类中声明的位置：</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419135843233-362818356.bmp"
+                      alt="img"
+                ></p>
+<h3 id="类的结构之二：方法"><a href="#类的结构之二：方法" class="headerlink" title="类的结构之二：方法"></a>类的结构之二：方法</h3><h4 id="方法：描述类应该具的功能。"><a href="#方法：描述类应该具的功能。" class="headerlink" title="方法：描述类应该具的功能。"></a>方法：描述类应该具的功能。</h4><p>比如：Math类：sqrt()\random() ...</p>
+<p>​			Scanner类：nextXxx() …</p>
+<p>​			Arrays类：sort() \ binarySearch() \ toString() \ equals() \ …</p>
+<h5 id="1-举例："><a href="#1-举例：" class="headerlink" title="1.举例："></a>1.举例：</h5><ul>
+<li>public void eat(){}</li>
+<li>public void sleep(int hour){}</li>
+<li>public String getName(){}</li>
+<li>public String getNation(String nation){}</li>
+</ul>
+<h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><h6 id="关于权限修饰符：默认方法的权限修饰符先都使用public"><a href="#关于权限修饰符：默认方法的权限修饰符先都使用public" class="headerlink" title="关于权限修饰符：默认方法的权限修饰符先都使用public"></a>关于权限修饰符：默认方法的权限修饰符先都使用public</h6><p>Java规定的4种权限修饰符：private、public、缺省、protected  –&gt;封装性再细说</p>
+<h6 id="返回值类型：-返回值-vs-没返回值"><a href="#返回值类型：-返回值-vs-没返回值" class="headerlink" title="返回值类型： 返回值  vs 没返回值"></a>返回值类型： 返回值  vs 没返回值</h6><p>如果方法返回值，则必须在方法声明时，指定返回值的类型。同时，方法中，需要使用return关键字来返回指定类型的变量或常量：“return 数据”。</p>
+<p>如果方法没返回值，则方法声明时，使用void来表示。通常，没返回值的方法中，就不需要使用return.但是，如果使用的话，只能“return;”表示结束此方法的意思。</p>
+<h6 id="我们定义方法该不该返回值？"><a href="#我们定义方法该不该返回值？" class="headerlink" title="我们定义方法该不该返回值？"></a>我们定义方法该不该返回值？</h6><ul>
+<li>题目要求</li>
+<li>凭经验：具体问题具体分析</li>
+</ul>
+<h6 id="方法名：属于标识符，遵循标识符的规则和规范，“见名知意”"><a href="#方法名：属于标识符，遵循标识符的规则和规范，“见名知意”" class="headerlink" title="方法名：属于标识符，遵循标识符的规则和规范，“见名知意”"></a>方法名：属于标识符，遵循标识符的规则和规范，“见名知意”</h6><h6 id="形参列表：-方法可以声明0个，1个，或多个形参。"><a href="#形参列表：-方法可以声明0个，1个，或多个形参。" class="headerlink" title="形参列表： 方法可以声明0个，1个，或多个形参。"></a>形参列表： 方法可以声明0个，1个，或多个形参。</h6><p>格式：数据类型1 形参1,数据类型2 形参2,…</p>
+<p>我们定义方法时，该不该定义形参？<br>① 题目要求② 凭经验：具体问题具体分析</p>
+<p>方法体：方法功能的体现。 	</p>
+<h5 id="方法的使用中，可以调用当前类的属性或方法"><a href="#方法的使用中，可以调用当前类的属性或方法" class="headerlink" title="方法的使用中，可以调用当前类的属性或方法"></a>方法的使用中，可以调用当前类的属性或方法</h5><p>特殊的：方法A中又调用了方法A:递归方法。</p>
+<p>方法中，不可以定义方法。</p>
+<h4 id="关键字：return"><a href="#关键字：return" class="headerlink" title="关键字：return"></a>关键字：return</h4><ol>
+<li><p>使用范围：使用在方法体中</p>
+</li>
+<li><p>作用：① 结束方法</p>
+<p>​		    ② 针对于返回值类型的方法，使用”return 数据”方法返回所要的数据。</p>
+</li>
+<li><p>3.注意点：return关键字后面不可以声明执行语句。</p>
+</li>
+</ol>
+<h4 id="方法的重载"><a href="#方法的重载" class="headerlink" title="方法的重载"></a>方法的重载</h4><p>略</p>
+<h4 id="可变个数形参的方法"><a href="#可变个数形参的方法" class="headerlink" title="可变个数形参的方法"></a>可变个数形参的方法</h4><h5 id="1-使用说明："><a href="#1-使用说明：" class="headerlink" title="1.使用说明："></a>1.使用说明：</h5><h6 id="jdk-5-0新增的内容"><a href="#jdk-5-0新增的内容" class="headerlink" title="jdk 5.0新增的内容"></a>jdk 5.0新增的内容</h6><p>具体使用：</p>
+<ul>
+<li>可变个数形参的格式：数据类型 … 变量名</li>
+<li>当调用可变个数形参的方法时，传入的参数个数可以是：0个，1个,2个，。。。</li>
+<li>可变个数形参的方法与本类中方法名相同，形参不同的方法之间构成重载</li>
+<li>可变个数形参的方法与本类中方法名相同，形参类型也相同的数组之间不构成重载。换句话说，二者不能共存。</li>
+<li>可变个数形参在方法的形参中，必须声明在末尾</li>
+<li>可变个数形参在方法的形参中,最多只能声明一个可变形参。</li>
+</ul>
+<h5 id="2-举例说明："><a href="#2-举例说明：" class="headerlink" title="2.举例说明："></a>2.举例说明：</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(String s)</span>&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;show(String)&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(String ... strs)</span>&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;show(String ... strs)&quot;</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt; strs.length;i++)&#123;</span><br><span class="line">		System.out.println(strs[i]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//不能与上一个方法同时存在</span></span><br><span class="line"><span class="comment">//	public void show(String[] strs)&#123;</span></span><br><span class="line"><span class="comment">//		</span></span><br><span class="line"><span class="comment">//	&#125;</span></span><br></pre></td></tr></table></figure>
+<h6 id="调用时："><a href="#调用时：" class="headerlink" title="调用时："></a>调用时：</h6><p>​		<br>​		</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">test.show(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">test.show(<span class="string">&quot;hello&quot;</span>,<span class="string">&quot;world&quot;</span>);</span><br><span class="line">test.show();</span><br><span class="line">test.show(<span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;AA&quot;</span>,<span class="string">&quot;BB&quot;</span>,<span class="string">&quot;CC&quot;</span>&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="java的值传递机制"><a href="#java的值传递机制" class="headerlink" title="java的值传递机制"></a>java的值传递机制</h4><h5 id="1-针对于方法内变量的赋值举例："><a href="#1-针对于方法内变量的赋值举例：" class="headerlink" title="1.针对于方法内变量的赋值举例："></a>1.针对于方法内变量的赋值举例：</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;***********基本数据类型：****************&quot;</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> m;</span><br><span class="line">System.out.println(<span class="string">&quot;m = &quot;</span> + m + <span class="string">&quot;, n = &quot;</span> + n);	</span><br><span class="line">n = <span class="number">20</span>;</span><br><span class="line">System.out.println(<span class="string">&quot;m = &quot;</span> + m + <span class="string">&quot;, n = &quot;</span> + n);</span><br><span class="line">System.out.println(<span class="string">&quot;***********引用数据类型：****************&quot;</span>);</span><br><span class="line"><span class="type">Order</span> <span class="variable">o1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Order</span>();</span><br><span class="line">o1.orderId = <span class="number">1001</span>;</span><br><span class="line"><span class="type">Order</span> <span class="variable">o2</span> <span class="operator">=</span> o1;<span class="comment">//赋值以后，o1和o2的地址值相同，都指向了堆空间中同一个对象实体。</span></span><br><span class="line">System.out.println(<span class="string">&quot;o1.orderId = &quot;</span> + o1.orderId + <span class="string">&quot;,o2.orderId = &quot;</span> +o2.orderId);</span><br><span class="line">o2.orderId = <span class="number">1002</span>;</span><br><span class="line">System.out.println(<span class="string">&quot;o1.orderId = &quot;</span> + o1.orderId + <span class="string">&quot;,o2.orderId = &quot;</span> +o2.orderId);</span><br></pre></td></tr></table></figure>
+
+<h6 id="规则："><a href="#规则：" class="headerlink" title="规则："></a>规则：</h6><ul>
+<li>如果变量是基本数据类型，此时赋值的是变量所保存的数据值。</li>
+<li>如果变量是引用数据类型，此时赋值的是变量所保存的数据的地址值。</li>
+</ul>
+<h4 id="递归方法"><a href="#递归方法" class="headerlink" title="递归方法"></a>递归方法</h4><h5 id="1-定义："><a href="#1-定义：" class="headerlink" title="1.定义："></a>1.定义：</h5><p>递归方法：一个方法体内调用它自身。</p>
+<h5 id="2-如何理解递归方法？"><a href="#2-如何理解递归方法？" class="headerlink" title="2.如何理解递归方法？"></a>2.如何理解递归方法？</h5><ul>
+<li>方法递归包含了一种隐式的循环，它会重复执行某段代码，但这种重复执行无须循环控制。</li>
+<li>递归一定要向已知方向递归，否则这种递归就变成了无穷递归，类似于死循环。</li>
+</ul>
+<p>3.举例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 例1：计算1-n之间所自然数的和</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getSum</span><span class="params">(<span class="type">int</span> n)</span> &#123;<span class="comment">// 3</span></span><br><span class="line">	<span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> n + getSum(n - <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 例2：计算1-n之间所自然数的乘积:n!</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getSum1</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> n * getSum1(n - <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//例3：已知一个数列：f(0) = 1,f(1) = 4,f(n+2)=2*f(n+1) + f(n),</span></span><br><span class="line"><span class="comment">//其中n是大于0的整数，求f(10)的值。</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n == <span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(n == <span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">4</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="comment">//return f(n + 2) - 2 * f(n + 1);</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">2</span>*f(n - <span class="number">1</span>) + f(n - <span class="number">2</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//例4：斐波那契数列</span></span><br><span class="line"><span class="comment">//例5：汉诺塔问题</span></span><br><span class="line"><span class="comment">//例6：快排</span></span><br></pre></td></tr></table></figure>
+<h3 id="面向对象的特征一：封装性"><a href="#面向对象的特征一：封装性" class="headerlink" title="面向对象的特征一：封装性"></a>面向对象的特征一：封装性</h3><h4 id="1-为什么要引入封装性？"><a href="#1-为什么要引入封装性？" class="headerlink" title="1.为什么要引入封装性？"></a>1.为什么要引入封装性？</h4><h5 id="我们程序设计追求“高内聚，低耦合”。"><a href="#我们程序设计追求“高内聚，低耦合”。" class="headerlink" title="我们程序设计追求“高内聚，低耦合”。"></a>我们程序设计追求“高内聚，低耦合”。</h5><ul>
+<li>高内聚 ：类的内部数据操作细节自己完成，不允许外部干涉；</li>
+<li>低耦合 ：仅对外暴露少量的方法用于使用。</li>
+</ul>
+<h5 id="隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。"><a href="#隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。" class="headerlink" title="隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。"></a>隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。</h5><h4 id="2-问题引入："><a href="#2-问题引入：" class="headerlink" title="2.问题引入："></a>2.问题引入：</h4><p>当我们创建一个类的对象以后，我们可以通过”对象.属性”的方式，对对象的属性进行赋值。这里，赋值操作要受到属性的数据类型和存储范围的制约。除此之外，没其他制约条件。但是，在实际问题中，我们往往需要给属性赋值加入额外的限制条件。这个条件就不能在属性声明时体现，我们只能通过方法进行限制条件的添加。（比如：setLegs()同时，我们需要避免用户再使用”对象.属性”的方式对属性进行赋值。则需要将属性声明为私有的(private).<br>  –&gt;此时，针对于属性就体现了封装性。</p>
+<h4 id="3-封装性思想具体的代码体现："><a href="#3-封装性思想具体的代码体现：" class="headerlink" title="3.封装性思想具体的代码体现："></a>3.封装性思想具体的代码体现：</h4><ul>
+<li>将类的属性xxx私化(private),同时，提供公共的(public)方法来获取(getXxx)和设置(setXxx)此属性的值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">double</span> radius;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setRadius</span><span class="params">(<span class="type">double</span> radius)</span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.radius = radius;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getRadius</span><span class="params">()</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> radius;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>体现二：不对外暴露的私有的方法</li>
+<li>体现三：单例模式（将构造器私有化）</li>
+<li>体现四：如果不希望类在包外被调用，可以将类设置为缺省的。</li>
+</ul>
+<h4 id="4-Java规定的四种权限修饰符"><a href="#4-Java规定的四种权限修饰符" class="headerlink" title="4.Java规定的四种权限修饰符"></a>4.Java规定的四种权限修饰符</h4><h5 id="4-1-权限从小到大顺序为：private-lt-缺省-lt-protected-lt-public"><a href="#4-1-权限从小到大顺序为：private-lt-缺省-lt-protected-lt-public" class="headerlink" title="4.1 权限从小到大顺序为：private &lt;  缺省 &lt; protected &lt; public"></a>4.1 权限从小到大顺序为：private &lt;  缺省 &lt; protected &lt; public</h5><h5 id="4-2-具体的修饰范围："><a href="#4-2-具体的修饰范围：" class="headerlink" title="4.2 具体的修饰范围："></a>4.2 具体的修饰范围：</h5><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419135919890-1483327167.bmp"
+                      alt="img"
+                ></p>
+<h5 id="4-3-权限修饰符可用来修饰的结构说明："><a href="#4-3-权限修饰符可用来修饰的结构说明：" class="headerlink" title="4.3 权限修饰符可用来修饰的结构说明："></a>4.3 权限修饰符可用来修饰的结构说明：</h5><p>4种权限都可以用来修饰类的内部结构：属性、方法、构造器、内部类<br>修饰类的话，只能使用：缺省、public</p>
+<h3 id="类的结构之三：构造器"><a href="#类的结构之三：构造器" class="headerlink" title="类的结构之三：构造器"></a>类的结构之三：构造器</h3><h4 id="属性赋值的顺序"><a href="#属性赋值的顺序" class="headerlink" title="属性赋值的顺序"></a>属性赋值的顺序</h4><p>① 默认初始化</p>
+<p>② 显式初始化</p>
+<p>③ 构造器中初始化</p>
+<p>④ 通过”对象.方法” 或 “对象.属性”的方式，赋值</p>
+<p>以上操作的先后顺序：① - ② - ③ - ④ </p>
+<h4 id="JavaBean的概念"><a href="#JavaBean的概念" class="headerlink" title="JavaBean的概念"></a>JavaBean的概念</h4><h5 id="所谓JavaBean，是指符合如下标准的Java类："><a href="#所谓JavaBean，是指符合如下标准的Java类：" class="headerlink" title="所谓JavaBean，是指符合如下标准的Java类："></a>所谓JavaBean，是指符合如下标准的Java类：</h5><ul>
+<li>类是公共的</li>
+<li>一个无参的公共的构造器</li>
+<li>属性，且对应的get、set方法</li>
+</ul>
+<h3 id="关键字：this"><a href="#关键字：this" class="headerlink" title="关键字：this"></a>关键字：this</h3><h4 id="1-可以调用的结构：属性、方法；构造器"><a href="#1-可以调用的结构：属性、方法；构造器" class="headerlink" title="1.可以调用的结构：属性、方法；构造器"></a>1.可以调用的结构：属性、方法；构造器</h4><h4 id="2-this调用属性、方法："><a href="#2-this调用属性、方法：" class="headerlink" title="2.this调用属性、方法："></a>2.this调用属性、方法：</h4><p>this理解为：当前对象  或 当前正在创建的对象</p>
+<ul>
+<li><p>2.1在类的方法中，我们可以使用”this.属性”或”this.方法”的方式，调用当前对象属性或方法。但是，通常情况下，我们都择省略”this.”。特殊情况下，如果方法的形参和类的属性同名时，我们必须显式的使用”this.变量”的方式，表明此变量是属性，而非形参。</p>
+</li>
+<li><p>2.2 在类的构造器中，我们可以使用”this.属性”或”this.方法”的方式，调用当前正在创建的对象属性或方法。但是，通常情况下，我们都择省略”this.”。</p>
+</li>
+<li><p>特殊情况下，如果构造器的形参和类的属性同名时，我们必须显式的使用”this.变量”的方式，表明此变量是属性，而非形参。</p>
+</li>
+</ul>
+<h4 id="3-this调用构造器："><a href="#3-this调用构造器：" class="headerlink" title="3.this调用构造器："></a>3.this调用构造器：</h4><ul>
+<li>我们在类的构造器中，可以显式的使用”this(形参列表)”方式，调用本类中指定的其他构造器</li>
+<li>构造器中不能通过”this(形参列表)”方式调用自己</li>
+<li>如果一个类中有n个构造器，则最多有 n - 1构造器中使用了”this(形参列表)”</li>
+<li>规定：”this(形参列表)”必须声明在当前构造器的首行</li>
+<li>构造器内部，最多只能声明一个”this(形参列表)”，用来调用其他的构造器</li>
+</ul>
+<h3 id="关键字：package-x2F-import"><a href="#关键字：package-x2F-import" class="headerlink" title="关键字：package&#x2F;import"></a>关键字：package&#x2F;import</h3><h4 id="package的使用"><a href="#package的使用" class="headerlink" title="package的使用"></a>package的使用</h4><h5 id="使用说明："><a href="#使用说明：" class="headerlink" title="使用说明："></a>使用说明：</h5><ul>
+<li>1.为了更好的实现项目中类的管理，提供包的概念</li>
+<li>2.使用package声明类或接口所属的包，声明在源文件的首行</li>
+<li>3.包，属于标识符，遵循标识符的命名规则、规范(xxxyyyzzz)、“见名知意”</li>
+<li>4.每”.”一次，就代表一层文件目录。</li>
+</ul>
+<h5 id="举例："><a href="#举例：" class="headerlink" title="举例："></a>举例：</h5><h6 id="举例一：某航运软件系统包括：一组域对象、GUI和reports子系统"><a href="#举例一：某航运软件系统包括：一组域对象、GUI和reports子系统" class="headerlink" title="举例一：某航运软件系统包括：一组域对象、GUI和reports子系统"></a>举例一：某航运软件系统包括：一组域对象、GUI和reports子系统</h6><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419140016868-950716672.bmp"
+                      alt="img"
+                ></p>
+<h6 id="举例二：MVC设计模式"><a href="#举例二：MVC设计模式" class="headerlink" title="举例二：MVC设计模式"></a>举例二：MVC设计模式</h6><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419140052195-1404903088.bmp"
+                      alt="img"
+                ></p>
+<h5 id="1-3-JDK中的主要包介绍："><a href="#1-3-JDK中的主要包介绍：" class="headerlink" title="1.3 JDK中的主要包介绍："></a>1.3 JDK中的主要包介绍：</h5><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419140107405-130671051.bmp"
+                      alt="img"
+                ></p>
+<h4 id="import的使用："><a href="#import的使用：" class="headerlink" title="import的使用："></a>import的使用：</h4><h5 id="import-导入"><a href="#import-导入" class="headerlink" title="import:导入"></a>import:导入</h5><ul>
+<li>在源文件中显式的使用import结构导入指定包下的类、接口</li>
+<li>声明在包的声明和类的声明之间</li>
+<li>如果需要导入多个结构，则并列写出即可</li>
+<li>可以使用”xxx.*”的方式，表示可以导入xxx包下的所结构</li>
+<li>如果使用的类或接口是java.lang包下定义的，则可以省略import结构</li>
+<li>如果使用的类或接口是本包下定义的，则可以省略import结构</li>
+<li>如果在源文件中，使用了不同包下的同名的类，则必须至少一个类需要以全类名的方式显示。</li>
+<li>使用”xxx.*”方式表明可以调用xxx包下的所结构。但是如果使用的是xxx子包下的结构，则仍需要显式导入</li>
+<li>import static:导入指定类或接口中的静态结构:属性或方法。</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端学习的记录</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git指令</title>
     <url>/2023/02/27/Git%E6%8C%87%E4%BB%A4/</url>
     <content><![CDATA[<h1 id="Git指令"><a href="#Git指令" class="headerlink" title="Git指令"></a>Git指令</h1><h2 id="Git-常用命令"><a href="#Git-常用命令" class="headerlink" title="Git 常用命令"></a>Git 常用命令</h2><table>
@@ -121,211 +325,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JAVA之面向对象上</title>
-    <url>/2022/11/17/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8A/</url>
-    <content><![CDATA[<h3 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h3><span id="more"></span>
-<h4 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a>JVM内存结构</h4><p>编译完源程序以后，生成一个或多个字节码文件。<br>我们使用JVM中的类的加载器和解释器对生成的字节码文件进行解释运行。意味着，需要将字节码文件对应的类加载到内存中，涉及到内存解析。</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/screenshot/master/1.bmp"
-                     
-                ></p>
-<p>虚拟机栈，即为平时提到的栈结构。<i style="color: red;">我们将局部变量存储在栈结构中堆，我们将new出来的结构（比如：数组、对象）加载在对空间中。补充：对象的属性（非static的）加载在堆空间中。方法区：类的加载信息、常量池、静态域</i></p>
-<h3 id="类的结构之一：属性"><a href="#类的结构之一：属性" class="headerlink" title="类的结构之一：属性"></a>类的结构之一：属性</h3><h4 id="对比：属性-vs-局部变量"><a href="#对比：属性-vs-局部变量" class="headerlink" title="对比：属性  vs  局部变量"></a>对比：属性  vs  局部变量</h4><h5 id="相同点："><a href="#相同点：" class="headerlink" title="相同点："></a>相同点：</h5><ul>
-<li>定义变量的格式：数据类型  变量名 &#x3D; 变量值</li>
-<li>先声明，后使用</li>
-<li>1.3 变量都其对应的作用域</li>
-</ul>
-<h5 id="不同点："><a href="#不同点：" class="headerlink" title="不同点："></a>不同点：</h5><h6 id="在类中声明的位置的不同"><a href="#在类中声明的位置的不同" class="headerlink" title="在类中声明的位置的不同"></a>在类中声明的位置的不同</h6><ul>
-<li>属性：直接定义在类的一对{}内</li>
-<li>局部变量：声明在方法内、方法形参、代码块内、构造器形参、构造器内部的变量</li>
-</ul>
-<h6 id="关于权限修饰符的不同"><a href="#关于权限修饰符的不同" class="headerlink" title="关于权限修饰符的不同"></a>关于权限修饰符的不同</h6><ul>
-<li>属性：可以在声明属性时，指明其权限，使用权限修饰符。</li>
-<li>常用的权限修饰符：private、public、缺省、protected  —&gt;封装性</li>
-<li>目前，大家声明属性时，都使用缺省就可以了。</li>
-<li>局部变量：不可以使用权限修饰符。</li>
-</ul>
-<h6 id="默认初始化值的情况："><a href="#默认初始化值的情况：" class="headerlink" title="默认初始化值的情况："></a>默认初始化值的情况：</h6><p>属性：类的属性，根据其类型，都默认初始化值。</p>
-<ul>
-<li><p>整型（byte、short、int、long：0）</p>
-</li>
-<li><p>浮点型（float、double：0.0）</p>
-</li>
-<li><p>字符型（char：0  （或’\u0000’））</p>
-</li>
-<li><p>布尔型（boolean：false）</p>
-</li>
-<li><p>引用数据类型（类、数组、接口：null）</p>
-</li>
-</ul>
-<p>局部变量：没默认初始化值。</p>
-<p>意味着，我们在调用局部变量之前，一定要显式赋值。</p>
-<p>特别地：形参在调用时，我们赋值即可。</p>
-<h6 id="在内存中加载的位置："><a href="#在内存中加载的位置：" class="headerlink" title="在内存中加载的位置："></a>在内存中加载的位置：</h6><p>属性：加载到堆空间中   （非static）</p>
-<p>局部变量：加载到栈空间</p>
-<h6 id="补充：回顾变量的分类："><a href="#补充：回顾变量的分类：" class="headerlink" title="补充：回顾变量的分类："></a>补充：回顾变量的分类：</h6><p>方式一：按照数据类型：</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/screenshot/master/1(1).bmp"
-                     
-                ></p>
-<p>方式二：按照在类中声明的位置：</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/screenshot/master/2.bmp"
-                     
-                ></p>
-<h3 id="类的结构之二：方法"><a href="#类的结构之二：方法" class="headerlink" title="类的结构之二：方法"></a>类的结构之二：方法</h3><h4 id="方法：描述类应该具的功能。"><a href="#方法：描述类应该具的功能。" class="headerlink" title="方法：描述类应该具的功能。"></a>方法：描述类应该具的功能。</h4><p>比如：Math类：sqrt()\random() ...</p>
-<p>​			Scanner类：nextXxx() …</p>
-<p>​			Arrays类：sort() \ binarySearch() \ toString() \ equals() \ …</p>
-<h5 id="1-举例："><a href="#1-举例：" class="headerlink" title="1.举例："></a>1.举例：</h5><ul>
-<li>public void eat(){}</li>
-<li>public void sleep(int hour){}</li>
-<li>public String getName(){}</li>
-<li>public String getNation(String nation){}</li>
-</ul>
-<h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><h6 id="关于权限修饰符：默认方法的权限修饰符先都使用public"><a href="#关于权限修饰符：默认方法的权限修饰符先都使用public" class="headerlink" title="关于权限修饰符：默认方法的权限修饰符先都使用public"></a>关于权限修饰符：默认方法的权限修饰符先都使用public</h6><p>Java规定的4种权限修饰符：private、public、缺省、protected  –&gt;封装性再细说</p>
-<h6 id="返回值类型：-返回值-vs-没返回值"><a href="#返回值类型：-返回值-vs-没返回值" class="headerlink" title="返回值类型： 返回值  vs 没返回值"></a>返回值类型： 返回值  vs 没返回值</h6><p>如果方法返回值，则必须在方法声明时，指定返回值的类型。同时，方法中，需要使用return关键字来返回指定类型的变量或常量：“return 数据”。</p>
-<p>如果方法没返回值，则方法声明时，使用void来表示。通常，没返回值的方法中，就不需要使用return.但是，如果使用的话，只能“return;”表示结束此方法的意思。</p>
-<h6 id="我们定义方法该不该返回值？"><a href="#我们定义方法该不该返回值？" class="headerlink" title="我们定义方法该不该返回值？"></a>我们定义方法该不该返回值？</h6><ul>
-<li>题目要求</li>
-<li>凭经验：具体问题具体分析</li>
-</ul>
-<h6 id="方法名：属于标识符，遵循标识符的规则和规范，“见名知意”"><a href="#方法名：属于标识符，遵循标识符的规则和规范，“见名知意”" class="headerlink" title="方法名：属于标识符，遵循标识符的规则和规范，“见名知意”"></a>方法名：属于标识符，遵循标识符的规则和规范，“见名知意”</h6><h6 id="形参列表：-方法可以声明0个，1个，或多个形参。"><a href="#形参列表：-方法可以声明0个，1个，或多个形参。" class="headerlink" title="形参列表： 方法可以声明0个，1个，或多个形参。"></a>形参列表： 方法可以声明0个，1个，或多个形参。</h6><p>格式：数据类型1 形参1,数据类型2 形参2,…</p>
-<p>我们定义方法时，该不该定义形参？<br>① 题目要求② 凭经验：具体问题具体分析</p>
-<p>方法体：方法功能的体现。 	</p>
-<h5 id="方法的使用中，可以调用当前类的属性或方法"><a href="#方法的使用中，可以调用当前类的属性或方法" class="headerlink" title="方法的使用中，可以调用当前类的属性或方法"></a>方法的使用中，可以调用当前类的属性或方法</h5><p>特殊的：方法A中又调用了方法A:递归方法。</p>
-<p>方法中，不可以定义方法。</p>
-<h4 id="关键字：return"><a href="#关键字：return" class="headerlink" title="关键字：return"></a>关键字：return</h4><ol>
-<li><p>使用范围：使用在方法体中</p>
-</li>
-<li><p>作用：① 结束方法</p>
-<p>​		    ② 针对于返回值类型的方法，使用”return 数据”方法返回所要的数据。</p>
-</li>
-<li><p>3.注意点：return关键字后面不可以声明执行语句。</p>
-</li>
-</ol>
-<h4 id="方法的重载"><a href="#方法的重载" class="headerlink" title="方法的重载"></a>方法的重载</h4><p>略</p>
-<h4 id="可变个数形参的方法"><a href="#可变个数形参的方法" class="headerlink" title="可变个数形参的方法"></a>可变个数形参的方法</h4><h5 id="1-使用说明："><a href="#1-使用说明：" class="headerlink" title="1.使用说明："></a>1.使用说明：</h5><h6 id="jdk-5-0新增的内容"><a href="#jdk-5-0新增的内容" class="headerlink" title="jdk 5.0新增的内容"></a>jdk 5.0新增的内容</h6><p>具体使用：</p>
-<ul>
-<li>可变个数形参的格式：数据类型 … 变量名</li>
-<li>当调用可变个数形参的方法时，传入的参数个数可以是：0个，1个,2个，。。。</li>
-<li>可变个数形参的方法与本类中方法名相同，形参不同的方法之间构成重载</li>
-<li>可变个数形参的方法与本类中方法名相同，形参类型也相同的数组之间不构成重载。换句话说，二者不能共存。</li>
-<li>可变个数形参在方法的形参中，必须声明在末尾</li>
-<li>可变个数形参在方法的形参中,最多只能声明一个可变形参。</li>
-</ul>
-<h5 id="2-举例说明："><a href="#2-举例说明：" class="headerlink" title="2.举例说明："></a>2.举例说明：</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(<span class="type">int</span> i)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(String s)</span>&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;show(String)&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(String ... strs)</span>&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;show(String ... strs)&quot;</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt; strs.length;i++)&#123;</span><br><span class="line">		System.out.println(strs[i]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//不能与上一个方法同时存在</span></span><br><span class="line"><span class="comment">//	public void show(String[] strs)&#123;</span></span><br><span class="line"><span class="comment">//		</span></span><br><span class="line"><span class="comment">//	&#125;</span></span><br></pre></td></tr></table></figure>
-<h6 id="调用时："><a href="#调用时：" class="headerlink" title="调用时："></a>调用时：</h6><p>​		<br>​		</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">test.show(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">test.show(<span class="string">&quot;hello&quot;</span>,<span class="string">&quot;world&quot;</span>);</span><br><span class="line">test.show();</span><br><span class="line">test.show(<span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;AA&quot;</span>,<span class="string">&quot;BB&quot;</span>,<span class="string">&quot;CC&quot;</span>&#125;);</span><br></pre></td></tr></table></figure>
-
-<h4 id="java的值传递机制"><a href="#java的值传递机制" class="headerlink" title="java的值传递机制"></a>java的值传递机制</h4><h5 id="1-针对于方法内变量的赋值举例："><a href="#1-针对于方法内变量的赋值举例：" class="headerlink" title="1.针对于方法内变量的赋值举例："></a>1.针对于方法内变量的赋值举例：</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;***********基本数据类型：****************&quot;</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> m;</span><br><span class="line">System.out.println(<span class="string">&quot;m = &quot;</span> + m + <span class="string">&quot;, n = &quot;</span> + n);	</span><br><span class="line">n = <span class="number">20</span>;</span><br><span class="line">System.out.println(<span class="string">&quot;m = &quot;</span> + m + <span class="string">&quot;, n = &quot;</span> + n);</span><br><span class="line">System.out.println(<span class="string">&quot;***********引用数据类型：****************&quot;</span>);</span><br><span class="line"><span class="type">Order</span> <span class="variable">o1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Order</span>();</span><br><span class="line">o1.orderId = <span class="number">1001</span>;</span><br><span class="line"><span class="type">Order</span> <span class="variable">o2</span> <span class="operator">=</span> o1;<span class="comment">//赋值以后，o1和o2的地址值相同，都指向了堆空间中同一个对象实体。</span></span><br><span class="line">System.out.println(<span class="string">&quot;o1.orderId = &quot;</span> + o1.orderId + <span class="string">&quot;,o2.orderId = &quot;</span> +o2.orderId);</span><br><span class="line">o2.orderId = <span class="number">1002</span>;</span><br><span class="line">System.out.println(<span class="string">&quot;o1.orderId = &quot;</span> + o1.orderId + <span class="string">&quot;,o2.orderId = &quot;</span> +o2.orderId);</span><br></pre></td></tr></table></figure>
-
-<h6 id="规则："><a href="#规则：" class="headerlink" title="规则："></a>规则：</h6><ul>
-<li>如果变量是基本数据类型，此时赋值的是变量所保存的数据值。</li>
-<li>如果变量是引用数据类型，此时赋值的是变量所保存的数据的地址值。</li>
-</ul>
-<h4 id="递归方法"><a href="#递归方法" class="headerlink" title="递归方法"></a>递归方法</h4><h5 id="1-定义："><a href="#1-定义：" class="headerlink" title="1.定义："></a>1.定义：</h5><p>递归方法：一个方法体内调用它自身。</p>
-<h5 id="2-如何理解递归方法？"><a href="#2-如何理解递归方法？" class="headerlink" title="2.如何理解递归方法？"></a>2.如何理解递归方法？</h5><ul>
-<li>方法递归包含了一种隐式的循环，它会重复执行某段代码，但这种重复执行无须循环控制。</li>
-<li>递归一定要向已知方向递归，否则这种递归就变成了无穷递归，类似于死循环。</li>
-</ul>
-<p>3.举例：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 例1：计算1-n之间所自然数的和</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getSum</span><span class="params">(<span class="type">int</span> n)</span> &#123;<span class="comment">// 3</span></span><br><span class="line">	<span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> n + getSum(n - <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 例2：计算1-n之间所自然数的乘积:n!</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getSum1</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> n * getSum1(n - <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//例3：已知一个数列：f(0) = 1,f(1) = 4,f(n+2)=2*f(n+1) + f(n),</span></span><br><span class="line"><span class="comment">//其中n是大于0的整数，求f(10)的值。</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n == <span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(n == <span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">4</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="comment">//return f(n + 2) - 2 * f(n + 1);</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">2</span>*f(n - <span class="number">1</span>) + f(n - <span class="number">2</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//例4：斐波那契数列</span></span><br><span class="line"><span class="comment">//例5：汉诺塔问题</span></span><br><span class="line"><span class="comment">//例6：快排</span></span><br></pre></td></tr></table></figure>
-<h3 id="面向对象的特征一：封装性"><a href="#面向对象的特征一：封装性" class="headerlink" title="面向对象的特征一：封装性"></a>面向对象的特征一：封装性</h3><h4 id="1-为什么要引入封装性？"><a href="#1-为什么要引入封装性？" class="headerlink" title="1.为什么要引入封装性？"></a>1.为什么要引入封装性？</h4><h5 id="我们程序设计追求“高内聚，低耦合”。"><a href="#我们程序设计追求“高内聚，低耦合”。" class="headerlink" title="我们程序设计追求“高内聚，低耦合”。"></a>我们程序设计追求“高内聚，低耦合”。</h5><ul>
-<li>高内聚 ：类的内部数据操作细节自己完成，不允许外部干涉；</li>
-<li>低耦合 ：仅对外暴露少量的方法用于使用。</li>
-</ul>
-<h5 id="隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。"><a href="#隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。" class="headerlink" title="隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。"></a>隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。</h5><h4 id="2-问题引入："><a href="#2-问题引入：" class="headerlink" title="2.问题引入："></a>2.问题引入：</h4><p>当我们创建一个类的对象以后，我们可以通过”对象.属性”的方式，对对象的属性进行赋值。这里，赋值操作要受到属性的数据类型和存储范围的制约。除此之外，没其他制约条件。但是，在实际问题中，我们往往需要给属性赋值加入额外的限制条件。这个条件就不能在属性声明时体现，我们只能通过方法进行限制条件的添加。（比如：setLegs()同时，我们需要避免用户再使用”对象.属性”的方式对属性进行赋值。则需要将属性声明为私有的(private).<br>  –&gt;此时，针对于属性就体现了封装性。</p>
-<h4 id="3-封装性思想具体的代码体现："><a href="#3-封装性思想具体的代码体现：" class="headerlink" title="3.封装性思想具体的代码体现："></a>3.封装性思想具体的代码体现：</h4><ul>
-<li>将类的属性xxx私化(private),同时，提供公共的(public)方法来获取(getXxx)和设置(setXxx)此属性的值</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">double</span> radius;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setRadius</span><span class="params">(<span class="type">double</span> radius)</span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.radius = radius;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getRadius</span><span class="params">()</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> radius;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>体现二：不对外暴露的私有的方法</li>
-<li>体现三：单例模式（将构造器私有化）</li>
-<li>体现四：如果不希望类在包外被调用，可以将类设置为缺省的。</li>
-</ul>
-<h4 id="4-Java规定的四种权限修饰符"><a href="#4-Java规定的四种权限修饰符" class="headerlink" title="4.Java规定的四种权限修饰符"></a>4.Java规定的四种权限修饰符</h4><h5 id="4-1-权限从小到大顺序为：private-lt-缺省-lt-protected-lt-public"><a href="#4-1-权限从小到大顺序为：private-lt-缺省-lt-protected-lt-public" class="headerlink" title="4.1 权限从小到大顺序为：private &lt;  缺省 &lt; protected &lt; public"></a>4.1 权限从小到大顺序为：private &lt;  缺省 &lt; protected &lt; public</h5><h5 id="4-2-具体的修饰范围："><a href="#4-2-具体的修饰范围：" class="headerlink" title="4.2 具体的修饰范围："></a>4.2 具体的修饰范围：</h5><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/screenshot/master/1(2).bmp"
-                     
-                ></p>
-<h5 id="4-3-权限修饰符可用来修饰的结构说明："><a href="#4-3-权限修饰符可用来修饰的结构说明：" class="headerlink" title="4.3 权限修饰符可用来修饰的结构说明："></a>4.3 权限修饰符可用来修饰的结构说明：</h5><p>4种权限都可以用来修饰类的内部结构：属性、方法、构造器、内部类<br>修饰类的话，只能使用：缺省、public</p>
-<h3 id="类的结构之三：构造器"><a href="#类的结构之三：构造器" class="headerlink" title="类的结构之三：构造器"></a>类的结构之三：构造器</h3><h4 id="属性赋值的顺序"><a href="#属性赋值的顺序" class="headerlink" title="属性赋值的顺序"></a>属性赋值的顺序</h4><p>① 默认初始化</p>
-<p>② 显式初始化</p>
-<p>③ 构造器中初始化</p>
-<p>④ 通过”对象.方法” 或 “对象.属性”的方式，赋值</p>
-<p>以上操作的先后顺序：① - ② - ③ - ④ </p>
-<h4 id="JavaBean的概念"><a href="#JavaBean的概念" class="headerlink" title="JavaBean的概念"></a>JavaBean的概念</h4><h5 id="所谓JavaBean，是指符合如下标准的Java类："><a href="#所谓JavaBean，是指符合如下标准的Java类：" class="headerlink" title="所谓JavaBean，是指符合如下标准的Java类："></a>所谓JavaBean，是指符合如下标准的Java类：</h5><ul>
-<li>类是公共的</li>
-<li>一个无参的公共的构造器</li>
-<li>属性，且对应的get、set方法</li>
-</ul>
-<h3 id="关键字：this"><a href="#关键字：this" class="headerlink" title="关键字：this"></a>关键字：this</h3><h4 id="1-可以调用的结构：属性、方法；构造器"><a href="#1-可以调用的结构：属性、方法；构造器" class="headerlink" title="1.可以调用的结构：属性、方法；构造器"></a>1.可以调用的结构：属性、方法；构造器</h4><h4 id="2-this调用属性、方法："><a href="#2-this调用属性、方法：" class="headerlink" title="2.this调用属性、方法："></a>2.this调用属性、方法：</h4><p>this理解为：当前对象  或 当前正在创建的对象</p>
-<ul>
-<li><p>2.1在类的方法中，我们可以使用”this.属性”或”this.方法”的方式，调用当前对象属性或方法。但是，通常情况下，我们都择省略”this.”。特殊情况下，如果方法的形参和类的属性同名时，我们必须显式的使用”this.变量”的方式，表明此变量是属性，而非形参。</p>
-</li>
-<li><p>2.2 在类的构造器中，我们可以使用”this.属性”或”this.方法”的方式，调用当前正在创建的对象属性或方法。但是，通常情况下，我们都择省略”this.”。</p>
-</li>
-<li><p>特殊情况下，如果构造器的形参和类的属性同名时，我们必须显式的使用”this.变量”的方式，表明此变量是属性，而非形参。</p>
-</li>
-</ul>
-<h4 id="3-this调用构造器："><a href="#3-this调用构造器：" class="headerlink" title="3.this调用构造器："></a>3.this调用构造器：</h4><ul>
-<li>我们在类的构造器中，可以显式的使用”this(形参列表)”方式，调用本类中指定的其他构造器</li>
-<li>构造器中不能通过”this(形参列表)”方式调用自己</li>
-<li>如果一个类中有n个构造器，则最多有 n - 1构造器中使用了”this(形参列表)”</li>
-<li>规定：”this(形参列表)”必须声明在当前构造器的首行</li>
-<li>构造器内部，最多只能声明一个”this(形参列表)”，用来调用其他的构造器</li>
-</ul>
-<h3 id="关键字：package-x2F-import"><a href="#关键字：package-x2F-import" class="headerlink" title="关键字：package&#x2F;import"></a>关键字：package&#x2F;import</h3><h4 id="package的使用"><a href="#package的使用" class="headerlink" title="package的使用"></a>package的使用</h4><h5 id="使用说明："><a href="#使用说明：" class="headerlink" title="使用说明："></a>使用说明：</h5><ul>
-<li>1.为了更好的实现项目中类的管理，提供包的概念</li>
-<li>2.使用package声明类或接口所属的包，声明在源文件的首行</li>
-<li>3.包，属于标识符，遵循标识符的命名规则、规范(xxxyyyzzz)、“见名知意”</li>
-<li>4.每”.”一次，就代表一层文件目录。</li>
-</ul>
-<h5 id="举例："><a href="#举例：" class="headerlink" title="举例："></a>举例：</h5><h6 id="举例一：某航运软件系统包括：一组域对象、GUI和reports子系统"><a href="#举例一：某航运软件系统包括：一组域对象、GUI和reports子系统" class="headerlink" title="举例一：某航运软件系统包括：一组域对象、GUI和reports子系统"></a>举例一：某航运软件系统包括：一组域对象、GUI和reports子系统</h6><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/screenshot/master/1(3).bmp"
-                     
-                ></p>
-<h6 id="举例二：MVC设计模式"><a href="#举例二：MVC设计模式" class="headerlink" title="举例二：MVC设计模式"></a>举例二：MVC设计模式</h6><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/screenshot/master/2(1).bmp"
-                     
-                ></p>
-<h5 id="1-3-JDK中的主要包介绍："><a href="#1-3-JDK中的主要包介绍：" class="headerlink" title="1.3 JDK中的主要包介绍："></a>1.3 JDK中的主要包介绍：</h5><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/screenshot/master/3.bmp"
-                     
-                ></p>
-<h4 id="import的使用："><a href="#import的使用：" class="headerlink" title="import的使用："></a>import的使用：</h4><h5 id="import-导入"><a href="#import-导入" class="headerlink" title="import:导入"></a>import:导入</h5><ul>
-<li>在源文件中显式的使用import结构导入指定包下的类、接口</li>
-<li>声明在包的声明和类的声明之间</li>
-<li>如果需要导入多个结构，则并列写出即可</li>
-<li>可以使用”xxx.*”的方式，表示可以导入xxx包下的所结构</li>
-<li>如果使用的类或接口是java.lang包下定义的，则可以省略import结构</li>
-<li>如果使用的类或接口是本包下定义的，则可以省略import结构</li>
-<li>如果在源文件中，使用了不同包下的同名的类，则必须至少一个类需要以全类名的方式显示。</li>
-<li>使用”xxx.*”方式表明可以调用xxx包下的所结构。但是如果使用的是xxx子包下的结构，则仍需要显式导入</li>
-<li>import static:导入指定类或接口中的静态结构:属性或方法。</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>JAVA</tag>
-        <tag>后端学习的记录</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JAVA之面向对象下</title>
     <url>/2022/11/17/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8B/</url>
     <content><![CDATA[<h3 id="关键字：static静态的"><a href="#关键字：static静态的" class="headerlink" title="关键字：static静态的"></a>关键字：static静态的</h3><span id="more"></span>
@@ -346,8 +345,8 @@
 <h6 id="静态属性举例：System-out-Math-PI"><a href="#静态属性举例：System-out-Math-PI" class="headerlink" title="静态属性举例：System.out; Math.PI;"></a>静态属性举例：System.out; Math.PI;</h6><h4 id="静态变量内存解析："><a href="#静态变量内存解析：" class="headerlink" title="静态变量内存解析："></a>静态变量内存解析：</h4><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1.png"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419141039974-398938700.png"
+                      alt="img"
                 ></p>
 <h4 id="static修饰方法：静态方法、类方法"><a href="#static修饰方法：静态方法、类方法" class="headerlink" title="static修饰方法：静态方法、类方法"></a>static修饰方法：<i style="color: aqua;">静态方法、类方法</i></h4><ol>
 <li><p>随着类的加载而加载，可以通过”类.静态方法”的方式进行调用<br>              静态方法	非静态方法<br>​		类		    yes			no</p>
@@ -470,8 +469,8 @@
 <h4 id="abstract的应用举例："><a href="#abstract的应用举例：" class="headerlink" title="abstract的应用举例："></a>abstract的应用举例：</h4><h5 id="举例一："><a href="#举例一：" class="headerlink" title="举例一："></a>举例一：</h5><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javaxia/master/1.bmp"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419141102281-1017235350.bmp"
+                      alt="img"
                 ></p>
 <h5 id="举例二："><a href="#举例二：" class="headerlink" title="举例二："></a>举例二：</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">GeometricObject</span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="type">double</span> <span class="title function_">findArea</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> <span class="keyword">extends</span> <span class="title class_">GeometricObject</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">double</span> radius;</span><br><span class="line">	<span class="keyword">public</span> <span class="type">double</span> <span class="title function_">findArea</span><span class="params">()</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">3.14</span> * radius * radius;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -482,8 +481,8 @@
 <h5 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h5><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javaxia/master/1(1).bmp"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419141120241-1104850151.bmp"
+                      alt="img"
                 ></p>
 <h3 id="关键字：interface接口"><a href="#关键字：interface接口" class="headerlink" title="关键字：interface接口"></a>关键字：interface接口</h3><h4 id="使用说明："><a href="#使用说明：" class="headerlink" title="使用说明："></a>使用说明：</h4><ol>
 <li>接口使用interface来定义</li>
@@ -502,8 +501,8 @@
 <h4 id="举例："><a href="#举例：" class="headerlink" title="举例："></a>举例：</h4><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javaxia/master/1(2).bmp"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419141135491-1558909460.bmp"
+                      alt="img"
                 ></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Computer</span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">transferData</span><span class="params">(USB usb)</span>&#123;<span class="comment">//USB usb = new Flash();</span></span><br><span class="line">		usb.start();</span><br><span class="line">		System.out.println(<span class="string">&quot;具体传输数据的细节&quot;</span>);</span><br><span class="line">		usb.stop();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">USB</span>&#123;</span><br><span class="line">	<span class="comment">//常量：定义了长、宽、最大最小的传输速度等</span></span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">start</span><span class="params">()</span>;</span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">stop</span><span class="params">()</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Flash</span> <span class="keyword">implements</span> <span class="title class_">USB</span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">start</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;U盘开启工作&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">stop</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;U盘结束工作&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Printer</span> <span class="keyword">implements</span> <span class="title class_">USB</span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">start</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;打印机开启工作&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">stop</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;打印机结束工作&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -515,8 +514,8 @@
 <h4 id="体会面向接口编程的思想"><a href="#体会面向接口编程的思想" class="headerlink" title="体会面向接口编程的思想"></a>体会面向接口编程的思想</h4><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javaxia/master/2.bmp"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419141154662-908680512.bmp"
+                      alt="img"
                 ></p>
 <h4 id="Java8中关于接口的新规范"><a href="#Java8中关于接口的新规范" class="headerlink" title="Java8中关于接口的新规范"></a>Java8中关于接口的新规范</h4><ol>
 <li><p>接口中定义的静态方法，只能通过接口来调用。</p>
@@ -542,8 +541,8 @@
 <h5 id="应用场景-1"><a href="#应用场景-1" class="headerlink" title="应用场景"></a>应用场景</h5><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javaxia/master/1(3).bmp"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419141210091-1578739646.bmp"
+                      alt="img"
                 ></p>
 <h4 id="工厂的设计模式"><a href="#工厂的设计模式" class="headerlink" title="工厂的设计模式"></a>工厂的设计模式</h4><h5 id="解决的问题-2"><a href="#解决的问题-2" class="headerlink" title="解决的问题"></a>解决的问题</h5><p>实现了创建者与调用者的分离，即将创建对象的具体过程屏蔽隔离起来，达到提高灵活性的目的。</p>
 <h5 id="具体模式"><a href="#具体模式" class="headerlink" title="具体模式"></a>具体模式</h5><ul>
@@ -703,9 +702,242 @@
       </tags>
   </entry>
   <entry>
+    <title>JAVA之面向对象中</title>
+    <url>/2022/11/17/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%AD/</url>
+    <content><![CDATA[<h3 id="面向对象的特征二：继承性"><a href="#面向对象的特征二：继承性" class="headerlink" title="面向对象的特征二：继承性"></a>面向对象的特征二：继承性</h3><span id="more"></span>
+<h4 id="为什么要有类的继承性？-继承性的好处）"><a href="#为什么要有类的继承性？-继承性的好处）" class="headerlink" title="为什么要有类的继承性？(继承性的好处）"></a>为什么要有类的继承性？(继承性的好处）</h4><ul>
+<li>减少了代码的冗余，提高了代码的复用性</li>
+<li>便于功能的扩展</li>
+<li>为之后多态性的使用，提供了前提</li>
+</ul>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419140437448-1742206144.bmp"
+                      alt="img"
+                ></p>
+<h4 id="继承性的格式："><a href="#继承性的格式：" class="headerlink" title="继承性的格式："></a>继承性的格式：</h4><h5 id="class-A-extends-B"><a href="#class-A-extends-B" class="headerlink" title="class A extends B{}"></a>class A extends B{}</h5><ul>
+<li>A:子类、派生类、subclass</li>
+<li>B:父类、超类、基类、superclass</li>
+</ul>
+<h4 id="子类继承父类以后有哪些不同？"><a href="#子类继承父类以后有哪些不同？" class="headerlink" title="子类继承父类以后有哪些不同？"></a>子类继承父类以后有哪些不同？</h4><ul>
+<li>体现：一旦子类A继承父类B以后，子类A中就获取了父类B中声明的所有的属性和方法。特别的，父类中声明为private的属性或方法，子类继承父类以后，仍然认为获取了父类中私的结构。只因为封装性的影响，使得子类不能直接调用父类的结构而已。</li>
+<li>子类继承父类以后，还可以声明自己特有的属性或方法：实现功能的拓展。子类和父类的关系，不同于子集和集合的关系。extends：延展、扩展</li>
+</ul>
+<h4 id="Java中继承性的说明"><a href="#Java中继承性的说明" class="headerlink" title="Java中继承性的说明"></a>Java中继承性的说明</h4><ul>
+<li>一个类可以被多个子类继承。</li>
+<li>Java中类的单继承性：一个类只能有一个父类。</li>
+<li>子父类是相对的概念。</li>
+<li>子类直接继承的父类，称为：直接父类。间接继承的父类称为：间接父类。</li>
+<li>子类继承父类以后，就获取了直接父类以及所间接父类中声明的属性和方法</li>
+</ul>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419140550656-1084315877.bmp"
+                      alt="img"
+                ></p>
+<h4 id="java-lang-Object类的理解"><a href="#java-lang-Object类的理解" class="headerlink" title="java.lang.Object类的理解"></a>java.lang.Object类的理解</h4><ul>
+<li>如果我们没显式的声明一个类的父类的话，则此类继承于java.lang.Object类</li>
+<li>所的java类（除java.lang.Object类之外都直接或间接的继承于java.lang.Object类</li>
+<li>意味着，所的java类具有java.lang.Object类声明的功能。</li>
+</ul>
+<h3 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a>方法的重写</h3><p>什么是方法的重写(override 或 overwrite)？<br>子类继承父类以后，可以对父类中同名同参数的方法，进行覆盖操作.</p>
+<p>应用：</p>
+<p>重写以后，当创建子类对象以后，通过子类对象调用子父类中的同名同参数的方法时，实际执行的是子类重写父类的方法。</p>
+<p>举例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">double</span> <span class="title function_">findArea</span><span class="params">()</span>&#123;&#125;<span class="comment">//求面积</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cylinder</span> <span class="keyword">extends</span> <span class="title class_">Circle</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">double</span> <span class="title function_">findArea</span><span class="params">()</span>&#123;&#125;<span class="comment">//求表面积</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//==============</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">withdraw</span><span class="params">(<span class="type">double</span> amt)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CheckAccount</span> <span class="keyword">extends</span> <span class="title class_">Account</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">withdraw</span><span class="params">(<span class="type">double</span> amt)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>重写的规则：</p>
+<p>方法的声明： 权限修饰符  返回值类型  方法名(形参列表) throws 异常的类型{</p>
+<p>​		&#x2F;&#x2F;方法体</p>
+<p>}</p>
+<p>约定俗称：子类中的叫重写的方法，父类中的叫被重写的方法</p>
+<ol>
+<li>子类重写的方法的方法名和形参列表与父类被重写的方法的方法名和形参列表相同</li>
+<li>子类重写的方法的权限修饰符不小于父类被重写的方法的权限修饰符</li>
+<li>特殊情况：子类不能重写父类中声明为private权限的方法</li>
+<li>返回值类型：父类被重写的方法的返回值类型是void，则子类重写的方法的返回值类型只能是void父类被重写的方法的返回值类型是A类型，则子类重写的方法的返回值类型可以是A类或A类的子类父类被重写的方法的返回值类型是基本数据类型(比如：double)，则子类重写的方法的返回值类型必须是相同的基本数据类型(必须也是double)</li>
+<li>子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型</li>
+</ol>
+<p>子类和父类中的同名同参数的方法要么都声明为非static的（考虑重写，要么都声明为static的（不是重写)。	</p>
+<p><i style="color: red;">面试题：区分方法的重写和重载？</i></p>
+<ol>
+<li>二者的概念：</li>
+<li>重载和重写的具体规则</li>
+<li>重载：不表现为多态性。<br>重写：表现为多态性。</li>
+</ol>
+<blockquote>
+<p>重载，是指允许存在多个同名方法，而这些方法的参数不同。编译器根据方法不同的参数表，对同名方法的名称做修饰。对于编译器而言，这些同名方法就成了不同的方法。它们的调用地址在编译期就绑定了。Java的重载是可以包括父类和子类的，即子类可以重载父类的同名不同参数的方法。<br>所以：对于重载而言，在方法调用之前，编译器就已经确定了所要调用的方法，这称为“早绑定”或“静态绑定”；</p>
+</blockquote>
+<blockquote>
+<p>而对于多态，只等到方法调用的那一刻，解释运行器才会确定所要调用的具体方法，这称为“晚绑定”或“动态绑定”。 </p>
+</blockquote>
+<blockquote>
+<p>引用一句Bruce Eckel的话：“不要犯傻，如果它不是晚绑定，它就不是多态。”</p>
+</blockquote>
+<h3 id="关键字：super"><a href="#关键字：super" class="headerlink" title="关键字：super"></a>关键字：super</h3><h4 id="super-关键字可以理解为：父类的"><a href="#super-关键字可以理解为：父类的" class="headerlink" title="super 关键字可以理解为：父类的"></a>super 关键字可以理解为：父类的</h4><h4 id="可以用来调用的结构："><a href="#可以用来调用的结构：" class="headerlink" title="可以用来调用的结构："></a>可以用来调用的结构：</h4><p>属性、方法、构造器</p>
+<h4 id="super调用属性、方法："><a href="#super调用属性、方法：" class="headerlink" title="super调用属性、方法："></a>super调用属性、方法：</h4><ol>
+<li>我们可以在子类的方法或构造器中。通过使用”super.属性”或”super.方法”的方式，显式的调用父类中声明的属性或方法。但是，通常情况下，我们习惯省略”super.”</li>
+<li>特殊情况：当子类和父类中定义了同名的属性时，我们要想在子类中调用父类中声明的属性，则必须显式的使用”super.属性”的方式，表明调用的是父类中声明的属性。</li>
+<li>特殊情况：当子类重写了父类中的方法以后，我们想在子类的方法中调用父类中被重写的方法时，则必须显式的使用”super.方法”的方式，表明调用的是父类中被重写的方法。</li>
+</ol>
+<h4 id="super调用构造器："><a href="#super调用构造器：" class="headerlink" title="super调用构造器："></a>super调用构造器：</h4><ol>
+<li>我们可以在子类的构造器中显式的使用”super(形参列表)”的方式，调用父类中声明的指定的构造器</li>
+<li>“super(形参列表)”的使用，必须声明在子类构造器的首行！</li>
+<li>我们在类的构造器中，针对于”this(形参列表)”或”super(形参列表)”只能二一，不能同时出现</li>
+<li>在构造器的首行，没显式的声明”this(形参列表)”或”super(形参列表)”，则默认调用的是父类中空参的构造器：super()</li>
+<li>在类的多个构造器中，至少一个类的构造器中使用了”super(形参列表)”，调用父类中的构造器</li>
+</ol>
+<h3 id="子类对象实例化全过程"><a href="#子类对象实例化全过程" class="headerlink" title="子类对象实例化全过程"></a>子类对象实例化全过程</h3><h4 id="从结果上看：继承性"><a href="#从结果上看：继承性" class="headerlink" title="从结果上看：继承性"></a>从结果上看：继承性</h4><ul>
+<li>子类继承父类以后，就获取了父类中声明的属性或方法。</li>
+<li>创建子类的对象，在堆空间中，就会加载所父类中声明的属性。</li>
+</ul>
+<h4 id="从过程上看："><a href="#从过程上看：" class="headerlink" title="从过程上看："></a>从过程上看：</h4><p>当我们通过子类的构造器创建子类对象时，我们一定会直接或间接的调用其父类的构造器，进而调用父类的父类的构造器，…直到调用了java.lang.Object类中空参的构造器为止。正因为加载过所的父类的结构，所以才可以看到内存中父类中的结构，子类对象才可以考虑进行调用。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(1).bmp"
+                     
+                ></p>
+<h4 id="强调说明："><a href="#强调说明：" class="headerlink" title="强调说明："></a>强调说明：</h4><p>虽然创建子类对象时，调用了父类的构造器，但是自始至终就创建过一个对象，即为new的子类对象。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419140656989-38651492.bmp"
+                      alt="img"
+                ></p>
+<h3 id="面向对象的特征三：多态性"><a href="#面向对象的特征三：多态性" class="headerlink" title="面向对象的特征三：多态性"></a>面向对象的特征三：多态性</h3><h4 id="多态性的理解："><a href="#多态性的理解：" class="headerlink" title="多态性的理解："></a>多态性的理解：</h4><p>可以理解为一个事物的多种形态。</p>
+<h4 id="何为多态性："><a href="#何为多态性：" class="headerlink" title="何为多态性："></a>何为多态性：</h4><p>对象的多态性：父类的引用指向子类的对象（或子类的对象赋给父类的引用）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Man</span>();</span><br><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="多态性的使用：虚拟方法调用"><a href="#多态性的使用：虚拟方法调用" class="headerlink" title="多态性的使用：虚拟方法调用"></a>多态性的使用：虚拟方法调用</h4><ul>
+<li>有了对象的多态性以后，我们在编译期，只能调用父类中声明的方法，但在运行期，我们实际执行的是子类重写父类的方法。</li>
+<li>总结：编译，看左边；运行，看右边。</li>
+</ul>
+<h4 id="多态性的使用前提："><a href="#多态性的使用前提：" class="headerlink" title="多态性的使用前提："></a>多态性的使用前提：</h4><ul>
+<li>类的继承关系</li>
+<li>方法的重写</li>
+</ul>
+<h4 id="多态性的应用举例："><a href="#多态性的应用举例：" class="headerlink" title="多态性的应用举例："></a>多态性的应用举例：</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">举例一：</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">func</span><span class="params">(Animal animal)</span>&#123;<span class="comment">//Animal animal = new Dog();</span></span><br><span class="line">		animal.eat();</span><br><span class="line">		animal.shout();</span><br><span class="line">	&#125;</span><br><span class="line">举例二：</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">(Object obj)</span>&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">举例三：</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Driver</span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doData</span><span class="params">(Connection conn)</span>&#123;</span><br><span class="line">	<span class="comment">//conn = new MySQlConnection();</span></span><br><span class="line">	<span class="comment">//conn = new OracleConnection();</span></span><br><span class="line">		conn.method1();</span><br><span class="line">		conn.method2();</span><br><span class="line">		conn.method3();		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="多态性使用的注意点："><a href="#多态性使用的注意点：" class="headerlink" title="多态性使用的注意点："></a>多态性使用的注意点：</h4><p><i style="color: red;">对象的多态性，只适用于方法，不适用于属性（编译和运行都看左边）</i></p>
+<h4 id="关于向上转型与向下转型："><a href="#关于向上转型与向下转型：" class="headerlink" title="关于向上转型与向下转型："></a>关于向上转型与向下转型：</h4><h5 id="向上转型：多态"><a href="#向上转型：多态" class="headerlink" title="向上转型：多态"></a>向上转型：多态</h5><h5 id="向下转型："><a href="#向下转型：" class="headerlink" title="向下转型："></a>向下转型：</h5><h6 id="为什么使用向下转型："><a href="#为什么使用向下转型：" class="headerlink" title="为什么使用向下转型："></a>为什么使用向下转型：</h6><p>有了对象的多态性以后，内存中实际上是加载了子类特有的属性和方法的，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法。子类特有的属性和方法不能调用。如何才能调用子类特的属性和方法？使用向下转型。</p>
+<h6 id="如何实现向下转型："><a href="#如何实现向下转型：" class="headerlink" title="如何实现向下转型："></a>如何实现向下转型：</h6><p>使用强制类型转换符：()</p>
+<h6 id="使用时的注意点："><a href="#使用时的注意点：" class="headerlink" title="使用时的注意点："></a>使用时的注意点：</h6><ol>
+<li>使用强转时，可能出现ClassCastException的异常。</li>
+<li>为了避免在向下转型时出现ClassCastException的异常，我们在向下转型之前，先进行instanceof的判断，一旦返回true，就进行向下转型。如果返回false，不进行向下转型。</li>
+</ol>
+<h6 id="instanceof的使用："><a href="#instanceof的使用：" class="headerlink" title="instanceof的使用："></a>instanceof的使用：</h6><ol>
+<li>a instanceof A:判断对象a是否是类A的实例。如果是，返回true；如果不是，返回false。</li>
+<li>如果 a instanceof A返回true,则 a instanceof B也返回true.其中，类B是类A的父类。</li>
+<li>要求a所属的类与类A必须是子类和父类的关系，否则编译错误。</li>
+</ol>
+<h6 id="图示："><a href="#图示：" class="headerlink" title="图示："></a>图示：</h6><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419140716366-1607263065.bmp"
+                      alt="img"
+                ></p>
+<h4 id="面试题："><a href="#面试题：" class="headerlink" title="面试题："></a>面试题：</h4><h5 id="谈谈你对多态性的理解？"><a href="#谈谈你对多态性的理解？" class="headerlink" title="谈谈你对多态性的理解？"></a>谈谈你对多态性的理解？</h5><ol>
+<li>实现代码的通用性。</li>
+<li>Object类中定义的public boolean equals(Object obj){  }</li>
+<li>JDBC:使用java程序操作(获取数据库连接、CRUD)数据库(MySQL、Oracle、DB2、SQL Server)</li>
+</ol>
+<h5 id="多态是编译时行为还是运行时行为？"><a href="#多态是编译时行为还是运行时行为？" class="headerlink" title="多态是编译时行为还是运行时行为？"></a>多态是编译时行为还是运行时行为？</h5><p><i style="color: red;">运行时行为</i></p>
+<h3 id="Object类的使用"><a href="#Object类的使用" class="headerlink" title="Object类的使用"></a>Object类的使用</h3><h4 id="java-lang-Object类的说明："><a href="#java-lang-Object类的说明：" class="headerlink" title="java.lang.Object类的说明："></a>java.lang.Object类的说明：</h4><ol>
+<li>Object类是所Java类的根父类</li>
+<li>如果在类的声明中未使用extends关键字指明其父类，则默认父类为java.lang.Object类 </li>
+<li>Object类中的功能(属性、方法)就具通用性。<br>属性：无<br>方法：equals() &#x2F; toString() &#x2F; getClass() &#x2F;hashCode() &#x2F; clone() &#x2F; finalize() wait() 、 notify()、notifyAll()</li>
+<li>Object类只声明了一个空参的构造器</li>
+</ol>
+<h4 id="equals-方法"><a href="#equals-方法" class="headerlink" title="equals()方法"></a>equals()方法</h4><h5 id="equals-的使用："><a href="#equals-的使用：" class="headerlink" title="equals()的使用："></a>equals()的使用：</h5><ol>
+<li><p>是一个方法，而非运算符</p>
+</li>
+<li><p>只能适用于引用数据类型</p>
+</li>
+<li><p>Object类中equals()的定义：</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>public boolean equals(Object obj) {<br>    return (this &#x3D;&#x3D; obj);<br>  }<br>&#x2F;<em>说明：Object类中定义的equals()和&#x3D;&#x3D;的作用是相同的：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</em>&#x2F;</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">5. 像String、Date、File、包装类等都重写了Object类中的equals()方法。重写以后，比较的不是两个引用的地址是否相同，而是比较两个对象的&quot;实体内容&quot;是否相同。</span><br><span class="line"></span><br><span class="line">6. 通常情况下，我们自定义的类如果使用equals()的话，也通常是比较两个对象的&quot;实体内容&quot;是否相同。那么，我们就需要对Object类中的equals()进行重写.</span><br><span class="line">   重写的原则：比较两个对象的实体内容是否相同.</span><br><span class="line"></span><br><span class="line">##### 如何重写equals()</span><br><span class="line"></span><br><span class="line">###### 手动重写举例：</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">class User&#123;</span><br><span class="line">	String name;</span><br><span class="line">	int age;</span><br><span class="line">	//重写其equals()方法</span><br><span class="line">	public boolean equals(Object obj)&#123;</span><br><span class="line">		if(obj == this)&#123;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">		if(obj instanceof User)&#123;</span><br><span class="line">			User u = (User)obj;</span><br><span class="line">			return this.age == u.age &amp;&amp; this.name.equals(u.name);</span><br><span class="line">		&#125;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h6 id="开发中如何实现：自动生成的"><a href="#开发中如何实现：自动生成的" class="headerlink" title="开发中如何实现：自动生成的"></a>开发中如何实现：自动生成的</h6><h5 id="回顾-x3D-x3D-运算符的使用："><a href="#回顾-x3D-x3D-运算符的使用：" class="headerlink" title="回顾 &#x3D;&#x3D; 运算符的使用："></a>回顾 &#x3D;&#x3D; 运算符的使用：</h5><p> &#x3D;&#x3D; ：运算符</p>
+<ol>
+<li>可以使用在基本数据类型变量和引用数据类型变量中</li>
+<li>如果比较的是基本数据类型变量：比较两个变量保存的数据是否相等。（不一定类型要相同）<br>如果比较的是引用数据类型变量：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</li>
+<li>补充： &#x3D;&#x3D; 符号使用时，必须保证符号左右两边的变量类型一致。</li>
+</ol>
+<h4 id="toString-方法"><a href="#toString-方法" class="headerlink" title="toString()方法"></a>toString()方法</h4><h5 id="toString-的使用："><a href="#toString-的使用：" class="headerlink" title="toString()的使用："></a>toString()的使用：</h5><ol>
+<li><p>当我们输出一个对象的引用时，实际上就是调用当前对象的toString()</p>
+</li>
+<li><p>Object类中toString()的定义：</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>public String toString() {<br>   return getClass().getName() + “@” + Integer.toHexString(hashCode());<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">4. 像String、Date、File、包装类等都重写了Object类中的toString()方法。</span><br><span class="line">   使得在调用对象的toString()时，返回&quot;实体内容&quot;信息</span><br><span class="line"></span><br><span class="line">5. 自定义类也可以重写toString()方法，当调用此方法时，返回对象的&quot;实体内容&quot;</span><br><span class="line">##### 如何重写toString()</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">//自动实现</span><br><span class="line">@Override</span><br><span class="line">public String toString() &#123;</span><br><span class="line">	return &quot;Customer [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="面试题：-1"><a href="#面试题：-1" class="headerlink" title="面试题："></a>面试题：</h4><ul>
+<li>final、finally、finalize的区别？</li>
+<li>&#x3D;&#x3D; 和 equals() 区别</li>
+</ul>
+<h3 id="单元测试方法"><a href="#单元测试方法" class="headerlink" title="单元测试方法"></a>单元测试方法</h3><p>略</p>
+<h3 id="包装类的使用"><a href="#包装类的使用" class="headerlink" title="包装类的使用"></a>包装类的使用</h3><h4 id="1-为什么要有包装类-或封装类）"><a href="#1-为什么要有包装类-或封装类）" class="headerlink" title="1.为什么要有包装类(或封装类）"></a>1.为什么要有包装类(或封装类）</h4><p>为了使基本数据类型的变量具有类的特征，引入包装类。</p>
+<h4 id="2-基本数据类型与对应的包装类："><a href="#2-基本数据类型与对应的包装类：" class="headerlink" title="2.基本数据类型与对应的包装类："></a>2.基本数据类型与对应的包装类：</h4><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419140735834-1779332304.bmp"
+                      alt="img"
+                ></p>
+<h4 id="3-需要掌握的类型间的转换：（基本数据类型、包装类、String）"><a href="#3-需要掌握的类型间的转换：（基本数据类型、包装类、String）" class="headerlink" title="3.需要掌握的类型间的转换：（基本数据类型、包装类、String）"></a>3.需要掌握的类型间的转换：（基本数据类型、包装类、String）</h4><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419140755056-601631857.bmp"
+                      alt="img"
+                ></p>
+<h5 id="简易版："><a href="#简易版：" class="headerlink" title="简易版："></a>简易版：</h5><ul>
+<li>基本数据类型&lt;—&gt;包装类：JDK 5.0 新特性：自动装箱 与自动拆箱</li>
+<li>基本数据类型、包装类—&gt;String:调用String重载的valueOf(Xxx xxx)</li>
+<li>String—&gt;基本数据类型、包装类:调用包装类的parseXxx(String s)</li>
+</ul>
+<p><i style="color: red;"> 注意：转换时，可能会报NumberFormatException</i></p>
+<h6 id="应用场景举例："><a href="#应用场景举例：" class="headerlink" title="应用场景举例："></a>应用场景举例：</h6><p>Vector类中关于添加元素，只定义了形参为Object类型的方法：</p>
+<p>v.addElement(Object obj);   &#x2F;&#x2F;基本数据类型 —&gt;包装类 —&gt;使用多态</p>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端学习的记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux环境下Redis无法使用配置文件</title>
+    <url>/2023/04/19/Linux%E7%8E%AF%E5%A2%83%E4%B8%8BRedis%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="Linux环境下Redis无法使用配置文件"><a href="#Linux环境下Redis无法使用配置文件" class="headerlink" title="Linux环境下Redis无法使用配置文件"></a>Linux环境下Redis无法使用配置文件</h1><h2 id="为什么"><a href="#为什么" class="headerlink" title="为什么?"></a>为什么?</h2><p>因为我是将<code>redis.conf</code>配置文件直接复制到<code>/myredis/</code>即根目录的myredis文件夹下，因为linux根目录下本身没有myredis文件夹所以我<code>mkdir</code>了一个我们可以查看一下下载解压redis目录下<code>redis.conf</code>的文件权限<img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419122220354-1007819127.png"
+                      alt="img"
+                ></p>
+<p>可以清晰的看到该文件没有执行权限，所以我们<code>redis-server /myredis/redis.conf</code>是无法使用该配置文件的</p>
+<h2 id="怎么发现的？"><a href="#怎么发现的？" class="headerlink" title="怎么发现的？"></a>怎么发现的？</h2><p>起初我们并没有在意该配置文件是不是可执行的，而是运行了<code>redis-server&amp; /myredis/redis.conf</code>提示没有权限，</p>
+<h2 id="怎么修复"><a href="#怎么修复" class="headerlink" title="怎么修复"></a>怎么修复</h2><p>直接<code>chmod 777/myredis/redis.conf</code>或将配置文件的执行权限加上即可</p>
+]]></content>
+      <tags>
+        <tag>Linux学习，平常学习开发中遇到的问题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux指令的学习</title>
     <url>/2022/12/03/Linux%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="Linux指令"><a href="#Linux指令" class="headerlink" title="Linux指令"></a>Linux指令</h1><h2 id="vim编辑器"><a href="#vim编辑器" class="headerlink" title="vim编辑器"></a>vim编辑器</h2><h5 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h5><table>
+    <content><![CDATA[<h1 id="Linux指令"><a href="#Linux指令" class="headerlink" title="Linux指令"></a>Linux指令</h1><h2 id="vim编辑器"><a href="#vim编辑器" class="headerlink" title="vim编辑器"></a>vim编辑器</h2><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419141419669-169776534.png"
+                      alt="img"
+                ></p>
+<h5 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h5><table>
 <thead>
 <tr>
 <th align="center">命令</th>
@@ -1771,230 +2003,20 @@
       </tags>
   </entry>
   <entry>
-    <title>JAVA之面向对象中</title>
-    <url>/2022/11/17/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%AD/</url>
-    <content><![CDATA[<h3 id="面向对象的特征二：继承性"><a href="#面向对象的特征二：继承性" class="headerlink" title="面向对象的特征二：继承性"></a>面向对象的特征二：继承性</h3><span id="more"></span>
-<h4 id="为什么要有类的继承性？-继承性的好处）"><a href="#为什么要有类的继承性？-继承性的好处）" class="headerlink" title="为什么要有类的继承性？(继承性的好处）"></a>为什么要有类的继承性？(继承性的好处）</h4><ul>
-<li>减少了代码的冗余，提高了代码的复用性</li>
-<li>便于功能的扩展</li>
-<li>为之后多态性的使用，提供了前提</li>
-</ul>
+    <title>MyBatis中关于TableId的使用</title>
+    <url>/2023/04/04/MyBatis%E4%B8%AD%E5%85%B3%E4%BA%8ETableId%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">saveWithFlavor</span><span class="params">(DishDto dishDto)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 保存菜品的基本信息到菜品表dish</span></span><br><span class="line">        <span class="built_in">this</span>.save(dishDto);</span><br><span class="line">        <span class="comment">//菜品id 雪花算法自动生成只要经过id操作。即可马上赋值</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">dishId</span> <span class="operator">=</span> dishDto.getId();</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1.bmp"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419141918724-1334033264.jpg"
+                      alt="img"
                 ></p>
-<h4 id="继承性的格式："><a href="#继承性的格式：" class="headerlink" title="继承性的格式："></a>继承性的格式：</h4><h5 id="class-A-extends-B"><a href="#class-A-extends-B" class="headerlink" title="class A extends B{}"></a>class A extends B{}</h5><ul>
-<li>A:子类、派生类、subclass</li>
-<li>B:父类、超类、基类、superclass</li>
-</ul>
-<h4 id="子类继承父类以后有哪些不同？"><a href="#子类继承父类以后有哪些不同？" class="headerlink" title="子类继承父类以后有哪些不同？"></a>子类继承父类以后有哪些不同？</h4><ul>
-<li>体现：一旦子类A继承父类B以后，子类A中就获取了父类B中声明的所有的属性和方法。特别的，父类中声明为private的属性或方法，子类继承父类以后，仍然认为获取了父类中私的结构。只因为封装性的影响，使得子类不能直接调用父类的结构而已。</li>
-<li>子类继承父类以后，还可以声明自己特有的属性或方法：实现功能的拓展。子类和父类的关系，不同于子集和集合的关系。extends：延展、扩展</li>
-</ul>
-<h4 id="Java中继承性的说明"><a href="#Java中继承性的说明" class="headerlink" title="Java中继承性的说明"></a>Java中继承性的说明</h4><ul>
-<li>一个类可以被多个子类继承。</li>
-<li>Java中类的单继承性：一个类只能有一个父类。</li>
-<li>子父类是相对的概念。</li>
-<li>子类直接继承的父类，称为：直接父类。间接继承的父类称为：间接父类。</li>
-<li>子类继承父类以后，就获取了直接父类以及所间接父类中声明的属性和方法</li>
-</ul>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/2.bmp"
-                     
-                ></p>
-<h4 id="java-lang-Object类的理解"><a href="#java-lang-Object类的理解" class="headerlink" title="java.lang.Object类的理解"></a>java.lang.Object类的理解</h4><ul>
-<li>如果我们没显式的声明一个类的父类的话，则此类继承于java.lang.Object类</li>
-<li>所的java类（除java.lang.Object类之外都直接或间接的继承于java.lang.Object类</li>
-<li>意味着，所的java类具有java.lang.Object类声明的功能。</li>
-</ul>
-<h3 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a>方法的重写</h3><p>什么是方法的重写(override 或 overwrite)？<br>子类继承父类以后，可以对父类中同名同参数的方法，进行覆盖操作.</p>
-<p>应用：</p>
-<p>重写以后，当创建子类对象以后，通过子类对象调用子父类中的同名同参数的方法时，实际执行的是子类重写父类的方法。</p>
-<p>举例：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">double</span> <span class="title function_">findArea</span><span class="params">()</span>&#123;&#125;<span class="comment">//求面积</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cylinder</span> <span class="keyword">extends</span> <span class="title class_">Circle</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">double</span> <span class="title function_">findArea</span><span class="params">()</span>&#123;&#125;<span class="comment">//求表面积</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//==============</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">withdraw</span><span class="params">(<span class="type">double</span> amt)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CheckAccount</span> <span class="keyword">extends</span> <span class="title class_">Account</span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">withdraw</span><span class="params">(<span class="type">double</span> amt)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>重写的规则：</p>
-<p>方法的声明： 权限修饰符  返回值类型  方法名(形参列表) throws 异常的类型{</p>
-<p>​		&#x2F;&#x2F;方法体</p>
-<p>}</p>
-<p>约定俗称：子类中的叫重写的方法，父类中的叫被重写的方法</p>
-<ol>
-<li>子类重写的方法的方法名和形参列表与父类被重写的方法的方法名和形参列表相同</li>
-<li>子类重写的方法的权限修饰符不小于父类被重写的方法的权限修饰符</li>
-<li>特殊情况：子类不能重写父类中声明为private权限的方法</li>
-<li>返回值类型：父类被重写的方法的返回值类型是void，则子类重写的方法的返回值类型只能是void父类被重写的方法的返回值类型是A类型，则子类重写的方法的返回值类型可以是A类或A类的子类父类被重写的方法的返回值类型是基本数据类型(比如：double)，则子类重写的方法的返回值类型必须是相同的基本数据类型(必须也是double)</li>
-<li>子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型</li>
-</ol>
-<p>子类和父类中的同名同参数的方法要么都声明为非static的（考虑重写，要么都声明为static的（不是重写)。	</p>
-<p><i style="color: red;">面试题：区分方法的重写和重载？</i></p>
-<ol>
-<li>二者的概念：</li>
-<li>重载和重写的具体规则</li>
-<li>重载：不表现为多态性。<br>重写：表现为多态性。</li>
-</ol>
-<blockquote>
-<p>重载，是指允许存在多个同名方法，而这些方法的参数不同。编译器根据方法不同的参数表，对同名方法的名称做修饰。对于编译器而言，这些同名方法就成了不同的方法。它们的调用地址在编译期就绑定了。Java的重载是可以包括父类和子类的，即子类可以重载父类的同名不同参数的方法。<br>所以：对于重载而言，在方法调用之前，编译器就已经确定了所要调用的方法，这称为“早绑定”或“静态绑定”；</p>
-</blockquote>
-<blockquote>
-<p>而对于多态，只等到方法调用的那一刻，解释运行器才会确定所要调用的具体方法，这称为“晚绑定”或“动态绑定”。 </p>
-</blockquote>
-<blockquote>
-<p>引用一句Bruce Eckel的话：“不要犯傻，如果它不是晚绑定，它就不是多态。”</p>
-</blockquote>
-<h3 id="关键字：super"><a href="#关键字：super" class="headerlink" title="关键字：super"></a>关键字：super</h3><h4 id="super-关键字可以理解为：父类的"><a href="#super-关键字可以理解为：父类的" class="headerlink" title="super 关键字可以理解为：父类的"></a>super 关键字可以理解为：父类的</h4><h4 id="可以用来调用的结构："><a href="#可以用来调用的结构：" class="headerlink" title="可以用来调用的结构："></a>可以用来调用的结构：</h4><p>属性、方法、构造器</p>
-<h4 id="super调用属性、方法："><a href="#super调用属性、方法：" class="headerlink" title="super调用属性、方法："></a>super调用属性、方法：</h4><ol>
-<li>我们可以在子类的方法或构造器中。通过使用”super.属性”或”super.方法”的方式，显式的调用父类中声明的属性或方法。但是，通常情况下，我们习惯省略”super.”</li>
-<li>特殊情况：当子类和父类中定义了同名的属性时，我们要想在子类中调用父类中声明的属性，则必须显式的使用”super.属性”的方式，表明调用的是父类中声明的属性。</li>
-<li>特殊情况：当子类重写了父类中的方法以后，我们想在子类的方法中调用父类中被重写的方法时，则必须显式的使用”super.方法”的方式，表明调用的是父类中被重写的方法。</li>
-</ol>
-<h4 id="super调用构造器："><a href="#super调用构造器：" class="headerlink" title="super调用构造器："></a>super调用构造器：</h4><ol>
-<li>我们可以在子类的构造器中显式的使用”super(形参列表)”的方式，调用父类中声明的指定的构造器</li>
-<li>“super(形参列表)”的使用，必须声明在子类构造器的首行！</li>
-<li>我们在类的构造器中，针对于”this(形参列表)”或”super(形参列表)”只能二一，不能同时出现</li>
-<li>在构造器的首行，没显式的声明”this(形参列表)”或”super(形参列表)”，则默认调用的是父类中空参的构造器：super()</li>
-<li>在类的多个构造器中，至少一个类的构造器中使用了”super(形参列表)”，调用父类中的构造器</li>
-</ol>
-<h3 id="子类对象实例化全过程"><a href="#子类对象实例化全过程" class="headerlink" title="子类对象实例化全过程"></a>子类对象实例化全过程</h3><h4 id="从结果上看：继承性"><a href="#从结果上看：继承性" class="headerlink" title="从结果上看：继承性"></a>从结果上看：继承性</h4><ul>
-<li>子类继承父类以后，就获取了父类中声明的属性或方法。</li>
-<li>创建子类的对象，在堆空间中，就会加载所父类中声明的属性。</li>
-</ul>
-<h4 id="从过程上看："><a href="#从过程上看：" class="headerlink" title="从过程上看："></a>从过程上看：</h4><p>当我们通过子类的构造器创建子类对象时，我们一定会直接或间接的调用其父类的构造器，进而调用父类的父类的构造器，…直到调用了java.lang.Object类中空参的构造器为止。正因为加载过所的父类的结构，所以才可以看到内存中父类中的结构，子类对象才可以考虑进行调用。</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(1).bmp"
-                     
-                ></p>
-<h4 id="强调说明："><a href="#强调说明：" class="headerlink" title="强调说明："></a>强调说明：</h4><p>虽然创建子类对象时，调用了父类的构造器，但是自始至终就创建过一个对象，即为new的子类对象。</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/2(1).bmp"
-                     
-                ></p>
-<h3 id="面向对象的特征三：多态性"><a href="#面向对象的特征三：多态性" class="headerlink" title="面向对象的特征三：多态性"></a>面向对象的特征三：多态性</h3><h4 id="多态性的理解："><a href="#多态性的理解：" class="headerlink" title="多态性的理解："></a>多态性的理解：</h4><p>可以理解为一个事物的多种形态。</p>
-<h4 id="何为多态性："><a href="#何为多态性：" class="headerlink" title="何为多态性："></a>何为多态性：</h4><p>对象的多态性：父类的引用指向子类的对象（或子类的对象赋给父类的引用）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Man</span>();</span><br><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br></pre></td></tr></table></figure>
-
-<h4 id="多态性的使用：虚拟方法调用"><a href="#多态性的使用：虚拟方法调用" class="headerlink" title="多态性的使用：虚拟方法调用"></a>多态性的使用：虚拟方法调用</h4><ul>
-<li>有了对象的多态性以后，我们在编译期，只能调用父类中声明的方法，但在运行期，我们实际执行的是子类重写父类的方法。</li>
-<li>总结：编译，看左边；运行，看右边。</li>
-</ul>
-<h4 id="多态性的使用前提："><a href="#多态性的使用前提：" class="headerlink" title="多态性的使用前提："></a>多态性的使用前提：</h4><ul>
-<li>类的继承关系</li>
-<li>方法的重写</li>
-</ul>
-<h4 id="多态性的应用举例："><a href="#多态性的应用举例：" class="headerlink" title="多态性的应用举例："></a>多态性的应用举例：</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">举例一：</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">func</span><span class="params">(Animal animal)</span>&#123;<span class="comment">//Animal animal = new Dog();</span></span><br><span class="line">		animal.eat();</span><br><span class="line">		animal.shout();</span><br><span class="line">	&#125;</span><br><span class="line">举例二：</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">(Object obj)</span>&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">举例三：</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Driver</span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doData</span><span class="params">(Connection conn)</span>&#123;</span><br><span class="line">	<span class="comment">//conn = new MySQlConnection();</span></span><br><span class="line">	<span class="comment">//conn = new OracleConnection();</span></span><br><span class="line">		conn.method1();</span><br><span class="line">		conn.method2();</span><br><span class="line">		conn.method3();		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="多态性使用的注意点："><a href="#多态性使用的注意点：" class="headerlink" title="多态性使用的注意点："></a>多态性使用的注意点：</h4><p><i style="color: red;">对象的多态性，只适用于方法，不适用于属性（编译和运行都看左边）</i></p>
-<h4 id="关于向上转型与向下转型："><a href="#关于向上转型与向下转型：" class="headerlink" title="关于向上转型与向下转型："></a>关于向上转型与向下转型：</h4><h5 id="向上转型：多态"><a href="#向上转型：多态" class="headerlink" title="向上转型：多态"></a>向上转型：多态</h5><h5 id="向下转型："><a href="#向下转型：" class="headerlink" title="向下转型："></a>向下转型：</h5><h6 id="为什么使用向下转型："><a href="#为什么使用向下转型：" class="headerlink" title="为什么使用向下转型："></a>为什么使用向下转型：</h6><p>有了对象的多态性以后，内存中实际上是加载了子类特有的属性和方法的，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法。子类特有的属性和方法不能调用。如何才能调用子类特的属性和方法？使用向下转型。</p>
-<h6 id="如何实现向下转型："><a href="#如何实现向下转型：" class="headerlink" title="如何实现向下转型："></a>如何实现向下转型：</h6><p>使用强制类型转换符：()</p>
-<h6 id="使用时的注意点："><a href="#使用时的注意点：" class="headerlink" title="使用时的注意点："></a>使用时的注意点：</h6><ol>
-<li>使用强转时，可能出现ClassCastException的异常。</li>
-<li>为了避免在向下转型时出现ClassCastException的异常，我们在向下转型之前，先进行instanceof的判断，一旦返回true，就进行向下转型。如果返回false，不进行向下转型。</li>
-</ol>
-<h6 id="instanceof的使用："><a href="#instanceof的使用：" class="headerlink" title="instanceof的使用："></a>instanceof的使用：</h6><ol>
-<li>a instanceof A:判断对象a是否是类A的实例。如果是，返回true；如果不是，返回false。</li>
-<li>如果 a instanceof A返回true,则 a instanceof B也返回true.其中，类B是类A的父类。</li>
-<li>要求a所属的类与类A必须是子类和父类的关系，否则编译错误。</li>
-</ol>
-<h6 id="图示："><a href="#图示：" class="headerlink" title="图示："></a>图示：</h6><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(2).bmp"
-                     
-                ></p>
-<h4 id="面试题："><a href="#面试题：" class="headerlink" title="面试题："></a>面试题：</h4><h5 id="谈谈你对多态性的理解？"><a href="#谈谈你对多态性的理解？" class="headerlink" title="谈谈你对多态性的理解？"></a>谈谈你对多态性的理解？</h5><ol>
-<li>实现代码的通用性。</li>
-<li>Object类中定义的public boolean equals(Object obj){  }</li>
-<li>JDBC:使用java程序操作(获取数据库连接、CRUD)数据库(MySQL、Oracle、DB2、SQL Server)</li>
-</ol>
-<h5 id="多态是编译时行为还是运行时行为？"><a href="#多态是编译时行为还是运行时行为？" class="headerlink" title="多态是编译时行为还是运行时行为？"></a>多态是编译时行为还是运行时行为？</h5><p><i style="color: red;">运行时行为</i></p>
-<h3 id="Object类的使用"><a href="#Object类的使用" class="headerlink" title="Object类的使用"></a>Object类的使用</h3><h4 id="java-lang-Object类的说明："><a href="#java-lang-Object类的说明：" class="headerlink" title="java.lang.Object类的说明："></a>java.lang.Object类的说明：</h4><ol>
-<li>Object类是所Java类的根父类</li>
-<li>如果在类的声明中未使用extends关键字指明其父类，则默认父类为java.lang.Object类 </li>
-<li>Object类中的功能(属性、方法)就具通用性。<br>属性：无<br>方法：equals() &#x2F; toString() &#x2F; getClass() &#x2F;hashCode() &#x2F; clone() &#x2F; finalize() wait() 、 notify()、notifyAll()</li>
-<li>Object类只声明了一个空参的构造器</li>
-</ol>
-<h4 id="equals-方法"><a href="#equals-方法" class="headerlink" title="equals()方法"></a>equals()方法</h4><h5 id="equals-的使用："><a href="#equals-的使用：" class="headerlink" title="equals()的使用："></a>equals()的使用：</h5><ol>
-<li><p>是一个方法，而非运算符</p>
-</li>
-<li><p>只能适用于引用数据类型</p>
-</li>
-<li><p>Object类中equals()的定义：</p>
-</li>
-<li><p>&#96;&#96;&#96;java<br>public boolean equals(Object obj) {<br>    return (this &#x3D;&#x3D; obj);<br>  }<br>&#x2F;<em>说明：Object类中定义的equals()和&#x3D;&#x3D;的作用是相同的：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</em>&#x2F;</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">5. 像String、Date、File、包装类等都重写了Object类中的equals()方法。重写以后，比较的不是两个引用的地址是否相同，而是比较两个对象的&quot;实体内容&quot;是否相同。</span><br><span class="line"></span><br><span class="line">6. 通常情况下，我们自定义的类如果使用equals()的话，也通常是比较两个对象的&quot;实体内容&quot;是否相同。那么，我们就需要对Object类中的equals()进行重写.</span><br><span class="line">   重写的原则：比较两个对象的实体内容是否相同.</span><br><span class="line"></span><br><span class="line">##### 如何重写equals()</span><br><span class="line"></span><br><span class="line">###### 手动重写举例：</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">class User&#123;</span><br><span class="line">	String name;</span><br><span class="line">	int age;</span><br><span class="line">	//重写其equals()方法</span><br><span class="line">	public boolean equals(Object obj)&#123;</span><br><span class="line">		if(obj == this)&#123;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">		if(obj instanceof User)&#123;</span><br><span class="line">			User u = (User)obj;</span><br><span class="line">			return this.age == u.age &amp;&amp; this.name.equals(u.name);</span><br><span class="line">		&#125;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h6 id="开发中如何实现：自动生成的"><a href="#开发中如何实现：自动生成的" class="headerlink" title="开发中如何实现：自动生成的"></a>开发中如何实现：自动生成的</h6><h5 id="回顾-x3D-x3D-运算符的使用："><a href="#回顾-x3D-x3D-运算符的使用：" class="headerlink" title="回顾 &#x3D;&#x3D; 运算符的使用："></a>回顾 &#x3D;&#x3D; 运算符的使用：</h5><p> &#x3D;&#x3D; ：运算符</p>
-<ol>
-<li>可以使用在基本数据类型变量和引用数据类型变量中</li>
-<li>如果比较的是基本数据类型变量：比较两个变量保存的数据是否相等。（不一定类型要相同）<br>如果比较的是引用数据类型变量：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</li>
-<li>补充： &#x3D;&#x3D; 符号使用时，必须保证符号左右两边的变量类型一致。</li>
-</ol>
-<h4 id="toString-方法"><a href="#toString-方法" class="headerlink" title="toString()方法"></a>toString()方法</h4><h5 id="toString-的使用："><a href="#toString-的使用：" class="headerlink" title="toString()的使用："></a>toString()的使用：</h5><ol>
-<li><p>当我们输出一个对象的引用时，实际上就是调用当前对象的toString()</p>
-</li>
-<li><p>Object类中toString()的定义：</p>
-</li>
-<li><p>&#96;&#96;&#96;java<br>public String toString() {<br>   return getClass().getName() + “@” + Integer.toHexString(hashCode());<br>}</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">4. 像String、Date、File、包装类等都重写了Object类中的toString()方法。</span><br><span class="line">   使得在调用对象的toString()时，返回&quot;实体内容&quot;信息</span><br><span class="line"></span><br><span class="line">5. 自定义类也可以重写toString()方法，当调用此方法时，返回对象的&quot;实体内容&quot;</span><br><span class="line">##### 如何重写toString()</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">//自动实现</span><br><span class="line">@Override</span><br><span class="line">public String toString() &#123;</span><br><span class="line">	return &quot;Customer [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h4 id="面试题：-1"><a href="#面试题：-1" class="headerlink" title="面试题："></a>面试题：</h4><ul>
-<li>final、finally、finalize的区别？</li>
-<li>&#x3D;&#x3D; 和 equals() 区别</li>
-</ul>
-<h3 id="单元测试方法"><a href="#单元测试方法" class="headerlink" title="单元测试方法"></a>单元测试方法</h3><p>略</p>
-<h3 id="包装类的使用"><a href="#包装类的使用" class="headerlink" title="包装类的使用"></a>包装类的使用</h3><h4 id="1-为什么要有包装类-或封装类）"><a href="#1-为什么要有包装类-或封装类）" class="headerlink" title="1.为什么要有包装类(或封装类）"></a>1.为什么要有包装类(或封装类）</h4><p>为了使基本数据类型的变量具有类的特征，引入包装类。</p>
-<h4 id="2-基本数据类型与对应的包装类："><a href="#2-基本数据类型与对应的包装类：" class="headerlink" title="2.基本数据类型与对应的包装类："></a>2.基本数据类型与对应的包装类：</h4><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/1(3).bmp"
-                     
-                ></p>
-<h4 id="3-需要掌握的类型间的转换：（基本数据类型、包装类、String）"><a href="#3-需要掌握的类型间的转换：（基本数据类型、包装类、String）" class="headerlink" title="3.需要掌握的类型间的转换：（基本数据类型、包装类、String）"></a>3.需要掌握的类型间的转换：（基本数据类型、包装类、String）</h4><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/javazhong/master/2(2).bmp"
-                     
-                ></p>
-<h5 id="简易版："><a href="#简易版：" class="headerlink" title="简易版："></a>简易版：</h5><ul>
-<li>基本数据类型&lt;—&gt;包装类：JDK 5.0 新特性：自动装箱 与自动拆箱</li>
-<li>基本数据类型、包装类—&gt;String:调用String重载的valueOf(Xxx xxx)</li>
-<li>String—&gt;基本数据类型、包装类:调用包装类的parseXxx(String s)</li>
-</ul>
-<p><i style="color: red;"> 注意：转换时，可能会报NumberFormatException</i></p>
-<h6 id="应用场景举例："><a href="#应用场景举例：" class="headerlink" title="应用场景举例："></a>应用场景举例：</h6><p>Vector类中关于添加元素，只定义了形参为Object类型的方法：</p>
-<p>v.addElement(Object obj);   &#x2F;&#x2F;基本数据类型 —&gt;包装类 —&gt;使用多态</p>
 ]]></content>
       <tags>
         <tag>JAVA</tag>
         <tag>后端学习的记录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux环境下Redis无法使用配置文件</title>
-    <url>/2023/04/19/Linux%E7%8E%AF%E5%A2%83%E4%B8%8BRedis%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<h1 id="Linux环境下Redis无法使用配置文件"><a href="#Linux环境下Redis无法使用配置文件" class="headerlink" title="Linux环境下Redis无法使用配置文件"></a>Linux环境下Redis无法使用配置文件</h1><h2 id="为什么"><a href="#为什么" class="headerlink" title="为什么?"></a>为什么?</h2><p>因为我是将<code>redis.conf</code>配置文件直接复制到<code>/myredis/</code>即根目录的myredis文件夹下，因为linux根目录下本身没有myredis文件夹所以我<code>mkdir</code>了一个我们可以查看一下下载解压redis目录下<code>redis.conf</code>的文件权限<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419122220354-1007819127.png"
-                      alt="img"
-                ></p>
-<p>可以清晰的看到该文件没有执行权限，所以我们<code>redis-server /myredis/redis.conf</code>是无法使用该配置文件的</p>
-<h2 id="怎么发现的？"><a href="#怎么发现的？" class="headerlink" title="怎么发现的？"></a>怎么发现的？</h2><p>起初我们并没有在意该配置文件是不是可执行的，而是运行了<code>redis-server&amp; /myredis/redis.conf</code>提示没有权限，</p>
-<h2 id="怎么修复"><a href="#怎么修复" class="headerlink" title="怎么修复"></a>怎么修复</h2><p>直接<code>chmod 777/myredis/redis.conf</code>或将配置文件的执行权限加上即可</p>
-]]></content>
-      <tags>
-        <tag>Linux学习，平常学习开发中遇到的问题</tag>
+        <tag>MyBaits</tag>
       </tags>
   </entry>
   <entry>
@@ -2255,148 +2277,25 @@
       </tags>
   </entry>
   <entry>
-    <title>MyBatis中关于TableId的使用</title>
-    <url>/2023/04/04/MyBatis%E4%B8%AD%E5%85%B3%E4%BA%8ETableId%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">saveWithFlavor</span><span class="params">(DishDto dishDto)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 保存菜品的基本信息到菜品表dish</span></span><br><span class="line">        <span class="built_in">this</span>.save(dishDto);</span><br><span class="line">        <span class="comment">//菜品id 雪花算法自动生成只要经过id操作。即可马上赋值</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">dishId</span> <span class="operator">=</span> dishDto.getId();</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<p><img  
+    <title>SpringBoot中yml格式配置文件关于数据库密码的读取</title>
+    <url>/2022/04/19/SpringBoot%E4%B8%ADyml%E6%A0%BC%E5%BC%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%85%B3%E4%BA%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%86%E7%A0%81%E7%9A%84%E8%AF%BB%E5%8F%96/</url>
+    <content><![CDATA[<h1 id="SpringBoot中yml格式配置文件关于数据库密码的读取"><a href="#SpringBoot中yml格式配置文件关于数据库密码的读取" class="headerlink" title="SpringBoot中yml格式配置文件关于数据库密码的读取"></a>SpringBoot中yml格式配置文件关于数据库密码的读取</h1><p>MySQL连接不到数据库说是密码错误<br><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto2/master/Snipaste_2023-04-04_19-45-54.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202303/2866182-20230328081317571-482717223.png"
+                      alt="img"
                 ></p>
-]]></content>
-      <tags>
-        <tag>JAVA</tag>
-        <tag>后端学习的记录</tag>
-        <tag>MyBaits</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SpringBoot学习笔记-基础篇</title>
-    <url>/2023/02/27/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0--%E5%9F%BA%E7%A1%80%E7%AF%87/</url>
-    <content><![CDATA[<h1 id="SpringBoot学习笔记-基础篇"><a href="#SpringBoot学习笔记-基础篇" class="headerlink" title="SpringBoot学习笔记-基础篇"></a>SpringBoot学习笔记-基础篇</h1><h2 id="配置文件的使用"><a href="#配置文件的使用" class="headerlink" title="配置文件的使用"></a>配置文件的使用</h2><h3 id="配置文件的类型"><a href="#配置文件的类型" class="headerlink" title="配置文件的类型"></a>配置文件的类型</h3><h4 id="properties-传统格式-x2F-默认格式"><a href="#properties-传统格式-x2F-默认格式" class="headerlink" title="properties(传统格式&#x2F;默认格式)"></a>properties(传统格式&#x2F;默认格式)</h4><figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 服务器端口配置</span></span><br><span class="line"><span class="attr">server.port</span>=<span class="string">80</span></span><br><span class="line"><span class="comment"># 修改banner</span></span><br><span class="line"><span class="attr">spring.main.banner-mode</span>=<span class="string">off</span></span><br><span class="line"><span class="attr">spring.banner.image.location</span>=<span class="string">logo.png</span></span><br><span class="line"><span class="comment"># 日志</span></span><br><span class="line"><span class="attr">logging.level.root</span>=<span class="string">info</span></span><br><span class="line"><span class="attr">logging.level.com.itheima</span>=<span class="string">warn</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="yaml-主流格式-x2F-常用"><a href="#yaml-主流格式-x2F-常用" class="headerlink" title="yaml(主流格式&#x2F;常用)"></a>yaml(主流格式&#x2F;常用)</h4><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">82</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="yml"><a href="#yml" class="headerlink" title="yml"></a>yml</h4><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">81</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="SpringBoot配置文件加载顺序"><a href="#SpringBoot配置文件加载顺序" class="headerlink" title="SpringBoot配置文件加载顺序"></a>SpringBoot配置文件加载顺序</h4><p>application.properties &gt; application.yml &gt; application.yaml</p>
-<h4 id="yaml语法总结"><a href="#yaml语法总结" class="headerlink" title="yaml语法总结"></a>yaml语法总结</h4><h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>YAML（YAML Ain’t Markup Language），一种数据序列化格式YAML</p>
-<p>文件扩展名	.yml（主流）	.yaml</p>
-<h5 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h5><ul>
-<li>大小写敏感</li>
-<li>属性层级关系使用多行描述，每行结尾使用冒号结束</li>
-<li>使用缩进表示层级关系，同层级左侧对齐，只允许使用空格（不允许使用Tab键）</li>
-<li>属性值前面添加空格（属性名与属性值之间使用冒号+空格作为分隔）</li>
-<li>星号*表示注释</li>
-<li><strong>核心规则：数据前面要加空格与冒号隔开</strong></li>
-</ul>
-<h6 id="字面值表示方式"><a href="#字面值表示方式" class="headerlink" title="字面值表示方式"></a>字面值表示方式</h6><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>boolean: TRUE</td>
-<td>TRUE,true,True,FALSE,false,False均可</td>
-</tr>
-<tr>
-<td>float: 3.14</td>
-<td>6.8523015e+5     支持科学计数法</td>
-</tr>
-<tr>
-<td>int: 123</td>
-<td>0b1010_0111_0100_1010_1110    支持二、八、十六进制</td>
-</tr>
-<tr>
-<td>null: ~</td>
-<td>使用~表示null</td>
-</tr>
-<tr>
-<td>string: HelloWorld</td>
-<td>字符串可以直接书写</td>
-</tr>
-<tr>
-<td>string2: “Hello World”</td>
-<td>可以使用双引号包裹特殊字符</td>
-</tr>
-<tr>
-<td>date: 2023-02-22</td>
-<td>日期必须使用yyyy-MN-dd格式</td>
-</tr>
-<tr>
-<td>datetime: 2023-02-22T18:09:00+08:00</td>
-<td>时间和日期之间使用T连接，最后使用+代表时区</td>
-</tr>
-</tbody></table>
-<h6 id="数组表示方式"><a href="#数组表示方式" class="headerlink" title="数组表示方式"></a>数组表示方式</h6><p>在属性名书写位置的下方使用减号作为数据开始符号，每行书写一个数据，减号与数据间空格分隔</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">subject:</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">Java</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">前端</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">大数据</span></span><br><span class="line"><span class="attr">enterprise:</span></span><br><span class="line">	<span class="attr">name:</span> <span class="string">itcast</span></span><br><span class="line">	<span class="attr">age:</span> <span class="number">16</span></span><br><span class="line">	<span class="attr">subject:</span></span><br><span class="line">		<span class="bullet">-</span> <span class="string">Java</span></span><br><span class="line">		<span class="bullet">-</span> <span class="string">前端</span></span><br><span class="line">		<span class="bullet">-</span> <span class="string">大数据</span></span><br><span class="line"><span class="attr">likes:</span> [<span class="string">王者荣耀</span>,<span class="string">刺激战场</span>]	<span class="comment">#数组书写缩略格式</span></span><br><span class="line"></span><br><span class="line"><span class="attr">users:</span> <span class="comment">#对象数组格式一</span></span><br><span class="line">	<span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Tom</span></span><br><span class="line">	  <span class="attr">age:</span> <span class="number">4</span></span><br><span class="line">	<span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Jerry</span></span><br><span class="line">	  <span class="attr">age:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">users:</span> <span class="comment">#对象数组格式二</span></span><br><span class="line">	<span class="bullet">-</span></span><br><span class="line">		<span class="attr">name:</span> <span class="string">Tom</span></span><br><span class="line">		<span class="attr">age:</span> <span class="number">4</span></span><br><span class="line">	<span class="bullet">-</span></span><br><span class="line">		<span class="attr">name:</span> <span class="string">Jerry</span></span><br><span class="line">		<span class="attr">age:</span> <span class="number">5</span></span><br><span class="line"><span class="comment">#对象数组缩略格式</span></span><br><span class="line"><span class="attr">users2:</span> [ &#123; <span class="string">name:Tom</span> , <span class="string">age:4</span> &#125; , &#123; <span class="string">name:Jerry</span> , <span class="string">age:5</span> &#125; ]</span><br></pre></td></tr></table></figure>
-
-<h5 id="yaml数据的读取"><a href="#yaml数据的读取" class="headerlink" title="yaml数据的读取"></a>yaml数据的读取</h5><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#application.yaml中的数据</span></span><br><span class="line"></span><br><span class="line"><span class="attr">country:</span> <span class="string">china</span></span><br><span class="line"></span><br><span class="line"><span class="attr">user1:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">itcast</span></span><br><span class="line">  <span class="attr">age:</span> <span class="number">16</span></span><br><span class="line">  </span><br><span class="line"><span class="attr">likes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">game</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">music</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">sleep</span>  </span><br><span class="line">  </span><br><span class="line"><span class="attr">users:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">zhangsan</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">18</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">lisi</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">17</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">#使用$&#123;属性名&#125;引用数据</span></span><br><span class="line"><span class="attr">tempDir:</span> <span class="string">$&#123;baseDir&#125;\temp</span></span><br><span class="line"><span class="comment">#使用引号包裹的字符串，其中的转义字符可以生效</span></span><br><span class="line"><span class="attr">tempDir2:</span> <span class="string">&quot;$&#123;baseDir&#125;\temp\t1\t2\t3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建类，用于封装下面的数据</span></span><br><span class="line"><span class="comment"># 由spring帮我们去加载数据到对象中，一定要告诉spring加载这组信息</span></span><br><span class="line"><span class="comment"># 使用时候从spring中直接获取信息使用</span></span><br><span class="line"><span class="attr">datasource:</span></span><br><span class="line">  <span class="attr">driver:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost/springboot_db</span></span><br><span class="line">  <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">root666</span></span><br></pre></td></tr></table></figure>
-
-<h6 id="方式一：单个获取单个读取"><a href="#方式一：单个获取单个读取" class="headerlink" title="方式一：单个获取单个读取"></a>方式一：单个获取单个读取</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Java读取application.yaml中的数据</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Value(&quot;$&#123;country&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String country1;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;user1.name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String name;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;likes[0]&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String likes;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;users[0].name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String users;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;tempDir&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String tempDir;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;tempDir2&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String tempDir2;</span><br></pre></td></tr></table></figure>
-
-<h6 id="方式二：统一获取单个读取"><a href="#方式二：统一获取单个读取" class="headerlink" title="方式二：统一获取单个读取"></a>方式二：统一获取单个读取</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//使用自动装配将所有的数据封装到一个对象Environment中</span></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> Environment env;</span><br></pre></td></tr></table></figure>
-
-<h6 id="方式三：放在对象中"><a href="#方式三：放在对象中" class="headerlink" title="方式三：放在对象中"></a>方式三：放在对象中</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//2.定义为spring管控的bean</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="comment">//3.指定加载的数据，prefix名也要一直</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;datasource&quot;)</span></span><br><span class="line"><span class="comment">//1.定义数据模型封装yaml文件中对应的数据</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyDataSource</span> &#123;</span><br><span class="line">    <span class="comment">//属性要与yaml文件中的属性名一致</span></span><br><span class="line">    <span class="keyword">private</span> String driver;</span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    </span><br><span class="line">    get()/set()方法	<span class="comment">//必须</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="整合第三方技术"><a href="#整合第三方技术" class="headerlink" title="整合第三方技术"></a>整合第三方技术</h2><h3 id="整合JUnit"><a href="#整合JUnit" class="headerlink" title="整合JUnit"></a>整合JUnit</h3><p>测试类SpringBoot已经帮忙构建了，只需要</p>
-<ol>
-<li>注入你要测试的对象</li>
-<li>执行要测试的对象对应的方法</li>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>密码明明输入的是0127，为什么打印的时候会是87呢？</p>
+<p>如果使用yml格式的配置文件int类型数据它只支持二进制、八进制、十六进制，恰逢改密码又以0开头各个位数&lt;8,所有会将其解析为二进制</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ol>
+<li>将password的值加上引号</li>
+<li>接收参数时候将String转为int，即<code>private int password;</code></li>
 </ol>
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>如果测试类文件不在<strong>主配置类文件的同级或子级包</strong>如同下图，那么就会报错</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-22_19-00-24.jpg"
-                     
-                ></p>
-<p style="color: red">java.lang.IllegalStateException: Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=...) with your test</p>
-
-<p>因此我们需要手动添加主配置类路径</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//这俩注解任选一个</span></span><br><span class="line"><span class="meta">@SpringBootTest(classes = Springboot04JunitApplication.class)</span></span><br><span class="line"><span class="meta">@ContextConfiguration(classes = Springboot04JunitApplication.class)</span></span><br></pre></td></tr></table></figure>
-
-<p>因为上述报错显示</p>
-<p style="color: red">Unable to find a @SpringBootConfiguration</p>
-
-<p>所以在主配置文件的**@SpringBootApplication**注解中可以发现</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-22_19-05-37.jpg"
-                     
-                ></p>
-<h3 id="整合MyBatis"><a href="#整合MyBatis" class="headerlink" title="整合MyBatis"></a>整合MyBatis</h3><h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><h5 id="1-选择技术集"><a href="#1-选择技术集" class="headerlink" title="1.选择技术集"></a>1.选择技术集</h5><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-23_15-04-47.jpg"
-                     
-                ></p>
-<h5 id="2-设置数据源参数"><a href="#2-设置数据源参数" class="headerlink" title="2.设置数据源参数"></a>2.设置数据源参数</h5><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#2.配置相关信息</span></span><br><span class="line"><span class="comment">#application.yml</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/springboot</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">666</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="3-定义数据层接口与映射配置"><a href="#3-定义数据层接口与映射配置" class="headerlink" title="3.定义数据层接口与映射配置"></a>3.定义数据层接口与映射配置</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">BookDao</span> &#123;</span><br><span class="line">    <span class="meta">@Select(&quot;select * from tbl_book where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Book <span class="title function_">getById</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> Integer id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="整合MyBatis-Plus"><a href="#整合MyBatis-Plus" class="headerlink" title="整合MyBatis-Plus"></a>整合MyBatis-Plus</h3><h4 id="1-选择技术集-1"><a href="#1-选择技术集-1" class="headerlink" title="1.选择技术集"></a>1.选择技术集</h4><p>步骤与整合MyBatis相似,但是</p>
-<p style="color:red">在选择技术集时不选择MyBatis Framework</p>
-
-<p>而是手动引入MyBatis-Plus依赖。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-定义数据层接口与映射配置"><a href="#2-定义数据层接口与映射配置" class="headerlink" title="2.定义数据层接口与映射配置"></a>2.定义数据层接口与映射配置</h4><p style="color:red">无需手写接口和映射文件，只需继承BaseMapper<实体类></p>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">BookDao</span> <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;Book&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="整合Druid"><a href="#整合Druid" class="headerlink" title="整合Druid"></a>整合Druid</h3><h4 id="1-选择技术集-2"><a href="#1-选择技术集-2" class="headerlink" title="1.选择技术集"></a>1.选择技术集</h4><p>步骤与整合MyBatis一样,选择MyBatis Framework和MySQL Driver</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-定义数据层接口与映射配置-1"><a href="#2-定义数据层接口与映射配置-1" class="headerlink" title="2.定义数据层接口与映射配置"></a>2.定义数据层接口与映射配置</h4><p>与整合MyBatis一样</p>
 ]]></content>
       <tags>
         <tag>JAVA</tag>
         <tag>后端学习的记录</tag>
+        <tag>BUG菇的出现与消亡</tag>
         <tag>SpringBoot2</tag>
       </tags>
   </entry>
@@ -2598,7 +2497,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Map&lt;String, Object&gt; <span class="title function_">getUserByIdToMap</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> Integer id)</span>;</span><br></pre></td></tr></table></figure>
 
-<p>查询结果为：{password&#x3D;123456, gender&#x3D;男, id&#x3D;1, age&#x3D;23, email&#x3D;<a class="link"   href="mailto:&#49;&#50;&#x33;&#x34;&#x35;&#54;&#64;&#113;&#113;&#46;&#x63;&#111;&#109;" >&#49;&#50;&#x33;&#x34;&#x35;&#54;&#64;&#113;&#113;&#46;&#x63;&#111;&#109;<i class="fas fa-external-link-alt"></i></a>, username&#x3D;root}</p>
+<p>查询结果为：{password&#x3D;123456, gender&#x3D;男, id&#x3D;1, age&#x3D;23, email&#x3D;<a class="link"   href="mailto:&#x31;&#x32;&#x33;&#52;&#53;&#x36;&#x40;&#113;&#113;&#46;&#99;&#x6f;&#109;" >&#x31;&#x32;&#x33;&#52;&#53;&#x36;&#x40;&#113;&#113;&#46;&#99;&#x6f;&#109;<i class="fas fa-external-link-alt"></i></a>, username&#x3D;root}</p>
 <h3 id="查询多条数据为map集合"><a href="#查询多条数据为map集合" class="headerlink" title="查询多条数据为map集合"></a>查询多条数据为map集合</h3><p>查询多条数据时有两种方式，第一种是将每一条map放到泛型为map的list集合中，第二种是使用@MapKey注解</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Map&lt;String, Object&gt;&gt; <span class="title function_">getAllUserToMap</span><span class="params">()</span>;</span><br><span class="line"><span class="comment">//结果：&#123;password=123456, gender=男, id=1, age=23, email=12345@qq.com, username=admin&#125;,&#123;password=123456, //gender=男, id=1, age=23, email=12345@qq.com, username=admin&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@MapKey(&quot;id&quot;)</span></span><br><span class="line">Map&lt;String, Object&gt; <span class="title function_">getAllUserToMap</span><span class="params">()</span>;</span><br><span class="line"><span class="comment">//结果：&#123;1=&#123;password=123456, gender=男, id=1, age=23, email=12345@qq.com, username=admin&#125;,2=&#123;password=123, gender=男, id=2, age=23, email=12345@qq.com, username=zhangsan&#125;,3=&#123;password=123456, gender=女, id=3, age=33, email=123@qq.com, username=root&#125;,4=&#123;password=123, id=4, username=lisi&#125;&#125;</span></span><br></pre></td></tr></table></figure>
 
@@ -2625,7 +2524,7 @@
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--void insertUser(User user);</span></span><br><span class="line"><span class="comment">	useGeneratedKeys:表示当前添加功能使用自增的主键</span></span><br><span class="line"><span class="comment">	keyProperty:将添加的数据的自增主键为实体类类型的参数的属性赋值</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insertUser&quot;</span> <span class="attr">useGeneratedKeys</span>=<span class="string">&quot;true&quot;</span> <span class="attr">keyProperty</span>=<span class="string">&quot;id&quot;</span>&gt;</span></span><br><span class="line">	insert into t_user values(null,#&#123;username&#125;,#&#123;password&#125;,#&#123;age&#125;,#&#123;gender&#125;,#&#123;email&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>改造后输出结果：User{id&#x3D;9, username&#x3D;’lisi’, password&#x3D;’123456’, age&#x3D;12, gender&#x3D;’男’, email&#x3D;‘<a class="link"   href="mailto:&#49;&#50;&#x33;&#x34;&#64;&#x71;&#113;&#46;&#99;&#x6f;&#109;" >&#49;&#50;&#x33;&#x34;&#64;&#x71;&#113;&#46;&#99;&#x6f;&#109;<i class="fas fa-external-link-alt"></i></a>‘}</p>
+<p>改造后输出结果：User{id&#x3D;9, username&#x3D;’lisi’, password&#x3D;’123456’, age&#x3D;12, gender&#x3D;’男’, email&#x3D;‘<a class="link"   href="mailto:&#x31;&#50;&#x33;&#52;&#x40;&#113;&#113;&#x2e;&#x63;&#x6f;&#109;" >&#x31;&#50;&#x33;&#52;&#x40;&#113;&#113;&#x2e;&#x63;&#x6f;&#109;<i class="fas fa-external-link-alt"></i></a>‘}</p>
 </blockquote>
 <h2 id="自定义映射resultMap"><a href="#自定义映射resultMap" class="headerlink" title="自定义映射resultMap"></a>自定义映射resultMap</h2><h3 id="为什么要使用resultMap"><a href="#为什么要使用resultMap" class="headerlink" title="为什么要使用resultMap?"></a>为什么要使用resultMap?</h3><p>因为后端数据库中的字段与java中的pojo类的属性名不一样。例如在java中员工ID的表示方法为<strong>empId</strong>，而在数据库中表示为<strong>emp_id</strong>。</p>
 <h3 id="字段名和属性名不一致时如何处理？"><a href="#字段名和属性名不一致时如何处理？" class="headerlink" title="字段名和属性名不一致时如何处理？"></a>字段名和属性名不一致时如何处理？</h3><h4 id="1、为查询的字段设置别名，和属性名保持一致"><a href="#1、为查询的字段设置别名，和属性名保持一致" class="headerlink" title="1、为查询的字段设置别名，和属性名保持一致"></a>1、为查询的字段设置别名，和属性名保持一致</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getEmpByEmpId&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;Emp&quot;</span>&gt;</span></span><br><span class="line">	select emp_id empId,emp_name empName,age,gender from t_emp where emp_id = #&#123;empId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -2820,8 +2719,8 @@
 <h4 id="4、执行MBG插件的generate目标"><a href="#4、执行MBG插件的generate目标" class="headerlink" title="4、执行MBG插件的generate目标"></a>4、执行MBG插件的generate目标</h4><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-11_16-49-32.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419141723549-1700110470.jpg"
+                      alt="img"
                 ></p>
 <h3 id="奢华尊享版使用说明"><a href="#奢华尊享版使用说明" class="headerlink" title="奢华尊享版使用说明"></a>奢华尊享版使用说明</h3><h4 id="常用单词说明"><a href="#常用单词说明" class="headerlink" title="常用单词说明"></a>常用单词说明</h4><table>
 <thead>
@@ -2856,8 +2755,8 @@
 <h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><p>原数据：<img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-11_17-15-17.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419141743603-604105468.jpg"
+                      alt="img"
                 ></p>
 <h5 id="普通修改"><a href="#普通修改" class="headerlink" title="普通修改"></a>普通修改</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Emp</span> <span class="variable">emp</span> <span class="operator">=</span>  <span class="keyword">new</span> <span class="title class_">Emp</span>(<span class="number">1</span>,<span class="string">&quot;小黑&quot;</span>,<span class="literal">null</span>,<span class="string">&quot;女&quot;</span>);</span><br><span class="line">mapper.updateByPrimaryKey(emp);</span><br></pre></td></tr></table></figure>
 
@@ -2866,8 +2765,8 @@
 <p>更新后数据：<img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-11_17-17-48.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419141754925-477113725.jpg"
+                      alt="img"
                 ></p>
 <h5 id="选择性修改"><a href="#选择性修改" class="headerlink" title="选择性修改"></a>选择性修改</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">mapper.updateByPrimaryKeySelective(emp);</span><br></pre></td></tr></table></figure>
 
@@ -2876,8 +2775,8 @@
 <p>更新后数据<img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-11_17-17-48.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419141754925-477113725.jpg"
+                      alt="img"
                 ></p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>使用Selective选择性代表手动输入SQL语句中为null的条件系统直接忽略，而不使用Selective则为将数据改为null</p>
 <h2 id="分页插件"><a href="#分页插件" class="headerlink" title="分页插件"></a>分页插件</h2><h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><h4 id="1、添加依赖-1"><a href="#1、添加依赖-1" class="headerlink" title="1、添加依赖"></a>1、添加依赖</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -2964,6 +2863,135 @@
       </tags>
   </entry>
   <entry>
+    <title>SpringBoot学习笔记-基础篇</title>
+    <url>/2023/02/27/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0--%E5%9F%BA%E7%A1%80%E7%AF%87/</url>
+    <content><![CDATA[<h1 id="SpringBoot学习笔记-基础篇"><a href="#SpringBoot学习笔记-基础篇" class="headerlink" title="SpringBoot学习笔记-基础篇"></a>SpringBoot学习笔记-基础篇</h1><h2 id="配置文件的使用"><a href="#配置文件的使用" class="headerlink" title="配置文件的使用"></a>配置文件的使用</h2><h3 id="配置文件的类型"><a href="#配置文件的类型" class="headerlink" title="配置文件的类型"></a>配置文件的类型</h3><h4 id="properties-传统格式-x2F-默认格式"><a href="#properties-传统格式-x2F-默认格式" class="headerlink" title="properties(传统格式&#x2F;默认格式)"></a>properties(传统格式&#x2F;默认格式)</h4><figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 服务器端口配置</span></span><br><span class="line"><span class="attr">server.port</span>=<span class="string">80</span></span><br><span class="line"><span class="comment"># 修改banner</span></span><br><span class="line"><span class="attr">spring.main.banner-mode</span>=<span class="string">off</span></span><br><span class="line"><span class="attr">spring.banner.image.location</span>=<span class="string">logo.png</span></span><br><span class="line"><span class="comment"># 日志</span></span><br><span class="line"><span class="attr">logging.level.root</span>=<span class="string">info</span></span><br><span class="line"><span class="attr">logging.level.com.itheima</span>=<span class="string">warn</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="yaml-主流格式-x2F-常用"><a href="#yaml-主流格式-x2F-常用" class="headerlink" title="yaml(主流格式&#x2F;常用)"></a>yaml(主流格式&#x2F;常用)</h4><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">82</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="yml"><a href="#yml" class="headerlink" title="yml"></a>yml</h4><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">81</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="SpringBoot配置文件加载顺序"><a href="#SpringBoot配置文件加载顺序" class="headerlink" title="SpringBoot配置文件加载顺序"></a>SpringBoot配置文件加载顺序</h4><p>application.properties &gt; application.yml &gt; application.yaml</p>
+<h4 id="yaml语法总结"><a href="#yaml语法总结" class="headerlink" title="yaml语法总结"></a>yaml语法总结</h4><h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>YAML（YAML Ain’t Markup Language），一种数据序列化格式YAML</p>
+<p>文件扩展名	.yml（主流）	.yaml</p>
+<h5 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h5><ul>
+<li>大小写敏感</li>
+<li>属性层级关系使用多行描述，每行结尾使用冒号结束</li>
+<li>使用缩进表示层级关系，同层级左侧对齐，只允许使用空格（不允许使用Tab键）</li>
+<li>属性值前面添加空格（属性名与属性值之间使用冒号+空格作为分隔）</li>
+<li>星号*表示注释</li>
+<li><strong>核心规则：数据前面要加空格与冒号隔开</strong></li>
+</ul>
+<h6 id="字面值表示方式"><a href="#字面值表示方式" class="headerlink" title="字面值表示方式"></a>字面值表示方式</h6><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean: TRUE</td>
+<td>TRUE,true,True,FALSE,false,False均可</td>
+</tr>
+<tr>
+<td>float: 3.14</td>
+<td>6.8523015e+5     支持科学计数法</td>
+</tr>
+<tr>
+<td>int: 123</td>
+<td>0b1010_0111_0100_1010_1110    支持二、八、十六进制</td>
+</tr>
+<tr>
+<td>null: ~</td>
+<td>使用~表示null</td>
+</tr>
+<tr>
+<td>string: HelloWorld</td>
+<td>字符串可以直接书写</td>
+</tr>
+<tr>
+<td>string2: “Hello World”</td>
+<td>可以使用双引号包裹特殊字符</td>
+</tr>
+<tr>
+<td>date: 2023-02-22</td>
+<td>日期必须使用yyyy-MN-dd格式</td>
+</tr>
+<tr>
+<td>datetime: 2023-02-22T18:09:00+08:00</td>
+<td>时间和日期之间使用T连接，最后使用+代表时区</td>
+</tr>
+</tbody></table>
+<h6 id="数组表示方式"><a href="#数组表示方式" class="headerlink" title="数组表示方式"></a>数组表示方式</h6><p>在属性名书写位置的下方使用减号作为数据开始符号，每行书写一个数据，减号与数据间空格分隔</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">subject:</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">Java</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">前端</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">大数据</span></span><br><span class="line"><span class="attr">enterprise:</span></span><br><span class="line">	<span class="attr">name:</span> <span class="string">itcast</span></span><br><span class="line">	<span class="attr">age:</span> <span class="number">16</span></span><br><span class="line">	<span class="attr">subject:</span></span><br><span class="line">		<span class="bullet">-</span> <span class="string">Java</span></span><br><span class="line">		<span class="bullet">-</span> <span class="string">前端</span></span><br><span class="line">		<span class="bullet">-</span> <span class="string">大数据</span></span><br><span class="line"><span class="attr">likes:</span> [<span class="string">王者荣耀</span>,<span class="string">刺激战场</span>]	<span class="comment">#数组书写缩略格式</span></span><br><span class="line"></span><br><span class="line"><span class="attr">users:</span> <span class="comment">#对象数组格式一</span></span><br><span class="line">	<span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Tom</span></span><br><span class="line">	  <span class="attr">age:</span> <span class="number">4</span></span><br><span class="line">	<span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Jerry</span></span><br><span class="line">	  <span class="attr">age:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">users:</span> <span class="comment">#对象数组格式二</span></span><br><span class="line">	<span class="bullet">-</span></span><br><span class="line">		<span class="attr">name:</span> <span class="string">Tom</span></span><br><span class="line">		<span class="attr">age:</span> <span class="number">4</span></span><br><span class="line">	<span class="bullet">-</span></span><br><span class="line">		<span class="attr">name:</span> <span class="string">Jerry</span></span><br><span class="line">		<span class="attr">age:</span> <span class="number">5</span></span><br><span class="line"><span class="comment">#对象数组缩略格式</span></span><br><span class="line"><span class="attr">users2:</span> [ &#123; <span class="string">name:Tom</span> , <span class="string">age:4</span> &#125; , &#123; <span class="string">name:Jerry</span> , <span class="string">age:5</span> &#125; ]</span><br></pre></td></tr></table></figure>
+
+<h5 id="yaml数据的读取"><a href="#yaml数据的读取" class="headerlink" title="yaml数据的读取"></a>yaml数据的读取</h5><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#application.yaml中的数据</span></span><br><span class="line"></span><br><span class="line"><span class="attr">country:</span> <span class="string">china</span></span><br><span class="line"></span><br><span class="line"><span class="attr">user1:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">itcast</span></span><br><span class="line">  <span class="attr">age:</span> <span class="number">16</span></span><br><span class="line">  </span><br><span class="line"><span class="attr">likes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">game</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">music</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">sleep</span>  </span><br><span class="line">  </span><br><span class="line"><span class="attr">users:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">zhangsan</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">18</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">lisi</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">17</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">#使用$&#123;属性名&#125;引用数据</span></span><br><span class="line"><span class="attr">tempDir:</span> <span class="string">$&#123;baseDir&#125;\temp</span></span><br><span class="line"><span class="comment">#使用引号包裹的字符串，其中的转义字符可以生效</span></span><br><span class="line"><span class="attr">tempDir2:</span> <span class="string">&quot;$&#123;baseDir&#125;\temp\t1\t2\t3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建类，用于封装下面的数据</span></span><br><span class="line"><span class="comment"># 由spring帮我们去加载数据到对象中，一定要告诉spring加载这组信息</span></span><br><span class="line"><span class="comment"># 使用时候从spring中直接获取信息使用</span></span><br><span class="line"><span class="attr">datasource:</span></span><br><span class="line">  <span class="attr">driver:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost/springboot_db</span></span><br><span class="line">  <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">root666</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="方式一：单个获取单个读取"><a href="#方式一：单个获取单个读取" class="headerlink" title="方式一：单个获取单个读取"></a>方式一：单个获取单个读取</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Java读取application.yaml中的数据</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Value(&quot;$&#123;country&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String country1;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;user1.name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String name;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;likes[0]&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String likes;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;users[0].name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String users;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;tempDir&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String tempDir;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;tempDir2&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String tempDir2;</span><br></pre></td></tr></table></figure>
+
+<h6 id="方式二：统一获取单个读取"><a href="#方式二：统一获取单个读取" class="headerlink" title="方式二：统一获取单个读取"></a>方式二：统一获取单个读取</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//使用自动装配将所有的数据封装到一个对象Environment中</span></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> Environment env;</span><br></pre></td></tr></table></figure>
+
+<h6 id="方式三：放在对象中"><a href="#方式三：放在对象中" class="headerlink" title="方式三：放在对象中"></a>方式三：放在对象中</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//2.定义为spring管控的bean</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="comment">//3.指定加载的数据，prefix名也要一直</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;datasource&quot;)</span></span><br><span class="line"><span class="comment">//1.定义数据模型封装yaml文件中对应的数据</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyDataSource</span> &#123;</span><br><span class="line">    <span class="comment">//属性要与yaml文件中的属性名一致</span></span><br><span class="line">    <span class="keyword">private</span> String driver;</span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    </span><br><span class="line">    get()/set()方法	<span class="comment">//必须</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="整合第三方技术"><a href="#整合第三方技术" class="headerlink" title="整合第三方技术"></a>整合第三方技术</h2><h3 id="整合JUnit"><a href="#整合JUnit" class="headerlink" title="整合JUnit"></a>整合JUnit</h3><p>测试类SpringBoot已经帮忙构建了，只需要</p>
+<ol>
+<li>注入你要测试的对象</li>
+<li>执行要测试的对象对应的方法</li>
+</ol>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>如果测试类文件不在<strong>主配置类文件的同级或子级包</strong>如同下图，那么就会报错</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419142120843-1226470023.jpg"
+                      alt="img"
+                ></p>
+<p style="color: red">java.lang.IllegalStateException: Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=...) with your test</p>
+
+<p>因此我们需要手动添加主配置类路径</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//这俩注解任选一个</span></span><br><span class="line"><span class="meta">@SpringBootTest(classes = Springboot04JunitApplication.class)</span></span><br><span class="line"><span class="meta">@ContextConfiguration(classes = Springboot04JunitApplication.class)</span></span><br></pre></td></tr></table></figure>
+
+<p>因为上述报错显示</p>
+<p style="color: red">Unable to find a @SpringBootConfiguration</p>
+
+<p>所以在主配置文件的**@SpringBootApplication**注解中可以发现</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419142133369-338890028.jpg"
+                      alt="img"
+                ></p>
+<h3 id="整合MyBatis"><a href="#整合MyBatis" class="headerlink" title="整合MyBatis"></a>整合MyBatis</h3><h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><h5 id="1-选择技术集"><a href="#1-选择技术集" class="headerlink" title="1.选择技术集"></a>1.选择技术集</h5><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419142143829-1154472937.jpg"
+                      alt="img"
+                ></p>
+<h5 id="2-设置数据源参数"><a href="#2-设置数据源参数" class="headerlink" title="2.设置数据源参数"></a>2.设置数据源参数</h5><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment">#2.配置相关信息</span></span><br><span class="line"><span class="comment">#application.yml</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/springboot</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">666</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-定义数据层接口与映射配置"><a href="#3-定义数据层接口与映射配置" class="headerlink" title="3.定义数据层接口与映射配置"></a>3.定义数据层接口与映射配置</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">BookDao</span> &#123;</span><br><span class="line">    <span class="meta">@Select(&quot;select * from tbl_book where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Book <span class="title function_">getById</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> Integer id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="整合MyBatis-Plus"><a href="#整合MyBatis-Plus" class="headerlink" title="整合MyBatis-Plus"></a>整合MyBatis-Plus</h3><h4 id="1-选择技术集-1"><a href="#1-选择技术集-1" class="headerlink" title="1.选择技术集"></a>1.选择技术集</h4><p>步骤与整合MyBatis相似,但是</p>
+<p style="color:red">在选择技术集时不选择MyBatis Framework</p>
+
+<p>而是手动引入MyBatis-Plus依赖。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-定义数据层接口与映射配置"><a href="#2-定义数据层接口与映射配置" class="headerlink" title="2.定义数据层接口与映射配置"></a>2.定义数据层接口与映射配置</h4><p style="color:red">无需手写接口和映射文件，只需继承BaseMapper<实体类></p>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">BookDao</span> <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;Book&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="整合Druid"><a href="#整合Druid" class="headerlink" title="整合Druid"></a>整合Druid</h3><h4 id="1-选择技术集-2"><a href="#1-选择技术集-2" class="headerlink" title="1.选择技术集"></a>1.选择技术集</h4><p>步骤与整合MyBatis一样,选择MyBatis Framework和MySQL Driver</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-定义数据层接口与映射配置-1"><a href="#2-定义数据层接口与映射配置-1" class="headerlink" title="2.定义数据层接口与映射配置"></a>2.定义数据层接口与映射配置</h4><p>与整合MyBatis一样</p>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端学习的记录</tag>
+        <tag>SpringBoot2</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SpringBoot学习笔记-运维篇</title>
     <url>/2023/03/15/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0--%E8%BF%90%E7%BB%B4%E7%AF%87/</url>
     <content><![CDATA[<h1 id="SpringBoot学习笔记–运维篇"><a href="#SpringBoot学习笔记–运维篇" class="headerlink" title="SpringBoot学习笔记–运维篇"></a>SpringBoot学习笔记–运维篇</h1><h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><h3 id="配置文件的分类"><a href="#配置文件的分类" class="headerlink" title="配置文件的分类"></a>配置文件的分类</h3><h4 id="SpringBoot中4级配置文件"><a href="#SpringBoot中4级配置文件" class="headerlink" title="SpringBoot中4级配置文件"></a>SpringBoot中4级配置文件</h4><p>1级： file ：config&#x2F;application.yml</p>
@@ -2973,15 +3001,15 @@
 <h3 id="自定义配置文件"><a href="#自定义配置文件" class="headerlink" title="自定义配置文件"></a>自定义配置文件</h3><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-03-03_19-31-51.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419142318652-27245035.jpg"
+                      alt="img"
                 ></p>
 <p>如上图，SpringBoot默认的配置文件名为application.properties ,如果改了后缀SpringBoot仍然能够识别出来。但如果改了后缀就需要声明一些</p>
 <h4 id="改了配置文件的前缀"><a href="#改了配置文件的前缀" class="headerlink" title="改了配置文件的前缀"></a>改了配置文件的前缀</h4><h5 id="第一种方式：告诉前缀名字"><a href="#第一种方式：告诉前缀名字" class="headerlink" title="第一种方式：告诉前缀名字"></a>第一种方式：告诉前缀名字</h5><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-03-03_19-36-11.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419142330227-2064864197.jpg"
+                      alt="img"
                 ></p>
 <p>在启动配置添加</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">--spring.config.name=ebank</span><br></pre></td></tr></table></figure>
@@ -2989,16 +3017,16 @@
 <h5 id="第二种方式：告诉配置文件位置"><a href="#第二种方式：告诉配置文件位置" class="headerlink" title="第二种方式：告诉配置文件位置"></a>第二种方式：告诉配置文件位置</h5><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-03-03_19-36-39.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419142347531-2059313586.jpg"
+                      alt="img"
                 ></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">--spring.config.location=classpath:/ebank.yml</span><br></pre></td></tr></table></figure>
 
 <h4 id="多个配置文件"><a href="#多个配置文件" class="headerlink" title="多个配置文件"></a>多个配置文件</h4><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-03-03_19-36-49.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419142358939-1110801181.jpg"
+                      alt="img"
                 ></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">--spring.config.location=classpath:/ebank.yml,classpath:/ebank-service.yml</span><br></pre></td></tr></table></figure>
 
@@ -3057,8 +3085,8 @@
 <h3 id="日志输出格式控制"><a href="#日志输出格式控制" class="headerlink" title="日志输出格式控制"></a>日志输出格式控制</h3><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-03-15_20-03-46.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419142417101-758153812.jpg"
+                      alt="img"
                 ></p>
 <p><strong>PID：进程ID，用于表明当前操作所处的进程，当多服务同时记录日志时，该值可用于协助程序员调试程序</strong></p>
 <p><strong>所属类&#x2F;接口名：当前显示信息为SpringBoot重写后的信息，名称过长时，简化包名书写为首字母，甚至直接删除</strong></p>
@@ -3122,6 +3150,54 @@
       </tags>
   </entry>
   <entry>
+    <title>后端服务器向前端发送JSON数据出现了异常</title>
+    <url>/2022/11/25/%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%91%E5%89%8D%E7%AB%AF%E5%8F%91%E9%80%81JSON%E6%95%B0%E6%8D%AE%E5%87%BA%E7%8E%B0%E5%BC%82%E5%B8%B8/</url>
+    <content><![CDATA[<h2 id="问题的由来"><a href="#问题的由来" class="headerlink" title="问题的由来"></a>问题的由来</h2><p>今天在做SSM整合时发现后端服务器可以从数据库取出数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//部分后端代码</span></span><br><span class="line"><span class="comment">//处理查询，响应ajax</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/queryStudent.do&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Student&gt; <span class="title function_">queryStudent</span><span class="params">()</span>&#123;</span><br><span class="line">	List&lt;Student&gt; students = service.findStudents();</span><br><span class="line">    students.forEach(System.out::println);</span><br><span class="line">    <span class="keyword">return</span> students;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同时我也打印此数据</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-03-06.jpg"
+                      alt="数据"
+                ></p>
+<p>但是前端页面无法数据</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//部分前端代码</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadStudentData</span>(<span class="params"></span>)&#123;</span><br><span class="line">	$.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">    	<span class="attr">url</span>:<span class="string">&quot;student/queryStudent.do&quot;</span>,</span><br><span class="line">        <span class="attr">type</span>:<span class="string">&quot;get&quot;</span>,</span><br><span class="line">        <span class="attr">dataType</span>:<span class="string">&quot;json&quot;</span>,</span><br><span class="line">        <span class="attr">success</span>:<span class="keyword">function</span>(<span class="params">data</span>)&#123;</span><br><span class="line">        	$.<span class="title function_">each</span>(data,<span class="keyword">function</span>(<span class="params">i,n</span>)&#123;</span><br><span class="line">            	$(<span class="string">&quot;#info&quot;</span>).<span class="title function_">append</span>(<span class="string">&quot;&lt;tr&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">id</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">name</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">age</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;/tr&gt;&quot;</span>)</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="问题的对策"><a href="#问题的对策" class="headerlink" title="问题的对策"></a>问题的对策</h2><p>看了一下接口发现一个<i style="color:red">500的服务器内部的报错</i>，主要报错为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">No converter found for return value of type: class java.util.ArrayList</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-08-40.jpg"
+                     
+                ></p>
+<p>发现在注册注解驱动&lt;mvc:annotation-driven &#x2F;&gt;时候有很多不同类型的注解驱动，我也是截了图保留了下来</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-16-43.jpg"
+                     
+                ></p>
+<h2 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h2><p>而我们要使用的是mvc结尾的那一个，最终前端也成功的获取到了JSON数据</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-19-55.jpg"
+                     
+                ></p>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端学习的记录</tag>
+        <tag>BUG菇的出现与消亡</tag>
+        <tag>SSM</tag>
+        <tag>SpringMVC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue学习笔记基础篇</title>
     <url>/2023/03/27/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9F%BA%E7%A1%80%E7%AF%87/</url>
     <content><![CDATA[<h1 id="Vue学习笔记"><a href="#Vue学习笔记" class="headerlink" title="Vue学习笔记"></a>Vue学习笔记</h1><h2 id="初识Vue"><a href="#初识Vue" class="headerlink" title="初识Vue"></a>初识Vue</h2><h3 id="如何使用Vue？"><a href="#如何使用Vue？" class="headerlink" title="如何使用Vue？"></a>如何使用Vue？</h3><h4 id="1-引入vue"><a href="#1-引入vue" class="headerlink" title="1.引入vue"></a>1.引入vue</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--引入vue--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;../js/vue.js(Vue所在的目录)&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -3167,8 +3243,8 @@
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-21_16-26-06.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143007449-2126172971.jpg"
+                      alt="img"
                 ></p>
 <p>显然应该为：你好插值语法，点我去黑马学习。因为插值语法和插值语法这两个词都由name代替为了方便使用，所以我们需要使用分层将name的不同含义划分开。</p>
 <p>改良代码</p>
@@ -3183,15 +3259,15 @@
 <h4 id="单向数据绑定"><a href="#单向数据绑定" class="headerlink" title="单向数据绑定"></a>单向数据绑定</h4><h5 id="修改后端数据时"><a href="#修改后端数据时" class="headerlink" title="修改后端数据时"></a>修改后端数据时</h5><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-22_15-52-41.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143024942-1104591568.jpg"
+                      alt="img"
                 ></p>
 <p>后端数据可以传递到前端页面</p>
 <h5 id="修改前端数据时"><a href="#修改前端数据时" class="headerlink" title="修改前端数据时"></a>修改前端数据时</h5><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-22_15-53-05.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143041052-1275277133.jpg"
+                      alt="img"
                 ></p>
 <p>前端页面的数据传递不到后端数据库</p>
 <h4 id="双向数据绑定"><a href="#双向数据绑定" class="headerlink" title="双向数据绑定"></a>双向数据绑定</h4><p>无论修改前端数据还是修改后端数据都能传输到自己的前后端</p>
@@ -3227,8 +3303,8 @@
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-23_18-42-52.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143100378-1176484024.jpg"
+                      alt="img"
                 ></p>
 <h3 id="JS中Object-defineProperty方法"><a href="#JS中Object-defineProperty方法" class="headerlink" title="JS中Object.defineProperty方法"></a>JS中Object.defineProperty方法</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">    <span class="attr">sex</span>: <span class="string">&#x27;男&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: number,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(person, <span class="string">&#x27;age&#x27;</span>, &#123;</span><br><span class="line">	<span class="attr">value</span>:<span class="number">18</span>,</span><br><span class="line">    <span class="attr">enumerable</span>:<span class="literal">true</span>,<span class="comment">//控制属性是否可以枚举，默认值是false</span></span><br><span class="line">    <span class="attr">writable</span>:<span class="literal">true</span>,<span class="comment">//控制属性是否可以被修改，默认值是false</span></span><br><span class="line">    <span class="attr">configurable</span>:<span class="literal">true</span> <span class="comment">//控制属性是否可以被删除，默认值是false</span></span><br><span class="line">    <span class="title function_">get</span>(<span class="params"></span>) &#123;<span class="comment">//当有人读取person的age属性时，get函数(getter)就会被调用，且返回值就是age的值</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;有人读取age属性了&#x27;</span>)</span><br><span class="line">      <span class="keyword">return</span> number;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">value</span>) &#123;<span class="comment">//当有人修改person的age属性时，set函数(setter)就会被调用，且会收到修改的具体值</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;有人修改了age属性，且值是&#x27;</span>, value)</span><br><span class="line">      number = value</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -3237,14 +3313,14 @@
 <h5 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h5><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2023-02-23_19-36-16.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143126799-619414106.jpg"
+                      alt="img"
                 ></p>
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/%E6%97%A0%E6%A0%87%E9%A2%98.png"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143144184-1865621978.png"
+                      alt="img"
                 ></p>
 <h5 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h5><p>实际上底层使用的就是Object.defineProperty()方法</p>
 <p>Vue中的数据代理：<br>            通过vm对象来代理data对象中属性的操作（读&#x2F;写）</p>
@@ -3351,8 +3427,8 @@
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-02-27_16-12-50.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143213043-912077786.jpg"
+                      alt="img"
                 ></p>
 <h3 id="如何使用计算属性"><a href="#如何使用计算属性" class="headerlink" title="如何使用计算属性"></a>如何使用计算属性</h3><h4 id="1-在Vue实例中新建一个computed选项"><a href="#1-在Vue实例中新建一个computed选项" class="headerlink" title="1. 在Vue实例中新建一个computed选项"></a>1. 在Vue实例中新建一个computed选项</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> vm = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">computed</span>:&#123;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -3472,20 +3548,20 @@
 <h5 id="1-key-index"><a href="#1-key-index" class="headerlink" title="1. :key(index)"></a>1. :key(index)</h5><h6 id="添加数据前"><a href="#添加数据前" class="headerlink" title="添加数据前"></a>添加数据前</h6><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-03-10_16-05-17.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143237177-239228274.jpg"
+                      alt="img"
                 ></p>
 <h6 id="添加数据后"><a href="#添加数据后" class="headerlink" title="添加数据后"></a>添加数据后</h6><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-03-10_16-05-25.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143250079-1073960456.jpg"
+                      alt="img"
                 ></p>
 <h5 id="2-key-p-id"><a href="#2-key-p-id" class="headerlink" title="2. :key(p.id)"></a>2. :key(p.id)</h5><h6 id="添加数据后-1"><a href="#添加数据后-1" class="headerlink" title="添加数据后"></a>添加数据后</h6><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-03-10_16-16-15.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143308868-1269740469.jpg"
+                      alt="img"
                 ></p>
 <h4 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a>总结</h4><h5 id="面试题：react、vue中的key有什么作用？（key的内部原理）"><a href="#面试题：react、vue中的key有什么作用？（key的内部原理）" class="headerlink" title="面试题：react、vue中的key有什么作用？（key的内部原理）"></a>面试题：react、vue中的key有什么作用？（key的内部原理）</h5><ol>
 <li><p>虚拟DOM中key的作用：<br>                         key是虚拟DOM对象的标识，当数据发生变化时，Vue会根据【新数据】生成【新的虚拟DOM】,<br> 随后Vue进行【新虚拟DOM】与【旧虚拟DOM】的差异比较，比较规则如下：</p>
@@ -3574,8 +3650,8 @@
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-03-15_16-38-21.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143341632-1289952121.jpg"
+                      alt="img"
                 ></p>
 <h4 id="总结-7"><a href="#总结-7" class="headerlink" title="总结"></a>总结</h4><ol>
 <li>作用：向其所在的节点中渲染文本内容。</li>
@@ -3588,8 +3664,8 @@
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto/master/Snipaste_2023-03-15_16-41-27.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143354885-2091194480.jpg"
+                      alt="img"
                 ></p>
 <h4 id="总结-8"><a href="#总结-8" class="headerlink" title="总结"></a>总结</h4><p>1.作用：向指定节点中渲染包含html结构的内容。</p>
 <p>2.与插值语法的区别：</p>
@@ -3675,8 +3751,8 @@
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto2/master/lifecycle2.png"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143409957-76840749.png"
+                      alt="img"
                 ></p>
 <h4 id="beforeCreate和created"><a href="#beforeCreate和created" class="headerlink" title="beforeCreate和created"></a>beforeCreate和created</h4><h5 id="beforeCreate"><a href="#beforeCreate" class="headerlink" title="beforeCreate"></a>beforeCreate</h5><p>无法通过vm访问到data中的数据、methods中的方法。</p>
 <h5 id="created"><a href="#created" class="headerlink" title="created"></a>created</h5><p>可以通过vm访问到data中的数据、methods中配置的方法</p>
@@ -3758,8 +3834,8 @@
 <h5 id="组件结构"><a href="#组件结构" class="headerlink" title="组件结构"></a>组件结构</h5><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto2/master/Snipaste_2023-03-20_16-04-40.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143431925-1986985012.jpg"
+                      alt="img"
                 ></p>
 <h5 id="关于VueComponent"><a href="#关于VueComponent" class="headerlink" title="关于VueComponent"></a>关于VueComponent</h5><p>1.school组件本质是一个名为VueComponent的构造函数，且不是程序员定义的，是Vue.extend生成的。</p>
 <p>2.我们只需要写<school/>或<school></school>，Vue解析时会帮我们创建school组件的实例对象，即Vue帮我们执行的：new VueComponent(options)。</p>
@@ -3774,54 +3850,6 @@
       <tags>
         <tag>Vue</tag>
         <tag>前端学习的记录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>后端服务器向前端发送JSON数据出现了异常</title>
-    <url>/2022/11/25/%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%91%E5%89%8D%E7%AB%AF%E5%8F%91%E9%80%81JSON%E6%95%B0%E6%8D%AE%E5%87%BA%E7%8E%B0%E5%BC%82%E5%B8%B8/</url>
-    <content><![CDATA[<h2 id="问题的由来"><a href="#问题的由来" class="headerlink" title="问题的由来"></a>问题的由来</h2><p>今天在做SSM整合时发现后端服务器可以从数据库取出数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//部分后端代码</span></span><br><span class="line"><span class="comment">//处理查询，响应ajax</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/queryStudent.do&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Student&gt; <span class="title function_">queryStudent</span><span class="params">()</span>&#123;</span><br><span class="line">	List&lt;Student&gt; students = service.findStudents();</span><br><span class="line">    students.forEach(System.out::println);</span><br><span class="line">    <span class="keyword">return</span> students;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>同时我也打印此数据</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-03-06.jpg"
-                      alt="数据"
-                ></p>
-<p>但是前端页面无法数据</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//部分前端代码</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadStudentData</span>(<span class="params"></span>)&#123;</span><br><span class="line">	$.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">    	<span class="attr">url</span>:<span class="string">&quot;student/queryStudent.do&quot;</span>,</span><br><span class="line">        <span class="attr">type</span>:<span class="string">&quot;get&quot;</span>,</span><br><span class="line">        <span class="attr">dataType</span>:<span class="string">&quot;json&quot;</span>,</span><br><span class="line">        <span class="attr">success</span>:<span class="keyword">function</span>(<span class="params">data</span>)&#123;</span><br><span class="line">        	$.<span class="title function_">each</span>(data,<span class="keyword">function</span>(<span class="params">i,n</span>)&#123;</span><br><span class="line">            	$(<span class="string">&quot;#info&quot;</span>).<span class="title function_">append</span>(<span class="string">&quot;&lt;tr&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">id</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">name</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">age</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;/tr&gt;&quot;</span>)</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="问题的对策"><a href="#问题的对策" class="headerlink" title="问题的对策"></a>问题的对策</h2><p>看了一下接口发现一个<i style="color:red">500的服务器内部的报错</i>，主要报错为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">No converter found for return value of type: class java.util.ArrayList</span><br></pre></td></tr></table></figure>
-
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-08-40.jpg"
-                     
-                ></p>
-<p>发现在注册注解驱动&lt;mvc:annotation-driven &#x2F;&gt;时候有很多不同类型的注解驱动，我也是截了图保留了下来</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-16-43.jpg"
-                     
-                ></p>
-<h2 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h2><p>而我们要使用的是mvc结尾的那一个，最终前端也成功的获取到了JSON数据</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-19-55.jpg"
-                     
-                ></p>
-]]></content>
-      <tags>
-        <tag>JAVA</tag>
-        <tag>后端学习的记录</tag>
-        <tag>SSM</tag>
-        <tag>BUG菇的出现与消亡</tag>
-        <tag>SpringMVC</tag>
       </tags>
   </entry>
   <entry>
@@ -3856,8 +3884,8 @@
 <h4 id="输出结果"><a href="#输出结果" class="headerlink" title="输出结果"></a>输出结果</h4><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto2/master/Snipaste_2023-03-21_17-52-52.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143920009-386388481.jpg"
+                      alt="img"
                 ></p>
 <h2 id="props配置项"><a href="#props配置项" class="headerlink" title="props配置项"></a>props配置项</h2><h3 id="为什么要用props？"><a href="#为什么要用props？" class="headerlink" title="为什么要用props？"></a>为什么要用props？</h3><p>该组件可能会被多次征用，同时里面的属性名不一样</p>
 <p><strong>父组件给子组件传值</strong></p>
@@ -4105,8 +4133,8 @@
 <h2 id="Vuex"><a href="#Vuex" class="headerlink" title="Vuex"></a>Vuex</h2><p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto2/master/vuex.png"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419143949944-832248855.png"
+                      alt="img"
                 ></p>
 <h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h3><p>在Vue中实现集中式状态（数据）管理的一个Vue插件，对vue应用中多个组件的共享状态进行集中式的管理（读&#x2F;写），也是一种组件间通信的方式，且适用于任意组件间通信。</p>
 <h4 id="何时使用？"><a href="#何时使用？" class="headerlink" title="何时使用？"></a>何时使用？</h4><p>多个组件需要共享数据时</p>
@@ -4375,8 +4403,8 @@
 <p><img  
                      lazyload
                      alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/LearnPhoto2/master/Snipaste_2023-03-27_16-35-54.jpg"
-                     
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419144022073-1779537214.jpg"
+                      alt="img"
                 ></p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">代码解释：</span></span><br><span class="line"><span class="comment">	第一个if判断是否是进入news或xiaoxi路由组件</span></span><br><span class="line"><span class="comment">	如果不进入则可以显示组件路由</span></span><br><span class="line"><span class="comment">	如果进入的话</span></span><br><span class="line"><span class="comment">		进行判断school是否为atguigu</span></span><br><span class="line"><span class="comment">		如果是则可以显示news或xiaoxi路由组件</span></span><br><span class="line"><span class="comment">		如果不是就弹框</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">router.<span class="title function_">beforeEach</span>(<span class="function">(<span class="params">to,<span class="keyword">from</span>,next</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (to.<span class="property">path</span> === <span class="string">&#x27;/home/news&#x27;</span> || to.<span class="property">name</span> === <span class="string">&#x27;xiaoxi&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;school&#x27;</span>) === <span class="string">&#x27;atguigu&#x27;</span>) &#123;</span><br><span class="line">            <span class="title function_">next</span>()</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="title function_">alert</span>(<span class="string">&#x27;学校名不对，无权限查看！&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="title function_">next</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
