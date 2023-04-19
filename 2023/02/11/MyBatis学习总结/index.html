@@ -201,11 +201,11 @@
                     </li>
                 
                     <li>
-                        | <a href="/tags/MyBaits/">MyBaits</a>&nbsp;
+                        | <a href="/tags/SSM/">SSM</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/SSM/">SSM</a>&nbsp;
+                        | <a href="/tags/MyBaits/">MyBaits</a>&nbsp;
                     </li>
                 
             </ul>
@@ -431,7 +431,7 @@
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Object&gt; <span class="title function_">getUserByIdToMap</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> Integer id)</span>;</span><br></pre></td></tr></table></figure>
 
-<p>查询结果为：{password&#x3D;123456, gender&#x3D;男, id&#x3D;1, age&#x3D;23, email&#x3D;<a class="link"   href="mailto:&#49;&#x32;&#x33;&#x34;&#x35;&#54;&#x40;&#113;&#113;&#46;&#x63;&#x6f;&#x6d;" >&#49;&#x32;&#x33;&#x34;&#x35;&#54;&#x40;&#113;&#113;&#46;&#x63;&#x6f;&#x6d;<i class="fas fa-external-link-alt"></i></a>, username&#x3D;root}</p>
+<p>查询结果为：{password&#x3D;123456, gender&#x3D;男, id&#x3D;1, age&#x3D;23, email&#x3D;<a class="link"   href="mailto:&#x31;&#x32;&#51;&#52;&#53;&#54;&#x40;&#x71;&#113;&#x2e;&#99;&#111;&#x6d;" >&#x31;&#x32;&#51;&#52;&#53;&#54;&#x40;&#x71;&#113;&#x2e;&#99;&#111;&#x6d;<i class="fas fa-external-link-alt"></i></a>, username&#x3D;root}</p>
 <h3 id="查询多条数据为map集合"><a href="#查询多条数据为map集合" class="headerlink" title="查询多条数据为map集合"></a>查询多条数据为map集合</h3><p>查询多条数据时有两种方式，第一种是将每一条map放到泛型为map的list集合中，第二种是使用@MapKey注解</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Map&lt;String, Object&gt;&gt; <span class="title function_">getAllUserToMap</span><span class="params">()</span>;</span><br><span class="line"><span class="comment">//结果：&#123;password=123456, gender=男, id=1, age=23, email=12345@qq.com, username=admin&#125;,&#123;password=123456, //gender=男, id=1, age=23, email=12345@qq.com, username=admin&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@MapKey(&quot;id&quot;)</span></span><br><span class="line">Map&lt;String, Object&gt; <span class="title function_">getAllUserToMap</span><span class="params">()</span>;</span><br><span class="line"><span class="comment">//结果：&#123;1=&#123;password=123456, gender=男, id=1, age=23, email=12345@qq.com, username=admin&#125;,2=&#123;password=123, gender=男, id=2, age=23, email=12345@qq.com, username=zhangsan&#125;,3=&#123;password=123456, gender=女, id=3, age=33, email=123@qq.com, username=root&#125;,4=&#123;password=123, id=4, username=lisi&#125;&#125;</span></span><br></pre></td></tr></table></figure>
 
@@ -458,7 +458,7 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--void insertUser(User user);</span></span><br><span class="line"><span class="comment">	useGeneratedKeys:表示当前添加功能使用自增的主键</span></span><br><span class="line"><span class="comment">	keyProperty:将添加的数据的自增主键为实体类类型的参数的属性赋值</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insertUser&quot;</span> <span class="attr">useGeneratedKeys</span>=<span class="string">&quot;true&quot;</span> <span class="attr">keyProperty</span>=<span class="string">&quot;id&quot;</span>&gt;</span></span><br><span class="line">	insert into t_user values(null,#&#123;username&#125;,#&#123;password&#125;,#&#123;age&#125;,#&#123;gender&#125;,#&#123;email&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>改造后输出结果：User{id&#x3D;9, username&#x3D;’lisi’, password&#x3D;’123456’, age&#x3D;12, gender&#x3D;’男’, email&#x3D;‘<a class="link"   href="mailto:&#x31;&#x32;&#51;&#52;&#x40;&#x71;&#113;&#x2e;&#x63;&#x6f;&#x6d;" >&#x31;&#x32;&#51;&#52;&#x40;&#x71;&#113;&#x2e;&#x63;&#x6f;&#x6d;<i class="fas fa-external-link-alt"></i></a>‘}</p>
+<p>改造后输出结果：User{id&#x3D;9, username&#x3D;’lisi’, password&#x3D;’123456’, age&#x3D;12, gender&#x3D;’男’, email&#x3D;‘<a class="link"   href="mailto:&#49;&#50;&#x33;&#52;&#64;&#113;&#x71;&#46;&#x63;&#111;&#x6d;" >&#49;&#50;&#x33;&#52;&#64;&#113;&#x71;&#46;&#x63;&#111;&#x6d;<i class="fas fa-external-link-alt"></i></a>‘}</p>
 </blockquote>
 <h2 id="自定义映射resultMap"><a href="#自定义映射resultMap" class="headerlink" title="自定义映射resultMap"></a>自定义映射resultMap</h2><h3 id="为什么要使用resultMap"><a href="#为什么要使用resultMap" class="headerlink" title="为什么要使用resultMap?"></a>为什么要使用resultMap?</h3><p>因为后端数据库中的字段与java中的pojo类的属性名不一样。例如在java中员工ID的表示方法为<strong>empId</strong>，而在数据库中表示为<strong>emp_id</strong>。</p>
 <h3 id="字段名和属性名不一致时如何处理？"><a href="#字段名和属性名不一致时如何处理？" class="headerlink" title="字段名和属性名不一致时如何处理？"></a>字段名和属性名不一致时如何处理？</h3><h4 id="1、为查询的字段设置别名，和属性名保持一致"><a href="#1、为查询的字段设置别名，和属性名保持一致" class="headerlink" title="1、为查询的字段设置别名，和属性名保持一致"></a>1、为查询的字段设置别名，和属性名保持一致</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getEmpByEmpId&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;Emp&quot;</span>&gt;</span></span><br><span class="line">	select emp_id empId,emp_name empName,age,gender from t_emp where emp_id = #&#123;empId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -828,11 +828,11 @@
                         </li>
                     
                         <li class="tag-item">
-                            <a href="/tags/MyBaits/">#MyBaits</a>&nbsp;
+                            <a href="/tags/SSM/">#SSM</a>&nbsp;
                         </li>
                     
                         <li class="tag-item">
-                            <a href="/tags/SSM/">#SSM</a>&nbsp;
+                            <a href="/tags/MyBaits/">#MyBaits</a>&nbsp;
                         </li>
                     
                 </ul>
