@@ -177,13 +177,13 @@
         
             <i class="fa-regular fa-calendar-plus"></i>&nbsp;
         
-        <span class="pc">2022-04-19 14:44:00</span>
-        <span class="mobile">2022-04-19 14:44</span>
+        <span class="pc">2023-04-19 14:00:00</span>
+        <span class="mobile">2023-04-19 14:00</span>
     </span>
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-04-19 14:44:48</span>
+        <span class="pc">2023-04-21 12:03:28</span>
     </span>
     
     
@@ -204,10 +204,6 @@
                         | <a href="/tags/BUG%E8%8F%87%E7%9A%84%E5%87%BA%E7%8E%B0%E4%B8%8E%E6%B6%88%E4%BA%A1/">BUG菇的出现与消亡</a>&nbsp;
                     </li>
                 
-                    <li>
-                        | <a href="/tags/SpringBoot2/">SpringBoot2</a>&nbsp;
-                    </li>
-                
             </ul>
         </span>
     
@@ -215,7 +211,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>135 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>120 字</span>
         </span>
     
     
@@ -236,15 +232,15 @@
             
 
             <div class="article-content keep-markdown-body">
-                <h1 id="SpringBoot中yml格式配置文件关于数据库密码的读取"><a href="#SpringBoot中yml格式配置文件关于数据库密码的读取" class="headerlink" title="SpringBoot中yml格式配置文件关于数据库密码的读取"></a>SpringBoot中yml格式配置文件关于数据库密码的读取</h1><p>MySQL连接不到数据库说是密码错误<br><img  
+                <h1 id="问题？"><a href="#问题？" class="headerlink" title="问题？"></a>问题？</h1><p>MySQL连接不到数据库说是密码错误<br><img  
                      lazyload
                      alt="image"
                      data-src="https://img2023.cnblogs.com/blog/2866182/202303/2866182-20230328081317571-482717223.png"
                       alt="img"
                 ></p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>密码明明输入的是0127，为什么打印的时候会是87呢？</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>密码明明输入的是0127，为什么打印的时候会是87呢？</p>
 <p>如果使用yml格式的配置文件int类型数据它只支持二进制、八进制、十六进制，恰逢改密码又以0开头各个位数&lt;8,所有会将其解析为二进制</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ol>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><ol>
 <li>将password的值加上引号</li>
 <li>接收参数时候将String转为int，即<code>private int password;</code></li>
 </ol>
@@ -262,10 +258,10 @@
             <span class="type">本文作者</span>：<span class="content">赫然玉鑫</span>
         </li>
         <li>
-            <span class="type">创建时间</span>：<span class="content">2022-04-19 14:44:00</span>
+            <span class="type">创建时间</span>：<span class="content">2023-04-19 14:00:00</span>
         </li>
         <li class="post-link">
-            <span class="type">本文链接</span>：<span class="content">2022/04/19/SpringBoot中yml格式配置文件关于数据库密码的读取/</span>
+            <span class="type">本文链接</span>：<span class="content">2023/04/19/SpringBoot中yml格式配置文件关于数据库密码的读取/</span>
         </li>
         <li>
             <span class="type">版权声明</span>：<span class="content">本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！</span>
@@ -291,10 +287,6 @@
                             <a href="/tags/BUG%E8%8F%87%E7%9A%84%E5%87%BA%E7%8E%B0%E4%B8%8E%E6%B6%88%E4%BA%A1/">#BUG菇的出现与消亡</a>&nbsp;
                         </li>
                     
-                        <li class="tag-item">
-                            <a href="/tags/SpringBoot2/">#SpringBoot2</a>&nbsp;
-                        </li>
-                    
                 </ul>
             
 
@@ -304,18 +296,33 @@
                         <div class="article-prev">
                             <a class="prev"
                                rel="prev"
-                               href="/2022/11/17/FirstBlog/"
+                               href="/2023/04/19/Linux%E7%8E%AF%E5%A2%83%E4%B8%8BRedis%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/"
                             >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                                 <span class="title flex-center">
-                                <span class="post-nav-title-item">Hello Blog</span>
+                                <span class="post-nav-title-item">Linux环境下Redis无法使用配置文件</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                             </a>
                         </div>
                     
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/04/15/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E8%84%9A%E6%89%8B%E6%9E%B6%E7%AF%87/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Vue学习脚手架篇</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
                     
                 </div>
             
@@ -406,7 +413,7 @@
             <div class="toc-content-container">
                 <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringBoot%E4%B8%ADyml%E6%A0%BC%E5%BC%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%85%B3%E4%BA%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%86%E7%A0%81%E7%9A%84%E8%AF%BB%E5%8F%96"><span class="nav-text">SpringBoot中yml格式配置文件关于数据库密码的读取</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-text">解决</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-text">问题？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-text">解决</span></a></li></ol>
     </div>
 </div>
 
