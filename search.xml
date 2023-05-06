@@ -1,6 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CentOS7安装MySQL8.0.33并远程连接</title>
+    <url>/2023/04/21/CentOS7%E5%AE%89%E8%A3%85MySQL8.0/</url>
+    <content><![CDATA[<h1 id="CentOS7安装MySQL8-0-33并远程连接"><a href="#CentOS7安装MySQL8-0-33并远程连接" class="headerlink" title="CentOS7安装MySQL8.0.33并远程连接"></a>CentOS7安装MySQL8.0.33并远程连接</h1><h2 id="安装MySQL8-0-33"><a href="#安装MySQL8-0-33" class="headerlink" title="安装MySQL8.0.33"></a>安装MySQL8.0.33</h2><h3 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h3><h3 id="检查MySQL依赖"><a href="#检查MySQL依赖" class="headerlink" title="检查MySQL依赖"></a>检查MySQL依赖</h3><h4 id="1-检查-x2F-tmp临时目录权限"><a href="#1-检查-x2F-tmp临时目录权限" class="headerlink" title="1.检查&#x2F;tmp临时目录权限"></a>1.检查&#x2F;tmp临时目录权限</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chmod -R 777 /tmp</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-安装前，检查依赖"><a href="#2-安装前，检查依赖" class="headerlink" title="2.安装前，检查依赖"></a>2.安装前，检查依赖</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rmp -qa | grep libaio</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h3><ol>
+<li><p>解压到&#x2F;opt并按顺序执行命令</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rpm -ivh mysql-community-common-8.0.33-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-plugins-8.0.33-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-8.0.33-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-icu-data-files-8.0.33-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-server-8.0.33-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看一下版本&amp;是否安装成功</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql --version</span><br><span class="line">rpm -qa | grep -i mysql</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务初始化</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysqld --initialize --user=mysql</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看mysql密码</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /var/log/mysqld.log</span><br></pre></td></tr></table></figure>
+<p> <img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230421112407195-899950426.png"
+                      alt="img"
+                ></p>
+</li>
+<li><p>启动MySQL，查看状态</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl status mysqld</span><br><span class="line">systemctl start mysqld</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看MySQL服务是否自启动</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl list-unit-files|grep mysqld.service</span><br><span class="line">如果为disable</span><br><span class="line">systemctl enable mysqld.service</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="设置MySQL"><a href="#设置MySQL" class="headerlink" title="设置MySQL"></a>设置MySQL</h3><ol>
+<li><p>修改密码</p>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;新的密码&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="遇到的问题及解决方案"><a href="#遇到的问题及解决方案" class="headerlink" title="遇到的问题及解决方案"></a>遇到的问题及解决方案</h3><h4 id="运行rpm-ivh-mysql-community-client-plugins-8-0-33-1-el7-x86-64-rpm时出现报错"><a href="#运行rpm-ivh-mysql-community-client-plugins-8-0-33-1-el7-x86-64-rpm时出现报错" class="headerlink" title="运行rpm -ivh mysql-community-client-plugins-8.0.33-1.el7.x86_64.rpm时出现报错"></a>运行<code>rpm -ivh mysql-community-client-plugins-8.0.33-1.el7.x86_64.rpm</code>时出现报错</h4><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230421110716269-1550262869.png"
+                      alt="img"
+                ></p>
+<h5 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum remove mysql-libs</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行yum-remove-mysql-libs时出现报错"><a href="#运行yum-remove-mysql-libs时出现报错" class="headerlink" title="运行yum remove mysql-libs时出现报错"></a>运行<code>yum remove mysql-libs</code>时出现报错</h4><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230421110932713-1249936203.png"
+                      alt="img"
+                ></p>
+<h5 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rm -f /var/run/yum.pid</span><br></pre></td></tr></table></figure>
+
+<h2 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h2><h3 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
+
+<h3 id="进入MySQL允许任何主机登录"><a href="#进入MySQL允许任何主机登录" class="headerlink" title="进入MySQL允许任何主机登录"></a>进入MySQL允许任何主机登录</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">update user set host = &#x27;%&#x27; where user = &#x27;root&#x27;;</span><br><span class="line"># 刷新权限</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+<h3 id="用户登录加密问题"><a href="#用户登录加密问题" class="headerlink" title="用户登录加密问题"></a>用户登录加密问题</h3><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230421115048478-927005844.png"
+                      alt="img"
+                ></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">alter user &#x27;root&#x27;@&#x27;%&#x27; identified with mysql_native_password by &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello Blog</title>
     <url>/2022/11/17/FirstBlog/</url>
     <content><![CDATA[<p>这是我的第一条博客<br>哈喽，博客</p>
@@ -325,75 +394,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CentOS7安装MySQL8.0.33并远程连接</title>
-    <url>/2023/04/21/CentOS7%E5%AE%89%E8%A3%85MySQL8.0/</url>
-    <content><![CDATA[<h1 id="CentOS7安装MySQL8-0-33并远程连接"><a href="#CentOS7安装MySQL8-0-33并远程连接" class="headerlink" title="CentOS7安装MySQL8.0.33并远程连接"></a>CentOS7安装MySQL8.0.33并远程连接</h1><h2 id="安装MySQL8-0-33"><a href="#安装MySQL8-0-33" class="headerlink" title="安装MySQL8.0.33"></a>安装MySQL8.0.33</h2><h3 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h3><h3 id="检查MySQL依赖"><a href="#检查MySQL依赖" class="headerlink" title="检查MySQL依赖"></a>检查MySQL依赖</h3><h4 id="1-检查-x2F-tmp临时目录权限"><a href="#1-检查-x2F-tmp临时目录权限" class="headerlink" title="1.检查&#x2F;tmp临时目录权限"></a>1.检查&#x2F;tmp临时目录权限</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chmod -R 777 /tmp</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-安装前，检查依赖"><a href="#2-安装前，检查依赖" class="headerlink" title="2.安装前，检查依赖"></a>2.安装前，检查依赖</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rmp -qa | grep libaio</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h3><ol>
-<li><p>解压到&#x2F;opt并按顺序执行命令</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rpm -ivh mysql-community-common-8.0.33-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-plugins-8.0.33-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-8.0.33-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-icu-data-files-8.0.33-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-server-8.0.33-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看一下版本&amp;是否安装成功</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql --version</span><br><span class="line">rpm -qa | grep -i mysql</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>服务初始化</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysqld --initialize --user=mysql</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看mysql密码</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /var/log/mysqld.log</span><br></pre></td></tr></table></figure>
-<p> <img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230421112407195-899950426.png"
-                      alt="img"
-                ></p>
-</li>
-<li><p>启动MySQL，查看状态</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl status mysqld</span><br><span class="line">systemctl start mysqld</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看MySQL服务是否自启动</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl list-unit-files|grep mysqld.service</span><br><span class="line">如果为disable</span><br><span class="line">systemctl enable mysqld.service</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="设置MySQL"><a href="#设置MySQL" class="headerlink" title="设置MySQL"></a>设置MySQL</h3><ol>
-<li><p>修改密码</p>
- <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;新的密码&#x27;</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="遇到的问题及解决方案"><a href="#遇到的问题及解决方案" class="headerlink" title="遇到的问题及解决方案"></a>遇到的问题及解决方案</h3><h4 id="运行rpm-ivh-mysql-community-client-plugins-8-0-33-1-el7-x86-64-rpm时出现报错"><a href="#运行rpm-ivh-mysql-community-client-plugins-8-0-33-1-el7-x86-64-rpm时出现报错" class="headerlink" title="运行rpm -ivh mysql-community-client-plugins-8.0.33-1.el7.x86_64.rpm时出现报错"></a>运行<code>rpm -ivh mysql-community-client-plugins-8.0.33-1.el7.x86_64.rpm</code>时出现报错</h4><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230421110716269-1550262869.png"
-                      alt="img"
-                ></p>
-<h5 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum remove mysql-libs</span><br></pre></td></tr></table></figure>
-
-<h4 id="运行yum-remove-mysql-libs时出现报错"><a href="#运行yum-remove-mysql-libs时出现报错" class="headerlink" title="运行yum remove mysql-libs时出现报错"></a>运行<code>yum remove mysql-libs</code>时出现报错</h4><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230421110932713-1249936203.png"
-                      alt="img"
-                ></p>
-<h5 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rm -f /var/run/yum.pid</span><br></pre></td></tr></table></figure>
-
-<h2 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h2><h3 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
-
-<h3 id="进入MySQL允许任何主机登录"><a href="#进入MySQL允许任何主机登录" class="headerlink" title="进入MySQL允许任何主机登录"></a>进入MySQL允许任何主机登录</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">update user set host = &#x27;%&#x27; where user = &#x27;root&#x27;;</span><br><span class="line"># 刷新权限</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
-
-<h3 id="用户登录加密问题"><a href="#用户登录加密问题" class="headerlink" title="用户登录加密问题"></a>用户登录加密问题</h3><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230421115048478-927005844.png"
-                      alt="img"
-                ></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">alter user &#x27;root&#x27;@&#x27;%&#x27; identified with mysql_native_password by &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JAVA之面向对象下</title>
     <url>/2022/11/17/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8B/</url>
     <content><![CDATA[<h3 id="关键字：static静态的"><a href="#关键字：static静态的" class="headerlink" title="关键字：static静态的"></a>关键字：static静态的</h3><span id="more"></span>
@@ -673,104 +673,6 @@
       </tags>
   </entry>
   <entry>
-    <title>jdk1.8安装步骤</title>
-    <url>/2023/04/20/Jdk1.8%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<h1 id="jdk1-8安装步骤"><a href="#jdk1-8安装步骤" class="headerlink" title="jdk1.8安装步骤"></a>jdk1.8安装步骤</h1><ol>
-<li><p>去Orcale官网在页面中找到Java<a class="link"   href="https://www.oracle.com/" ><i class="fas fa-external-link-alt"></i></a><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417110119970-1006665398.png"
-                      alt="img"
-                ><br>  2.在页面中找到Oracle JDK<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417110230716-1406771304.png"
-                      alt="img"
-                ></p>
-</li>
-<li><p>在页面中找到Java 8的对应版本下载<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417110422646-234286030.png"
-                      alt="img"
-                ></p>
-</li>
-<li><p>无脑点击下载的exe，不建议安装在C盘</p>
-</li>
-<li><p>环境配置</p>
-<ol>
-<li><p>进入环境变量：我的电脑右键属性 -&gt; 高级系统设置 -&gt; 环境变量<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111123605-1704686929.png"
-                      alt="img"
-                ><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111209128-203857538.png"
-                      alt="img"
-                ><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111317993-905614547.png"
-                      alt="img"
-                ></p>
-</li>
-<li><p>配置JAVA_HOME：点击新建 变量：JAVA_HOME,值：JDK8安装目录<br><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111715256-1609117752.png"
-                      alt="img"
-                ></p>
-<blockquote>
-<p>解释:因为我安装了两个版本的jdk所以再间接的包一层版本HOME</p>
-</blockquote>
-</li>
-<li><p>配置CLASSPATH<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115106269-1197964225.png"
-                      alt="img"
-                ></p>
-</li>
-<li><p>配置Path<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115524830-2023442476.png"
-                      alt="img"
-                ></p>
-</li>
-</ol>
-</li>
-<li><p>检验配置是否成功<br>  打开cmd输入</p>
-</li>
-</ol>
-<ul>
-<li><code>java</code><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115912490-2123310794.png"
-                      alt="img"
-                ></li>
-<li>&#96;&#96;&#96;&#96;&#96;&#96;javac&#96;&#96;&#96;<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115937691-387392419.png"
-                      alt="img"
-                ></li>
-<li><code>java -version</code><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419120007113-1750989495.png"
-                      alt="img"
-                ></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JAVA之面向对象中</title>
     <url>/2022/11/17/JAVA%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%AD/</url>
     <content><![CDATA[<h3 id="面向对象的特征二：继承性"><a href="#面向对象的特征二：继承性" class="headerlink" title="面向对象的特征二：继承性"></a>面向对象的特征二：继承性</h3><span id="more"></span>
@@ -978,6 +880,104 @@
       <tags>
         <tag>JAVA</tag>
         <tag>后端学习的记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>jdk1.8安装步骤</title>
+    <url>/2023/04/20/Jdk1.8%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h1 id="jdk1-8安装步骤"><a href="#jdk1-8安装步骤" class="headerlink" title="jdk1.8安装步骤"></a>jdk1.8安装步骤</h1><ol>
+<li><p>去Orcale官网在页面中找到Java<a class="link"   href="https://www.oracle.com/" ><i class="fas fa-external-link-alt"></i></a><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417110119970-1006665398.png"
+                      alt="img"
+                ><br>  2.在页面中找到Oracle JDK<img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417110230716-1406771304.png"
+                      alt="img"
+                ></p>
+</li>
+<li><p>在页面中找到Java 8的对应版本下载<img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417110422646-234286030.png"
+                      alt="img"
+                ></p>
+</li>
+<li><p>无脑点击下载的exe，不建议安装在C盘</p>
+</li>
+<li><p>环境配置</p>
+<ol>
+<li><p>进入环境变量：我的电脑右键属性 -&gt; 高级系统设置 -&gt; 环境变量<img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111123605-1704686929.png"
+                      alt="img"
+                ><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111209128-203857538.png"
+                      alt="img"
+                ><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111317993-905614547.png"
+                      alt="img"
+                ></p>
+</li>
+<li><p>配置JAVA_HOME：点击新建 变量：JAVA_HOME,值：JDK8安装目录<br><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230417111715256-1609117752.png"
+                      alt="img"
+                ></p>
+<blockquote>
+<p>解释:因为我安装了两个版本的jdk所以再间接的包一层版本HOME</p>
+</blockquote>
+</li>
+<li><p>配置CLASSPATH<img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115106269-1197964225.png"
+                      alt="img"
+                ></p>
+</li>
+<li><p>配置Path<img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115524830-2023442476.png"
+                      alt="img"
+                ></p>
+</li>
+</ol>
+</li>
+<li><p>检验配置是否成功<br>  打开cmd输入</p>
+</li>
+</ol>
+<ul>
+<li><code>java</code><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115912490-2123310794.png"
+                      alt="img"
+                ></li>
+<li>&#96;&#96;&#96;&#96;&#96;&#96;javac&#96;&#96;&#96;<img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419115937691-387392419.png"
+                      alt="img"
+                ></li>
+<li><code>java -version</code><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230419120007113-1750989495.png"
+                      alt="img"
+                ></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
@@ -2072,6 +2072,263 @@
       </tags>
   </entry>
   <entry>
+    <title>MyBatis-Plus学习笔记</title>
+    <url>/2023/03/02/MyBatis-Plus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="MyBatis-Plus学习笔记"><a href="#MyBatis-Plus学习笔记" class="headerlink" title="MyBatis-Plus学习笔记"></a>MyBatis-Plus学习笔记</h1><h2 id="关于MyBatisPlus中的注解"><a href="#关于MyBatisPlus中的注解" class="headerlink" title="关于MyBatisPlus中的注解"></a>关于MyBatisPlus中的注解</h2><h3 id="实体类中"><a href="#实体类中" class="headerlink" title="实体类中"></a>实体类中</h3><h4 id="TableName"><a href="#TableName" class="headerlink" title="@TableName"></a>@TableName</h4><h5 id="为什么要使用此注解？"><a href="#为什么要使用此注解？" class="headerlink" title="为什么要使用此注解？"></a>为什么要使用此注解？</h5><p>MyBatis-Plus在确定操作的表时，由BaseMapper的泛型决定，即实体类型决定。默认操作的表名&#x3D;实体类型的<strong>类名首字母变为小写</strong></p>
+<h5 id="用法及作用位置"><a href="#用法及作用位置" class="headerlink" title="用法及作用位置"></a>用法及作用位置</h5><h6 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h6><p>@TableName(“数据库中的表名”)</p>
+<h6 id="作用位置"><a href="#作用位置" class="headerlink" title="作用位置"></a>作用位置</h6><p>实体类上面</p>
+<h4 id="TableId"><a href="#TableId" class="headerlink" title="@TableId"></a>@TableId</h4><h5 id="为什么要使用此注解？-1"><a href="#为什么要使用此注解？-1" class="headerlink" title="为什么要使用此注解？"></a>为什么要使用此注解？</h5><p>MyBatis-Plus在实现CRUD时，会<strong>默认将id作为主键列</strong>，并在插入数据时，默认基于雪花算法的策略生成id。如果没有找到数据库表中的id就会报错</p>
+<h5 id="用法及作用位置-1"><a href="#用法及作用位置-1" class="headerlink" title="用法及作用位置"></a>用法及作用位置</h5><h6 id="用法-1"><a href="#用法-1" class="headerlink" title="用法"></a>用法</h6><p>@TableId(value&#x3D;”数据库表中id主键对应实体类中的属性”,type&#x3D;IdType.主键策略)</p>
+<p>@TableId(“数据库表中id主键对应实体类中的属性”)</p>
+<h6 id="作用位置-1"><a href="#作用位置-1" class="headerlink" title="作用位置"></a>作用位置</h6><p>数据库表中id主键对应实体类中的属性上面<span style="color:red">只要对数据的id进行了相关操作该对象在java层面就附上了id即可调用</span></p>
+<h5 id="主键策略"><a href="#主键策略" class="headerlink" title="主键策略"></a>主键策略</h5><table>
+<thead>
+<tr>
+<th>主键策略</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IdType.ASSIGN_ID</td>
+<td>基于雪花算法的策略生成数据id，与数据库id是否设置自增无关</td>
+</tr>
+<tr>
+<td>IdType.AUTO</td>
+<td>数据库ID自增</td>
+</tr>
+<tr>
+<td>其他</td>
+<td>其他</td>
+</tr>
+</tbody></table>
+<h4 id="TableField"><a href="#TableField" class="headerlink" title="@TableField"></a>@TableField</h4><h5 id="为什么使用此注解？"><a href="#为什么使用此注解？" class="headerlink" title="为什么使用此注解？"></a>为什么使用此注解？</h5><ol>
+<li>默认情况数据库表字段与实体类属性相同，如：age、id。无需使用</li>
+<li>第二种情况实体类中的属性使用的是驼峰命名风格，而表中的字段使用的是下划线命名风格，如：实体类属性userName，表中字段user_name。此时MyBatis-Plus会自动将下划线命名风格转化为驼峰命名风格<br>相当于在MyBatis中配置</li>
+<li><strong>实体类属性name，表中字段username这种情况就需要使用注解</strong></li>
+</ol>
+<h5 id="用法及作用位置-2"><a href="#用法及作用位置-2" class="headerlink" title="用法及作用位置"></a>用法及作用位置</h5><h6 id="用法-2"><a href="#用法-2" class="headerlink" title="用法"></a>用法</h6><p>@TableField(“数据库字段名”) </p>
+<h6 id="作用位置-2"><a href="#作用位置-2" class="headerlink" title="作用位置"></a>作用位置</h6><p>对应实体类属性的上面</p>
+<h4 id="Version"><a href="#Version" class="headerlink" title="@Version"></a>@Version</h4><h5 id="为什么要使用此注解？-2"><a href="#为什么要使用此注解？-2" class="headerlink" title="为什么要使用此注解？"></a>为什么要使用此注解？</h5><blockquote>
+<p>场景：一件商品，成本价是80元，售价是100元。老板先是通知小李，说你去把商品价格增加50元。小李正在玩游戏，耽搁了一个小时。正好一个小时后，老板觉得商品价格增加到150元，价格太高，可能会影响销量。又通知小王，你把商品价格降低30元。此时，小李和小王同时操作商品后台系统。小李操作的时候，系统先取出商品价格100元；小王也在操作，取出的商品价格也是100元。小李将价格加了50元，并将100+50&#x3D;150元存入了数据库；小王将商品减了30元，并将100-30&#x3D;70元存入了数据库。是的，如果没有锁，小李的操作就完全被小王的覆盖了。现在商品价格是70元，比成本价低10元。几分钟后，这个商品很快出售了1千多件商品，老板亏1万多。</p>
+</blockquote>
+<p>该注解主要针对于数据表操作，防止数据出错</p>
+<h5 id="用法-3"><a href="#用法-3" class="headerlink" title="用法"></a>用法</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@MapperScan(&quot;com.sxx.mybatisplus.mapper&quot;)</span><span class="comment">//扫描mapper接口所在的包，原本写在主配置类上</span></span><br><span class="line"><span class="meta">@Configuration</span><span class="comment">//标识为配置类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyBatisPlusConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span><span class="comment">//只要是返回实体类都要添加Bean注解</span></span><br><span class="line">    <span class="keyword">public</span> MybatisPlusInterceptor <span class="title function_">mybatisPlusInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">MybatisPlusInterceptor</span> <span class="variable">interceptor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MybatisPlusInterceptor</span>();</span><br><span class="line">        <span class="comment">//添加分页插件</span></span><br><span class="line">        interceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">PaginationInnerInterceptor</span>(DbType.MYSQL));</span><br><span class="line">        <span class="comment">//添加乐观锁插件</span></span><br><span class="line">        interceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">OptimisticLockerInnerInterceptor</span>());</span><br><span class="line">        <span class="keyword">return</span> interceptor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="TableLogic"><a href="#TableLogic" class="headerlink" title="@TableLogic"></a>@TableLogic</h4><h5 id="为什么要使用此注解"><a href="#为什么要使用此注解" class="headerlink" title="为什么要使用此注解"></a>为什么要使用此注解</h5><p>此注解为逻辑删除，使用此注解可以进行数据恢复</p>
+<ul>
+<li>物理删除：真实删除，将对应数据从数据库中删除，之后查询不到此条被删除的数据</li>
+<li>逻辑删除：假删除，将对应数据中代表是否被删除字段的状态修改为“被删除状态”，之后在数据库中仍旧能看到此条数据记录</li>
+</ul>
+<h5 id="用法及作用位置-3"><a href="#用法及作用位置-3" class="headerlink" title="用法及作用位置"></a>用法及作用位置</h5><h6 id="用法-4"><a href="#用法-4" class="headerlink" title="用法"></a>用法</h6><p>在数据库表中添加一个<strong>数据类型为int</strong>逻辑删除字段，同时默认<strong>0为未删除，1为删除</strong>此配置可以在配置文件中更改</p>
+<h6 id="作用位置-3"><a href="#作用位置-3" class="headerlink" title="作用位置"></a>作用位置</h6><p>在对应的实体类属性上面添加@TableLogic注解</p>
+<h3 id="枚举类中"><a href="#枚举类中" class="headerlink" title="枚举类中"></a>枚举类中</h3><h4 id="EnumValue"><a href="#EnumValue" class="headerlink" title="@EnumValue"></a>@EnumValue</h4><h5 id="怎么使用"><a href="#怎么使用" class="headerlink" title="怎么使用"></a>怎么使用</h5><p>用在枚举类中对应数据库表字段的上面@EnumValue </p>
+<p>同时该属性可以与数据库中的字段一样或者可以互相转化</p>
+<h4 id="上面的部分注解可以在application-yml中配置"><a href="#上面的部分注解可以在application-yml中配置" class="headerlink" title="上面的部分注解可以在application.yml中配置"></a>上面的部分注解可以在application.yml中配置</h4><h5 id="TableName-1"><a href="#TableName-1" class="headerlink" title="@TableName"></a>@TableName</h5><p>在配置文件中针对的是数据库表名称 都有统一的前缀，例如tb_</p>
+<p>在配置文件中</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">table-prefix:</span> <span class="string">t_</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="TableId-1"><a href="#TableId-1" class="headerlink" title="@TableId"></a>@TableId</h5><p>在配置文件中针对主键自增策略</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">id-type:</span> <span class="string">auto</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="TableLogic-1"><a href="#TableLogic-1" class="headerlink" title="@TableLogic"></a>@TableLogic</h5><p>在配置文件中针对<strong>哪个值代表删除哪个代表存在</strong></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">logic-delete-value:</span> <span class="number">1</span>	<span class="comment">#删除</span></span><br><span class="line"><span class="attr">logic-not-delete-value:</span> <span class="number">0</span>	<span class="comment">#保留</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="EnumValue-1"><a href="#EnumValue-1" class="headerlink" title="@EnumValue"></a>@EnumValue</h5><p>在配置文件中主要是描述枚举类的位置</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">type-enums-package:</span> <span class="string">com.sxx.mybatisplus.enums</span></span><br></pre></td></tr></table></figure>
+
+<p>java中的一个实体类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sxx.mybatisplus.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.*;</span><br><span class="line"><span class="keyword">import</span> com.sxx.mybatisplus.enums.SexEnum;</span><br><span class="line"><span class="keyword">import</span> lombok.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@TableName(&quot;t_user&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="meta">@TableId(value = &quot;uid&quot;,type = IdType.AUTO)</span></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="meta">@TableField(&quot;user_name&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String email;</span><br><span class="line">    <span class="keyword">private</span> SexEnum sex;</span><br><span class="line">    <span class="meta">@TableLogic</span></span><br><span class="line">    <span class="keyword">private</span> Integer isDeleted;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>配置文件</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="comment"># 配置数据源信息</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="comment"># 配置数据源类型</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">com.zaxxer.hikari.HikariDataSource</span></span><br><span class="line">    <span class="comment"># 配置连接数据库的各个信息</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/mybatis_plus</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">Sxx15963559164</span></span><br><span class="line"></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="attr">log-impl:</span> <span class="string">org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="comment"># 设置实体类所对应的表的统一前缀</span></span><br><span class="line">      <span class="comment"># 法二，法一：@TabName</span></span><br><span class="line">      <span class="attr">table-prefix:</span> <span class="string">t_</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">auto</span></span><br><span class="line">      <span class="comment"># 逻辑删除</span></span><br><span class="line">      <span class="attr">logic-delete-value:</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">logic-not-delete-value:</span> <span class="number">0</span></span><br><span class="line">  <span class="comment"># 配置类型别名所对应的包</span></span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.sxx.mybatisplus.pojo</span></span><br><span class="line">  <span class="comment"># 配置扫描通用枚举</span></span><br><span class="line">  <span class="attr">type-enums-package:</span> <span class="string">com.sxx.mybatisplus.enums</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Wapper"><a href="#Wapper" class="headerlink" title="Wapper"></a>Wapper</h2><ul>
+<li>Wrapper ： 条件构造抽象类，最顶端父类<ul>
+<li>AbstractWrapper ： 用于查询条件封装，生成 sql 的 where 条件<ul>
+<li>QueryWrapper ： 查询条件封装（使用）</li>
+<li>UpdateWrapper ： Update 条件封装（使用）</li>
+<li>AbstractLambdaWrapper ： 使用Lambda 语法<ul>
+<li>LambdaQueryWrapper ：用于Lambda语法使用的查询Wrapper（使用）</li>
+<li>LambdaUpdateWrapper ： Lambda 更新封装Wrapper（使用）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="QueryWrapper"><a href="#QueryWrapper" class="headerlink" title="QueryWrapper"></a>QueryWrapper</h3><h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><p>使用哪个就new哪个，例如QueryWrapper </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">QueryWrapper&lt;实体类的泛型&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;();</span><br><span class="line">queryWrapper.like(<span class="string">&quot;user_name&quot;</span>, <span class="string">&quot;a&quot;</span>).between(<span class="string">&quot;age&quot;</span>, <span class="string">&quot;20&quot;</span>, <span class="string">&quot;30&quot;</span>).or().isNotNull(<span class="string">&quot;email&quot;</span>);</span><br><span class="line">List&lt;User&gt; users = userMapper.selectList(queryWrapper);</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>like(column,val)</td>
+<td>模糊查询</td>
+</tr>
+<tr>
+<td>between(column,val)</td>
+<td>between</td>
+</tr>
+<tr>
+<td>orderByDesc(column)</td>
+<td>降序</td>
+</tr>
+<tr>
+<td>orderByAsc(column)</td>
+<td>升序</td>
+</tr>
+<tr>
+<td>gt(column,val)</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>lt(column,val)</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>ge(column,val)</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>le(column,val)</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>or()</td>
+<td>如果使用或语句必须.or()</td>
+</tr>
+<tr>
+<td>isNotNull(column)</td>
+<td>不为null</td>
+</tr>
+<tr>
+<td>isNull(column)</td>
+<td>为null</td>
+</tr>
+</tbody></table>
+<h5 id="条件优先级"><a href="#条件优先级" class="headerlink" title="条件优先级"></a>条件优先级</h5><ul>
+<li><p>将年龄大于20并且用户名中包含有a或邮箱为null的用户信息修改</p>
+</li>
+<li><p>将用户名中包含有a并且（年龄大于20或邮箱为null）的用户信息修改</p>
+</li>
+</ul>
+<p>上述两个修改条件优先级是不同的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UPDATE t_user SET age=?, email=? WHERE (username LIKE ? AND age &gt; ? OR</span><br><span class="line">email IS NULL)</span><br><span class="line"></span><br><span class="line">UPDATE t_user SET age=?, email=? WHERE (username LIKE ? AND (age &gt; ? OR</span><br><span class="line">email IS NULL))</span><br></pre></td></tr></table></figure>
+
+<p>如果使用简单的条件拼接就会按照书写顺序进行优先级，所以要使用条件优先级</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">queryWrapper.gt(<span class="string">&quot;age&quot;</span>, <span class="number">20</span>).like(<span class="string">&quot;user_name&quot;</span>, <span class="string">&quot;a&quot;</span>)</span><br><span class="line">                .or()</span><br><span class="line">                .isNull(<span class="string">&quot;email&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">queryWrapper.like(&quot;user_name&quot;,&quot;a&quot;)</span><br><span class="line">                .and(i-&gt;i.gt(&quot;age&quot;,20).or().isNull(&quot;email&quot;));</span><br></pre></td></tr></table></figure>
+
+<h5 id="组装select语句"><a href="#组装select语句" class="headerlink" title="组装select语句"></a>组装select语句</h5><p>默认查询结果包含了数据库表中所有的字段</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">queryWrapper.select(<span class="string">&quot;user_name&quot;</span>, <span class="string">&quot;age&quot;</span>, <span class="string">&quot;email&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>即使用queryWrapper.select(“想要查询的字段”);</p>
+<h5 id="inSql-子查询"><a href="#inSql-子查询" class="headerlink" title="inSql()子查询"></a>inSql()子查询</h5><p>queryWrapper.inSql(“where条件”,”子查询语句”);</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">queryWrapper.inSql(<span class="string">&quot;uid&quot;</span>,<span class="string">&quot;select uid from t_user where uid &lt;= 100&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT uid AS id,user_name AS name,age,email,is_deleted FROM t_user WHERE is_deleted=0 AND (uid IN (select uid from t_user where uid &lt;= 100))</span><br></pre></td></tr></table></figure>
+
+<h3 id="UpdateWrapper"><a href="#UpdateWrapper" class="headerlink" title="UpdateWrapper"></a>UpdateWrapper</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>set(“column”,”val”)</td>
+<td>设置某个字段&#x3D;val</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">UpdateWrapper&lt;User&gt; userUpdateWrapper = <span class="keyword">new</span> <span class="title class_">UpdateWrapper</span>&lt;&gt;();</span><br><span class="line">userUpdateWrapper.like(<span class="string">&quot;user_name&quot;</span>,<span class="string">&quot;a&quot;</span>).and(i-&gt;i.gt(<span class="string">&quot;age&quot;</span>,<span class="number">20</span>).or().isNull(<span class="string">&quot;email&quot;</span>));</span><br><span class="line">userUpdateWrapper.set(<span class="string">&quot;user_name&quot;</span>,<span class="string">&quot;小黑&quot;</span>).set(<span class="string">&quot;email&quot;</span>,<span class="string">&quot;abc@atguigu.com&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UPDATE t_user SET user_name=?,email=? WHERE is_deleted=0 AND (user_name LIKE ? AND (age &gt; ? OR email IS NULL))</span><br></pre></td></tr></table></figure>
+
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>条件语句和查询语句要分开</p>
+<h4 id="condition"><a href="#condition" class="headerlink" title="condition"></a>condition</h4><p>在真正开发的过程中，组装条件是常见的功能，而这些条件数据来源于用户输入，是可选的，因此我们在组装这些条件时，必须先判断用户是否选择了这些条件，若选择则需要组装该条件，若没有选择则一定不能组装，以免影响SQL执行的结果</p>
+<p>condition</p>
+<h5 id="原生"><a href="#原生" class="headerlink" title="原生"></a>原生</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">username</span> <span class="operator">=</span> <span class="string">&quot;a&quot;</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">ageBegin</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">ageEnd</span> <span class="operator">=</span> <span class="number">30</span>;</span><br><span class="line"><span class="comment">//SELECT uid AS id,user_name AS name,age,email,is_deleted FROM t_user WHERE is_deleted=0 AND (user_name LIKE ? AND age &lt;= ?)</span></span><br><span class="line">QueryWrapper&lt;User&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">if</span>(StringUtils.isNotBlank(username))&#123;</span><br><span class="line">	<span class="comment">//isNotBlank判断某个字符创是否不为空字符串、不为null、不为空白符</span></span><br><span class="line">    queryWrapper.like(<span class="string">&quot;user_name&quot;</span>, username);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(ageBegin != <span class="literal">null</span>)&#123;</span><br><span class="line">  	queryWrapper.ge(<span class="string">&quot;age&quot;</span>, ageBegin);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(ageEnd != <span class="literal">null</span>)&#123;</span><br><span class="line">	queryWrapper.le(<span class="string">&quot;age&quot;</span>, ageEnd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>繁琐！</p>
+<h5 id="使用condition"><a href="#使用condition" class="headerlink" title="使用condition"></a>使用condition</h5><p>like(condition,column,val)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">username</span> <span class="operator">=</span> <span class="string">&quot;a&quot;</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">ageBegin</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">ageEnd</span> <span class="operator">=</span> <span class="number">30</span>;</span><br><span class="line">QueryWrapper&lt;User&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;();</span><br><span class="line">queryWrapper.like(StringUtils.isNotBlank(username),<span class="string">&quot;user_name&quot;</span>, username)</span><br><span class="line">        .ge(ageBegin != <span class="literal">null</span>,<span class="string">&quot;age&quot;</span>, ageBegin)</span><br><span class="line">        .le(ageEnd != <span class="literal">null</span>, <span class="string">&quot;age&quot;</span>, ageEnd);</span><br></pre></td></tr></table></figure>
+
+<h3 id="LambdaQueryWrapper和LambdaUpdateWrapper"><a href="#LambdaQueryWrapper和LambdaUpdateWrapper" class="headerlink" title="LambdaQueryWrapper和LambdaUpdateWrapper"></a>LambdaQueryWrapper和LambdaUpdateWrapper</h3><p>防止开发者手动输入错column可以使用实体类::get属性名()</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">LambdaQueryWrapper&lt;User&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">        queryWrapper.like(StringUtils.isNotBlank(username), User::getName,username)</span><br><span class="line">                .ge(ageBegin != <span class="literal">null</span>,User::getAge, ageBegin)</span><br><span class="line">                .le(ageEnd != <span class="literal">null</span>,User::getAge, ageEnd);</span><br></pre></td></tr></table></figure>
+
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><h3 id="分页插件"><a href="#分页插件" class="headerlink" title="分页插件"></a>分页插件</h3><h4 id="Page类的一些方法"><a href="#Page类的一些方法" class="headerlink" title="Page类的一些方法"></a>Page类的一些方法</h4><p>Page<User> page &#x3D; new Page&lt;&gt;(2,3);</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>page</td>
+<td>Page这个对象</td>
+</tr>
+<tr>
+<td>page.getRecords()</td>
+<td>当前页数据</td>
+</tr>
+<tr>
+<td>page.getSize()</td>
+<td>每页显示的条数</td>
+</tr>
+<tr>
+<td>page.getCurrent()</td>
+<td>获取当前页的页码</td>
+</tr>
+<tr>
+<td>page.getPages()</td>
+<td>总页数</td>
+</tr>
+<tr>
+<td>page.getTotal()</td>
+<td>总记录数</td>
+</tr>
+<tr>
+<td>page.hasPrevious()</td>
+<td>是否有上一页</td>
+</tr>
+<tr>
+<td>page.hasNext()</td>
+<td>是否有下一页</td>
+</tr>
+</tbody></table>
+<h4 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h4><h5 id="1-添加配置项"><a href="#1-添加配置项" class="headerlink" title="1. 添加配置项"></a>1. 添加配置项</h5><p>创建配置类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@MapperScan(&quot;com.sxx.mybatisplus.mapper&quot;)</span><span class="comment">//扫描mapper接口所在的包，原本写在主配置类上</span></span><br><span class="line"><span class="meta">@Configuration</span><span class="comment">//标识为配置类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyBatisPlusConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span><span class="comment">//只要是返回实体类都要添加Bean注解</span></span><br><span class="line">    <span class="keyword">public</span> MybatisPlusInterceptor <span class="title function_">mybatisPlusInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">MybatisPlusInterceptor</span> <span class="variable">interceptor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MybatisPlusInterceptor</span>();</span><br><span class="line">        <span class="comment">//添加分页插件</span></span><br><span class="line">        interceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">PaginationInnerInterceptor</span>(DbType.MYSQL));</span><br><span class="line">        <span class="keyword">return</span> interceptor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-测试"><a href="#2-测试" class="headerlink" title="2.测试"></a>2.测试</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Page&lt;User&gt; page = <span class="keyword">new</span> <span class="title class_">Page</span>&lt;&gt;(<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line">userMapper.selectPage(page,<span class="literal">null</span>);<span class="comment">//第二个为QueryWrapper查询条件</span></span><br><span class="line"><span class="comment">//最后直接输出page对象</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="乐观锁插件"><a href="#乐观锁插件" class="headerlink" title="乐观锁插件"></a>乐观锁插件</h3><p>@Version部分</p>
+<h2 id="通用枚举类"><a href="#通用枚举类" class="headerlink" title="通用枚举类"></a>通用枚举类</h2><blockquote>
+<p>表中的有些字段值是固定的，例如性别（男或女），此时我们可以使用MyBatis-Plus的通用枚举<br>来实现</p>
+</blockquote>
+<h3 id="创建枚举类"><a href="#创建枚举类" class="headerlink" title="创建枚举类"></a>创建枚举类</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sxx.mybatisplus.enums;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.EnumValue;</span><br><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> SHIXINXI</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2023-03-01-18:09</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">SexEnum</span> &#123;</span><br><span class="line">    MAIL(<span class="number">1</span>,<span class="string">&quot;男&quot;</span>),</span><br><span class="line">    FEMAIL(<span class="number">2</span>,<span class="string">&quot;女&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@EnumValue</span></span><br><span class="line">    <span class="keyword">private</span> Integer sex;</span><br><span class="line">    <span class="keyword">private</span> String sexName;</span><br><span class="line"></span><br><span class="line">    SexEnum(Integer sex, String sexName) &#123;</span><br><span class="line">        <span class="built_in">this</span>.sex = sex;</span><br><span class="line">        <span class="built_in">this</span>.sexName = sexName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="代码生成器"><a href="#代码生成器" class="headerlink" title="代码生成器"></a>代码生成器</h2><h3 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--代码生成器依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-generator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.freemarker<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>freemarker<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.31<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="快速生成"><a href="#快速生成" class="headerlink" title="快速生成"></a>快速生成</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">FastAutoGenerator.create(<span class="string">&quot;jdbc:mysql://127.0.0.1:3306/mybatis_plus&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;Sxx15963559164&quot;</span>)</span><br><span class="line">                .globalConfig(builder -&gt; &#123;</span><br><span class="line">                    builder.author(<span class="string">&quot;sxx&quot;</span>) <span class="comment">// 设置作者</span></span><br><span class="line">                            <span class="comment">//.enableSwagger() // 开启 swagger 模式</span></span><br><span class="line">                            .fileOverride() <span class="comment">// 覆盖已生成文件</span></span><br><span class="line">                            .outputDir(<span class="string">&quot;E://mybatis_plus&quot;</span>); <span class="comment">// 指定输出目录</span></span><br><span class="line">                &#125;)</span><br><span class="line">                .packageConfig(builder -&gt; &#123;</span><br><span class="line">                    builder.parent(<span class="string">&quot;com.sxx&quot;</span>) <span class="comment">// 设置父包名</span></span><br><span class="line">                            .moduleName(<span class="string">&quot;mybatisplus&quot;</span>) <span class="comment">// 设置父包模块名</span></span><br><span class="line">                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, <span class="string">&quot;E://mybatis_plus&quot;</span>)); <span class="comment">// 设置mapperXml生成路径</span></span><br><span class="line">                &#125;)</span><br><span class="line">                .strategyConfig(builder -&gt; &#123;</span><br><span class="line">                    builder.addInclude(<span class="string">&quot;t_user&quot;</span>) <span class="comment">// 设置需要生成的表名</span></span><br><span class="line">                            .addTablePrefix(<span class="string">&quot;t_&quot;</span>, <span class="string">&quot;c_&quot;</span>); <span class="comment">// 设置过滤表前缀</span></span><br><span class="line">                &#125;)</span><br><span class="line">                .templateEngine(<span class="keyword">new</span> <span class="title class_">FreemarkerTemplateEngine</span>()) <span class="comment">// 使用Freemarker引擎模板，默认的是Velocity引擎模板</span></span><br><span class="line">                .execute();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>MyBatis-Plus学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MyBatis中关于TableId的使用</title>
     <url>/2023/04/04/MyBatis%E4%B8%AD%E5%85%B3%E4%BA%8ETableId%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">saveWithFlavor</span><span class="params">(DishDto dishDto)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 保存菜品的基本信息到菜品表dish</span></span><br><span class="line">        <span class="built_in">this</span>.save(dishDto);</span><br><span class="line">        <span class="comment">//菜品id 雪花算法自动生成只要经过id操作。即可马上赋值</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">dishId</span> <span class="operator">=</span> dishDto.getId();</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
@@ -2286,7 +2543,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Map&lt;String, Object&gt; <span class="title function_">getUserByIdToMap</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> Integer id)</span>;</span><br></pre></td></tr></table></figure>
 
-<p>查询结果为：{password&#x3D;123456, gender&#x3D;男, id&#x3D;1, age&#x3D;23, email&#x3D;<a class="link"   href="mailto:&#49;&#50;&#x33;&#x34;&#x35;&#54;&#x40;&#x71;&#x71;&#x2e;&#x63;&#111;&#109;" >&#49;&#50;&#x33;&#x34;&#x35;&#54;&#x40;&#x71;&#x71;&#x2e;&#x63;&#111;&#109;<i class="fas fa-external-link-alt"></i></a>, username&#x3D;root}</p>
+<p>查询结果为：{password&#x3D;123456, gender&#x3D;男, id&#x3D;1, age&#x3D;23, email&#x3D;<a class="link"   href="mailto:&#49;&#50;&#51;&#x34;&#x35;&#x36;&#x40;&#x71;&#113;&#46;&#x63;&#x6f;&#x6d;" >&#49;&#50;&#51;&#x34;&#x35;&#x36;&#x40;&#x71;&#113;&#46;&#x63;&#x6f;&#x6d;<i class="fas fa-external-link-alt"></i></a>, username&#x3D;root}</p>
 <h3 id="查询多条数据为map集合"><a href="#查询多条数据为map集合" class="headerlink" title="查询多条数据为map集合"></a>查询多条数据为map集合</h3><p>查询多条数据时有两种方式，第一种是将每一条map放到泛型为map的list集合中，第二种是使用@MapKey注解</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Map&lt;String, Object&gt;&gt; <span class="title function_">getAllUserToMap</span><span class="params">()</span>;</span><br><span class="line"><span class="comment">//结果：&#123;password=123456, gender=男, id=1, age=23, email=12345@qq.com, username=admin&#125;,&#123;password=123456, //gender=男, id=1, age=23, email=12345@qq.com, username=admin&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@MapKey(&quot;id&quot;)</span></span><br><span class="line">Map&lt;String, Object&gt; <span class="title function_">getAllUserToMap</span><span class="params">()</span>;</span><br><span class="line"><span class="comment">//结果：&#123;1=&#123;password=123456, gender=男, id=1, age=23, email=12345@qq.com, username=admin&#125;,2=&#123;password=123, gender=男, id=2, age=23, email=12345@qq.com, username=zhangsan&#125;,3=&#123;password=123456, gender=女, id=3, age=33, email=123@qq.com, username=root&#125;,4=&#123;password=123, id=4, username=lisi&#125;&#125;</span></span><br></pre></td></tr></table></figure>
 
@@ -2313,7 +2570,7 @@
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--void insertUser(User user);</span></span><br><span class="line"><span class="comment">	useGeneratedKeys:表示当前添加功能使用自增的主键</span></span><br><span class="line"><span class="comment">	keyProperty:将添加的数据的自增主键为实体类类型的参数的属性赋值</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insertUser&quot;</span> <span class="attr">useGeneratedKeys</span>=<span class="string">&quot;true&quot;</span> <span class="attr">keyProperty</span>=<span class="string">&quot;id&quot;</span>&gt;</span></span><br><span class="line">	insert into t_user values(null,#&#123;username&#125;,#&#123;password&#125;,#&#123;age&#125;,#&#123;gender&#125;,#&#123;email&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>改造后输出结果：User{id&#x3D;9, username&#x3D;’lisi’, password&#x3D;’123456’, age&#x3D;12, gender&#x3D;’男’, email&#x3D;‘<a class="link"   href="mailto:&#x31;&#50;&#51;&#x34;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;" >&#x31;&#50;&#51;&#x34;&#x40;&#x71;&#x71;&#x2e;&#99;&#x6f;&#109;<i class="fas fa-external-link-alt"></i></a>‘}</p>
+<p>改造后输出结果：User{id&#x3D;9, username&#x3D;’lisi’, password&#x3D;’123456’, age&#x3D;12, gender&#x3D;’男’, email&#x3D;‘<a class="link"   href="mailto:&#49;&#x32;&#x33;&#x34;&#x40;&#113;&#x71;&#46;&#x63;&#x6f;&#109;" >&#49;&#x32;&#x33;&#x34;&#x40;&#113;&#x71;&#46;&#x63;&#x6f;&#109;<i class="fas fa-external-link-alt"></i></a>‘}</p>
 </blockquote>
 <h2 id="自定义映射resultMap"><a href="#自定义映射resultMap" class="headerlink" title="自定义映射resultMap"></a>自定义映射resultMap</h2><h3 id="为什么要使用resultMap"><a href="#为什么要使用resultMap" class="headerlink" title="为什么要使用resultMap?"></a>为什么要使用resultMap?</h3><p>因为后端数据库中的字段与java中的pojo类的属性名不一样。例如在java中员工ID的表示方法为<strong>empId</strong>，而在数据库中表示为<strong>emp_id</strong>。</p>
 <h3 id="字段名和属性名不一致时如何处理？"><a href="#字段名和属性名不一致时如何处理？" class="headerlink" title="字段名和属性名不一致时如何处理？"></a>字段名和属性名不一致时如何处理？</h3><h4 id="1、为查询的字段设置别名，和属性名保持一致"><a href="#1、为查询的字段设置别名，和属性名保持一致" class="headerlink" title="1、为查询的字段设置别名，和属性名保持一致"></a>1、为查询的字段设置别名，和属性名保持一致</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getEmpByEmpId&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;Emp&quot;</span>&gt;</span></span><br><span class="line">	select emp_id empId,emp_name empName,age,gender from t_emp where emp_id = #&#123;empId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -2652,260 +2909,25 @@
       </tags>
   </entry>
   <entry>
-    <title>MyBatis-Plus学习笔记</title>
-    <url>/2023/03/02/MyBatis-Plus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="MyBatis-Plus学习笔记"><a href="#MyBatis-Plus学习笔记" class="headerlink" title="MyBatis-Plus学习笔记"></a>MyBatis-Plus学习笔记</h1><h2 id="关于MyBatisPlus中的注解"><a href="#关于MyBatisPlus中的注解" class="headerlink" title="关于MyBatisPlus中的注解"></a>关于MyBatisPlus中的注解</h2><h3 id="实体类中"><a href="#实体类中" class="headerlink" title="实体类中"></a>实体类中</h3><h4 id="TableName"><a href="#TableName" class="headerlink" title="@TableName"></a>@TableName</h4><h5 id="为什么要使用此注解？"><a href="#为什么要使用此注解？" class="headerlink" title="为什么要使用此注解？"></a>为什么要使用此注解？</h5><p>MyBatis-Plus在确定操作的表时，由BaseMapper的泛型决定，即实体类型决定。默认操作的表名&#x3D;实体类型的<strong>类名首字母变为小写</strong></p>
-<h5 id="用法及作用位置"><a href="#用法及作用位置" class="headerlink" title="用法及作用位置"></a>用法及作用位置</h5><h6 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h6><p>@TableName(“数据库中的表名”)</p>
-<h6 id="作用位置"><a href="#作用位置" class="headerlink" title="作用位置"></a>作用位置</h6><p>实体类上面</p>
-<h4 id="TableId"><a href="#TableId" class="headerlink" title="@TableId"></a>@TableId</h4><h5 id="为什么要使用此注解？-1"><a href="#为什么要使用此注解？-1" class="headerlink" title="为什么要使用此注解？"></a>为什么要使用此注解？</h5><p>MyBatis-Plus在实现CRUD时，会<strong>默认将id作为主键列</strong>，并在插入数据时，默认基于雪花算法的策略生成id。如果没有找到数据库表中的id就会报错</p>
-<h5 id="用法及作用位置-1"><a href="#用法及作用位置-1" class="headerlink" title="用法及作用位置"></a>用法及作用位置</h5><h6 id="用法-1"><a href="#用法-1" class="headerlink" title="用法"></a>用法</h6><p>@TableId(value&#x3D;”数据库表中id主键对应实体类中的属性”,type&#x3D;IdType.主键策略)</p>
-<p>@TableId(“数据库表中id主键对应实体类中的属性”)</p>
-<h6 id="作用位置-1"><a href="#作用位置-1" class="headerlink" title="作用位置"></a>作用位置</h6><p>数据库表中id主键对应实体类中的属性上面<span style="color:red">只要对数据的id进行了相关操作该对象在java层面就附上了id即可调用</span></p>
-<h5 id="主键策略"><a href="#主键策略" class="headerlink" title="主键策略"></a>主键策略</h5><table>
-<thead>
-<tr>
-<th>主键策略</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>IdType.ASSIGN_ID</td>
-<td>基于雪花算法的策略生成数据id，与数据库id是否设置自增无关</td>
-</tr>
-<tr>
-<td>IdType.AUTO</td>
-<td>数据库ID自增</td>
-</tr>
-<tr>
-<td>其他</td>
-<td>其他</td>
-</tr>
-</tbody></table>
-<h4 id="TableField"><a href="#TableField" class="headerlink" title="@TableField"></a>@TableField</h4><h5 id="为什么使用此注解？"><a href="#为什么使用此注解？" class="headerlink" title="为什么使用此注解？"></a>为什么使用此注解？</h5><ol>
-<li>默认情况数据库表字段与实体类属性相同，如：age、id。无需使用</li>
-<li>第二种情况实体类中的属性使用的是驼峰命名风格，而表中的字段使用的是下划线命名风格，如：实体类属性userName，表中字段user_name。此时MyBatis-Plus会自动将下划线命名风格转化为驼峰命名风格<br>相当于在MyBatis中配置</li>
-<li><strong>实体类属性name，表中字段username这种情况就需要使用注解</strong></li>
+    <title>SpringBoot中yml格式配置文件关于数据库密码的读取</title>
+    <url>/2023/04/19/SpringBoot%E4%B8%ADyml%E6%A0%BC%E5%BC%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%85%B3%E4%BA%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%86%E7%A0%81%E7%9A%84%E8%AF%BB%E5%8F%96/</url>
+    <content><![CDATA[<h1 id="问题？"><a href="#问题？" class="headerlink" title="问题？"></a>问题？</h1><p>MySQL连接不到数据库说是密码错误<br><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img2023.cnblogs.com/blog/2866182/202303/2866182-20230328081317571-482717223.png"
+                      alt="img"
+                ></p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>密码明明输入的是0127，为什么打印的时候会是87呢？</p>
+<p>如果使用yml格式的配置文件int类型数据它只支持二进制、八进制、十六进制，恰逢改密码又以0开头各个位数&lt;8,所有会将其解析为二进制</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><ol>
+<li>将password的值加上引号</li>
+<li>接收参数时候将String转为int，即<code>private int password;</code></li>
 </ol>
-<h5 id="用法及作用位置-2"><a href="#用法及作用位置-2" class="headerlink" title="用法及作用位置"></a>用法及作用位置</h5><h6 id="用法-2"><a href="#用法-2" class="headerlink" title="用法"></a>用法</h6><p>@TableField(“数据库字段名”) </p>
-<h6 id="作用位置-2"><a href="#作用位置-2" class="headerlink" title="作用位置"></a>作用位置</h6><p>对应实体类属性的上面</p>
-<h4 id="Version"><a href="#Version" class="headerlink" title="@Version"></a>@Version</h4><h5 id="为什么要使用此注解？-2"><a href="#为什么要使用此注解？-2" class="headerlink" title="为什么要使用此注解？"></a>为什么要使用此注解？</h5><blockquote>
-<p>场景：一件商品，成本价是80元，售价是100元。老板先是通知小李，说你去把商品价格增加50元。小李正在玩游戏，耽搁了一个小时。正好一个小时后，老板觉得商品价格增加到150元，价格太高，可能会影响销量。又通知小王，你把商品价格降低30元。此时，小李和小王同时操作商品后台系统。小李操作的时候，系统先取出商品价格100元；小王也在操作，取出的商品价格也是100元。小李将价格加了50元，并将100+50&#x3D;150元存入了数据库；小王将商品减了30元，并将100-30&#x3D;70元存入了数据库。是的，如果没有锁，小李的操作就完全被小王的覆盖了。现在商品价格是70元，比成本价低10元。几分钟后，这个商品很快出售了1千多件商品，老板亏1万多。</p>
-</blockquote>
-<p>该注解主要针对于数据表操作，防止数据出错</p>
-<h5 id="用法-3"><a href="#用法-3" class="headerlink" title="用法"></a>用法</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@MapperScan(&quot;com.sxx.mybatisplus.mapper&quot;)</span><span class="comment">//扫描mapper接口所在的包，原本写在主配置类上</span></span><br><span class="line"><span class="meta">@Configuration</span><span class="comment">//标识为配置类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyBatisPlusConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span><span class="comment">//只要是返回实体类都要添加Bean注解</span></span><br><span class="line">    <span class="keyword">public</span> MybatisPlusInterceptor <span class="title function_">mybatisPlusInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">MybatisPlusInterceptor</span> <span class="variable">interceptor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MybatisPlusInterceptor</span>();</span><br><span class="line">        <span class="comment">//添加分页插件</span></span><br><span class="line">        interceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">PaginationInnerInterceptor</span>(DbType.MYSQL));</span><br><span class="line">        <span class="comment">//添加乐观锁插件</span></span><br><span class="line">        interceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">OptimisticLockerInnerInterceptor</span>());</span><br><span class="line">        <span class="keyword">return</span> interceptor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="TableLogic"><a href="#TableLogic" class="headerlink" title="@TableLogic"></a>@TableLogic</h4><h5 id="为什么要使用此注解"><a href="#为什么要使用此注解" class="headerlink" title="为什么要使用此注解"></a>为什么要使用此注解</h5><p>此注解为逻辑删除，使用此注解可以进行数据恢复</p>
-<ul>
-<li>物理删除：真实删除，将对应数据从数据库中删除，之后查询不到此条被删除的数据</li>
-<li>逻辑删除：假删除，将对应数据中代表是否被删除字段的状态修改为“被删除状态”，之后在数据库中仍旧能看到此条数据记录</li>
-</ul>
-<h5 id="用法及作用位置-3"><a href="#用法及作用位置-3" class="headerlink" title="用法及作用位置"></a>用法及作用位置</h5><h6 id="用法-4"><a href="#用法-4" class="headerlink" title="用法"></a>用法</h6><p>在数据库表中添加一个<strong>数据类型为int</strong>逻辑删除字段，同时默认<strong>0为未删除，1为删除</strong>此配置可以在配置文件中更改</p>
-<h6 id="作用位置-3"><a href="#作用位置-3" class="headerlink" title="作用位置"></a>作用位置</h6><p>在对应的实体类属性上面添加@TableLogic注解</p>
-<h3 id="枚举类中"><a href="#枚举类中" class="headerlink" title="枚举类中"></a>枚举类中</h3><h4 id="EnumValue"><a href="#EnumValue" class="headerlink" title="@EnumValue"></a>@EnumValue</h4><h5 id="怎么使用"><a href="#怎么使用" class="headerlink" title="怎么使用"></a>怎么使用</h5><p>用在枚举类中对应数据库表字段的上面@EnumValue </p>
-<p>同时该属性可以与数据库中的字段一样或者可以互相转化</p>
-<h4 id="上面的部分注解可以在application-yml中配置"><a href="#上面的部分注解可以在application-yml中配置" class="headerlink" title="上面的部分注解可以在application.yml中配置"></a>上面的部分注解可以在application.yml中配置</h4><h5 id="TableName-1"><a href="#TableName-1" class="headerlink" title="@TableName"></a>@TableName</h5><p>在配置文件中针对的是数据库表名称 都有统一的前缀，例如tb_</p>
-<p>在配置文件中</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">table-prefix:</span> <span class="string">t_</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="TableId-1"><a href="#TableId-1" class="headerlink" title="@TableId"></a>@TableId</h5><p>在配置文件中针对主键自增策略</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">id-type:</span> <span class="string">auto</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="TableLogic-1"><a href="#TableLogic-1" class="headerlink" title="@TableLogic"></a>@TableLogic</h5><p>在配置文件中针对<strong>哪个值代表删除哪个代表存在</strong></p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">logic-delete-value:</span> <span class="number">1</span>	<span class="comment">#删除</span></span><br><span class="line"><span class="attr">logic-not-delete-value:</span> <span class="number">0</span>	<span class="comment">#保留</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="EnumValue-1"><a href="#EnumValue-1" class="headerlink" title="@EnumValue"></a>@EnumValue</h5><p>在配置文件中主要是描述枚举类的位置</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">type-enums-package:</span> <span class="string">com.sxx.mybatisplus.enums</span></span><br></pre></td></tr></table></figure>
-
-<p>java中的一个实体类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sxx.mybatisplus.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.*;</span><br><span class="line"><span class="keyword">import</span> com.sxx.mybatisplus.enums.SexEnum;</span><br><span class="line"><span class="keyword">import</span> lombok.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@TableName(&quot;t_user&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="meta">@TableId(value = &quot;uid&quot;,type = IdType.AUTO)</span></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="meta">@TableField(&quot;user_name&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String email;</span><br><span class="line">    <span class="keyword">private</span> SexEnum sex;</span><br><span class="line">    <span class="meta">@TableLogic</span></span><br><span class="line">    <span class="keyword">private</span> Integer isDeleted;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>配置文件</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="comment"># 配置数据源信息</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="comment"># 配置数据源类型</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">com.zaxxer.hikari.HikariDataSource</span></span><br><span class="line">    <span class="comment"># 配置连接数据库的各个信息</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/mybatis_plus</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">Sxx15963559164</span></span><br><span class="line"></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="attr">log-impl:</span> <span class="string">org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="comment"># 设置实体类所对应的表的统一前缀</span></span><br><span class="line">      <span class="comment"># 法二，法一：@TabName</span></span><br><span class="line">      <span class="attr">table-prefix:</span> <span class="string">t_</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">auto</span></span><br><span class="line">      <span class="comment"># 逻辑删除</span></span><br><span class="line">      <span class="attr">logic-delete-value:</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">logic-not-delete-value:</span> <span class="number">0</span></span><br><span class="line">  <span class="comment"># 配置类型别名所对应的包</span></span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.sxx.mybatisplus.pojo</span></span><br><span class="line">  <span class="comment"># 配置扫描通用枚举</span></span><br><span class="line">  <span class="attr">type-enums-package:</span> <span class="string">com.sxx.mybatisplus.enums</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Wapper"><a href="#Wapper" class="headerlink" title="Wapper"></a>Wapper</h2><ul>
-<li>Wrapper ： 条件构造抽象类，最顶端父类<ul>
-<li>AbstractWrapper ： 用于查询条件封装，生成 sql 的 where 条件<ul>
-<li>QueryWrapper ： 查询条件封装（使用）</li>
-<li>UpdateWrapper ： Update 条件封装（使用）</li>
-<li>AbstractLambdaWrapper ： 使用Lambda 语法<ul>
-<li>LambdaQueryWrapper ：用于Lambda语法使用的查询Wrapper（使用）</li>
-<li>LambdaUpdateWrapper ： Lambda 更新封装Wrapper（使用）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="QueryWrapper"><a href="#QueryWrapper" class="headerlink" title="QueryWrapper"></a>QueryWrapper</h3><h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><p>使用哪个就new哪个，例如QueryWrapper </p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">QueryWrapper&lt;实体类的泛型&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;();</span><br><span class="line">queryWrapper.like(<span class="string">&quot;user_name&quot;</span>, <span class="string">&quot;a&quot;</span>).between(<span class="string">&quot;age&quot;</span>, <span class="string">&quot;20&quot;</span>, <span class="string">&quot;30&quot;</span>).or().isNotNull(<span class="string">&quot;email&quot;</span>);</span><br><span class="line">List&lt;User&gt; users = userMapper.selectList(queryWrapper);</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>like(column,val)</td>
-<td>模糊查询</td>
-</tr>
-<tr>
-<td>between(column,val)</td>
-<td>between</td>
-</tr>
-<tr>
-<td>orderByDesc(column)</td>
-<td>降序</td>
-</tr>
-<tr>
-<td>orderByAsc(column)</td>
-<td>升序</td>
-</tr>
-<tr>
-<td>gt(column,val)</td>
-<td>大于</td>
-</tr>
-<tr>
-<td>lt(column,val)</td>
-<td>小于</td>
-</tr>
-<tr>
-<td>ge(column,val)</td>
-<td>大于等于</td>
-</tr>
-<tr>
-<td>le(column,val)</td>
-<td>小于等于</td>
-</tr>
-<tr>
-<td>or()</td>
-<td>如果使用或语句必须.or()</td>
-</tr>
-<tr>
-<td>isNotNull(column)</td>
-<td>不为null</td>
-</tr>
-<tr>
-<td>isNull(column)</td>
-<td>为null</td>
-</tr>
-</tbody></table>
-<h5 id="条件优先级"><a href="#条件优先级" class="headerlink" title="条件优先级"></a>条件优先级</h5><ul>
-<li><p>将年龄大于20并且用户名中包含有a或邮箱为null的用户信息修改</p>
-</li>
-<li><p>将用户名中包含有a并且（年龄大于20或邮箱为null）的用户信息修改</p>
-</li>
-</ul>
-<p>上述两个修改条件优先级是不同的</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UPDATE t_user SET age=?, email=? WHERE (username LIKE ? AND age &gt; ? OR</span><br><span class="line">email IS NULL)</span><br><span class="line"></span><br><span class="line">UPDATE t_user SET age=?, email=? WHERE (username LIKE ? AND (age &gt; ? OR</span><br><span class="line">email IS NULL))</span><br></pre></td></tr></table></figure>
-
-<p>如果使用简单的条件拼接就会按照书写顺序进行优先级，所以要使用条件优先级</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">queryWrapper.gt(<span class="string">&quot;age&quot;</span>, <span class="number">20</span>).like(<span class="string">&quot;user_name&quot;</span>, <span class="string">&quot;a&quot;</span>)</span><br><span class="line">                .or()</span><br><span class="line">                .isNull(<span class="string">&quot;email&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">queryWrapper.like(&quot;user_name&quot;,&quot;a&quot;)</span><br><span class="line">                .and(i-&gt;i.gt(&quot;age&quot;,20).or().isNull(&quot;email&quot;));</span><br></pre></td></tr></table></figure>
-
-<h5 id="组装select语句"><a href="#组装select语句" class="headerlink" title="组装select语句"></a>组装select语句</h5><p>默认查询结果包含了数据库表中所有的字段</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">queryWrapper.select(<span class="string">&quot;user_name&quot;</span>, <span class="string">&quot;age&quot;</span>, <span class="string">&quot;email&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>即使用queryWrapper.select(“想要查询的字段”);</p>
-<h5 id="inSql-子查询"><a href="#inSql-子查询" class="headerlink" title="inSql()子查询"></a>inSql()子查询</h5><p>queryWrapper.inSql(“where条件”,”子查询语句”);</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">queryWrapper.inSql(<span class="string">&quot;uid&quot;</span>,<span class="string">&quot;select uid from t_user where uid &lt;= 100&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT uid AS id,user_name AS name,age,email,is_deleted FROM t_user WHERE is_deleted=0 AND (uid IN (select uid from t_user where uid &lt;= 100))</span><br></pre></td></tr></table></figure>
-
-<h3 id="UpdateWrapper"><a href="#UpdateWrapper" class="headerlink" title="UpdateWrapper"></a>UpdateWrapper</h3><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>set(“column”,”val”)</td>
-<td>设置某个字段&#x3D;val</td>
-</tr>
-</tbody></table>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">UpdateWrapper&lt;User&gt; userUpdateWrapper = <span class="keyword">new</span> <span class="title class_">UpdateWrapper</span>&lt;&gt;();</span><br><span class="line">userUpdateWrapper.like(<span class="string">&quot;user_name&quot;</span>,<span class="string">&quot;a&quot;</span>).and(i-&gt;i.gt(<span class="string">&quot;age&quot;</span>,<span class="number">20</span>).or().isNull(<span class="string">&quot;email&quot;</span>));</span><br><span class="line">userUpdateWrapper.set(<span class="string">&quot;user_name&quot;</span>,<span class="string">&quot;小黑&quot;</span>).set(<span class="string">&quot;email&quot;</span>,<span class="string">&quot;abc@atguigu.com&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UPDATE t_user SET user_name=?,email=? WHERE is_deleted=0 AND (user_name LIKE ? AND (age &gt; ? OR email IS NULL))</span><br></pre></td></tr></table></figure>
-
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>条件语句和查询语句要分开</p>
-<h4 id="condition"><a href="#condition" class="headerlink" title="condition"></a>condition</h4><p>在真正开发的过程中，组装条件是常见的功能，而这些条件数据来源于用户输入，是可选的，因此我们在组装这些条件时，必须先判断用户是否选择了这些条件，若选择则需要组装该条件，若没有选择则一定不能组装，以免影响SQL执行的结果</p>
-<p>condition</p>
-<h5 id="原生"><a href="#原生" class="headerlink" title="原生"></a>原生</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">username</span> <span class="operator">=</span> <span class="string">&quot;a&quot;</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">ageBegin</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">ageEnd</span> <span class="operator">=</span> <span class="number">30</span>;</span><br><span class="line"><span class="comment">//SELECT uid AS id,user_name AS name,age,email,is_deleted FROM t_user WHERE is_deleted=0 AND (user_name LIKE ? AND age &lt;= ?)</span></span><br><span class="line">QueryWrapper&lt;User&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">if</span>(StringUtils.isNotBlank(username))&#123;</span><br><span class="line">	<span class="comment">//isNotBlank判断某个字符创是否不为空字符串、不为null、不为空白符</span></span><br><span class="line">    queryWrapper.like(<span class="string">&quot;user_name&quot;</span>, username);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(ageBegin != <span class="literal">null</span>)&#123;</span><br><span class="line">  	queryWrapper.ge(<span class="string">&quot;age&quot;</span>, ageBegin);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(ageEnd != <span class="literal">null</span>)&#123;</span><br><span class="line">	queryWrapper.le(<span class="string">&quot;age&quot;</span>, ageEnd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>繁琐！</p>
-<h5 id="使用condition"><a href="#使用condition" class="headerlink" title="使用condition"></a>使用condition</h5><p>like(condition,column,val)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">username</span> <span class="operator">=</span> <span class="string">&quot;a&quot;</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">ageBegin</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">ageEnd</span> <span class="operator">=</span> <span class="number">30</span>;</span><br><span class="line">QueryWrapper&lt;User&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;&gt;();</span><br><span class="line">queryWrapper.like(StringUtils.isNotBlank(username),<span class="string">&quot;user_name&quot;</span>, username)</span><br><span class="line">        .ge(ageBegin != <span class="literal">null</span>,<span class="string">&quot;age&quot;</span>, ageBegin)</span><br><span class="line">        .le(ageEnd != <span class="literal">null</span>, <span class="string">&quot;age&quot;</span>, ageEnd);</span><br></pre></td></tr></table></figure>
-
-<h3 id="LambdaQueryWrapper和LambdaUpdateWrapper"><a href="#LambdaQueryWrapper和LambdaUpdateWrapper" class="headerlink" title="LambdaQueryWrapper和LambdaUpdateWrapper"></a>LambdaQueryWrapper和LambdaUpdateWrapper</h3><p>防止开发者手动输入错column可以使用实体类::get属性名()</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">LambdaQueryWrapper&lt;User&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">        queryWrapper.like(StringUtils.isNotBlank(username), User::getName,username)</span><br><span class="line">                .ge(ageBegin != <span class="literal">null</span>,User::getAge, ageBegin)</span><br><span class="line">                .le(ageEnd != <span class="literal">null</span>,User::getAge, ageEnd);</span><br></pre></td></tr></table></figure>
-
-<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><h3 id="分页插件"><a href="#分页插件" class="headerlink" title="分页插件"></a>分页插件</h3><h4 id="Page类的一些方法"><a href="#Page类的一些方法" class="headerlink" title="Page类的一些方法"></a>Page类的一些方法</h4><p>Page<User> page &#x3D; new Page&lt;&gt;(2,3);</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>page</td>
-<td>Page这个对象</td>
-</tr>
-<tr>
-<td>page.getRecords()</td>
-<td>当前页数据</td>
-</tr>
-<tr>
-<td>page.getSize()</td>
-<td>每页显示的条数</td>
-</tr>
-<tr>
-<td>page.getCurrent()</td>
-<td>获取当前页的页码</td>
-</tr>
-<tr>
-<td>page.getPages()</td>
-<td>总页数</td>
-</tr>
-<tr>
-<td>page.getTotal()</td>
-<td>总记录数</td>
-</tr>
-<tr>
-<td>page.hasPrevious()</td>
-<td>是否有上一页</td>
-</tr>
-<tr>
-<td>page.hasNext()</td>
-<td>是否有下一页</td>
-</tr>
-</tbody></table>
-<h4 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h4><h5 id="1-添加配置项"><a href="#1-添加配置项" class="headerlink" title="1. 添加配置项"></a>1. 添加配置项</h5><p>创建配置类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@MapperScan(&quot;com.sxx.mybatisplus.mapper&quot;)</span><span class="comment">//扫描mapper接口所在的包，原本写在主配置类上</span></span><br><span class="line"><span class="meta">@Configuration</span><span class="comment">//标识为配置类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyBatisPlusConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span><span class="comment">//只要是返回实体类都要添加Bean注解</span></span><br><span class="line">    <span class="keyword">public</span> MybatisPlusInterceptor <span class="title function_">mybatisPlusInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">MybatisPlusInterceptor</span> <span class="variable">interceptor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MybatisPlusInterceptor</span>();</span><br><span class="line">        <span class="comment">//添加分页插件</span></span><br><span class="line">        interceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">PaginationInnerInterceptor</span>(DbType.MYSQL));</span><br><span class="line">        <span class="keyword">return</span> interceptor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-测试"><a href="#2-测试" class="headerlink" title="2.测试"></a>2.测试</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Page&lt;User&gt; page = <span class="keyword">new</span> <span class="title class_">Page</span>&lt;&gt;(<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line">userMapper.selectPage(page,<span class="literal">null</span>);<span class="comment">//第二个为QueryWrapper查询条件</span></span><br><span class="line"><span class="comment">//最后直接输出page对象</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="乐观锁插件"><a href="#乐观锁插件" class="headerlink" title="乐观锁插件"></a>乐观锁插件</h3><p>@Version部分</p>
-<h2 id="通用枚举类"><a href="#通用枚举类" class="headerlink" title="通用枚举类"></a>通用枚举类</h2><blockquote>
-<p>表中的有些字段值是固定的，例如性别（男或女），此时我们可以使用MyBatis-Plus的通用枚举<br>来实现</p>
-</blockquote>
-<h3 id="创建枚举类"><a href="#创建枚举类" class="headerlink" title="创建枚举类"></a>创建枚举类</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sxx.mybatisplus.enums;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.EnumValue;</span><br><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> SHIXINXI</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2023-03-01-18:09</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">SexEnum</span> &#123;</span><br><span class="line">    MAIL(<span class="number">1</span>,<span class="string">&quot;男&quot;</span>),</span><br><span class="line">    FEMAIL(<span class="number">2</span>,<span class="string">&quot;女&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@EnumValue</span></span><br><span class="line">    <span class="keyword">private</span> Integer sex;</span><br><span class="line">    <span class="keyword">private</span> String sexName;</span><br><span class="line"></span><br><span class="line">    SexEnum(Integer sex, String sexName) &#123;</span><br><span class="line">        <span class="built_in">this</span>.sex = sex;</span><br><span class="line">        <span class="built_in">this</span>.sexName = sexName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="代码生成器"><a href="#代码生成器" class="headerlink" title="代码生成器"></a>代码生成器</h2><h3 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--代码生成器依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-generator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.freemarker<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>freemarker<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.31<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="快速生成"><a href="#快速生成" class="headerlink" title="快速生成"></a>快速生成</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">FastAutoGenerator.create(<span class="string">&quot;jdbc:mysql://127.0.0.1:3306/mybatis_plus&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;Sxx15963559164&quot;</span>)</span><br><span class="line">                .globalConfig(builder -&gt; &#123;</span><br><span class="line">                    builder.author(<span class="string">&quot;sxx&quot;</span>) <span class="comment">// 设置作者</span></span><br><span class="line">                            <span class="comment">//.enableSwagger() // 开启 swagger 模式</span></span><br><span class="line">                            .fileOverride() <span class="comment">// 覆盖已生成文件</span></span><br><span class="line">                            .outputDir(<span class="string">&quot;E://mybatis_plus&quot;</span>); <span class="comment">// 指定输出目录</span></span><br><span class="line">                &#125;)</span><br><span class="line">                .packageConfig(builder -&gt; &#123;</span><br><span class="line">                    builder.parent(<span class="string">&quot;com.sxx&quot;</span>) <span class="comment">// 设置父包名</span></span><br><span class="line">                            .moduleName(<span class="string">&quot;mybatisplus&quot;</span>) <span class="comment">// 设置父包模块名</span></span><br><span class="line">                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, <span class="string">&quot;E://mybatis_plus&quot;</span>)); <span class="comment">// 设置mapperXml生成路径</span></span><br><span class="line">                &#125;)</span><br><span class="line">                .strategyConfig(builder -&gt; &#123;</span><br><span class="line">                    builder.addInclude(<span class="string">&quot;t_user&quot;</span>) <span class="comment">// 设置需要生成的表名</span></span><br><span class="line">                            .addTablePrefix(<span class="string">&quot;t_&quot;</span>, <span class="string">&quot;c_&quot;</span>); <span class="comment">// 设置过滤表前缀</span></span><br><span class="line">                &#125;)</span><br><span class="line">                .templateEngine(<span class="keyword">new</span> <span class="title class_">FreemarkerTemplateEngine</span>()) <span class="comment">// 使用Freemarker引擎模板，默认的是Velocity引擎模板</span></span><br><span class="line">                .execute();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <tags>
-        <tag>MyBatis-Plus学习笔记</tag>
+        <tag>JAVA</tag>
+        <tag>后端学习的记录</tag>
+        <tag>BUG菇的出现与消亡</tag>
       </tags>
   </entry>
   <entry>
@@ -3193,28 +3215,6 @@
         <tag>JAVA</tag>
         <tag>后端学习的记录</tag>
         <tag>SpringBoot2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SpringBoot中yml格式配置文件关于数据库密码的读取</title>
-    <url>/2023/04/19/SpringBoot%E4%B8%ADyml%E6%A0%BC%E5%BC%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%85%B3%E4%BA%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%86%E7%A0%81%E7%9A%84%E8%AF%BB%E5%8F%96/</url>
-    <content><![CDATA[<h1 id="问题？"><a href="#问题？" class="headerlink" title="问题？"></a>问题？</h1><p>MySQL连接不到数据库说是密码错误<br><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202303/2866182-20230328081317571-482717223.png"
-                      alt="img"
-                ></p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>密码明明输入的是0127，为什么打印的时候会是87呢？</p>
-<p>如果使用yml格式的配置文件int类型数据它只支持二进制、八进制、十六进制，恰逢改密码又以0开头各个位数&lt;8,所有会将其解析为二进制</p>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><ol>
-<li>将password的值加上引号</li>
-<li>接收参数时候将String转为int，即<code>private int password;</code></li>
-</ol>
-]]></content>
-      <tags>
-        <tag>JAVA</tag>
-        <tag>后端学习的记录</tag>
-        <tag>BUG菇的出现与消亡</tag>
       </tags>
   </entry>
   <entry>
@@ -3873,54 +3873,6 @@
       </tags>
   </entry>
   <entry>
-    <title>后端服务器向前端发送JSON数据出现了异常</title>
-    <url>/2022/11/25/%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%91%E5%89%8D%E7%AB%AF%E5%8F%91%E9%80%81JSON%E6%95%B0%E6%8D%AE%E5%87%BA%E7%8E%B0%E5%BC%82%E5%B8%B8/</url>
-    <content><![CDATA[<h2 id="问题的由来"><a href="#问题的由来" class="headerlink" title="问题的由来"></a>问题的由来</h2><p>今天在做SSM整合时发现后端服务器可以从数据库取出数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//部分后端代码</span></span><br><span class="line"><span class="comment">//处理查询，响应ajax</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/queryStudent.do&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Student&gt; <span class="title function_">queryStudent</span><span class="params">()</span>&#123;</span><br><span class="line">	List&lt;Student&gt; students = service.findStudents();</span><br><span class="line">    students.forEach(System.out::println);</span><br><span class="line">    <span class="keyword">return</span> students;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>同时我也打印此数据</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-03-06.jpg"
-                      alt="数据"
-                ></p>
-<p>但是前端页面无法数据</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//部分前端代码</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadStudentData</span>(<span class="params"></span>)&#123;</span><br><span class="line">	$.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">    	<span class="attr">url</span>:<span class="string">&quot;student/queryStudent.do&quot;</span>,</span><br><span class="line">        <span class="attr">type</span>:<span class="string">&quot;get&quot;</span>,</span><br><span class="line">        <span class="attr">dataType</span>:<span class="string">&quot;json&quot;</span>,</span><br><span class="line">        <span class="attr">success</span>:<span class="keyword">function</span>(<span class="params">data</span>)&#123;</span><br><span class="line">        	$.<span class="title function_">each</span>(data,<span class="keyword">function</span>(<span class="params">i,n</span>)&#123;</span><br><span class="line">            	$(<span class="string">&quot;#info&quot;</span>).<span class="title function_">append</span>(<span class="string">&quot;&lt;tr&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">id</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">name</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">age</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;/tr&gt;&quot;</span>)</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="问题的对策"><a href="#问题的对策" class="headerlink" title="问题的对策"></a>问题的对策</h2><p>看了一下接口发现一个<i style="color:red">500的服务器内部的报错</i>，主要报错为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">No converter found for return value of type: class java.util.ArrayList</span><br></pre></td></tr></table></figure>
-
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-08-40.jpg"
-                     
-                ></p>
-<p>发现在注册注解驱动&lt;mvc:annotation-driven &#x2F;&gt;时候有很多不同类型的注解驱动，我也是截了图保留了下来</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-16-43.jpg"
-                     
-                ></p>
-<h2 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h2><p>而我们要使用的是mvc结尾的那一个，最终前端也成功的获取到了JSON数据</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-19-55.jpg"
-                     
-                ></p>
-]]></content>
-      <tags>
-        <tag>JAVA</tag>
-        <tag>后端学习的记录</tag>
-        <tag>SSM</tag>
-        <tag>BUG菇的出现与消亡</tag>
-        <tag>SpringMVC</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vue学习脚手架篇</title>
     <url>/2023/04/15/Vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E8%84%9A%E6%89%8B%E6%9E%B6%E7%AF%87/</url>
     <content><![CDATA[<h1 id="Vue学习脚手架篇"><a href="#Vue学习脚手架篇" class="headerlink" title="Vue学习脚手架篇"></a>Vue学习脚手架篇</h1><h2 id="脚手架文件结构"><a href="#脚手架文件结构" class="headerlink" title="脚手架文件结构"></a>脚手架文件结构</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">├── node_modules </span><br><span class="line">├── public</span><br><span class="line">│   ├── favicon.ico: 页签图标</span><br><span class="line">│   └── index.html: 主页面*</span><br><span class="line">├── src</span><br><span class="line">│   ├── assets: 存放静态资源</span><br><span class="line">│   │   └── logo.png</span><br><span class="line">│   │── component: 存放组件</span><br><span class="line">│   │   └── HelloWorld.vue*</span><br><span class="line">│   │── App.vue: 汇总所有组件*</span><br><span class="line">│   │── main.js: 入口文件*</span><br><span class="line">├── .gitignore: git版本管制忽略的配置</span><br><span class="line">├── babel.config.js: babel的配置文件</span><br><span class="line">├── package.json: 应用包配置文件 </span><br><span class="line">├── README.md: 应用描述文件</span><br><span class="line">├── package-lock.json：包版本控制文件</span><br></pre></td></tr></table></figure>
@@ -4528,6 +4480,75 @@
       <tags>
         <tag>Vue</tag>
         <tag>前端学习的记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端传入一个数组后端如何接受处理？</title>
+    <url>/2023/05/06/%E5%89%8D%E7%AB%AF%E4%BC%A0%E5%85%A5%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E5%90%8E%E7%AB%AF%E5%A6%82%E4%BD%95%E6%8E%A5%E5%8F%97%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h1 id="前端传入一个数组后端如何接受处理？"><a href="#前端传入一个数组后端如何接受处理？" class="headerlink" title="前端传入一个数组后端如何接受处理？"></a>前端传入一个数组后端如何接受处理？</h1><h2 id="前端发送请求"><a href="#前端发送请求" class="headerlink" title="前端发送请求"></a>前端发送请求</h2><p><a class="link"   href="http://localhost:8080/all/list?=1,2,3" >http://localhost:8080/all/list?=1,2,3<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="后端处理"><a href="#后端处理" class="headerlink" title="后端处理"></a>后端处理</h2><p>使用数组方式接收</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">getOne</span><span class="params">(String[] list)</span>&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用List集合接收"><a href="#使用List集合接收" class="headerlink" title="使用List集合接收"></a>使用List集合接收</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">getOne</span><span class="params">(<span class="meta">@RequestParam(&quot;list&quot;)</span> String[] list)</span>&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：如果不加<code>@RequestParam(&quot;list&quot;)</code>就会报错<code> No primary or single unique constructor found for interface java.util.List</code></p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端学习的记录</tag>
+        <tag>BUG菇的出现与消亡</tag>
+        <tag>SpringBoot2</tag>
+        <tag>SpringMVC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>后端服务器向前端发送JSON数据出现了异常</title>
+    <url>/2022/11/25/%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%91%E5%89%8D%E7%AB%AF%E5%8F%91%E9%80%81JSON%E6%95%B0%E6%8D%AE%E5%87%BA%E7%8E%B0%E5%BC%82%E5%B8%B8/</url>
+    <content><![CDATA[<h2 id="问题的由来"><a href="#问题的由来" class="headerlink" title="问题的由来"></a>问题的由来</h2><p>今天在做SSM整合时发现后端服务器可以从数据库取出数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//部分后端代码</span></span><br><span class="line"><span class="comment">//处理查询，响应ajax</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/queryStudent.do&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Student&gt; <span class="title function_">queryStudent</span><span class="params">()</span>&#123;</span><br><span class="line">	List&lt;Student&gt; students = service.findStudents();</span><br><span class="line">    students.forEach(System.out::println);</span><br><span class="line">    <span class="keyword">return</span> students;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同时我也打印此数据</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-03-06.jpg"
+                      alt="数据"
+                ></p>
+<p>但是前端页面无法数据</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//部分前端代码</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadStudentData</span>(<span class="params"></span>)&#123;</span><br><span class="line">	$.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">    	<span class="attr">url</span>:<span class="string">&quot;student/queryStudent.do&quot;</span>,</span><br><span class="line">        <span class="attr">type</span>:<span class="string">&quot;get&quot;</span>,</span><br><span class="line">        <span class="attr">dataType</span>:<span class="string">&quot;json&quot;</span>,</span><br><span class="line">        <span class="attr">success</span>:<span class="keyword">function</span>(<span class="params">data</span>)&#123;</span><br><span class="line">        	$.<span class="title function_">each</span>(data,<span class="keyword">function</span>(<span class="params">i,n</span>)&#123;</span><br><span class="line">            	$(<span class="string">&quot;#info&quot;</span>).<span class="title function_">append</span>(<span class="string">&quot;&lt;tr&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">id</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">name</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;td&gt;&quot;</span>+n.<span class="property">age</span>+<span class="string">&quot;&lt;/td&gt;&quot;</span>)</span><br><span class="line">                          .<span class="title function_">append</span>(<span class="string">&quot;&lt;/tr&gt;&quot;</span>)</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="问题的对策"><a href="#问题的对策" class="headerlink" title="问题的对策"></a>问题的对策</h2><p>看了一下接口发现一个<i style="color:red">500的服务器内部的报错</i>，主要报错为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">No converter found for return value of type: class java.util.ArrayList</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-08-40.jpg"
+                     
+                ></p>
+<p>发现在注册注解驱动&lt;mvc:annotation-driven &#x2F;&gt;时候有很多不同类型的注解驱动，我也是截了图保留了下来</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-16-43.jpg"
+                     
+                ></p>
+<h2 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h2><p>而我们要使用的是mvc结尾的那一个，最终前端也成功的获取到了JSON数据</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://raw.githubusercontent.com/HRYX02/SolveTheProblem/master/Snipaste_2022-11-25_20-19-55.jpg"
+                     
+                ></p>
+]]></content>
+      <tags>
+        <tag>JAVA</tag>
+        <tag>后端学习的记录</tag>
+        <tag>SSM</tag>
+        <tag>BUG菇的出现与消亡</tag>
+        <tag>SpringMVC</tag>
       </tags>
   </entry>
 </search>

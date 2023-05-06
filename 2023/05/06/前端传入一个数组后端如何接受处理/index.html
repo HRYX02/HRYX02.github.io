@@ -9,7 +9,7 @@
     
     <title>
         
-            CentOS7安装MySQL8.0.33并远程连接 |
+            前端传入一个数组后端如何接受处理？ |
         
         赫然玉鑫的Blog
     </title>
@@ -155,7 +155,7 @@
         <div class="article-content-container">
 
             <div class="article-title">
-                <span class="title-hover-animation">CentOS7安装MySQL8.0.33并远程连接</span>
+                <span class="title-hover-animation">前端传入一个数组后端如何接受处理？</span>
             </div>
 
             
@@ -177,13 +177,13 @@
         
             <i class="fa-regular fa-calendar-plus"></i>&nbsp;
         
-        <span class="pc">2023-04-21 12:01:00</span>
-        <span class="mobile">2023-04-21 12:01</span>
+        <span class="pc">2023-05-06 18:45:00</span>
+        <span class="mobile">2023-05-06 18:45</span>
     </span>
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-04-21 12:01:35</span>
+        <span class="pc">2023-05-06 18:45:30</span>
     </span>
     
     
@@ -193,7 +193,23 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>&nbsp;
+                        <a href="/tags/JAVA/">JAVA</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%AE%B0%E5%BD%95/">后端学习的记录</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/BUG%E8%8F%87%E7%9A%84%E5%87%BA%E7%8E%B0%E4%B8%8E%E6%B6%88%E4%BA%A1/">BUG菇的出现与消亡</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/SpringBoot2/">SpringBoot2</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/SpringMVC/">SpringMVC</a>&nbsp;
                     </li>
                 
             </ul>
@@ -203,7 +219,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>339 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>92 字</span>
         </span>
     
     
@@ -224,67 +240,15 @@
             
 
             <div class="article-content keep-markdown-body">
-                <h1 id="CentOS7安装MySQL8-0-33并远程连接"><a href="#CentOS7安装MySQL8-0-33并远程连接" class="headerlink" title="CentOS7安装MySQL8.0.33并远程连接"></a>CentOS7安装MySQL8.0.33并远程连接</h1><h2 id="安装MySQL8-0-33"><a href="#安装MySQL8-0-33" class="headerlink" title="安装MySQL8.0.33"></a>安装MySQL8.0.33</h2><h3 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h3><h3 id="检查MySQL依赖"><a href="#检查MySQL依赖" class="headerlink" title="检查MySQL依赖"></a>检查MySQL依赖</h3><h4 id="1-检查-x2F-tmp临时目录权限"><a href="#1-检查-x2F-tmp临时目录权限" class="headerlink" title="1.检查&#x2F;tmp临时目录权限"></a>1.检查&#x2F;tmp临时目录权限</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 777 /tmp</span><br></pre></td></tr></table></figure>
+                <h1 id="前端传入一个数组后端如何接受处理？"><a href="#前端传入一个数组后端如何接受处理？" class="headerlink" title="前端传入一个数组后端如何接受处理？"></a>前端传入一个数组后端如何接受处理？</h1><h2 id="前端发送请求"><a href="#前端发送请求" class="headerlink" title="前端发送请求"></a>前端发送请求</h2><p><a class="link"   target="_blank" rel="noopener" href="http://localhost:8080/all/list?=1,2,3" >http://localhost:8080/all/list?=1,2,3<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="后端处理"><a href="#后端处理" class="headerlink" title="后端处理"></a>后端处理</h2><p>使用数组方式接收</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">getOne</span><span class="params">(String[] list)</span>&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h5 id="2-安装前，检查依赖"><a href="#2-安装前，检查依赖" class="headerlink" title="2.安装前，检查依赖"></a>2.安装前，检查依赖</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rmp -qa | grep libaio</span><br></pre></td></tr></table></figure>
+<h3 id="使用List集合接收"><a href="#使用List集合接收" class="headerlink" title="使用List集合接收"></a>使用List集合接收</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">getOne</span><span class="params">(<span class="meta">@RequestParam(&quot;list&quot;)</span> String[] list)</span>&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h3><ol>
-<li><p>解压到&#x2F;opt并按顺序执行命令</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh mysql-community-common-8.0.33-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-plugins-8.0.33-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-8.0.33-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-icu-data-files-8.0.33-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-server-8.0.33-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看一下版本&amp;是否安装成功</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql --version</span><br><span class="line">rpm -qa | grep -i mysql</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>服务初始化</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld --initialize --user=mysql</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看mysql密码</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /var/log/mysqld.log</span><br></pre></td></tr></table></figure>
-<p> <img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230421112407195-899950426.png"
-                      alt="img"
-                ></p>
-</li>
-<li><p>启动MySQL，查看状态</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl status mysqld</span><br><span class="line">systemctl start mysqld</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看MySQL服务是否自启动</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl list-unit-files|grep mysqld.service</span><br><span class="line">如果为disable</span><br><span class="line">systemctl enable mysqld.service</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="设置MySQL"><a href="#设置MySQL" class="headerlink" title="设置MySQL"></a>设置MySQL</h3><ol>
-<li><p>修改密码</p>
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;新的密码&#x27;</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="遇到的问题及解决方案"><a href="#遇到的问题及解决方案" class="headerlink" title="遇到的问题及解决方案"></a>遇到的问题及解决方案</h3><h4 id="运行rpm-ivh-mysql-community-client-plugins-8-0-33-1-el7-x86-64-rpm时出现报错"><a href="#运行rpm-ivh-mysql-community-client-plugins-8-0-33-1-el7-x86-64-rpm时出现报错" class="headerlink" title="运行rpm -ivh mysql-community-client-plugins-8.0.33-1.el7.x86_64.rpm时出现报错"></a>运行<code>rpm -ivh mysql-community-client-plugins-8.0.33-1.el7.x86_64.rpm</code>时出现报错</h4><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230421110716269-1550262869.png"
-                      alt="img"
-                ></p>
-<h5 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove mysql-libs</span><br></pre></td></tr></table></figure>
-
-<h4 id="运行yum-remove-mysql-libs时出现报错"><a href="#运行yum-remove-mysql-libs时出现报错" class="headerlink" title="运行yum remove mysql-libs时出现报错"></a>运行<code>yum remove mysql-libs</code>时出现报错</h4><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230421110932713-1249936203.png"
-                      alt="img"
-                ></p>
-<h5 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -f /var/run/yum.pid</span><br></pre></td></tr></table></figure>
-
-<h2 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h2><h3 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
-
-<h3 id="进入MySQL允许任何主机登录"><a href="#进入MySQL允许任何主机登录" class="headerlink" title="进入MySQL允许任何主机登录"></a>进入MySQL允许任何主机登录</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update user set host = &#x27;%&#x27; where user = &#x27;root&#x27;;</span><br><span class="line"># 刷新权限</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
-
-<h3 id="用户登录加密问题"><a href="#用户登录加密问题" class="headerlink" title="用户登录加密问题"></a>用户登录加密问题</h3><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img2023.cnblogs.com/blog/2866182/202304/2866182-20230421115048478-927005844.png"
-                      alt="img"
-                ></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter user &#x27;root&#x27;@&#x27;%&#x27; identified with mysql_native_password by &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
-
+<blockquote>
+<p>注意：如果不加<code>@RequestParam(&quot;list&quot;)</code>就会报错<code> No primary or single unique constructor found for interface java.util.List</code></p>
+</blockquote>
 
             </div>
 
@@ -293,16 +257,16 @@
                     <div class="article-copyright-info-container">
     <ul class="copyright-info-content">
         <li>
-            <span class="type">本文标题</span>：<span class="content">CentOS7安装MySQL8.0.33并远程连接</span>
+            <span class="type">本文标题</span>：<span class="content">前端传入一个数组后端如何接受处理？</span>
         </li>
         <li>
             <span class="type">本文作者</span>：<span class="content">赫然玉鑫</span>
         </li>
         <li>
-            <span class="type">创建时间</span>：<span class="content">2023-04-21 12:01:00</span>
+            <span class="type">创建时间</span>：<span class="content">2023-05-06 18:45:00</span>
         </li>
         <li class="post-link">
-            <span class="type">本文链接</span>：<span class="content">2023/04/21/CentOS7安装MySQL8.0/</span>
+            <span class="type">本文链接</span>：<span class="content">2023/05/06/前端传入一个数组后端如何接受处理/</span>
         </li>
         <li>
             <span class="type">版权声明</span>：<span class="content">本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！</span>
@@ -317,7 +281,23 @@
                 <ul class="post-tags-box">
                     
                         <li class="tag-item">
-                            <a href="/tags/%E6%95%99%E7%A8%8B/">#教程</a>&nbsp;
+                            <a href="/tags/JAVA/">#JAVA</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%AE%B0%E5%BD%95/">#后端学习的记录</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/BUG%E8%8F%87%E7%9A%84%E5%87%BA%E7%8E%B0%E4%B8%8E%E6%B6%88%E4%BA%A1/">#BUG菇的出现与消亡</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/SpringBoot2/">#SpringBoot2</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/SpringMVC/">#SpringMVC</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -326,29 +306,14 @@
             
                 <div class="article-nav">
                     
-                        <div class="article-prev">
-                            <a class="prev"
-                               rel="prev"
-                               href="/2023/05/06/%E5%89%8D%E7%AB%AF%E4%BC%A0%E5%85%A5%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E5%90%8E%E7%AB%AF%E5%A6%82%E4%BD%95%E6%8E%A5%E5%8F%97%E5%A4%84%E7%90%86/"
-                            >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                                <span class="title flex-center">
-                                <span class="post-nav-title-item">前端传入一个数组后端如何接受处理？</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                            </a>
-                        </div>
-                    
                     
                         <div class="article-next">
                             <a class="next"
                                rel="next"
-                               href="/2023/04/20/Jdk1.8%E5%AE%89%E8%A3%85/"
+                               href="/2023/04/21/CentOS7%E5%AE%89%E8%A3%85MySQL8.0/"
                             >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">jdk1.8安装步骤</span>
+                                <span class="post-nav-title-item">CentOS7安装MySQL8.0.33并远程连接</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                                 <span class="right arrow-icon flex-center">
@@ -446,7 +411,7 @@
             <div class="toc-content-container">
                 <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CentOS7%E5%AE%89%E8%A3%85MySQL8-0-33%E5%B9%B6%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="nav-text">CentOS7安装MySQL8.0.33并远程连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85MySQL8-0-33"><span class="nav-text">安装MySQL8.0.33</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-text">下载安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5MySQL%E4%BE%9D%E8%B5%96"><span class="nav-text">检查MySQL依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A3%80%E6%9F%A5-x2F-tmp%E4%B8%B4%E6%97%B6%E7%9B%AE%E5%BD%95%E6%9D%83%E9%99%90"><span class="nav-text">1.检查&#x2F;tmp临时目录权限</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85%E5%89%8D%EF%BC%8C%E6%A3%80%E6%9F%A5%E4%BE%9D%E8%B5%96"><span class="nav-text">2.安装前，检查依赖</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85MySQL"><span class="nav-text">安装MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEMySQL"><span class="nav-text">设置MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">遇到的问题及解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8Crpm-ivh-mysql-community-client-plugins-8-0-33-1-el7-x86-64-rpm%E6%97%B6%E5%87%BA%E7%8E%B0%E6%8A%A5%E9%94%99"><span class="nav-text">运行rpm -ivh mysql-community-client-plugins-8.0.33-1.el7.x86_64.rpm时出现报错</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8Cyum-remove-mysql-libs%E6%97%B6%E5%87%BA%E7%8E%B0%E6%8A%A5%E9%94%99"><span class="nav-text">运行yum remove mysql-libs时出现报错</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="nav-text">解决方案</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="nav-text">远程连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-text">关闭防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5MySQL%E5%85%81%E8%AE%B8%E4%BB%BB%E4%BD%95%E4%B8%BB%E6%9C%BA%E7%99%BB%E5%BD%95"><span class="nav-text">进入MySQL允许任何主机登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E5%8A%A0%E5%AF%86%E9%97%AE%E9%A2%98"><span class="nav-text">用户登录加密问题</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E4%BC%A0%E5%85%A5%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E5%90%8E%E7%AB%AF%E5%A6%82%E4%BD%95%E6%8E%A5%E5%8F%97%E5%A4%84%E7%90%86%EF%BC%9F"><span class="nav-text">前端传入一个数组后端如何接受处理？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82"><span class="nav-text">前端发送请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF%E5%A4%84%E7%90%86"><span class="nav-text">后端处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8List%E9%9B%86%E5%90%88%E6%8E%A5%E6%94%B6"><span class="nav-text">使用List集合接收</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
 
