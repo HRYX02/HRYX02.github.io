@@ -9,7 +9,7 @@
     
     <title>
         
-            前端传入一个数组后端如何接受处理？ |
+            Ubuntu安装MySQL8.0并远程连接 |
         
         赫然玉鑫的Blog
     </title>
@@ -155,7 +155,7 @@
         <div class="article-content-container">
 
             <div class="article-title">
-                <span class="title-hover-animation">前端传入一个数组后端如何接受处理？</span>
+                <span class="title-hover-animation">Ubuntu安装MySQL8.0并远程连接</span>
             </div>
 
             
@@ -177,13 +177,13 @@
         
             <i class="fa-regular fa-calendar-plus"></i>&nbsp;
         
-        <span class="pc">2023-05-06 18:45:00</span>
-        <span class="mobile">2023-05-06 18:45</span>
+        <span class="pc">2023-07-30 11:48:00</span>
+        <span class="mobile">2023-07-30 11:48</span>
     </span>
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-05-06 18:45:30</span>
+        <span class="pc">2023-07-30 23:48:25</span>
     </span>
     
     
@@ -193,23 +193,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/JAVA/">JAVA</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%AE%B0%E5%BD%95/">后端学习的记录</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/BUG%E8%8F%87%E7%9A%84%E5%87%BA%E7%8E%B0%E4%B8%8E%E6%B6%88%E4%BA%A1/">BUG菇的出现与消亡</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/SpringBoot2/">SpringBoot2</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/SpringMVC/">SpringMVC</a>&nbsp;
+                        <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>&nbsp;
                     </li>
                 
             </ul>
@@ -219,12 +203,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>92 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>475 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
         </span>
     
     
@@ -240,15 +224,59 @@
             
 
             <div class="article-content keep-markdown-body">
-                <h1 id="前端传入一个数组后端如何接受处理？"><a href="#前端传入一个数组后端如何接受处理？" class="headerlink" title="前端传入一个数组后端如何接受处理？"></a>前端传入一个数组后端如何接受处理？</h1><h2 id="前端发送请求"><a href="#前端发送请求" class="headerlink" title="前端发送请求"></a>前端发送请求</h2><p><a class="link"   target="_blank" rel="noopener" href="http://localhost:8080/all/list?=1,2,3" >http://localhost:8080/all/list?=1,2,3<i class="fas fa-external-link-alt"></i></a></p>
-<h2 id="后端处理"><a href="#后端处理" class="headerlink" title="后端处理"></a>后端处理</h2><p>使用数组方式接收</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">getOne</span><span class="params">(String[] list)</span>&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                <h1 id="Ubuntu安装MySQL8-0"><a href="#Ubuntu安装MySQL8-0" class="headerlink" title="Ubuntu安装MySQL8.0"></a>Ubuntu安装MySQL8.0</h1><h2 id="下载安装MySQL"><a href="#下载安装MySQL" class="headerlink" title="下载安装MySQL"></a>下载安装MySQL</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install mysql-server</span><br></pre></td></tr></table></figure>
 
-<h3 id="使用List集合接收"><a href="#使用List集合接收" class="headerlink" title="使用List集合接收"></a>使用List集合接收</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">getOne</span><span class="params">(<span class="meta">@RequestParam(&quot;list&quot;)</span> String[] list)</span>&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="MySQL初始化"><a href="#MySQL初始化" class="headerlink" title="MySQL初始化"></a>MySQL初始化</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mysql_secure_installation</span><br></pre></td></tr></table></figure>
+
+
 
 <blockquote>
-<p>注意：如果不加<code>@RequestParam(&quot;list&quot;)</code>就会报错<code> No primary or single unique constructor found for interface java.util.List</code></p>
+<p>VALIDATE PASSWORD COMPONENT can be used to test passwords<br>and improve security. It checks the strength of password<br>and allows the users to set only those passwords which are<br>secure enough. Would you like to setup VALIDATE PASSWORD component?</p>
+<p>Press y|Y for Yes, any other key for No: <strong>y</strong></p>
 </blockquote>
+<blockquote>
+<p>There are three levels of password validation policy:</p>
+<p>LOW    Length &gt;&#x3D; 8<br>MEDIUM Length &gt;&#x3D; 8, numeric, mixed case, and special characters<br>STRONG Length &gt;&#x3D; 8, numeric, mixed case, special characters and dictionary                  file</p>
+<p>Please enter 0 &#x3D; LOW, 1 &#x3D; MEDIUM and 2 &#x3D; STRONG: <strong>0</strong></p>
+</blockquote>
+<blockquote>
+<p>By default, a MySQL installation has an anonymous user,<br>allowing anyone to log into MySQL without having to have<br>a user account created for them. This is intended only for<br>testing, and to make the installation go a bit smoother.<br>You should remove them before moving into a production<br>environment.</p>
+<p>Remove anonymous users? (Press y|Y for Yes, any other key for No) : <strong>y</strong></p>
+</blockquote>
+<blockquote>
+<p>Normally, root should only be allowed to connect from<br>‘localhost’. This ensures that someone cannot guess at<br>the root password from the network.</p>
+<p>Disallow root login remotely? (Press y|Y for Yes, any other key for No) : <strong>n</strong></p>
+</blockquote>
+<blockquote>
+<p>By default, MySQL comes with a database named ‘test’ that<br>anyone can access. This is also intended only for testing,<br>and should be removed before moving into a production<br>environment.</p>
+<p>Remove test database and access to it? (Press y|Y for Yes, any other key for No) : y</p>
+</blockquote>
+<blockquote>
+<p>Reloading the privilege tables will ensure that all changes<br>made so far will take effect immediately.</p>
+<p>Reload privilege tables now? (Press y|Y for Yes, any other key for No) : y</p>
+</blockquote>
+<h2 id="进入MySQL"><a href="#进入MySQL" class="headerlink" title="进入MySQL"></a>进入MySQL</h2><h3 id="设置本地账户"><a href="#设置本地账户" class="headerlink" title="设置本地账户"></a>设置本地账户</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mysql -u root -p</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">直接回车不需要密码</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="将密码设为空"><a href="#将密码设为空" class="headerlink" title="将密码设为空"></a>将密码设为空</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update user set authentication_string=&#x27;&#x27; where user=&#x27;root&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="更改密码"><a href="#更改密码" class="headerlink" title="更改密码"></a>更改密码</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 密码最好不要太简单，太简单会出现一系列问题</span><br><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;Abcd@1234&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置远程账户"><a href="#设置远程账户" class="headerlink" title="设置远程账户"></a>设置远程账户</h3><h4 id="更改配置文件"><a href="#更改配置文件" class="headerlink" title="更改配置文件"></a>更改配置文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注释掉 bind-address=127.0.0.1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="创建远程账户"><a href="#创建远程账户" class="headerlink" title="创建远程账户"></a>创建远程账户</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create user &#x27;root&#x27;@&#x27;%&#x27; identified by &#x27;Abcd@1234&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="赋予全部权限"><a href="#赋予全部权限" class="headerlink" title="赋予全部权限"></a>赋予全部权限</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on *.* to &#x27;root&#x27;@&#x27;%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+<h4 id="重启MySQL"><a href="#重启MySQL" class="headerlink" title="重启MySQL"></a>重启MySQL</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service mysql restart</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="小插曲The-user-specified-as-a-definer-‘mysql-infoschema’-‘localhost’"><a href="#小插曲The-user-specified-as-a-definer-‘mysql-infoschema’-‘localhost’" class="headerlink" title="小插曲The user specified as a definer (‘mysql.infoschema’@‘localhost’)"></a>小插曲<code>The user specified as a definer (‘mysql.infoschema’@‘localhost’)</code></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create user &#x27;mysql.infoschema&#x27;@&#x27;localhost&#x27; identified by &#x27;Abcd@1234&#x27;;</span><br><span class="line">grant all on *.* to &#x27;mysql.infoschema&#x27;@&#x27;localhost&#x27;;</span><br></pre></td></tr></table></figure>
+
 
             </div>
 
@@ -257,16 +285,16 @@
                     <div class="article-copyright-info-container">
     <ul class="copyright-info-content">
         <li>
-            <span class="type">本文标题</span>：<span class="content">前端传入一个数组后端如何接受处理？</span>
+            <span class="type">本文标题</span>：<span class="content">Ubuntu安装MySQL8.0并远程连接</span>
         </li>
         <li>
             <span class="type">本文作者</span>：<span class="content">赫然玉鑫</span>
         </li>
         <li>
-            <span class="type">创建时间</span>：<span class="content">2023-05-06 18:45:00</span>
+            <span class="type">创建时间</span>：<span class="content">2023-07-30 11:48:00</span>
         </li>
         <li class="post-link">
-            <span class="type">本文链接</span>：<span class="content">2023/05/06/前端传入一个数组后端如何接受处理/</span>
+            <span class="type">本文链接</span>：<span class="content">2023/07/30/Ubuntu安装MySQL8.0/</span>
         </li>
         <li>
             <span class="type">版权声明</span>：<span class="content">本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！</span>
@@ -281,23 +309,7 @@
                 <ul class="post-tags-box">
                     
                         <li class="tag-item">
-                            <a href="/tags/JAVA/">#JAVA</a>&nbsp;
-                        </li>
-                    
-                        <li class="tag-item">
-                            <a href="/tags/%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%9A%84%E8%AE%B0%E5%BD%95/">#后端学习的记录</a>&nbsp;
-                        </li>
-                    
-                        <li class="tag-item">
-                            <a href="/tags/BUG%E8%8F%87%E7%9A%84%E5%87%BA%E7%8E%B0%E4%B8%8E%E6%B6%88%E4%BA%A1/">#BUG菇的出现与消亡</a>&nbsp;
-                        </li>
-                    
-                        <li class="tag-item">
-                            <a href="/tags/SpringBoot2/">#SpringBoot2</a>&nbsp;
-                        </li>
-                    
-                        <li class="tag-item">
-                            <a href="/tags/SpringMVC/">#SpringMVC</a>&nbsp;
+                            <a href="/tags/%E6%95%99%E7%A8%8B/">#教程</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -306,29 +318,14 @@
             
                 <div class="article-nav">
                     
-                        <div class="article-prev">
-                            <a class="prev"
-                               rel="prev"
-                               href="/2023/07/30/Ubuntu%E5%AE%89%E8%A3%85MySQL8.0/"
-                            >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                                <span class="title flex-center">
-                                <span class="post-nav-title-item">Ubuntu安装MySQL8.0并远程连接</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                            </a>
-                        </div>
-                    
                     
                         <div class="article-next">
                             <a class="next"
                                rel="next"
-                               href="/2023/04/21/CentOS7%E5%AE%89%E8%A3%85MySQL8.0/"
+                               href="/2023/05/06/%E5%89%8D%E7%AB%AF%E4%BC%A0%E5%85%A5%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E5%90%8E%E7%AB%AF%E5%A6%82%E4%BD%95%E6%8E%A5%E5%8F%97%E5%A4%84%E7%90%86/"
                             >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">CentOS7安装MySQL8.0.33并远程连接</span>
+                                <span class="post-nav-title-item">前端传入一个数组后端如何接受处理？</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                                 <span class="right arrow-icon flex-center">
@@ -426,7 +423,7 @@
             <div class="toc-content-container">
                 <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E4%BC%A0%E5%85%A5%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E5%90%8E%E7%AB%AF%E5%A6%82%E4%BD%95%E6%8E%A5%E5%8F%97%E5%A4%84%E7%90%86%EF%BC%9F"><span class="nav-text">前端传入一个数组后端如何接受处理？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82"><span class="nav-text">前端发送请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF%E5%A4%84%E7%90%86"><span class="nav-text">后端处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8List%E9%9B%86%E5%90%88%E6%8E%A5%E6%94%B6"><span class="nav-text">使用List集合接收</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ubuntu%E5%AE%89%E8%A3%85MySQL8-0"><span class="nav-text">Ubuntu安装MySQL8.0</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85MySQL"><span class="nav-text">下载安装MySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">MySQL初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5MySQL"><span class="nav-text">进入MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%9C%AC%E5%9C%B0%E8%B4%A6%E6%88%B7"><span class="nav-text">设置本地账户</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86%E5%AF%86%E7%A0%81%E8%AE%BE%E4%B8%BA%E7%A9%BA"><span class="nav-text">将密码设为空</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E5%AF%86%E7%A0%81"><span class="nav-text">更改密码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%BF%9C%E7%A8%8B%E8%B4%A6%E6%88%B7"><span class="nav-text">设置远程账户</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">更改配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%BF%9C%E7%A8%8B%E8%B4%A6%E6%88%B7"><span class="nav-text">创建远程账户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B5%8B%E4%BA%88%E5%85%A8%E9%83%A8%E6%9D%83%E9%99%90"><span class="nav-text">赋予全部权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%90%AFMySQL"><span class="nav-text">重启MySQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E6%8F%92%E6%9B%B2The-user-specified-as-a-definer-%E2%80%98mysql-infoschema%E2%80%99-%E2%80%98localhost%E2%80%99"><span class="nav-text">小插曲The user specified as a definer (‘mysql.infoschema’@‘localhost’)</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
 </div>
 
